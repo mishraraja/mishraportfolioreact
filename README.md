@@ -1,6 +1,6 @@
 <h2 align="center">
   Portfolio Website<br/>
-  <a href="https://sukrutrahane.netlify.app/" target="_blank">rajamishra</a>
+  <a href="https://rajamishra.vercel.app/" target="_blank">rajamishra</a>
 </h2>
 <div align="center">
   <img alt="Demo" src="./Images/interface.png" />
