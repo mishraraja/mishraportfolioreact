@@ -21,14 +21,14 @@ function Home2() {
             <p className="home-about-body">
               I am fluent in classics like
               <i>
-                <b className="purple"> Java and Python. </b>
+                <b className="purple"> Java and Spring Framework. </b>
               </i>
               <br />
               <br />
               I debug more than I code.
               <br />
               <br />
-              My pronouns are <i><b>Jack of All Trades / Master of none</b></i>
+              The only way to do great work is to <i><b>love what you do.</b></i>
             </p>
           </Col>
           <Col md={4} className="myAvtar">
@@ -46,7 +46,7 @@ function Home2() {
             <ul className="home-about-social-links">
               <li className="social-icons">
                 <a
-                  href="https://github.com/sukrutrahane"
+                  href="https://github.com/"
                   target="_blank"
                   rel="noreferrer"
                   className="icon-colour  home-social-icons"
@@ -56,7 +56,7 @@ function Home2() {
               </li>
               <li className="social-icons">
                 <a
-                  href="https://twitter.com/sukrutrahane"
+                  href="https://twitter.com/mishraja_"
                   target="_blank"
                   rel="noreferrer"
                   className="icon-colour  home-social-icons"
@@ -66,7 +66,7 @@ function Home2() {
               </li>
               <li className="social-icons">
                 <a
-                  href="https://www.linkedin.com/in/sukrutrahane/"
+                  href="https://www.linkedin.com/in/rajakrmishra/"
                   target="_blank"
                   rel="noreferrer"
                   className="icon-colour  home-social-icons"
@@ -76,7 +76,7 @@ function Home2() {
               </li>
               <li className="social-icons">
                 <a
-                  href="https://www.instagram.com/sukkkrut"
+                  href="https://www.instagram.com/mishra_rajakr/"
                   target="_blank"
                   rel="noreferrer"
                   className="icon-colour home-social-icons"
