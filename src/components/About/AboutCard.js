@@ -8,7 +8,7 @@ function AboutCard() {
       <Card.Body>
         <blockquote className="blockquote mb-0">
           <p style={{ textAlign: "justify" }}>
-            Greetings everyone, I'm here <span className="purple">Raja Mishra</span>,
+            Greetings everyone, I'm <span className="purple">Raja Mishra</span>,
             based in <span className="purple">Ranchi, India.</span>
             <br /> I hold a Master's degree in Computer Applications (MCA) and I am presently an employed professional with hands-on experience.
             My expertise lies in classic programming languages like Java, and I have honed my skills in various related technologies, including Spring Framework, Hibernate, and Spring Boot.
