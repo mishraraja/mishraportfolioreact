@@ -1,7 +1,6 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
-import { CgCPlusPlus } from "react-icons/cg";
-import { DiJava, } from "react-icons/di";
+import { DiJava,DiNodejs,DiReact } from "react-icons/di";
 import { SiSpringboot, } from "react-icons/si";
 
 function Techstack() {
@@ -14,28 +13,10 @@ function Techstack() {
         <SiSpringboot />
       </Col>
       <Col xs={4} md={2} className="tech-icons">
-        <DiJava />
+        <DiNodejs />
       </Col>
       <Col xs={4} md={2} className="tech-icons">
-        <DiJava />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <DiJava />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <DiJava />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <DiJava />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <DiJava />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <DiJava />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <DiJava />
+        <DiReact />
       </Col>
     </Row>
   );

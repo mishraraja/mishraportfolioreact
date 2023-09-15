@@ -10,10 +10,9 @@ function AboutCard() {
           <p style={{ textAlign: "justify" }}>
             Greetings everyone, I'm <span className="purple">Raja Mishra</span>,
             based in <span className="purple">Ranchi, India.</span>
-            <br /> I hold a Master's degree in Computer Applications (MCA) and I am presently an employed professional with hands-on experience.
-            My expertise lies in classic programming languages like Java, and I have honed my skills in various related technologies, including Spring Framework, Hibernate, and Spring Boot.
-            With a solid educational foundation in MCA, I am enthusiastic about applying my well-rounded skills and proficiency in microservices and Java to contribute effectively in a professional environment.
-          </p>
+            <br />
+            "I hold a Master's degree in Computer Applications (MCA) and boast a formidable track record with over two years of experience in software development. My specialization revolves around Java, where I wield expertise in Spring Framework, Hibernate, and Spring Boot.
+            I am driven by a relentless pursuit of excellence, thriving in the most intricate of technical landscapes. My true passion lies in the realm of microservices, where I architect solutions that not only meet but exceed expectations. If you seek a professional who excels in the art of precise and impactful software development, your quest ends here."</p>
           <p>Some of my hobbies include:</p>
           <ul>
             <li className="about-activity">
