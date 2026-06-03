@@ -11,7 +11,7 @@ function AboutCard() {
             Greetings everyone, I'm <span className="purple">Raja Mishra</span>,
             based in <span className="purple">Ranchi, India.</span>
             <br />
-            "I am a seasoned Software Developer, with over two years of hands-on experience, crafting exceptional digital solutions. My primary expertise revolves around Java, a canvas upon which I skillfully weave the intricate threads of Spring Framework, Hibernate, and Spring Boot.
+            "I am a seasoned Software Developer, with over four years of hands-on experience, crafting exceptional digital solutions. My primary expertise revolves around Java, a canvas upon which I skillfully weave the intricate threads of Spring Framework, Hibernate, and Spring Boot.
 
             In the world of software, I am more than a professional; I am a connoisseur of elegant code. I take pride in engineering solutions that not only meet your needs but also exemplify sophistication and innovation.
 
