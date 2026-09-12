@@ -1,0 +1,130 @@
+.timeline {
+  display: flex;
+  flex-direction: column;
+}
+
+.timeline__item {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: var(--space-5);
+  padding-bottom: var(--space-8);
+}
+
+.timeline__marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timeline__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  box-shadow: 0 0 0 4px var(--color-accent-soft);
+  flex-shrink: 0;
+}
+
+.timeline__line {
+  flex: 1;
+  width: 1px;
+  background: var(--color-border-strong);
+  margin-top: var(--space-2);
+}
+
+.timeline__period {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+}
+
+.timeline__role {
+  margin-top: var(--space-1);
+  font-size: var(--fs-h3);
+}
+
+.timeline__company {
+  color: var(--color-accent-strong);
+  font-weight: 600;
+  margin-top: var(--space-1);
+}
+
+.timeline__summary {
+  margin-top: var(--space-3);
+  max-width: 62ch;
+}
+
+.timeline__highlights {
+  margin-top: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-width: 62ch;
+}
+
+.timeline__highlights li {
+  position: relative;
+  padding-left: var(--space-4);
+  color: var(--color-fg-muted);
+  font-size: var(--fs-small);
+}
+
+.timeline__highlights li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+
+.timeline__stack {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  margin-top: var(--space-4);
+}
+
+/* --- snapshot fallback --- */
+.snapshot {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: var(--space-8);
+  align-items: start;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-7);
+  background: var(--color-surface);
+}
+
+.snapshot__stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.snapshot__number {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 2.5rem + 2vw, 4.5rem);
+  font-weight: 700;
+  color: var(--color-accent-strong);
+  line-height: 1;
+}
+
+.snapshot__note p {
+  font-size: var(--fs-body-lg);
+  max-width: 60ch;
+}
+
+.snapshot__pending {
+  margin-top: var(--space-4);
+  font-size: var(--fs-small);
+  font-style: italic;
+}
+
+@media (max-width: 767px) {
+  .snapshot {
+    grid-template-columns: 1fr;
+  }
+}

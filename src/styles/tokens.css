@@ -1,0 +1,110 @@
+/* ==========================================================================
+   Design tokens — single source of truth for the visual language.
+   Dark-first. One primary accent, one secondary accent, no rainbow gradients.
+   ========================================================================== */
+
+:root {
+  /* ---- Color: surfaces ---- */
+  --color-bg: #08080b;
+  --color-bg-secondary: #0d0d12;
+  --color-surface: #111116;
+  --color-surface-hover: #17171e;
+  --color-border: rgba(245, 245, 240, 0.09);
+  --color-border-strong: rgba(245, 245, 240, 0.18);
+
+  /* ---- Color: text ---- */
+  --color-fg: #f4f3ee;
+  --color-fg-muted: #9a99a6;
+  --color-fg-faint: #64636f;
+
+  /* ---- Color: accents ---- */
+  --color-accent: #8b7bff;
+  --color-accent-strong: #a597ff;
+  --color-accent-soft: rgba(139, 123, 255, 0.12);
+  --color-accent-border: rgba(139, 123, 255, 0.35);
+  --color-accent-2: #ffb454;
+  --color-accent-2-soft: rgba(255, 180, 84, 0.12);
+
+  --color-success: #6cd39a;
+  --color-danger: #ff7a7a;
+
+  /* ---- Gradients (used sparingly) ---- */
+  --gradient-aurora: radial-gradient(
+      60% 60% at 20% 20%,
+      rgba(139, 123, 255, 0.16),
+      transparent 60%
+    ),
+    radial-gradient(50% 50% at 85% 15%, rgba(255, 180, 84, 0.08), transparent 60%);
+  --gradient-fade-bottom: linear-gradient(to bottom, transparent, var(--color-bg));
+
+  /* ---- Typography ---- */
+  --font-display: "Space Grotesk", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --fs-display: clamp(3rem, 2.2rem + 4vw, 6rem);
+  --fs-h1: clamp(2.25rem, 1.9rem + 1.8vw, 3.5rem);
+  --fs-h2: clamp(1.75rem, 1.5rem + 1.2vw, 2.5rem);
+  --fs-h3: clamp(1.25rem, 1.1rem + 0.6vw, 1.65rem);
+  --fs-body-lg: clamp(1.05rem, 1rem + 0.25vw, 1.25rem);
+  --fs-body: 1rem;
+  --fs-small: 0.875rem;
+  --fs-label: 0.75rem;
+
+  --lh-tight: 1.05;
+  --lh-snug: 1.25;
+  --lh-normal: 1.6;
+
+  /* ---- Spacing scale ---- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --space-10: 8rem;
+
+  /* ---- Radius ---- */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-pill: 999px;
+
+  /* ---- Shadow / glow (subtle only) ---- */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.45);
+  --glow-accent: 0 0 0 1px var(--color-accent-border), 0 0 32px -8px rgba(139, 123, 255, 0.45);
+
+  /* ---- Layout ---- */
+  --container-max: 1200px;
+  --container-pad: clamp(1.25rem, 4vw, 3rem);
+
+  /* ---- Motion ---- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 0.18s;
+  --dur-base: 0.32s;
+  --dur-slow: 0.6s;
+
+  /* ---- Z-index scale ---- */
+  --z-bg: 0;
+  --z-content: 1;
+  --z-nav: 50;
+  --z-cursor: 60;
+  --z-overlay: 70;
+  --z-modal: 80;
+  --z-toast: 90;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 0.001s;
+    --dur-base: 0.001s;
+    --dur-slow: 0.001s;
+  }
+}

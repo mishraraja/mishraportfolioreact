@@ -1,44 +1,67 @@
-import React, { useState, useEffect } from "react";
-import Preloader from "../src/components/Pre";
-import Navbar from "./components/Navbar";
-import Home from "./components/Home/Home";
-import About from "./components/About/About";
-import Footer from "./components/Footer";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate
-} from "react-router-dom";
-import ScrollToTop from "./components/ScrollToTop";
-import "./style.css";
-import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { useEffect, useState, lazy, Suspense } from "react";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import { Loader } from "./components/Loader";
+import { Navbar } from "./components/Navbar";
+import { Footer } from "./components/Footer";
+import { ScrollProgress } from "./components/ScrollProgress";
+import { CustomCursor } from "./components/CustomCursor";
+import { CommandPalette } from "./components/CommandPalette";
+import { AuroraBackground } from "./components/background/AuroraBackground";
+import { Hero } from "./sections/Hero";
+import { About } from "./sections/About";
+import { Experience } from "./sections/Experience";
+import { Projects } from "./sections/Projects";
+import { Skills } from "./sections/Skills";
+import { Contact } from "./sections/Contact";
+import "./styles/tokens.css";
+import "./styles/base.css";
+
+const GithubActivity = lazy(() =>
+  import("./sections/GithubActivity").then((m) => ({ default: m.GithubActivity }))
+);
+
+function Home() {
+  return (
+    <>
+      <Hero />
+      <About />
+      <Experience />
+      <Projects />
+      <Skills />
+      <Suspense fallback={null}>
+        <GithubActivity />
+      </Suspense>
+      <Contact />
+    </>
+  );
+}
 
 function App() {
-  const [load, upadateLoad] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      upadateLoad(false);
-    }, 1200);
-
+    const timer = setTimeout(() => setLoading(false), 500);
     return () => clearTimeout(timer);
   }, []);
 
   return (
-    <Router>
-      <Preloader load={load} />
-      <div className="App" id={load ? "no-scroll" : "scroll"}>
-        <Navbar />
-        <ScrollToTop />
+    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+      <a href="#main" className="skip-link">
+        Skip to content
+      </a>
+      <Loader visible={loading} />
+      <AuroraBackground />
+      <CustomCursor />
+      <ScrollProgress />
+      <Navbar />
+      <CommandPalette />
+      <main id="main">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="*" element={<Navigate to="/"/>} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
-        <Footer />
-      </div>
+      </main>
+      <Footer />
     </Router>
   );
 }

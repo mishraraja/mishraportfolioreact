@@ -1,44 +1,61 @@
 <h2 align="center">
-  Portfolio<br/>
-  <a href="https://rajamishra.vercel.app/" target="_blank">rajamishra</a>
+  Raja Mishra — Portfolio<br/>
+  <a href="https://rajamishra.vercel.app/" target="_blank">rajamishra.vercel.app</a>
 </h2>
-<div align="center">
-  <img alt="Demo" src="./Images/interface.png" />
-</div>
 
-<br/>
-
+A single-page developer portfolio built as a dark, editorial, motion-driven
+experience: cinematic hero, scroll-triggered reveals, a command palette
+(⌘/Ctrl+K), and content kept out of the components in `src/data/`.
 
 ## Built With
 
-This project was built using these technologies.
+- React 18
+- React Router 6
+- Framer Motion
+- react-icons
+- Plain CSS with design tokens (`src/styles/tokens.css`) — no CSS framework
 
-- React.js
-- Node.js
-- Express.js
-- CSS3
-- VsCode
+## Project Structure
 
+```
+src/
+  components/   shared UI (nav, footer, cursor, background, command palette, ui primitives)
+  sections/     page sections (Hero, About, Experience, Projects, Skills, Contact)
+  data/         personal content — edit here, not in components
+  hooks/        small reusable hooks (reduced motion, scroll spy, tilt, ...)
+  styles/       design tokens + global base styles
+```
 
 ## Features
 
-**📖 Multi-Page Layout**
-
-**🎨 Styled with React-Bootstrap and Css with easy to customize colors**
-
-**📱 Fully Responsive**
+- Cinematic hero with staggered entrance animation
+- Scroll-spy navigation with a floating pill navbar
+- Command palette (⌘/Ctrl+K) for quick navigation
+- Custom cursor (desktop only, disabled under reduced motion)
+- Mouse-reactive aurora background (pure CSS, no canvas/WebGL)
+- Filterable project showcase
+- Fully responsive, accessible (semantic HTML, focus states, reduced-motion support)
 
 ## Getting Started
 
-Clone down this repository. You will need `node.js` and `git` installed globally on your machine.
+You'll need `node` and `git` installed.
 
-## 🛠 Installation and Setup Instructions
+```bash
+npm install
+npm start
+```
 
-1. Installation: `npm install`
-
-2. In the project directory, you can run: `npm start`
-
-Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-The page will reload if you make edits.
 
+## Editing Content
+
+All personal content — bio, skills, experience, projects, social links,
+resume URL — lives in `src/data/`. Update those files; the UI picks up the
+changes automatically. Empty sections (e.g. no projects yet) render an
+honest "coming soon" state instead of placeholder content.
+
+## Build
+
+```bash
+npm run build
+```

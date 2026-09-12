@@ -1,0 +1,28 @@
+.section-heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+  max-width: 640px;
+}
+
+.section-heading--center {
+  align-items: center;
+  text-align: center;
+  max-width: 560px;
+  margin-inline: auto;
+}
+
+.section-heading__index {
+  font-variant-numeric: tabular-nums;
+  color: var(--color-accent-strong);
+}
+
+.section-heading__title {
+  font-size: var(--fs-h1);
+}
+
+.section-heading__desc {
+  font-size: var(--fs-body-lg);
+  max-width: 52ch;
+}

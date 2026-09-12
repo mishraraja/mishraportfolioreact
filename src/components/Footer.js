@@ -1,71 +1,57 @@
-import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import {
-  AiFillGithub,
-  AiOutlineTwitter,
-  AiFillInstagram,
-} from "react-icons/ai";
-import { FaLinkedinIn } from "react-icons/fa";  
+import { profile } from "../data/profile";
+import { navItems } from "../data/nav";
+import "./Footer.css";
 
-function Footer() {
-  let date = new Date();
-  let year = date.getFullYear();
+export function Footer() {
+  const year = new Date().getFullYear();
+
+  function go(id) {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  }
+
   return (
-    <Container fluid className="footer">
-      <Row>
-        <Col md="4" className="footer-copywright">
-          
-        </Col>
-        <Col md="4" className="footer-copywright">
-          <h3>Copyright © {year} Raja Mishra</h3>
-        </Col>
-        <Col md="4" className="footer-body">
-          <ul className="footer-icons">
-            <li className="social-icons">
+    <footer className="footer">
+      <div className="container footer__inner">
+        <div className="footer__top">
+          <a href="#home" className="footer__brand" onClick={(e) => { e.preventDefault(); go("home"); }}>
+            {profile.name}
+          </a>
+
+          <nav className="footer__nav" aria-label="Footer">
+            {navItems.map((item) => (
               <a
-                href="https://github.com/"
-                style={{ color: "white" }}
-                target="_blank" 
-                rel="noopener noreferrer"
+                key={item.id}
+                href={`#${item.id}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  go(item.id);
+                }}
               >
-                <AiFillGithub />
+                {item.label}
               </a>
-            </li>
-            <li className="social-icons">
-              <a
-                href="https://twitter.com/mishraja_"
-                style={{ color: "white" }}
-                target="_blank" 
-                rel="noopener noreferrer"
-              >
-                <AiOutlineTwitter />
+            ))}
+          </nav>
+
+          <div className="footer__socials">
+            {profile.social.github ? (
+              <a href={profile.social.github} target="_blank" rel="noreferrer">
+                GitHub
               </a>
-            </li>
-            <li className="social-icons">
-              <a
-                href="https://www.linkedin.com/in/rajakrmishra/"
-                style={{ color: "white" }}
-                target="_blank" 
-                rel="noopener noreferrer"
-              >
-                <FaLinkedinIn />
-              </a>
-            </li>
-            <li className="social-icons">
-              <a
-                href="https://www.instagram.com/mishra_rajakr/"
-                style={{ color: "white" }}
-                target="_blank" 
-                rel="noopener noreferrer"
-              >
-                <AiFillInstagram />
-              </a>
-            </li>
-          </ul>
-        </Col>
-      </Row>
-    </Container>
+            ) : null}
+            <a href={profile.social.linkedin} target="_blank" rel="noreferrer">
+              LinkedIn
+            </a>
+            <a href={profile.social.twitter} target="_blank" rel="noreferrer">
+              Twitter
+            </a>
+          </div>
+        </div>
+
+        <div className="footer__bottom">
+          <span>© {year} {profile.name}. All rights reserved.</span>
+          <span>Designed &amp; engineered by {profile.name}.</span>
+        </div>
+      </div>
+    </footer>
   );
 }
-
-export default Footer;

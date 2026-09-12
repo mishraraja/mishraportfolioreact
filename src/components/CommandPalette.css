@@ -1,0 +1,71 @@
+.cmdk-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  background: rgba(4, 4, 6, 0.7);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 12vh var(--space-4) var(--space-4);
+}
+
+.cmdk {
+  width: 100%;
+  max-width: 480px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+
+.cmdk__input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--space-5);
+  font-size: var(--fs-body-lg);
+  color: var(--color-fg);
+}
+.cmdk__input:focus {
+  outline: none;
+}
+
+.cmdk__list {
+  max-height: 320px;
+  overflow-y: auto;
+  padding: var(--space-2);
+}
+
+.cmdk__item {
+  width: 100%;
+  text-align: left;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  color: var(--color-fg-muted);
+  font-size: var(--fs-body);
+}
+
+.cmdk__item:hover,
+.cmdk__item:focus-visible {
+  background: var(--color-surface-hover);
+  color: var(--color-fg);
+}
+
+.cmdk__empty {
+  padding: var(--space-4);
+  color: var(--color-fg-faint);
+  font-size: var(--fs-small);
+}
+
+.cmdk__hint {
+  display: flex;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-5);
+  border-top: 1px solid var(--color-border);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-fg-faint);
+}
