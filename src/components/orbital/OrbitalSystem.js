@@ -27,6 +27,11 @@ export function OrbitalSystem() {
   const svgRef = useRef(null);
   const bodyRefs = useRef({});
   const cometRef = useRef(null);
+  // Two containers straddling the star. Bodies are moved between them as they
+  // cross the midpoint of their orbit, which is what makes them pass in front
+  // of and behind the star instead of always painting on one side.
+  const backRef = useRef(null);
+  const frontRef = useRef(null);
 
   const [selected, setSelected] = useState(null);
   const [hovered, setHovered] = useState(null);
@@ -68,8 +73,14 @@ export function OrbitalSystem() {
 
       el.setAttribute("transform", "translate(" + x + " " + y + ") scale(" + scale.toFixed(3) + ")");
       el.style.opacity = (0.55 + depth * 0.45).toFixed(3);
+
       // Near-side bodies must paint over the star, far-side ones behind it.
-      el.dataset.front = depth > 0.5 ? "1" : "0";
+      // SVG has no z-index, so the only way to reorder is to move the node.
+      // This fires twice per orbit per body, not every frame.
+      const wantFront = depth > 0.5;
+      const target = wantFront ? frontRef.current : backRef.current;
+      if (target && el.parentNode !== target) target.appendChild(el);
+
       return { x, y, depth, radius };
     }
 
@@ -220,13 +231,14 @@ export function OrbitalSystem() {
           />
         </g>
 
-        {/* Far-side bodies render before the star so it occludes them */}
-        <g className="orbital__bodies orbital__bodies--back">
+        {/* Far-side bodies live here, before the star, so it occludes them.
+            The orbit loop moves each body into the front group as it comes
+            round the near side. */}
+        <g className="orbital__bodies orbital__bodies--back" ref={backRef}>
           {bodies.map((b, i) => (
             <Body
               key={b.id}
               body={b}
-              layer="back"
               refFn={(el) => {
                 if (el) bodyRefs.current[b.id] = el;
               }}
@@ -246,6 +258,9 @@ export function OrbitalSystem() {
             {star.name}
           </text>
         </g>
+
+        {/* Near-side bodies get moved in here, so they paint over the star */}
+        <g className="orbital__bodies orbital__bodies--front" ref={frontRef} />
 
         <g className="orbital__comet-wrap">
           <g

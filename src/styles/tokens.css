@@ -139,10 +139,12 @@
   --z-bg: 0;
   --z-content: 1;
   --z-nav: 50;
-  --z-cursor: 60;
   --z-overlay: 70;
   --z-modal: 80;
   --z-toast: 90;
+  /* The cursor replaces the native one, so it has to sit above everything —
+     including modals and toasts — or it vanishes inside them. */
+  --z-cursor: 100;
 }
 
 @media (prefers-reduced-motion: reduce) {

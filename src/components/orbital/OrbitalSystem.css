@@ -41,6 +41,18 @@
 }
 
 /* ---------- the star ---------- */
+/* The corona is a filled circle 165px across painted over the inner orbits.
+   Without this it swallows every hover and click in that whole area, which
+   made the two innermost planets permanently unreachable. */
+.orbital__star {
+  pointer-events: none;
+}
+
+/* Orbit rings are decoration; they must never intercept a pointer either. */
+.orbital__paths {
+  pointer-events: none;
+}
+
 .orbital__corona {
   animation: corona-pulse 6s var(--ease-in-out) infinite;
   transform-origin: center;
