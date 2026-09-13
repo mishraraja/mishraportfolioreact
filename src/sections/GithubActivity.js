@@ -65,7 +65,7 @@ export function GithubActivity() {
     <section id="github" className="gh section">
       <div className="container">
         <SectionHeading
-          index="06"
+          index="07"
           eyebrow="Proof of work"
           title="Still building, most days."
           description="These numbers are pulled live from GitHub every time this page loads. Nobody types them in."

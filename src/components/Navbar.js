@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { navItems } from "../data/nav";
 import { profile } from "../data/profile";
 import { useScrollSpy } from "../hooks/useScrollSpy";
@@ -9,6 +10,10 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const activeId = useScrollSpy(["home", ...navItems.map((item) => item.id)]);
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const onHome = pathname === "/";
+  const inArcade = pathname.startsWith("/dsa");
 
   useLockBodyScroll(mobileOpen);
 
@@ -21,14 +26,19 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Section links scroll on the home page; anywhere else they go home first.
   function go(id) {
     setMobileOpen(false);
+    if (!onHome) {
+      navigate("/", { state: { scrollTo: id } });
+      return;
+    }
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   }
 
   return (
     <header className={`nav ${scrolled ? "nav--scrolled" : ""}`}>
-      <a href="#home" className="nav__brand" onClick={(e) => { e.preventDefault(); go("home"); }}>
+      <a href="/" className="nav__brand" onClick={(e) => { e.preventDefault(); go("home"); }}>
         {profile.initials}
       </a>
 
@@ -36,8 +46,8 @@ export function Navbar() {
         {navItems.map((item) => (
           <a
             key={item.id}
-            href={`#${item.id}`}
-            className={`nav__link ${activeId === item.id ? "nav__link--active" : ""}`}
+            href={`/#${item.id}`}
+            className={`nav__link ${onHome && activeId === item.id ? "nav__link--active" : ""}`}
             onClick={(e) => {
               e.preventDefault();
               go(item.id);
@@ -46,6 +56,13 @@ export function Navbar() {
             {item.label}
           </a>
         ))}
+        <Link
+          to="/dsa"
+          className={`nav__link nav__link--arcade ${inArcade ? "nav__link--active" : ""}`}
+          aria-current={inArcade ? "page" : undefined}
+        >
+          DSA Arcade
+        </Link>
       </nav>
 
       <div className="nav__actions">
@@ -70,8 +87,8 @@ export function Navbar() {
           {navItems.map((item) => (
             <a
               key={item.id}
-              href={`#${item.id}`}
-              className={`nav__mobile-link ${activeId === item.id ? "nav__mobile-link--active" : ""}`}
+              href={`/#${item.id}`}
+              className={`nav__mobile-link ${onHome && activeId === item.id ? "nav__mobile-link--active" : ""}`}
               onClick={(e) => {
                 e.preventDefault();
                 go(item.id);
@@ -80,6 +97,13 @@ export function Navbar() {
               {item.label}
             </a>
           ))}
+          <Link
+            to="/dsa"
+            className={`nav__mobile-link nav__mobile-link--arcade ${inArcade ? "nav__mobile-link--active" : ""}`}
+            onClick={() => setMobileOpen(false)}
+          >
+            🕹️ DSA Arcade
+          </Link>
         </div>
       )}
     </header>

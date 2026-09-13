@@ -1,3 +1,4 @@
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { profile } from "../data/profile";
 import { navItems } from "../data/nav";
 import { useExperience } from "../context/ExperienceContext";
@@ -8,8 +9,14 @@ export function Footer() {
   const year = new Date().getFullYear();
   const { unlockedCount, total, rank, setTrophyOpen } = useExperience();
   const found = unlockedCount > 0;
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   function go(id) {
+    if (pathname !== "/") {
+      navigate("/", { state: { scrollTo: id } });
+      return;
+    }
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   }
 
@@ -18,7 +25,7 @@ export function Footer() {
       <div className="container footer__inner">
         <div className="footer__top">
           <a
-            href="#home"
+            href="/"
             className="footer__brand"
             onClick={(e) => {
               e.preventDefault();
@@ -32,7 +39,7 @@ export function Footer() {
             {navItems.map((item) => (
               <a
                 key={item.id}
-                href={"#" + item.id}
+                href={"/#" + item.id}
                 onClick={(e) => {
                   e.preventDefault();
                   go(item.id);
@@ -42,6 +49,9 @@ export function Footer() {
                 {item.label}
               </a>
             ))}
+            <Link to="/dsa" onPointerEnter={sfx.hover}>
+              DSA Arcade
+            </Link>
           </nav>
 
           <div className="footer__socials">

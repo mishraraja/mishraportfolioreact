@@ -57,6 +57,38 @@
   background: var(--color-surface-hover);
 }
 
+/* One extra link for the arcade, so the pill gets a little wider. */
+.nav {
+  width: min(900px, calc(100% - 2rem));
+}
+
+.nav__link--arcade {
+  color: var(--color-accent-2-strong);
+  white-space: nowrap;
+}
+
+.nav__link--arcade::after {
+  content: "";
+  position: absolute;
+  top: 7px;
+  right: 5px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-accent-2);
+  box-shadow: 0 0 8px var(--color-accent-2);
+}
+
+.nav__mobile-link--arcade {
+  color: var(--color-accent-2-strong);
+}
+
+@media (max-width: 1080px) {
+  .nav__link {
+    padding: 0.5rem 0.6rem;
+  }
+}
+
 .nav__actions {
   display: flex;
   align-items: center;

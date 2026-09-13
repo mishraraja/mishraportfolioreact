@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { useIdle } from "../../hooks/useIdle";
 import { useExperience } from "../../context/ExperienceContext";
@@ -14,11 +15,13 @@ const MESSAGES = [
 
 /**
  * After a stretch of no input, the site leans over and whispers a hint.
- * It appears once per idle period and never blocks anything.
+ * It appears once per idle period and never blocks anything — and it stays
+ * quiet in the DSA Arcade, where sitting still usually means thinking.
  */
 export function IdleNudge() {
   const idle = useIdle(50000);
   const { unlock, setTerminalOpen } = useExperience();
+  const { pathname } = useLocation();
   const [message, setMessage] = useState(MESSAGES[0]);
   const [dismissed, setDismissed] = useState(false);
 
@@ -30,7 +33,7 @@ export function IdleNudge() {
     }
   }, [idle, unlock]);
 
-  const show = idle && !dismissed;
+  const show = idle && !dismissed && !pathname.startsWith("/dsa");
 
   return (
     <AnimatePresence>

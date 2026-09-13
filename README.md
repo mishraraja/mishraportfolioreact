@@ -116,6 +116,28 @@ control dock.
 | Konami code | Retro CRT mode |
 | Type `chess` / `hire` | You will find out |
 
+## DSA Arcade
+
+`/dsa` is a free practice space for the 75 interview problems product companies
+keep asking (the "Blind 75"), built so learning them feels like playing.
+
+- **Every problem is animated.** A tracer runs the real algorithm and records
+  each moment worth seeing; the player lets you play, pause, scrub, step
+  backwards and run it on your own input. Arrays, grids, trees, tries, linked
+  lists, graphs, heaps, intervals and bits each have their own view.
+- **Predict mode** pauses before key decisions and asks what happens next.
+- **Each problem** has a story that makes the trick memorable, the one-line
+  insight, Java and Python solutions, complexity, and a mastery question.
+- **Beyond the 75:** a 24-pattern playbook with templates, a Pattern Radar
+  recognition game, an 8-week roadmap with spaced reviews, a Big-O lab and an
+  interview playbook.
+- **Progress** (XP, levels, streaks, reviews) lives in `localStorage` — no
+  account, no server.
+
+The arcade is lazy-loaded, so the portfolio's first load doesn't pay for it.
+Problem content lives in `src/dsa/data/problems/`; the test suite runs every
+example through its animation and checks the answer, so a broken tracer fails CI.
+
 ## Automation
 
 The point is that nobody has to maintain the numbers on this page.
@@ -142,8 +164,12 @@ src/
     easter/     terminal, chess puzzle, idle nudge
     fx/         confetti, achievement toast
     ui/         buttons, headings, reveal primitives
-  sections/     Hero, About, Experience, Projects, Skills, ApiConsole,
-                GithubActivity, Contact, NotFound
+  sections/     Hero, About, Experience, Projects, Arcade teaser, Skills,
+                ApiConsole, GithubActivity, Contact, NotFound
+  dsa/          the DSA Arcade (lazy-loaded)
+    engine/     tracer recorder, input parsing, step player, data-structure views
+    data/       75 problems, patterns, worlds, roadmap
+    pages/      hub, problem page, patterns, radar, roadmap, Big-O, interview
   context/      global state — theme, sound, the secret hunt
   lib/          api, sound, achievements, console egg
   data/         personal content + the orbital system's bodies

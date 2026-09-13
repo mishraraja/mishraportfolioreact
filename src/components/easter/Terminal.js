@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { profile, focusAreas } from "../../data/profile";
 import { skillGroups } from "../../data/skills";
@@ -16,6 +17,14 @@ const BANNER = [
   " |_| \\_\\___|_| |_|\\___/_|  |_|_|___/_| |_|_|  \\__,_|",
 ];
 
+const ARCADE_PAGES = {
+  radar: "/dsa/radar",
+  roadmap: "/dsa/learn/roadmap",
+  patterns: "/dsa/learn/patterns",
+  bigo: "/dsa/learn/big-o",
+  interview: "/dsa/learn/interview",
+};
+
 /**
  * A genuine little shell. Every command returns real data from the site's own
  * content files, so nothing here is a mock-up of a mock-up.
@@ -26,6 +35,8 @@ export function Terminal() {
     toggleSound, setChessOpen, fireConfetti, toggleRetro, setTrophyOpen,
     unlockedCount, total,
   } = useExperience();
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   const [lines, setLines] = useState([]);
   const [input, setInput] = useState("");
@@ -152,11 +163,29 @@ export function Terminal() {
         desc: "jump to a section",
         run: (args) => {
           const id = (args[0] || "").toLowerCase();
-          const valid = ["home", "about", "experience", "projects", "api", "skills", "github", "contact"];
+          const valid = ["home", "about", "experience", "projects", "arcade", "api", "skills", "github", "contact"];
           if (!valid.includes(id)) return ["Usage: goto <" + valid.join("|") + ">"];
-          document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+          if (pathname !== "/") {
+            navigate("/", { state: { scrollTo: id } });
+          } else {
+            document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+          }
           setTerminalOpen(false);
           return ["Navigating to #" + id];
+        },
+      },
+      dsa: {
+        desc: "practise 75 interview problems",
+        run: (args) => {
+          const target = ARCADE_PAGES[(args[0] || "").toLowerCase()] || "/dsa";
+          setTimeout(() => {
+            setTerminalOpen(false);
+            navigate(target);
+          }, 350);
+          return [
+            "Booting the DSA Arcade -> " + target,
+            "  also try: dsa radar | dsa roadmap | dsa patterns | dsa bigo | dsa interview",
+          ];
         },
       },
       theme: {
@@ -241,6 +270,7 @@ export function Terminal() {
   }, [
     cycleTheme, setTheme, toggleSound, setChessOpen, setTerminalOpen,
     fireConfetti, toggleRetro, setTrophyOpen, unlockedCount, total,
+    pathname, navigate,
   ]);
 
   const run = useCallback(

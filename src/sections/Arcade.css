@@ -1,0 +1,192 @@
+.arcade-teaser__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-7);
+  align-items: center;
+}
+
+/* ---------- the mini demo ---------- */
+.teaser-demo {
+  display: grid;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border-strong);
+  background: linear-gradient(160deg, var(--color-accent-soft), transparent 55%), var(--color-surface);
+  box-shadow: var(--shadow-lg), 0 0 80px -40px var(--color-accent);
+}
+
+.teaser-demo__bar {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  color: var(--color-fg-muted);
+}
+
+.teaser-demo__target {
+  color: var(--color-accent-2-strong);
+}
+
+.teaser-demo__cells {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.teaser-demo__cell {
+  display: grid;
+  place-items: center;
+  flex: 1;
+  height: 56px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-bg);
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  font-weight: 700;
+  transition: transform var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out), background var(--dur-base) var(--ease-out);
+}
+
+.teaser-demo__cell.is-active {
+  transform: translateY(-4px);
+  border-color: var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 20%, var(--color-bg));
+}
+
+.teaser-demo__cell.is-found {
+  border-color: var(--color-accent-2);
+  background: color-mix(in srgb, var(--color-accent-2) 22%, var(--color-bg));
+}
+
+.teaser-demo__map {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 32px;
+}
+
+.teaser-demo__label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  color: var(--color-fg-faint);
+}
+
+.teaser-demo__chip {
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-accent-3);
+  background: var(--color-accent-3-soft);
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+}
+
+.teaser-demo__chip.is-found {
+  border-color: var(--color-accent-2);
+  background: var(--color-accent-2-soft);
+}
+
+.teaser-demo__empty {
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  color: var(--color-fg-faint);
+}
+
+.teaser-demo__say {
+  display: flex;
+  gap: var(--space-2);
+  min-height: 3.2em;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+  line-height: 1.5;
+}
+
+.teaser-demo__dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.teaser-demo__dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-border-strong);
+  transition: background var(--dur-base) var(--ease-out), width var(--dur-base) var(--ease-out);
+}
+
+.teaser-demo__dots .is-on {
+  width: 18px;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent);
+}
+
+/* ---------- copy ---------- */
+.arcade-teaser__features {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.arcade-teaser__features li {
+  display: flex;
+  gap: var(--space-4);
+}
+
+.arcade-teaser__icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  font-size: 1.3rem;
+}
+
+.arcade-teaser__features strong {
+  font-family: var(--font-display);
+  font-size: var(--fs-body-lg);
+}
+
+.arcade-teaser__features p {
+  margin-top: 2px;
+  font-size: var(--fs-small);
+  line-height: 1.55;
+  color: var(--color-fg-muted);
+}
+
+.arcade-teaser__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+.arcade-teaser__stats {
+  display: flex;
+  gap: var(--space-7);
+  margin: var(--space-6) 0 0;
+}
+
+.arcade-teaser__stats dt {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-fg-faint);
+}
+
+.arcade-teaser__stats dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .arcade-teaser__grid {
+    grid-template-columns: 1fr;
+  }
+}

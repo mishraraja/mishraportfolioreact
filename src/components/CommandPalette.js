@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { navItems } from "../data/nav";
 import { profile } from "../data/profile";
@@ -7,11 +8,22 @@ import { useExperience } from "../context/ExperienceContext";
 import { sfx } from "../lib/sound";
 import "./CommandPalette.css";
 
+const LEARN = [
+  { id: "dsa", label: "Open the DSA Arcade — 75 playable interview problems", icon: "🕹", path: "/dsa" },
+  { id: "dsa-radar", label: "Play Pattern Radar", icon: "📡", path: "/dsa/radar" },
+  { id: "dsa-roadmap", label: "DSA: the 8-week roadmap", icon: "🗺", path: "/dsa/learn/roadmap" },
+  { id: "dsa-patterns", label: "DSA: the pattern playbook", icon: "🧠", path: "/dsa/learn/patterns" },
+  { id: "dsa-bigo", label: "DSA: the Big-O lab", icon: "⚡", path: "/dsa/learn/big-o" },
+  { id: "dsa-interview", label: "DSA: the interview playbook", icon: "🎤", path: "/dsa/learn/interview" },
+];
+
 export function CommandPalette() {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [cursor, setCursor] = useState(0);
   const listRef = useRef(null);
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   const {
     unlock, cycleTheme, setTheme, themes, theme, toggleSound, soundOn,
@@ -27,7 +39,11 @@ export function CommandPalette() {
   }
 
   function scrollToId(id) {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    if (pathname !== "/") {
+      navigate("/", { state: { scrollTo: id } });
+    } else {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    }
     close();
   }
 
@@ -38,6 +54,15 @@ export function CommandPalette() {
       group: "Navigate",
       icon: "→",
       action: () => scrollToId(item.id),
+    }));
+
+    const learn = LEARN.map((item) => ({
+      ...item,
+      group: "Learn",
+      action: () => {
+        close();
+        navigate(item.path);
+      },
     }));
 
     const actions = [
@@ -160,9 +185,9 @@ export function CommandPalette() {
       },
     ].filter(Boolean);
 
-    return [...go, ...actions, ...links];
+    return [...go, ...learn, ...actions, ...links];
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [themes, theme, soundOn, retro, cycleTheme, setTheme, toggleSound, toggleRetro]);
+  }, [themes, theme, soundOn, retro, cycleTheme, setTheme, toggleSound, toggleRetro, pathname, navigate]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();

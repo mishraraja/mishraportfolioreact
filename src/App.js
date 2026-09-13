@@ -1,5 +1,5 @@
 import { useEffect, useState, lazy, Suspense } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
 import { ExperienceProvider, useExperience } from "./context/ExperienceContext";
 import { Loader } from "./components/Loader";
 import { Navbar } from "./components/Navbar";
@@ -19,6 +19,7 @@ import { Hero } from "./sections/Hero";
 import { About } from "./sections/About";
 import { Experience } from "./sections/Experience";
 import { Projects } from "./sections/Projects";
+import { ArcadeTeaser } from "./sections/Arcade";
 import { Skills } from "./sections/Skills";
 import { ApiConsole } from "./sections/ApiConsole";
 import { Contact } from "./sections/Contact";
@@ -33,13 +34,30 @@ const GithubActivity = lazy(() =>
   import("./sections/GithubActivity").then((m) => ({ default: m.GithubActivity }))
 );
 
+// The arcade is a whole app of its own — 75 problems and their animations —
+// so it only downloads when someone actually opens it.
+const DsaArcade = lazy(() => import("./dsa/DsaArcade"));
+
 function Home() {
+  const location = useLocation();
+
+  // Section links followed from another page arrive with the section to land on.
+  useEffect(() => {
+    const target = location.state && location.state.scrollTo;
+    if (!target) return undefined;
+    const timer = setTimeout(() => {
+      document.getElementById(target)?.scrollIntoView({ behavior: "smooth" });
+    }, 80);
+    return () => clearTimeout(timer);
+  }, [location.state]);
+
   return (
     <>
       <Hero />
       <About />
       <Experience />
       <Projects />
+      <ArcadeTeaser />
       <Skills />
       <ApiConsole />
       <Suspense fallback={<div className="section" style={{ minHeight: "40vh" }} />}>
@@ -48,6 +66,21 @@ function Home() {
       <Contact />
     </>
   );
+}
+
+/** A new page starts at its top, unless the link asked for a particular section. */
+function ScrollOnRouteChange() {
+  const { pathname, state } = useLocation();
+
+  useEffect(() => {
+    if (state && state.scrollTo) return;
+    // Instant, not smooth: the new page shouldn't visibly scroll up through itself.
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    // Only a change of page should reset the scroll, not a change of state.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
+
+  return null;
 }
 
 /**
@@ -154,10 +187,19 @@ function Shell() {
       <Confetti />
       <AchievementToast />
       <GlobalInteractions />
+      <ScrollOnRouteChange />
 
       <main id="main">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route
+            path="/dsa/*"
+            element={
+              <Suspense fallback={<div className="section" style={{ minHeight: "100vh" }} aria-busy="true" />}>
+                <DsaArcade />
+              </Suspense>
+            }
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
