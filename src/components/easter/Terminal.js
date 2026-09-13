@@ -163,7 +163,7 @@ export function Terminal() {
         desc: "change the colour scheme",
         run: (args) => {
           const name = (args[0] || "").toLowerCase();
-          const valid = ["midnight", "solar", "matrix", "blueprint", "daylight"];
+          const valid = ["nebula", "supernova", "deepfield", "solar", "observatory"];
           if (!name) {
             cycleTheme();
             return ["Cycled to the next theme."];

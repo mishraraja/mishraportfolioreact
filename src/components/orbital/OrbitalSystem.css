@@ -1,0 +1,224 @@
+.orbital {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.orbital__svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  cursor: grab;
+  touch-action: pan-y;
+}
+
+.orbital--dragging .orbital__svg {
+  cursor: grabbing;
+}
+
+/* ---------- orbit paths ---------- */
+.orbital__path {
+  fill: none;
+  stroke: var(--color-border-strong);
+  stroke-width: 1;
+  opacity: 0.5;
+  transition: stroke var(--dur-base) var(--ease-out), opacity var(--dur-base) var(--ease-out);
+}
+
+.orbital__path--on {
+  stroke: var(--color-accent);
+  opacity: 1;
+}
+
+.orbital__path--comet {
+  stroke-dasharray: 3 7;
+  stroke: var(--color-accent-3);
+  opacity: 0.35;
+}
+
+/* ---------- the star ---------- */
+.orbital__corona {
+  animation: corona-pulse 6s var(--ease-in-out) infinite;
+  transform-origin: center;
+}
+
+@keyframes corona-pulse {
+  0%, 100% { opacity: 0.85; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.07); }
+}
+
+.orbital__star-rim {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.35);
+  stroke-width: 1;
+}
+
+.orbital__star-label {
+  text-anchor: middle;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  fill: #3a2200;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ---------- orbiting bodies ---------- */
+.orbital__body {
+  cursor: pointer;
+  outline: none;
+}
+
+.orbital__hit {
+  fill: transparent;
+}
+
+.orbital__body-label {
+  text-anchor: middle;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  fill: var(--color-fg-muted);
+  pointer-events: none;
+  user-select: none;
+  opacity: 0;
+  transition: opacity var(--dur-base) var(--ease-out), fill var(--dur-base) var(--ease-out);
+}
+
+.orbital__body:hover .orbital__body-label,
+.orbital__body:focus-visible .orbital__body-label,
+.orbital__body--on .orbital__body-label {
+  opacity: 1;
+  fill: var(--color-fg);
+}
+
+.orbital__body:focus-visible .orbital__hit {
+  fill: var(--color-accent-soft);
+  stroke: var(--color-accent);
+  stroke-width: 1.5;
+}
+
+.orbital__ring {
+  fill: none;
+  stroke-width: 2;
+  opacity: 0.55;
+}
+
+/* ---------- readout ---------- */
+.orbital__readout {
+  min-height: 104px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-surface) 70%, transparent);
+  backdrop-filter: blur(10px);
+}
+
+.orbital__readout-name {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  letter-spacing: -0.02em;
+  color: var(--color-fg);
+}
+
+.orbital__readout-role {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.orbital__readout-detail {
+  margin-top: var(--space-2);
+  font-size: var(--fs-small);
+  line-height: 1.55;
+  color: var(--color-fg-muted);
+}
+
+/* ---------- controls ---------- */
+.orbital__controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.orbital__hint {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-fg-faint);
+}
+
+.orbital__speed {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.orbital__speed input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 104px;
+  height: 3px;
+  border-radius: var(--radius-pill);
+  background: var(--color-border-strong);
+  outline: none;
+  cursor: pointer;
+}
+
+.orbital__speed input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  box-shadow: 0 0 0 4px var(--color-accent-soft);
+  cursor: pointer;
+}
+
+.orbital__speed input[type="range"]::-moz-range-thumb {
+  width: 13px;
+  height: 13px;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-accent);
+  box-shadow: 0 0 0 4px var(--color-accent-soft);
+  cursor: pointer;
+}
+
+.orbital__speed-value {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  color: var(--color-fg-muted);
+  font-variant-numeric: tabular-nums;
+  min-width: 30px;
+}
+
+@media (max-width: 900px) {
+  .orbital {
+    max-width: 480px;
+  }
+}
+
+@media (max-width: 520px) {
+  .orbital__readout {
+    min-height: 120px;
+    padding: var(--space-3) var(--space-4);
+  }
+  .orbital__body-label {
+    font-size: 14px;
+  }
+}

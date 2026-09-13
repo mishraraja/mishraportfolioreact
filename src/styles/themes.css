@@ -1,133 +1,226 @@
 /* ==========================================================================
-   Theme palettes. Each theme overrides the accent + surface tokens only,
-   so every component inherits the new look with zero extra CSS.
-   Switch with [data-theme] on <html>.
+   Themes — each one is a different sky.
+
+   Only the light sources and surfaces change; every component, the starfield
+   and the orbital system all read these tokens, so one swap repaints the
+   entire site including the canvas.
    ========================================================================== */
 
-/* --- Midnight (default, declared in tokens.css) --- */
+/* --- Nebula (default) lives in tokens.css --- */
 
-/* --- Solar: warm amber on deep espresso --- */
+/* --- Supernova: a star going off. Magenta and gold on near-black. --- */
+[data-theme="supernova"] {
+  --color-void: #0a0206;
+  --color-bg: #0d040a;
+  --color-bg-secondary: #140611;
+  --color-surface: #1a0916;
+  --color-surface-hover: #240d1e;
+  --color-surface-raised: #1f0b1a;
+
+  --color-border: rgba(255, 180, 220, 0.11);
+  --color-border-strong: rgba(255, 180, 220, 0.24);
+
+  --color-fg: #ffeef7;
+  --color-fg-muted: #c898b4;
+  --color-fg-faint: #8a5f79;
+
+  --color-accent: #ff5fa2;
+  --color-accent-strong: #ff8cbd;
+  --color-accent-soft: rgba(255, 95, 162, 0.14);
+  --color-accent-border: rgba(255, 95, 162, 0.4);
+
+  --color-accent-2: #ffc247;
+  --color-accent-2-strong: #ffd679;
+  --color-accent-2-soft: rgba(255, 194, 71, 0.14);
+
+  --color-accent-3: #b06cff;
+  --color-accent-3-soft: rgba(176, 108, 255, 0.14);
+
+  --color-star: #fff0f6;
+
+  --gradient-nebula: radial-gradient(ellipse 80% 50% at 15% 0%, rgba(255, 95, 162, 0.2), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 85% 10%, rgba(176, 108, 255, 0.14), transparent 60%),
+    radial-gradient(ellipse 70% 60% at 50% 100%, rgba(255, 194, 71, 0.1), transparent 65%);
+  --glow-accent: 0 0 0 1px var(--color-accent-border), 0 0 40px -10px var(--color-accent);
+}
+
+/* --- Deep Field: cold, quiet, far from any star. --- */
+[data-theme="deepfield"] {
+  --color-void: #01050c;
+  --color-bg: #020814;
+  --color-bg-secondary: #040d1e;
+  --color-surface: #061428;
+  --color-surface-hover: #0a1f3c;
+  --color-surface-raised: #081a33;
+
+  --color-border: rgba(120, 200, 255, 0.11);
+  --color-border-strong: rgba(120, 200, 255, 0.24);
+
+  --color-fg: #e4f4ff;
+  --color-fg-muted: #82a8c8;
+  --color-fg-faint: #4e7392;
+
+  --color-accent: #38bdf8;
+  --color-accent-strong: #7dd3fc;
+  --color-accent-soft: rgba(56, 189, 248, 0.13);
+  --color-accent-border: rgba(56, 189, 248, 0.38);
+
+  --color-accent-2: #5eead4;
+  --color-accent-2-strong: #99f6e4;
+  --color-accent-2-soft: rgba(94, 234, 212, 0.13);
+
+  --color-accent-3: #818cf8;
+  --color-accent-3-soft: rgba(129, 140, 248, 0.13);
+
+  --color-star: #eaf6ff;
+
+  --gradient-nebula: radial-gradient(ellipse 80% 50% at 15% 0%, rgba(56, 189, 248, 0.18), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 85% 10%, rgba(129, 140, 248, 0.14), transparent 60%),
+    radial-gradient(ellipse 70% 60% at 50% 100%, rgba(94, 234, 212, 0.08), transparent 65%);
+  --glow-accent: 0 0 0 1px var(--color-accent-border), 0 0 40px -10px var(--color-accent);
+}
+
+/* --- Solar: close orbit. Amber, rust and heat. --- */
 [data-theme="solar"] {
-  --color-bg: #0c0906;
-  --color-bg-secondary: #12100b;
-  --color-surface: #17130d;
-  --color-surface-hover: #1f1a11;
-  --color-border: rgba(255, 236, 210, 0.1);
-  --color-border-strong: rgba(255, 236, 210, 0.2);
-  --color-fg: #fdf6e9;
-  --color-fg-muted: #a79881;
-  --color-fg-faint: #6e6250;
-  --color-accent: #ffa83d;
-  --color-accent-strong: #ffc16b;
-  --color-accent-soft: rgba(255, 168, 61, 0.14);
-  --color-accent-border: rgba(255, 168, 61, 0.38);
-  --color-accent-2: #ff6b6b;
-  --color-accent-2-soft: rgba(255, 107, 107, 0.12);
-  --gradient-aurora: radial-gradient(60% 60% at 20% 20%, rgba(255, 168, 61, 0.16), transparent 60%),
-    radial-gradient(50% 50% at 85% 15%, rgba(255, 107, 107, 0.09), transparent 60%);
-  --glow-accent: 0 0 0 1px var(--color-accent-border), 0 0 32px -8px rgba(255, 168, 61, 0.5);
+  --color-void: #0a0502;
+  --color-bg: #0e0704;
+  --color-bg-secondary: #150c06;
+  --color-surface: #1c1109;
+  --color-surface-hover: #28180c;
+  --color-surface-raised: #22140b;
+
+  --color-border: rgba(255, 214, 170, 0.12);
+  --color-border-strong: rgba(255, 214, 170, 0.25);
+
+  --color-fg: #fff3e2;
+  --color-fg-muted: #bf9c78;
+  --color-fg-faint: #8a6c4c;
+
+  --color-accent: #ff9f45;
+  --color-accent-strong: #ffbd7a;
+  --color-accent-soft: rgba(255, 159, 69, 0.14);
+  --color-accent-border: rgba(255, 159, 69, 0.4);
+
+  --color-accent-2: #ff5f45;
+  --color-accent-2-strong: #ff8a76;
+  --color-accent-2-soft: rgba(255, 95, 69, 0.14);
+
+  --color-accent-3: #ffd54f;
+  --color-accent-3-soft: rgba(255, 213, 79, 0.14);
+
+  --color-star: #fff6e4;
+
+  --gradient-nebula: radial-gradient(ellipse 80% 50% at 15% 0%, rgba(255, 159, 69, 0.2), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 85% 10%, rgba(255, 95, 69, 0.14), transparent 60%),
+    radial-gradient(ellipse 70% 60% at 50% 100%, rgba(255, 213, 79, 0.1), transparent 65%);
+  --glow-accent: 0 0 0 1px var(--color-accent-border), 0 0 40px -10px var(--color-accent);
 }
 
-/* --- Matrix: phosphor green terminal --- */
-[data-theme="matrix"] {
-  --color-bg: #030705;
-  --color-bg-secondary: #050c08;
-  --color-surface: #07120c;
-  --color-surface-hover: #0b1c12;
-  --color-border: rgba(120, 255, 180, 0.12);
-  --color-border-strong: rgba(120, 255, 180, 0.26);
-  --color-fg: #d6ffe6;
-  --color-fg-muted: #6fae8c;
-  --color-fg-faint: #3f6b56;
-  --color-accent: #3dff96;
-  --color-accent-strong: #7cffbb;
-  --color-accent-soft: rgba(61, 255, 150, 0.12);
-  --color-accent-border: rgba(61, 255, 150, 0.4);
-  --color-accent-2: #38e8ff;
-  --color-accent-2-soft: rgba(56, 232, 255, 0.12);
-  --gradient-aurora: radial-gradient(60% 60% at 20% 20%, rgba(61, 255, 150, 0.14), transparent 60%),
-    radial-gradient(50% 50% at 85% 15%, rgba(56, 232, 255, 0.08), transparent 60%);
-  --glow-accent: 0 0 0 1px var(--color-accent-border), 0 0 32px -8px rgba(61, 255, 150, 0.55);
-}
-
-/* --- Blueprint: drafting-table cyan on navy --- */
-[data-theme="blueprint"] {
-  --color-bg: #050a14;
-  --color-bg-secondary: #07101f;
-  --color-surface: #0a1526;
-  --color-surface-hover: #0f1e33;
-  --color-border: rgba(180, 220, 255, 0.12);
-  --color-border-strong: rgba(180, 220, 255, 0.24);
-  --color-fg: #e8f3ff;
-  --color-fg-muted: #8aa4c2;
-  --color-fg-faint: #566d87;
-  --color-accent: #4db8ff;
-  --color-accent-strong: #86d0ff;
-  --color-accent-soft: rgba(77, 184, 255, 0.13);
-  --color-accent-border: rgba(77, 184, 255, 0.38);
-  --color-accent-2: #b388ff;
-  --color-accent-2-soft: rgba(179, 136, 255, 0.12);
-  --gradient-aurora: radial-gradient(60% 60% at 20% 20%, rgba(77, 184, 255, 0.15), transparent 60%),
-    radial-gradient(50% 50% at 85% 15%, rgba(179, 136, 255, 0.09), transparent 60%);
-  --glow-accent: 0 0 0 1px var(--color-accent-border), 0 0 32px -8px rgba(77, 184, 255, 0.5);
-}
-
-/* --- Daylight: the one light theme, for people who squint at dark UIs --- */
-[data-theme="daylight"] {
+/* --- Observatory: the one light theme. Daylight at the telescope. --- */
+[data-theme="observatory"] {
+  --color-void: #e8e6e1;
   --color-bg: #f7f6f3;
   --color-bg-secondary: #efede8;
   --color-surface: #ffffff;
-  --color-surface-hover: #f3f1ec;
-  --color-border: rgba(20, 18, 30, 0.1);
-  --color-border-strong: rgba(20, 18, 30, 0.2);
-  --color-fg: #16141d;
-  --color-fg-muted: #5d5a6b;
-  --color-fg-faint: #8b8898;
+  --color-surface-hover: #f2f0ea;
+  --color-surface-raised: #fbfaf7;
+
+  --color-border: rgba(26, 24, 44, 0.11);
+  --color-border-strong: rgba(26, 24, 44, 0.22);
+
+  --color-fg: #14121e;
+  --color-fg-muted: #575370;
+  --color-fg-faint: #8a86a0;
+
   --color-accent: #5b46e5;
   --color-accent-strong: #4632c9;
   --color-accent-soft: rgba(91, 70, 229, 0.1);
   --color-accent-border: rgba(91, 70, 229, 0.3);
+
   --color-accent-2: #d97706;
+  --color-accent-2-strong: #b45309;
   --color-accent-2-soft: rgba(217, 119, 6, 0.1);
-  --gradient-aurora: radial-gradient(60% 60% at 20% 20%, rgba(91, 70, 229, 0.1), transparent 60%),
-    radial-gradient(50% 50% at 85% 15%, rgba(217, 119, 6, 0.07), transparent 60%);
-  --shadow-md: 0 8px 24px rgba(20, 18, 30, 0.08);
-  --shadow-lg: 0 24px 60px rgba(20, 18, 30, 0.12);
-  --glow-accent: 0 0 0 1px var(--color-accent-border), 0 0 32px -10px rgba(91, 70, 229, 0.4);
+
+  --color-accent-3: #0891b2;
+  --color-accent-3-soft: rgba(8, 145, 178, 0.1);
+
+  --color-star: #3b3766;
+
+  --color-success: #15803d;
+  --color-danger: #dc2626;
+
+  --gradient-nebula: radial-gradient(ellipse 80% 50% at 15% 0%, rgba(91, 70, 229, 0.09), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 85% 10%, rgba(8, 145, 178, 0.07), transparent 60%),
+    radial-gradient(ellipse 70% 60% at 50% 100%, rgba(217, 119, 6, 0.06), transparent 65%);
+
+  --shadow-md: 0 8px 28px rgba(26, 24, 44, 0.09);
+  --shadow-lg: 0 28px 70px rgba(26, 24, 44, 0.14);
+  --glow-accent: 0 0 0 1px var(--color-accent-border), 0 0 36px -12px var(--color-accent);
 }
-[data-theme="daylight"] ::selection {
+
+[data-theme="observatory"] ::selection {
   background: var(--color-accent);
   color: #fff;
 }
 
+/* The starfield is drawn for a dark sky; on the light theme it becomes
+   daytime dust instead of night stars. */
+[data-theme="observatory"] .cosmos__stars {
+  opacity: 0.3;
+  mix-blend-mode: multiply;
+}
+
+[data-theme="observatory"] .cosmos__vignette {
+  background: radial-gradient(ellipse 100% 85% at 50% 45%, transparent 55%, rgba(26, 24, 44, 0.1) 100%);
+}
+
+[data-theme="observatory"] .orbital__star-label {
+  fill: #ffffff;
+}
+
 /* ==========================================================================
-   Retro mode — unlocked, not chosen. Konami code turns the whole site into
-   a 1983 CRT terminal: scanlines, phosphor bloom, the works.
+   Retro mode — unlocked, not chosen. The Konami code turns the whole system
+   into a 1983 CRT: phosphor green, scanlines, the lot.
    ========================================================================== */
 [data-retro="on"] {
+  --color-void: #050803;
   --color-bg: #0a0d05;
   --color-bg-secondary: #0d1107;
   --color-surface: #101507;
   --color-surface-hover: #161d0b;
+  --color-surface-raised: #131a09;
+
   --color-border: rgba(178, 255, 89, 0.18);
   --color-border-strong: rgba(178, 255, 89, 0.35);
+
   --color-fg: #b2ff59;
   --color-fg-muted: #7ba83c;
   --color-fg-faint: #4e6b26;
+
   --color-accent: #b2ff59;
   --color-accent-strong: #d4ff8f;
   --color-accent-soft: rgba(178, 255, 89, 0.12);
   --color-accent-border: rgba(178, 255, 89, 0.45);
+
   --color-accent-2: #ffcf4d;
+  --color-accent-2-strong: #ffe08a;
+  --color-accent-3: #8fff6a;
+
+  --color-star: #d4ff8f;
+
   --font-display: var(--font-mono);
   --font-body: var(--font-mono);
+
+  --gradient-text: linear-gradient(100deg, var(--color-fg), var(--color-accent-2));
+  --gradient-nebula: radial-gradient(ellipse 80% 50% at 15% 0%, rgba(178, 255, 89, 0.12), transparent 60%),
+    radial-gradient(ellipse 70% 60% at 50% 100%, rgba(255, 207, 77, 0.08), transparent 65%);
 }
 
 [data-retro="on"] body {
   text-shadow: 0 0 6px rgba(178, 255, 89, 0.45);
 }
 
-/* Scanline + flicker overlay */
+/* Scanlines */
 [data-retro="on"] body::after {
   content: "";
   position: fixed;
@@ -144,7 +237,7 @@
   animation: retro-flicker 5s steps(60) infinite;
 }
 
-/* Vignette, so the glass edge of the tube feels curved */
+/* Tube curvature */
 [data-retro="on"] body::before {
   content: "";
   position: fixed;

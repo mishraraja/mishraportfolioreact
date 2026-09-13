@@ -3,11 +3,11 @@ import { ACHIEVEMENTS, TOTAL_ACHIEVEMENTS, getAchievement, rankFor } from "../li
 import { setSoundEnabled, sfx } from "../lib/sound";
 
 export const THEMES = [
-  { id: "midnight", label: "Midnight", swatch: "#8b7bff" },
-  { id: "solar", label: "Solar", swatch: "#ffa83d" },
-  { id: "matrix", label: "Matrix", swatch: "#3dff96" },
-  { id: "blueprint", label: "Blueprint", swatch: "#4db8ff" },
-  { id: "daylight", label: "Daylight", swatch: "#5b46e5" },
+  { id: "nebula", label: "Nebula", swatch: "#8b7bff" },
+  { id: "supernova", label: "Supernova", swatch: "#ff5fa2" },
+  { id: "deepfield", label: "Deep Field", swatch: "#38bdf8" },
+  { id: "solar", label: "Solar", swatch: "#ff9f45" },
+  { id: "observatory", label: "Observatory", swatch: "#5b46e5" },
 ];
 
 const STORAGE_KEY = "rm.portfolio.state.v1";
@@ -35,11 +35,11 @@ function writeStored(state) {
 export function ExperienceProvider({ children }) {
   const stored = useRef(readStored()).current;
 
-  const [theme, setThemeState] = useState(stored.theme || "midnight");
+  const [theme, setThemeState] = useState(stored.theme || "nebula");
   const [soundOn, setSoundOn] = useState(Boolean(stored.soundOn));
   const [retro, setRetro] = useState(false);
   const [unlocked, setUnlocked] = useState(() => new Set(stored.unlocked || []));
-  const [seenThemes, setSeenThemes] = useState(() => new Set(stored.seenThemes || [stored.theme || "midnight"]));
+  const [seenThemes, setSeenThemes] = useState(() => new Set(stored.seenThemes || [stored.theme || "nebula"]));
   const [toast, setToast] = useState(null);
   const [terminalOpen, setTerminalOpen] = useState(false);
   const [trophyOpen, setTrophyOpen] = useState(false);
@@ -64,7 +64,7 @@ export function ExperienceProvider({ children }) {
     const swatch = THEMES.find((t) => t.id === theme);
     const meta = document.querySelector('meta[name="theme-color"]');
     if (meta && swatch) {
-      meta.setAttribute("content", theme === "daylight" ? "#f7f6f3" : "#08080b");
+      meta.setAttribute("content", theme === "observatory" ? "#f7f6f3" : "#04060f");
     }
   }, [theme]);
 

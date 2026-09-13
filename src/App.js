@@ -9,8 +9,7 @@ import { CustomCursor } from "./components/CustomCursor";
 import { CommandPalette } from "./components/CommandPalette";
 import { ControlDock } from "./components/ControlDock";
 import { TrophyCase } from "./components/TrophyCase";
-import { AuroraBackground } from "./components/background/AuroraBackground";
-import { ParticleField } from "./components/fx/ParticleField";
+import { CosmicBackground } from "./components/background/CosmicBackground";
 import { Confetti } from "./components/fx/Confetti";
 import { AchievementToast } from "./components/fx/AchievementToast";
 import { Terminal } from "./components/easter/Terminal";
@@ -137,9 +136,8 @@ function Shell() {
 
       <Loader visible={loading} />
 
-      {/* Background layers */}
-      <AuroraBackground />
-      <ParticleField />
+      {/* The sky everything sits in */}
+      <CosmicBackground />
 
       {/* Chrome */}
       <CustomCursor />

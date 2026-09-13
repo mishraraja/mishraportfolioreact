@@ -3,26 +3,107 @@
   flex-direction: column;
   gap: var(--space-4);
   margin-bottom: var(--space-8);
-  max-width: 640px;
+  max-width: 720px;
 }
 
 .section-heading--center {
   align-items: center;
   text-align: center;
-  max-width: 560px;
+  max-width: 600px;
   margin-inline: auto;
 }
 
+/* ---------- marker row ---------- */
+.section-heading__marker {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  width: 100%;
+}
+
 .section-heading__index {
+  position: relative;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--color-accent-border);
+  background: var(--color-accent-soft);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
   font-variant-numeric: tabular-nums;
   color: var(--color-accent-strong);
 }
 
+/* A faint ring around the sector number, like an orbit marker on a chart. */
+.section-heading__index::after {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+}
+
+.section-heading__eyebrow {
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-fg-muted);
+}
+
+/* The horizon: a hairline that fades out toward the edge of the container. */
+.section-heading__rule {
+  flex: 1;
+  height: 1px;
+  min-width: 20px;
+  background: linear-gradient(
+    90deg,
+    var(--color-border-strong),
+    var(--color-accent-border) 30%,
+    transparent
+  );
+}
+
+.section-heading--center .section-heading__marker {
+  justify-content: center;
+}
+
+.section-heading--center .section-heading__rule {
+  display: none;
+}
+
+/* ---------- title ---------- */
 .section-heading__title {
   font-size: var(--fs-h1);
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .section-heading__desc {
   font-size: var(--fs-body-lg);
-  max-width: 52ch;
+  line-height: 1.62;
+  color: var(--color-fg-muted);
+  max-width: 56ch;
+}
+
+@media (max-width: 560px) {
+  .section-heading {
+    margin-bottom: var(--space-7);
+  }
+  .section-heading__index {
+    width: 30px;
+    height: 30px;
+  }
+  .section-heading__marker {
+    gap: var(--space-3);
+  }
 }

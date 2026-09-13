@@ -191,3 +191,55 @@ ol {
 #root {
   overflow-x: clip;
 }
+
+/* ==========================================================================
+   Global utility classes used across sections.
+
+   `.tag` previously lived in an orphaned Tag component that nothing imported,
+   so its stylesheet never reached the bundle and every tag on the site
+   rendered as bare text. It belongs here with the other global utilities.
+   ========================================================================== */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.04em;
+  padding: 0.36rem 0.8rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border);
+  color: var(--color-fg-muted);
+  background: color-mix(in srgb, var(--color-surface) 80%, transparent);
+  transition: color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out),
+    background var(--dur-fast) var(--ease-out);
+}
+
+button.tag {
+  cursor: pointer;
+}
+
+button.tag:hover {
+  color: var(--color-fg);
+  border-color: var(--color-border-strong);
+}
+
+.tag--active {
+  color: var(--color-accent-strong);
+  border-color: var(--color-accent-border);
+  background: var(--color-accent-soft);
+}
+
+/* ---------- section divider: a horizon line between sections ---------- */
+.section + .section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(var(--container-max), 90vw);
+  height: 1px;
+  background: var(--gradient-horizon);
+  opacity: 0.4;
+}

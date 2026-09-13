@@ -21,7 +21,7 @@ describe("page shell", () => {
 
   test("applies a theme to the document root", () => {
     render(<App />);
-    expect(document.documentElement.getAttribute("data-theme")).toBe("midnight");
+    expect(document.documentElement.getAttribute("data-theme")).toBe("nebula");
   });
 
   test("exposes the site controls toolbar", () => {
@@ -34,7 +34,7 @@ describe("theme switching", () => {
   test("pressing T moves to the next theme", () => {
     render(<App />);
     fireEvent.keyDown(window, { key: "t" });
-    expect(document.documentElement.getAttribute("data-theme")).toBe("solar");
+    expect(document.documentElement.getAttribute("data-theme")).toBe("supernova");
   });
 
   test("typing in a field does not trigger the theme shortcut", () => {
@@ -42,7 +42,7 @@ describe("theme switching", () => {
     const input = document.createElement("input");
     document.body.appendChild(input);
     fireEvent.keyDown(input, { key: "t" });
-    expect(document.documentElement.getAttribute("data-theme")).toBe("midnight");
+    expect(document.documentElement.getAttribute("data-theme")).toBe("nebula");
     document.body.removeChild(input);
   });
 });

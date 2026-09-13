@@ -1,0 +1,87 @@
+.cosmos {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-bg);
+  pointer-events: none;
+  overflow: hidden;
+  background: var(--color-bg);
+}
+
+/* ---- nebula clouds ---- */
+.cosmos__nebula {
+  position: absolute;
+  inset: -10%;
+  background: var(--gradient-nebula);
+  filter: blur(10px);
+  transform: translate3d(var(--nx, 0), var(--ny, 0), 0);
+  transition: transform 1.4s var(--ease-out);
+  will-change: transform;
+}
+
+/* A slow breathing pulse keeps the clouds from feeling like a static image. */
+.cosmos__nebula::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 50% 40% at 70% 60%,
+    rgba(139, 123, 255, 0.14),
+    transparent 65%
+  );
+  animation: nebula-drift 26s var(--ease-in-out) infinite alternate;
+}
+
+@keyframes nebula-drift {
+  0% {
+    transform: translate3d(-3%, 2%, 0) scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate3d(4%, -3%, 0) scale(1.15);
+    opacity: 1;
+  }
+}
+
+/* ---- the engineering half of the mix: a faint coordinate grid ---- */
+.cosmos__grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(var(--color-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
+  background-size: 68px 68px;
+  opacity: 0.4;
+  /* Fade the grid out toward the edges so it reads as a horizon, not a table. */
+  mask-image: radial-gradient(ellipse 75% 65% at 50% 40%, #000 20%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 40%, #000 20%, transparent 78%);
+}
+
+/* ---- starfield canvas ---- */
+.cosmos__stars {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---- edge falloff, so the page feels like a porthole ---- */
+.cosmos__vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 100% 85% at 50% 45%, transparent 45%, var(--color-void) 100%);
+}
+
+@media (max-width: 640px) {
+  .cosmos__grid {
+    background-size: 44px 44px;
+    opacity: 0.28;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cosmos__nebula::after {
+    animation: none;
+  }
+  .cosmos__nebula {
+    transition: none;
+  }
+}

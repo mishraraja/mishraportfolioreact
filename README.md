@@ -3,13 +3,19 @@
   <a href="https://rajamishra.vercel.app/" target="_blank">rajamishra.vercel.app</a>
 </h2>
 
-A single-page developer portfolio that behaves less like a brochure and more
-like a piece of software. It boots with a Spring Boot startup log, ships a
-working REST console you can send requests to, hides twelve things worth
-finding, repaints itself in five themes, and refreshes its own GitHub numbers
-on a schedule so nothing on the page goes stale.
+A single-page developer portfolio built on one idea: **a software system drawn
+as a solar system.**
 
-No UI kit, no chart library, no confetti package, and not a single audio file.
+The stack orbits a star. Skills are a constellation chart. The whole page sits
+in a parallax starfield that reacts to your cursor, stretches into streaks when
+you scroll fast, and throws the occasional shooting star. Underneath the sky is
+a working REST console you can send requests to, a real shell, twelve hidden
+things worth finding, and a data pipeline that refreshes its own GitHub numbers
+on a schedule so nothing goes stale.
+
+No UI kit, no chart library, no confetti package, no 3D engine, and not a single
+audio file. The starfield is hand-rolled canvas, the solar system is SVG driven
+by an orbit loop, and every sound is synthesised at runtime.
 
 ## Built With
 
@@ -17,7 +23,7 @@ No UI kit, no chart library, no confetti package, and not a single audio file.
 - Framer Motion for choreography
 - react-icons
 - Plain CSS with design tokens (`src/styles/tokens.css`) — no CSS framework
-- Canvas, WebAudio and the GitHub REST API, all hand-wired
+- Canvas, SVG, WebAudio and the GitHub REST API, all hand-wired
 
 ## Getting Started
 
@@ -60,11 +66,26 @@ A tracked hunt with ranks from Visitor to Completionist. Progress lives in
 `localStorage`, the trophy case shows a hint for anything still locked, and the
 footer tells every visitor the hunt exists so nobody leaves without knowing.
 
-### Five themes and a sixth you unlock
+### The stack as a solar system
 
-Midnight, Solar, Matrix, Blueprint and Daylight all swap one set of tokens, so
-every component follows automatically. The Konami code boots **retro mode** — a
-1983 CRT with phosphor green, scanlines, flicker and a vignette.
+The hero is an orrery. A star labelled JVM sits at the centre and five bodies
+orbit it on tilted ellipses — Java closest, AWS furthest out, each with a period
+that follows its distance the way a real system does. Bodies scale with depth so
+they pass visibly in front of and behind the star. Hover or focus one for detail,
+drag the background to spin the whole system, scrub the slider to change time.
+
+### Skills as a star chart
+
+Nineteen technologies in five constellations, each star hand-placed by its
+group and jittered by a seed of its own name, so the chart is identical on every
+visit. Hover a star to read what that technology is actually used for.
+
+### Five skies and a sixth you unlock
+
+Nebula, Supernova, Deep Field, Solar and Observatory each swap one set of tokens,
+so every component — including the starfield canvas and the orrery — repaints
+automatically. The Konami code boots **retro mode**: a 1983 CRT with phosphor
+green, scanlines, flicker and a vignette.
 
 ### Sound with no sound files
 
@@ -76,8 +97,8 @@ control dock.
 
 - A Spring Boot startup log on first load, once per session
 - A playable mate-in-one chess puzzle
-- A cursor-reactive constellation canvas behind the whole page
-- A clickable request-flow diagram in the hero
+- A parallax starfield that brightens near the cursor and warps when you scroll
+- Shooting stars, on their own schedule
 - Magnetic buttons, spotlight cards, a decrypting headline
 - A live clock in the author's timezone
 - A nudge if you stand still too long
@@ -116,14 +137,16 @@ the browser hits GitHub's rate limit, the snapshot stands and the page says so.
 ```
 src/
   components/   nav, footer, cursor, control dock, trophy case, command palette
+    background/ the cosmic sky: starfield, nebula, grid, warp
+    orbital/    the hero orrery
     easter/     terminal, chess puzzle, idle nudge
-    fx/         confetti, particle field, achievement toast
+    fx/         confetti, achievement toast
     ui/         buttons, headings, reveal primitives
   sections/     Hero, About, Experience, Projects, Skills, ApiConsole,
                 GithubActivity, Contact, NotFound
   context/      global state — theme, sound, the secret hunt
   lib/          api, sound, achievements, console egg
-  data/         personal content — edit here, not in components
+  data/         personal content + the orbital system's bodies
   hooks/        reduced motion, scroll spy, konami, magnetic, scramble, idle
   styles/       design tokens, themes, global base
 scripts/        GitHub fetch + sitemap generation
@@ -139,7 +162,7 @@ of placeholder content.
 ## Accessibility
 
 Everything decorative gets out of the way. `prefers-reduced-motion` disables the
-scramble, the particle field, confetti, the cursor and the boot log. The hero
+scramble, the starfield, orbital motion, confetti, the cursor and the boot log. The hero
 headline carries its real text for screen readers while it decrypts visually.
 Focus states are never removed, every overlay is a labelled dialog, and the
 keyboard shortcuts ignore keystrokes aimed at inputs.

@@ -7,43 +7,77 @@
   font-family: var(--font-body);
   font-weight: 600;
   font-size: var(--fs-body);
-  padding: 0.85rem 1.6rem;
+  padding: 0.85rem 1.7rem;
   border-radius: var(--radius-pill);
   border: 1px solid transparent;
+  overflow: hidden;
+  isolation: isolate;
   transition: transform var(--dur-fast) var(--ease-out), background var(--dur-base) var(--ease-out),
-    border-color var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
+    border-color var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out),
+    color var(--dur-base) var(--ease-out);
   will-change: transform;
 }
 
 .btn__label {
+  position: relative;
+  z-index: 2;
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
 }
 
+/* ---------- primary: lit from within ---------- */
 .btn--primary {
-  background: var(--color-fg);
-  color: var(--color-bg);
-}
-.btn--primary:hover {
-  box-shadow: var(--glow-accent);
+  background: linear-gradient(120deg, var(--color-accent), var(--color-accent-3));
+  color: #05060f;
+  box-shadow: 0 6px 26px -10px var(--color-accent), inset 0 1px 0 rgba(255, 255, 255, 0.35);
 }
 
+/* A slow sheen crosses the button on hover, like light off a curved surface. */
+.btn--primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    110deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.45) 48%,
+    transparent 72%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.7s var(--ease-out);
+}
+
+.btn--primary:hover::after {
+  transform: translateX(120%);
+}
+
+.btn--primary:hover {
+  box-shadow: 0 10px 34px -8px var(--color-accent), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+/* ---------- secondary: glass over the starfield ---------- */
 .btn--secondary {
-  background: transparent;
+  background: color-mix(in srgb, var(--color-surface) 55%, transparent);
+  backdrop-filter: blur(10px);
   color: var(--color-fg);
   border-color: var(--color-border-strong);
 }
+
 .btn--secondary:hover {
   border-color: var(--color-accent-border);
   background: var(--color-accent-soft);
+  box-shadow: var(--glow-accent);
 }
 
+/* ---------- ghost ---------- */
 .btn--ghost {
   background: transparent;
   color: var(--color-fg-muted);
   padding: 0.5rem 0.9rem;
 }
+
 .btn--ghost:hover {
   color: var(--color-fg);
 }
@@ -53,4 +87,16 @@
   opacity: 0.4;
   cursor: not-allowed;
   transform: none !important;
+}
+
+/* The light theme needs dark text on a light ground, not the reverse. */
+[data-theme="observatory"] .btn--primary {
+  color: #ffffff;
+  box-shadow: 0 6px 26px -10px var(--color-accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn--primary::after {
+    display: none;
+  }
 }
