@@ -112,7 +112,7 @@ export function ApiConsole() {
     <section id="api" className="api section" ref={liveRef}>
       <div className="container">
         <SectionHeading
-          index="05"
+          index="06"
           eyebrow="Try it yourself"
           title="This portfolio has an API."
           description="A Spring-Boot-shaped service running entirely in your browser. Pick an endpoint, send the request, read the response. Everything it returns is the real content of this site."

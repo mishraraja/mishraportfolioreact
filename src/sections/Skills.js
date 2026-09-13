@@ -94,7 +94,7 @@ export function Skills() {
     <section id="skills" className="skills section">
       <div className="container">
         <SectionHeading
-          index="04"
+          index="05"
           eyebrow="Technology"
           title="The stack, mapped."
           description="Five constellations, nineteen stars. Everything here is used deliberately, not collected."

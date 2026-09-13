@@ -99,6 +99,9 @@ window.AudioContext =
     }
   };
 
+// jsdom logs "not implemented" for scrolling; pages reset scroll on navigation.
+window.scrollTo = () => {};
+
 // Clipboard is used by the contact section's copy button.
 if (!navigator.clipboard) {
   Object.defineProperty(navigator, "clipboard", {
