@@ -1,0 +1,66 @@
+name: Refresh live data
+
+# Keeps public/data/github.json current so the site shows accurate numbers
+# even when a visitor's browser hits the GitHub API rate limit.
+on:
+  schedule:
+    # 02:30 UTC daily — 08:00 IST, before anyone is likely to look.
+    - cron: "30 2 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/fetch-github.mjs"
+      - ".github/workflows/refresh-data.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-data
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    name: Pull GitHub stats
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+
+      - name: Fetch GitHub data
+        run: node scripts/fetch-github.mjs
+        env:
+          # The default token lifts the unauthenticated 60 req/hour limit.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_USERNAME: mishraraja
+          STRICT: "0"
+
+      - name: Commit the snapshot if it changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          if git diff --quiet -- public/data/github.json; then
+            echo "No change in GitHub data — nothing to commit."
+            exit 0
+          fi
+
+          git add public/data/github.json
+          git commit -m "chore(data): refresh GitHub snapshot [skip ci]"
+          git push
+
+      - name: Summarise
+        run: |
+          echo "### GitHub snapshot" >> "$GITHUB_STEP_SUMMARY"
+          echo '```json' >> "$GITHUB_STEP_SUMMARY"
+          head -c 800 public/data/github.json >> "$GITHUB_STEP_SUMMARY"
+          echo '' >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"

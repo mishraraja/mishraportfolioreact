@@ -1,6 +1,6 @@
 {
   "name": "raja_mishra_portfolio",
-  "version": "0.1.0",
+  "version": "2.0.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.2",
@@ -22,8 +22,12 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "cross-env CI=false react-scripts build",
+    "postbuild": "node scripts/gen-sitemap.mjs",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test:ci": "cross-env CI=true react-scripts test --watchAll=false --passWithNoTests",
+    "eject": "react-scripts eject",
+    "data:refresh": "node scripts/fetch-github.mjs",
+    "sitemap": "node scripts/gen-sitemap.mjs"
   },
   "eslintConfig": {
     "extends": [

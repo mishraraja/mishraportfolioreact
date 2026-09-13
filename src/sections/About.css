@@ -75,3 +75,85 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ---------- spotlight focus cards ---------- */
+.about__focus-card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* A soft light that follows the cursor, driven by --mx / --my from JS. */
+.about__focus-glow {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    220px circle at var(--mx, 50%) var(--my, 50%),
+    var(--color-accent-soft),
+    transparent 70%
+  );
+  transition: opacity var(--dur-base) var(--ease-out);
+}
+
+.about__focus-card:hover .about__focus-glow {
+  opacity: 1;
+}
+
+.about__focus-card {
+  transition: border-color var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
+}
+
+.about__focus-card:hover {
+  border-color: var(--color-accent-border);
+  transform: translateY(-3px);
+}
+
+/* ---------- interactive hobby chips ---------- */
+.tag--interactive {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  transition: all var(--dur-fast) var(--ease-out);
+}
+
+.tag--interactive:hover {
+  border-color: var(--color-accent-border);
+  color: var(--color-fg);
+}
+
+.tag--chess {
+  cursor: pointer;
+}
+
+.tag--chess:hover {
+  background: var(--color-accent-soft);
+}
+
+.tag__glyph {
+  font-size: 1.05em;
+  line-height: 1;
+}
+
+.tag__cta {
+  padding: 1px 7px;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent);
+  color: var(--color-bg);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: all var(--dur-fast) var(--ease-out);
+}
+
+.tag--chess:hover .tag__cta {
+  opacity: 1;
+  transform: translateX(0);
+}

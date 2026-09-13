@@ -1,24 +1,103 @@
 .loader {
   position: fixed;
   inset: 0;
-  z-index: var(--z-toast);
+  z-index: var(--z-overlay);
+  display: grid;
+  place-items: center;
   background: var(--color-bg);
+  padding: var(--space-5);
+}
+
+.loader__inner {
+  width: min(560px, 100%);
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  gap: var(--space-5);
 }
 
 .loader__mark {
   font-family: var(--font-display);
+  font-size: 2.4rem;
   font-weight: 700;
-  font-size: 2rem;
-  letter-spacing: 0.08em;
+  letter-spacing: -0.04em;
   color: var(--color-fg);
-  border: 1px solid var(--color-border-strong);
-  border-radius: var(--radius-lg);
-  width: 72px;
-  height: 72px;
+  position: relative;
+}
+
+.loader__mark::after {
+  content: "";
+  position: absolute;
+  inset: -14px -18px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-accent-border);
+  opacity: 0.5;
+}
+
+.loader__log {
+  width: 100%;
+  min-height: 190px;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  gap: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  line-height: 1.55;
+}
+
+.loader__line {
+  display: flex;
+  gap: var(--space-3);
+  color: var(--color-fg-muted);
+  word-break: break-word;
+}
+
+.loader__stamp {
+  flex-shrink: 0;
+  width: 34px;
+  color: var(--color-fg-faint);
+  font-weight: 700;
+}
+
+.loader__line--warn .loader__stamp {
+  color: var(--color-accent-2);
+}
+
+.loader__line--ok {
+  color: var(--color-fg);
+}
+
+.loader__line--ok .loader__stamp {
+  color: var(--color-success);
+}
+
+.loader__reduced {
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  color: var(--color-fg-muted);
+}
+
+.loader__bar {
+  width: 100%;
+  height: 2px;
+  border-radius: var(--radius-pill);
+  background: var(--color-border);
+  overflow: hidden;
+}
+
+.loader__bar-fill {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-2));
+  transition: width 0.1s linear;
+}
+
+@media (max-width: 560px) {
+  .loader__log {
+    font-size: 0.6rem;
+    min-height: 170px;
+  }
+  .loader__mark {
+    font-size: 2rem;
+  }
 }

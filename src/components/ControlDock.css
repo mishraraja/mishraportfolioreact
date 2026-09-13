@@ -1,0 +1,198 @@
+.dock {
+  position: fixed;
+  right: var(--space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: var(--z-nav);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-2);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-surface) 75%, transparent);
+  backdrop-filter: blur(14px);
+  box-shadow: var(--shadow-md);
+}
+
+.dock__group {
+  position: relative;
+}
+
+.dock__btn {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  color: var(--color-fg-muted);
+  transition: color var(--dur-fast) var(--ease-out),
+    background var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+
+.dock__btn:hover {
+  color: var(--color-fg);
+  background: var(--color-surface-hover);
+  transform: scale(1.08);
+}
+
+.dock__btn--active {
+  color: var(--color-accent);
+  background: var(--color-accent-soft);
+}
+
+/* Tooltip on the left of the rail */
+.dock__btn::after {
+  content: attr(data-tip);
+  position: absolute;
+  right: calc(100% + 12px);
+  top: 50%;
+  transform: translateY(-50%) translateX(6px);
+  padding: 5px 10px;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-fg);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+
+.dock__btn:hover::after {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* Progress ring around the trophy button */
+.dock__ring {
+  position: absolute;
+  inset: -1px;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  transform: rotate(-90deg);
+  pointer-events: none;
+}
+
+.dock__ring-track {
+  fill: none;
+  stroke: var(--color-border);
+  stroke-width: 2;
+}
+
+.dock__ring-fill {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 2;
+  stroke-linecap: round;
+  transition: stroke-dashoffset var(--dur-slow) var(--ease-out);
+}
+
+.dock__badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent);
+  color: var(--color-bg);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* Palette flyout */
+.dock__palette {
+  position: absolute;
+  right: calc(100% + 14px);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--space-2);
+  min-width: 160px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-surface) 95%, transparent);
+  backdrop-filter: blur(18px);
+  box-shadow: var(--shadow-lg);
+}
+
+.dock__swatch {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-small);
+  color: var(--color-fg-muted);
+  text-align: left;
+  transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+
+.dock__swatch:hover {
+  background: var(--color-surface-hover);
+  color: var(--color-fg);
+}
+
+.dock__swatch--on {
+  color: var(--color-fg);
+  background: var(--color-accent-soft);
+}
+
+.dock__swatch-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--swatch);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--swatch) 22%, transparent);
+  flex-shrink: 0;
+}
+
+.dock__palette-hint {
+  margin-top: var(--space-2);
+  padding: var(--space-2) var(--space-3) 0;
+  border-top: 1px solid var(--color-border);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-fg-faint);
+}
+
+/* On phones the rail lies down along the bottom edge */
+@media (max-width: 880px) {
+  .dock {
+    top: auto;
+    bottom: calc(var(--space-4) + env(safe-area-inset-bottom, 0px));
+    right: 50%;
+    transform: translateX(50%);
+    flex-direction: row;
+  }
+  .dock__btn::after {
+    right: auto;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(6px);
+  }
+  .dock__btn:hover::after {
+    transform: translateX(-50%) translateY(0);
+  }
+  .dock__palette {
+    right: auto;
+    left: 50%;
+    top: auto;
+    bottom: calc(100% + 14px);
+    transform: translateX(-50%);
+  }
+}

@@ -1,4 +1,119 @@
-.github-activity__card {
+/* ---------- live stats ---------- */
+.gh__stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+  margin-top: var(--space-7);
+}
+
+.gh__stat {
+  padding: var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  transition: border-color var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
+}
+
+.gh__stat:hover {
+  border-color: var(--color-accent-border);
+  transform: translateY(-3px);
+}
+
+.gh__stat-value {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 1.4rem + 1.8vw, 2.9rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  background: linear-gradient(120deg, var(--color-fg) 25%, var(--color-accent) 85%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.gh__stat-label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-fg-faint);
+}
+
+/* ---------- language mix ---------- */
+.gh__block-label {
+  display: block;
+  margin-bottom: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-fg-faint);
+}
+
+.gh__langs {
+  margin-top: var(--space-7);
+}
+
+.gh__lang-bar {
+  display: flex;
+  height: 10px;
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.gh__lang-seg {
+  display: block;
+  height: 100%;
+  /* Each language sits at its own point along the accent -> accent-2 ramp,
+     so the segments stay distinguishable whether there are two or eight. */
+  background: color-mix(
+    in srgb,
+    var(--color-accent-2) calc(var(--i, 0) / var(--n, 1) * 100%),
+    var(--color-accent)
+  );
+}
+
+.gh__lang-seg + .gh__lang-seg {
+  border-left: 1px solid var(--color-bg);
+}
+
+.gh__lang-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+  margin-top: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--color-fg-muted);
+}
+
+.gh__lang-key li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.gh__lang-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: color-mix(
+    in srgb,
+    var(--color-accent-2) calc(var(--i, 0) / var(--n, 1) * 100%),
+    var(--color-accent)
+  );
+  flex-shrink: 0;
+}
+
+/* ---------- calendar ---------- */
+.gh__card {
+  margin-top: var(--space-7);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
   background: var(--color-surface);
@@ -6,16 +121,141 @@
   overflow-x: auto;
 }
 
-.github-activity__card svg {
+.gh__card svg {
   max-width: 100%;
 }
 
-.github-activity__card text {
+.gh__card text {
   fill: var(--color-fg-muted);
 }
 
-.github-activity__card i {
+.gh__card i {
   font-style: normal;
   color: var(--color-fg-faint);
   font-size: var(--fs-small);
+}
+
+/* ---------- repos ---------- */
+.gh__repos {
+  margin-top: var(--space-7);
+}
+
+.gh__repo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-4);
+}
+
+.gh__repo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  transition: border-color var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+}
+
+.gh__repo:hover {
+  border-color: var(--color-accent-border);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.gh__repo-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.gh__repo-name {
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--color-fg);
+  word-break: break-word;
+}
+
+.gh__repo-time {
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  color: var(--color-fg-faint);
+}
+
+.gh__repo-desc {
+  flex: 1;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--color-fg-muted);
+}
+
+.gh__repo-foot {
+  display: flex;
+  gap: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--color-fg-faint);
+}
+
+.gh__repo-lang {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* ---------- freshness stamp ---------- */
+.gh__stamp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-6);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+}
+
+.gh__stamp-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-fg-faint);
+}
+
+.gh__stamp-dot--ready {
+  background: var(--color-success);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-success) 20%, transparent);
+}
+
+.gh__stamp-dot--loading {
+  background: var(--color-accent-2);
+  animation: gh-blink 1.2s var(--ease-in-out) infinite;
+}
+
+.gh__stamp-dot--offline {
+  background: var(--color-accent-2);
+}
+
+@keyframes gh-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+
+@media (max-width: 860px) {
+  .gh__stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .gh__stat {
+    padding: var(--space-4);
+  }
+  .gh__card {
+    padding: var(--space-5) var(--space-4);
+  }
 }

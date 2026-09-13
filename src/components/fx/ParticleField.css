@@ -1,0 +1,13 @@
+.particle-field {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-bg);
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+@media (max-width: 640px) {
+  .particle-field {
+    opacity: 0.5;
+  }
+}

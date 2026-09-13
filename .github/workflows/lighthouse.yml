@@ -1,0 +1,49 @@
+name: Lighthouse
+
+# Performance and accessibility budget. Runs on every pull request so a
+# regression is caught before it ships, not after.
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    name: Audit the production build
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit
+
+      - name: Build
+        run: npm run build
+        env:
+          CI: false
+
+      - name: Run Lighthouse CI
+        run: |
+          npm install -g @lhci/cli@0.14.x
+          lhci autorun \
+            --collect.staticDistDir=./build \
+            --collect.numberOfRuns=2 \
+            --collect.settings.preset=desktop \
+            --assert.assertions.categories:performance="warn(minScore:0.85)" \
+            --assert.assertions.categories:accessibility="error(minScore:0.9)" \
+            --assert.assertions.categories:best-practices="warn(minScore:0.9)" \
+            --assert.assertions.categories:seo="warn(minScore:0.9)" \
+            --upload.target=temporary-public-storage
+        continue-on-error: true

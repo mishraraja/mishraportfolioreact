@@ -1,9 +1,13 @@
 import { profile } from "../data/profile";
 import { navItems } from "../data/nav";
+import { useExperience } from "../context/ExperienceContext";
+import { sfx } from "../lib/sound";
 import "./Footer.css";
 
 export function Footer() {
   const year = new Date().getFullYear();
+  const { unlockedCount, total, rank, setTrophyOpen } = useExperience();
+  const found = unlockedCount > 0;
 
   function go(id) {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -13,7 +17,14 @@ export function Footer() {
     <footer className="footer">
       <div className="container footer__inner">
         <div className="footer__top">
-          <a href="#home" className="footer__brand" onClick={(e) => { e.preventDefault(); go("home"); }}>
+          <a
+            href="#home"
+            className="footer__brand"
+            onClick={(e) => {
+              e.preventDefault();
+              go("home");
+            }}
+          >
             {profile.name}
           </a>
 
@@ -21,11 +32,12 @@ export function Footer() {
             {navItems.map((item) => (
               <a
                 key={item.id}
-                href={`#${item.id}`}
+                href={"#" + item.id}
                 onClick={(e) => {
                   e.preventDefault();
                   go(item.id);
                 }}
+                onPointerEnter={sfx.hover}
               >
                 {item.label}
               </a>
@@ -47,9 +59,46 @@ export function Footer() {
           </div>
         </div>
 
+        {/* The scoreboard, stated plainly, so nobody leaves without knowing
+            there was something to find. */}
+        <button
+          type="button"
+          className="footer__hunt"
+          onClick={() => {
+            setTrophyOpen(true);
+            sfx.open();
+          }}
+          onPointerEnter={sfx.hover}
+        >
+          <span className="footer__hunt-bar" aria-hidden="true">
+            <span
+              className="footer__hunt-fill"
+              style={{ width: (unlockedCount / total) * 100 + "%" }}
+            />
+          </span>
+          <span className="footer__hunt-text">
+            {found ? (
+              <>
+                <strong>{rank}</strong> — you have found {unlockedCount} of {total} hidden things
+                on this site.
+              </>
+            ) : (
+              <>
+                There are <strong>{total} hidden things</strong> on this site. You have found none
+                of them yet.
+              </>
+            )}
+          </span>
+          <span className="footer__hunt-cta">Open the list</span>
+        </button>
+
         <div className="footer__bottom">
-          <span>© {year} {profile.name}. All rights reserved.</span>
-          <span>Designed &amp; engineered by {profile.name}.</span>
+          <span>
+            © {year} {profile.name}. All rights reserved.
+          </span>
+          <span className="footer__built">
+            Hand-built with React. No UI kit, no confetti library, no audio files.
+          </span>
         </div>
       </div>
     </footer>

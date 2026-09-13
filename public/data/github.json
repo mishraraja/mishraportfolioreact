@@ -1,0 +1,92 @@
+{
+  "generatedAt": "2026-09-13T04:56:10.369Z",
+  "source": "snapshot",
+  "user": {
+    "login": "mishraraja",
+    "name": "Raja Mishra",
+    "avatar": "https://avatars.githubusercontent.com/u/121672623?v=4",
+    "bio": null,
+    "publicRepos": 6,
+    "followers": 1,
+    "following": 2,
+    "createdAt": "2022-12-30T11:49:17Z",
+    "url": "https://github.com/mishraraja"
+  },
+  "totals": {
+    "repos": 5,
+    "stars": 0,
+    "forks": 0
+  },
+  "languages": [
+    {
+      "name": "JavaScript",
+      "count": 4
+    },
+    {
+      "name": "TypeScript",
+      "count": 1
+    }
+  ],
+  "repos": [
+    {
+      "id": 682196384,
+      "name": "mishraportfolioreact",
+      "description": null,
+      "url": "https://github.com/mishraraja/mishraportfolioreact",
+      "homepage": "https://rajamishra.vercel.app",
+      "language": "JavaScript",
+      "stars": 0,
+      "forks": 0,
+      "pushedAt": "2026-09-12T18:00:15Z",
+      "topics": []
+    },
+    {
+      "id": 1321469066,
+      "name": "kamrasaathi",
+      "description": null,
+      "url": "https://github.com/mishraraja/kamrasaathi",
+      "homepage": "https://kamrasaathiks.vercel.app",
+      "language": "JavaScript",
+      "stars": 0,
+      "forks": 0,
+      "pushedAt": "2026-08-03T09:48:08Z",
+      "topics": []
+    },
+    {
+      "id": 1240369225,
+      "name": "react_app",
+      "description": null,
+      "url": "https://github.com/mishraraja/react_app",
+      "homepage": "https://timetablegen-indol.vercel.app",
+      "language": "JavaScript",
+      "stars": 0,
+      "forks": 0,
+      "pushedAt": "2026-05-16T05:33:59Z",
+      "topics": []
+    },
+    {
+      "id": 971162252,
+      "name": "chancellorPortalReact",
+      "description": null,
+      "url": "https://github.com/mishraraja/chancellorPortalReact",
+      "homepage": null,
+      "language": "JavaScript",
+      "stars": 0,
+      "forks": 0,
+      "pushedAt": "2025-04-23T06:05:19Z",
+      "topics": []
+    },
+    {
+      "id": 811208098,
+      "name": "mishraportfolioangular",
+      "description": "Angular project",
+      "url": "https://github.com/mishraraja/mishraportfolioangular",
+      "homepage": "https://mishraportfolioangular.vercel.app",
+      "language": "TypeScript",
+      "stars": 0,
+      "forks": 0,
+      "pushedAt": "2024-06-10T08:02:13Z",
+      "topics": []
+    }
+  ]
+}

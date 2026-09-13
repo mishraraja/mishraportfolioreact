@@ -45,3 +45,71 @@
 .contact__links a:hover {
   color: var(--color-fg);
 }
+
+/* ---------- copyable email ---------- */
+.contact__email {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+  padding: var(--space-3) var(--space-3) var(--space-3) var(--space-5);
+  border-radius: var(--radius-pill);
+  border: 1px dashed var(--color-border-strong);
+  background: color-mix(in srgb, var(--color-surface) 55%, transparent);
+  transition: border-color var(--dur-base) var(--ease-out),
+    background var(--dur-base) var(--ease-out);
+}
+
+.contact__email:hover {
+  border-color: var(--color-accent-border);
+  background: var(--color-accent-soft);
+}
+
+.contact__email--copied {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--color-success) 45%, transparent);
+  background: color-mix(in srgb, var(--color-success) 10%, transparent);
+}
+
+.contact__email-text {
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  color: var(--color-fg);
+  word-break: break-all;
+}
+
+.contact__email-action {
+  flex-shrink: 0;
+  display: inline-grid;
+  place-items: center;
+  min-width: 66px;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent);
+  color: var(--color-bg);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.contact__email--copied .contact__email-action {
+  background: var(--color-success);
+}
+
+.contact__magnet {
+  display: inline-block;
+  will-change: transform;
+}
+
+@media (max-width: 520px) {
+  .contact__email {
+    width: 100%;
+    justify-content: space-between;
+    padding-left: var(--space-4);
+  }
+  .contact__email-text {
+    font-size: 0.72rem;
+  }
+}

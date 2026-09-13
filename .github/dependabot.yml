@@ -1,0 +1,40 @@
+version: 2
+
+updates:
+  # Application dependencies — grouped so review is one PR, not twenty.
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Asia/Kolkata
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "chore(deps)"
+      prefix-development: "chore(dev-deps)"
+    groups:
+      react:
+        patterns:
+          - "react"
+          - "react-dom"
+          - "react-router*"
+      testing:
+        patterns:
+          - "@testing-library/*"
+      minor-and-patch:
+        update-types:
+          - minor
+          - patch
+    ignore:
+      # react-scripts majors rewrite the build; upgrade deliberately.
+      - dependency-name: react-scripts
+        update-types: ["version-update:semver-major"]
+
+  # Keep the workflows themselves current.
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: "chore(ci)"
