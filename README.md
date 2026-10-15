@@ -81,7 +81,7 @@ No environment variables are required to start the app. Optional script settings
 
 ## What Makes It Different
 
-### Mission Control on the homepage
+### Homepage shortcuts, demo and coding questions
 
 The hero now offers three entry points: selected work, a quick coding challenge,
 and the developer's story, with a greeting based on the visitor's local time.
@@ -97,7 +97,7 @@ opt-in sound setting. No new packages, external APIs or media downloads are
 needed for these additions.
 
 Project cards retain their existing destinations and add a native expandable
-"Behind the build" story using the existing problem, contribution and delivered
+"Project details" section using the existing problem, contribution and delivered
 functionality descriptions. No performance or business metrics are invented.
 
 ### An API simulator you can interact with

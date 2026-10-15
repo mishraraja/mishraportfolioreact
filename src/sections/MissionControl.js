@@ -8,11 +8,11 @@ export function MissionPanel() {
   const hour = new Date().getHours();
   const greeting = hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
   return (
-    <nav className="mission-panel" aria-label="Choose your mission">
-      <div className="mission-panel__head"><span className="mission-label">MISSION CONTROL</span><span>{greeting}, explorer.</span></div>
-      <p>Three ways in. Follow your curiosity.</p>
+    <nav className="mission-panel" aria-label="Homepage shortcuts">
+      <div className="mission-panel__head"><span className="mission-label">START HERE</span><span>{greeting}.</span></div>
+      <p>See my projects, try a question, or read about my work.</p>
       <div className="mission-panel__links">
-        {[["01", "Explore my work", "projects"], ["02", "Try a coding challenge", "mission-lab"], ["03", "Meet the developer", "about"]].map(([n, label, id]) => (
+        {[["01", "Explore projects", "projects"], ["02", "Try a coding question", "mission-lab"], ["03", "About me", "about"]].map(([n, label, id]) => (
           <a key={id} href={`#${id}`} onClick={() => sfx.click()}><span aria-hidden="true">{n}</span>{label}<span aria-hidden="true">↗</span></a>
         ))}
       </div>
@@ -42,9 +42,9 @@ export function MissionControl() {
   return (
     <section ref={section} id="mission-lab" className="mission-section section" aria-labelledby="mission-title">
       <div className="container">
-        <div className="mission-heading"><span className="mission-label">SIDE QUEST / NO SIGN-UP</span><h2 id="mission-title">Less scrolling. More exploring.</h2><p>Send a request. Follow the journey. Give your Java instincts a quick workout.</p></div>
+        <div className="mission-heading"><span className="mission-label">BACKEND DEMO & PRACTICE</span><h2 id="mission-title">Try a backend demo and a coding question.</h2><p>Step through a request, then test a Java or DSA concept with a short question.</p></div>
         <div className="mission-slot">
-          <LabBoundary><Suspense fallback={<p role="status">Preparing your mission…</p>}>
+          <LabBoundary><Suspense fallback={<p role="status">Loading the demo and questions…</p>}>
             {ready ? <Playground /> : <button className="mission-button" onClick={() => setReady(true)}>Open the interactive lab →</button>}
           </Suspense></LabBoundary>
         </div>

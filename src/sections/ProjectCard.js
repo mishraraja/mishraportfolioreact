@@ -56,7 +56,7 @@ export function ProjectCard({ project, index }) {
       {href ? <span className="project-card__link">View Project →</span> : null}
     </Component>
     <details className="project-story__details">
-      <summary>Behind the build <span className="sr-only">— {project.title}</span></summary>
+      <summary>Project details <span className="sr-only">— {project.title}</span></summary>
       <dl>
         <div><dt>01 / The problem</dt><dd>{project.problem}</dd></div>
         <div><dt>02 / My contribution</dt><dd><strong>{project.role}.</strong> {project.solution}</dd></div>
