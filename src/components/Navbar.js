@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { navItems } from "../data/nav";
 import { profile } from "../data/profile";
@@ -9,6 +10,8 @@ import "./Navbar.css";
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const menuRef = useRef(null);
+  const toggleRef = useRef(null);
   const activeId = useScrollSpy(["home", ...navItems.map((item) => item.id)]);
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -17,6 +20,45 @@ export function Navbar() {
   const inJava = pathname.startsWith("/java");
 
   useLockBodyScroll(mobileOpen);
+
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!mobileOpen) return undefined;
+    const menu = menuRef.current;
+    const toggle = toggleRef.current;
+    const controls = menu.querySelectorAll("button, a[href]");
+    const first = controls[0];
+    const last = controls[controls.length - 1];
+    first.focus();
+
+    function onKeyDown(event) {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setMobileOpen(false);
+      } else if (event.key === "Tab") {
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+    }
+    function onResize() {
+      if (window.innerWidth >= 768) setMobileOpen(false);
+    }
+    menu.addEventListener("keydown", onKeyDown);
+    window.addEventListener("resize", onResize);
+    return () => {
+      menu.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener("resize", onResize);
+      toggle?.focus();
+    };
+  }, [mobileOpen]);
 
   useEffect(() => {
     function onScroll() {
@@ -80,9 +122,12 @@ export function Navbar() {
           </a>
         ) : null}
         <button
+          ref={toggleRef}
+          type="button"
           className={`nav__toggle ${mobileOpen ? "nav__toggle--open" : ""}`}
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
           aria-expanded={mobileOpen}
+          aria-controls={mobileOpen ? "mobile-navigation" : undefined}
           onClick={() => setMobileOpen((v) => !v)}
         >
           <span />
@@ -90,8 +135,11 @@ export function Navbar() {
         </button>
       </div>
 
-      {mobileOpen && (
-        <div className="nav__mobile" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+      {mobileOpen && createPortal(
+        <div ref={menuRef} id="mobile-navigation" className="nav__mobile" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+          <button type="button" className="nav__mobile-close" onClick={() => setMobileOpen(false)}>
+            Close menu
+          </button>
           {navItems.map((item) => (
             <a
               key={item.id}
@@ -119,7 +167,8 @@ export function Navbar() {
           >
             ☕ Java Arcade
           </Link>
-        </div>
+        </div>,
+        document.body
       )}
     </header>
   );

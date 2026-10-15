@@ -6,9 +6,7 @@ import { LabPage, LabsIndex } from "./pages/LabPage";
 import { ThisOrThat } from "./pages/ThisOrThat";
 import { GuessOutput } from "./pages/GuessOutput";
 import { Revise } from "./pages/Revise";
-import "../dsa/DsaArcade.css";
-import "../dsa/pages/Hub.css";
-import "../dsa/engine/Player.css";
+import "../dsa/sharedStyles";
 import "./JavaArcade.css";
 
 const LINKS = [

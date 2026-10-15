@@ -8,7 +8,7 @@ import { useProgress, isDue } from "../progress";
 import { ProblemCard } from "../components/ProblemCard";
 import { useTitle } from "../useTitle";
 import { sfx } from "../../lib/sound";
-import "./Hub.css";
+import "../sharedStyles";
 
 const DIFFICULTIES = ["All", "Easy", "Medium", "Hard"];
 const STATUSES = [

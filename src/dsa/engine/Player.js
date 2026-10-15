@@ -4,7 +4,7 @@ import { runTrace, parseInputs, formatField, formatValue } from "./trace";
 import { Stage } from "./Stage";
 import { rich } from "./views/format";
 import { sfx } from "../../lib/sound";
-import "./Player.css";
+import "../sharedStyles";
 
 const SPEEDS = [0.5, 1, 1.5, 2];
 const PRAISE = ["Nailed it!", "Exactly right.", "You're thinking like the algorithm.", "Spot on.", "That's the one."];

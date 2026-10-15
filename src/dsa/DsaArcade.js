@@ -7,7 +7,7 @@ import { PatternRadar } from "./pages/PatternRadar";
 import { Roadmap } from "./pages/Roadmap";
 import { BigO } from "./pages/BigO";
 import { Playbook } from "./pages/Playbook";
-import "./DsaArcade.css";
+import "./sharedStyles";
 
 const LINKS = [
   { to: "/dsa", label: "Problems", icon: "🧭", end: true },

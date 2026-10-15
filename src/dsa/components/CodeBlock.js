@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { sfx } from "../../lib/sound";
-import "./CodeBlock.css";
+import "../sharedStyles";
 
 const LANG_KEY = "rm.dsa.lang";
 
