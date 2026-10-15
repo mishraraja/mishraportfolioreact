@@ -15,6 +15,11 @@ const LEARN = [
   { id: "dsa-patterns", label: "DSA: the pattern playbook", icon: "🧠", path: "/dsa/learn/patterns" },
   { id: "dsa-bigo", label: "DSA: the Big-O lab", icon: "⚡", path: "/dsa/learn/big-o" },
   { id: "dsa-interview", label: "DSA: the interview playbook", icon: "🎤", path: "/dsa/learn/interview" },
+  { id: "java", label: "Open the Backend Arcade — Java, Spring, SQL and Git, playable", icon: "☕", path: "/java" },
+  { id: "java-labs", label: "Backend Arcade: hands-on labs", icon: "🧪", path: "/java/labs" },
+  { id: "java-this-or-that", label: "Play This or That — Java trade-offs against the clock", icon: "⚖", path: "/java/play/this-or-that" },
+  { id: "java-guess-output", label: "Play Guess the Output — tricky Java snippets", icon: "🖨", path: "/java/play/guess-output" },
+  { id: "java-revise", label: "Backend Arcade: the revision sheet", icon: "📜", path: "/java/revise" },
 ];
 
 export function CommandPalette() {

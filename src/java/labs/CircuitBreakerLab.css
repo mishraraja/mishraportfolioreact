@@ -1,0 +1,120 @@
+.cbreak__svg {
+  width: 100%;
+  max-width: 420px;
+  justify-self: center;
+}
+
+.cbreak__node rect {
+  fill: var(--color-bg);
+  stroke: var(--color-border-strong);
+  stroke-width: 1.5;
+  transition: fill var(--dur-base) var(--ease-out), stroke var(--dur-base) var(--ease-out);
+}
+
+.cbreak__node text {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  text-anchor: middle;
+  fill: var(--color-fg-muted);
+}
+
+.cbreak__node.is-on text {
+  fill: var(--color-fg);
+}
+
+.cbreak__node--CLOSED.is-on rect {
+  fill: color-mix(in srgb, var(--color-success) 18%, var(--color-bg));
+  stroke: var(--color-success);
+  stroke-width: 2.5;
+}
+
+.cbreak__node--OPEN.is-on rect {
+  fill: color-mix(in srgb, var(--color-danger) 16%, var(--color-bg));
+  stroke: var(--color-danger);
+  stroke-width: 2.5;
+}
+
+.cbreak__node--HALF_OPEN.is-on rect {
+  fill: var(--color-accent-2-soft);
+  stroke: var(--color-accent-2);
+  stroke-width: 2.5;
+}
+
+.cbreak__edge {
+  stroke: var(--color-border-strong);
+  stroke-width: 1.5;
+}
+
+.cbreak__head {
+  fill: var(--color-border-strong);
+}
+
+.cbreak__edge-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-anchor: middle;
+  fill: var(--color-fg-faint);
+}
+
+.cbreak__window {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.cbreak__slot {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px dashed var(--color-border-strong);
+  font-weight: 700;
+}
+
+.cbreak__slot.is-ok {
+  border: 1px solid var(--color-success);
+  background: color-mix(in srgb, var(--color-success) 16%, var(--color-bg));
+  color: var(--color-success);
+}
+
+.cbreak__slot.is-fail {
+  border: 1px solid var(--color-danger);
+  background: color-mix(in srgb, var(--color-danger) 14%, var(--color-bg));
+  color: var(--color-danger);
+}
+
+.cbreak__rate {
+  display: grid;
+  gap: 6px;
+}
+
+.cbreak__bar {
+  position: relative;
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--color-danger) 14%, transparent);
+}
+
+.cbreak__fill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--color-danger);
+  transition: width var(--dur-base) var(--ease-out);
+}
+
+.cbreak__limit {
+  position: absolute;
+  top: -4px;
+  bottom: -4px;
+  left: 50%;
+  width: 2px;
+  background: var(--color-fg);
+}
+
+.cbreak__log {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}

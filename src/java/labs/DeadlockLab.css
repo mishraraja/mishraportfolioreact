@@ -1,0 +1,131 @@
+.dlock__stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 1fr) minmax(0, 1fr);
+  gap: var(--space-4);
+  align-items: start;
+}
+
+@media (max-width: 960px) {
+  .dlock__stage {
+    grid-template-columns: 1fr;
+  }
+  .dlock__graph-panel {
+    order: -1;
+  }
+}
+
+.dlock__thread .lab-btn--primary {
+  justify-self: start;
+}
+
+.dlock__graph-panel.is-dead {
+  border-color: color-mix(in srgb, var(--color-danger) 60%, transparent);
+  box-shadow: 0 0 40px -20px var(--color-danger);
+}
+
+.dlock__graph {
+  width: 100%;
+  max-width: 360px;
+  justify-self: center;
+  overflow: visible;
+}
+
+.dlock__graph text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-anchor: middle;
+  fill: var(--color-fg);
+}
+
+.dlock__lock rect {
+  fill: var(--color-bg);
+  stroke: var(--color-border-strong);
+  stroke-width: 1.5;
+}
+
+.dlock__lock.is-held rect {
+  stroke: var(--color-accent-2);
+  fill: var(--color-accent-2-soft);
+}
+
+.dlock__node circle {
+  fill: var(--color-bg);
+  stroke: var(--color-accent);
+  stroke-width: 2;
+}
+
+.dlock__node.is-waiting circle {
+  stroke: var(--color-danger);
+}
+
+.dlock__node.is-done circle {
+  stroke: var(--color-success);
+}
+
+.dlock__edge {
+  stroke-width: 2;
+}
+
+.dlock__edge--hold {
+  stroke: var(--color-accent-2);
+}
+
+.dlock__edge--wait {
+  stroke: var(--color-danger);
+  stroke-dasharray: 5 4;
+}
+
+.dlock__head--hold {
+  fill: var(--color-accent-2);
+}
+
+.dlock__head--wait {
+  fill: var(--color-danger);
+}
+
+.dlock__key {
+  display: inline-block;
+  width: 18px;
+  height: 0;
+  margin-right: 4px;
+  vertical-align: middle;
+  border-top: 2px solid var(--color-accent-2);
+}
+
+.dlock__key--wait {
+  border-top: 2px dashed var(--color-danger);
+}
+
+.dlock__coffman {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: var(--space-2);
+}
+
+.dlock__coffman li {
+  display: grid;
+  align-content: start;
+  gap: 4px;
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  font-size: var(--fs-small);
+  color: var(--color-fg-muted);
+}
+
+.dlock__coffman li strong {
+  color: var(--color-fg);
+}
+
+.dlock__coffman li.is-met {
+  border-color: color-mix(in srgb, var(--color-danger) 55%, transparent);
+}
+
+.dlock__coffman li.is-broken {
+  border-color: color-mix(in srgb, var(--color-success) 55%, transparent);
+}
+
+.dlock__coffman .lab-chip {
+  justify-self: start;
+}

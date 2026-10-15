@@ -25,6 +25,13 @@ const FEATURES = [
   ["🗺️", "A plan that sticks", "An 8-week roadmap with spaced reviews, XP and streaks. No sign-up, ever."],
 ];
 
+const JAVA_LABS = [
+  ["🏁", "Lose an update", "Schedule two threads by hand until count++ quietly breaks."],
+  ["🧮", "Break a HashMap", "Force a collision with \"Aa\" and \"BB\", then watch the table resize."],
+  ["🐌", "Count the N+1", "Run one report, watch the SQL queries pile up, then fix it."],
+  ["🌿", "Rewrite history", "Merge, rebase, reset and revert on a live commit graph."],
+];
+
 export function ArcadeTeaser() {
   const reduced = useReducedMotion();
   const [step, setStep] = useState(reduced ? FRAMES.length - 1 : 0);
@@ -142,6 +149,36 @@ export function ArcadeTeaser() {
             </dl>
           </div>
         </div>
+
+        <Reveal className="java-teaser">
+          <div className="java-teaser__copy">
+            <span className="java-teaser__badge">New · Backend Arcade</span>
+            <h3 className="java-teaser__title">Java backend interviews, made playable.</h3>
+            <p>
+              Core Java, collections, multithreading, Spring Boot, microservices, SQL and JPA, testing, Git and Agile. Every hard idea starts in plain
+              words, then you break it in a lab, then you beat the boss.
+            </p>
+            <div className="arcade-teaser__cta">
+              <Button as={Link} to="/java" variant="primary" onClick={sfx.click}>
+                Enter the Backend Arcade
+              </Button>
+              <Button as={Link} to="/java/play/guess-output" variant="secondary" onClick={sfx.click}>
+                Guess the Output
+              </Button>
+            </div>
+          </div>
+          <ul className="java-teaser__labs" aria-label="A few of the labs">
+            {JAVA_LABS.map(([icon, title, text]) => (
+              <li key={title}>
+                <span aria-hidden="true">{icon}</span>
+                <div>
+                  <strong>{title}</strong>
+                  <p>{text}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
       </div>
     </section>
   );

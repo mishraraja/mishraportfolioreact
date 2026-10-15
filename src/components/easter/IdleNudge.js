@@ -16,7 +16,7 @@ const MESSAGES = [
 /**
  * After a stretch of no input, the site leans over and whispers a hint.
  * It appears once per idle period and never blocks anything — and it stays
- * quiet in the DSA Arcade, where sitting still usually means thinking.
+ * quiet in the arcades, where sitting still usually means thinking.
  */
 export function IdleNudge() {
   const idle = useIdle(50000);
@@ -33,7 +33,7 @@ export function IdleNudge() {
     }
   }, [idle, unlock]);
 
-  const show = idle && !dismissed && !pathname.startsWith("/dsa");
+  const show = idle && !dismissed && !pathname.startsWith("/dsa") && !pathname.startsWith("/java");
 
   return (
     <AnimatePresence>

@@ -1,0 +1,34 @@
+.mspy__db-line {
+  color: var(--color-accent-2-strong);
+}
+
+.mspy__status {
+  display: grid;
+  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.6fr);
+  gap: var(--space-4);
+  align-items: start;
+}
+
+@media (max-width: 760px) {
+  .mspy__status {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mspy__light {
+  display: inline-block;
+  justify-self: start;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-bg);
+  font-family: var(--font-mono);
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.mspy__light.is-hit {
+  border-color: var(--color-accent-2);
+  background: var(--color-accent-2-soft);
+  box-shadow: 0 0 24px -10px var(--color-accent-2);
+}

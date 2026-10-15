@@ -1,0 +1,101 @@
+.gitlab__scroll {
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.gitlab__svg {
+  display: block;
+}
+
+.gitlab__lane {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  fill: var(--color-fg-faint);
+}
+
+.gitlab__edge {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 2.5;
+}
+
+.gitlab__edge.is-orphan {
+  stroke: var(--color-border-strong);
+  stroke-dasharray: 4 4;
+}
+
+.gitlab__commit circle {
+  fill: var(--color-bg);
+  stroke: var(--color-accent);
+  stroke-width: 2.5;
+}
+
+.gitlab__commit text {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  text-anchor: middle;
+  fill: var(--color-fg);
+}
+
+.gitlab__commit.is-merge circle {
+  stroke: var(--color-accent-2);
+  fill: var(--color-accent-2-soft);
+}
+
+.gitlab__commit.is-revert circle {
+  stroke: var(--color-accent-3);
+}
+
+.gitlab__commit.is-orphan {
+  opacity: 0.35;
+}
+
+.gitlab__commit.is-orphan circle {
+  stroke: var(--color-border-strong);
+  stroke-dasharray: 3 3;
+}
+
+.gitlab__branch rect {
+  fill: var(--color-surface-hover);
+  stroke: var(--color-border-strong);
+}
+
+.gitlab__branch text {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  text-anchor: middle;
+  fill: var(--color-fg-muted);
+}
+
+.gitlab__branch.is-head rect {
+  fill: var(--color-accent-soft);
+  stroke: var(--color-accent);
+}
+
+.gitlab__branch.is-head text {
+  font-weight: 700;
+  fill: var(--color-fg);
+}
+
+.gitlab__areas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  gap: var(--space-3);
+}
+
+.gitlab__controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+  gap: var(--space-3);
+}
+
+.gitlab__buttons {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-2);
+}
+
+.gitlab__terminal li {
+  color: var(--color-fg);
+}

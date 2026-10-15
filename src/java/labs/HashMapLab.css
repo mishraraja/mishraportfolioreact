@@ -1,0 +1,55 @@
+.hmap__load {
+  display: grid;
+  gap: 6px;
+}
+
+.hmap__buckets {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 210px), 1fr));
+  gap: var(--space-2);
+}
+
+.hmap__bucket {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 48px;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  transition: border-color var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
+}
+
+.hmap__bucket.is-focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-soft);
+}
+
+.hmap__index {
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  color: var(--color-fg-faint);
+}
+
+.hmap__chain {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+
+.hmap__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.hmap__arrow,
+.hmap__null {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  color: var(--color-fg-faint);
+}

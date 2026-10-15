@@ -52,6 +52,9 @@ export function Footer() {
             <Link to="/dsa" onPointerEnter={sfx.hover}>
               DSA Arcade
             </Link>
+            <Link to="/java" onPointerEnter={sfx.hover}>
+              Java Arcade
+            </Link>
           </nav>
 
           <div className="footer__socials">

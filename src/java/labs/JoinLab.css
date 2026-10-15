@@ -1,0 +1,85 @@
+.join__tables {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: var(--space-4);
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .join__tables {
+    grid-template-columns: 1fr;
+  }
+}
+
+.join__result {
+  border-color: color-mix(in srgb, var(--color-accent) 45%, transparent);
+}
+
+.join__table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 3px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+}
+
+.join__table th {
+  padding: 0 8px 4px;
+  font-weight: 500;
+  text-align: left;
+  color: var(--color-fg-faint);
+}
+
+.join__table td {
+  padding: 6px 8px;
+  background: var(--color-bg);
+  transition: background var(--dur-base) var(--ease-out), opacity var(--dur-base) var(--ease-out);
+}
+
+.join__table td:first-child {
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+}
+
+.join__table td:last-child {
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.join__table tr.is-match td {
+  background: color-mix(in srgb, var(--color-success) 14%, var(--color-bg));
+}
+
+.join__table tr.is-kept td {
+  background: var(--color-accent-2-soft);
+}
+
+.join__table tr.is-dropped td {
+  opacity: 0.4;
+}
+
+.join__null {
+  font-style: italic;
+  color: var(--color-fg-faint);
+}
+
+.join__key {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 2px;
+  vertical-align: -1px;
+  border-radius: 3px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-strong);
+}
+
+.join__key.is-match {
+  background: color-mix(in srgb, var(--color-success) 40%, var(--color-bg));
+}
+
+.join__key.is-kept {
+  background: var(--color-accent-2);
+}
+
+.join__key.is-dropped {
+  opacity: 0.4;
+}

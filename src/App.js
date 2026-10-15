@@ -38,6 +38,10 @@ const GithubActivity = lazy(() =>
 // so it only downloads when someone actually opens it.
 const DsaArcade = lazy(() => import("./dsa/DsaArcade"));
 
+// The Backend Arcade — Java, Spring, SQL, testing and Git as cards, labs and
+// games — loads the same way.
+const JavaArcade = lazy(() => import("./java/JavaArcade"));
+
 function Home() {
   const location = useLocation();
 
@@ -197,6 +201,14 @@ function Shell() {
             element={
               <Suspense fallback={<div className="section" style={{ minHeight: "100vh" }} aria-busy="true" />}>
                 <DsaArcade />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/java/*"
+            element={
+              <Suspense fallback={<div className="section" style={{ minHeight: "100vh" }} aria-busy="true" />}>
+                <JavaArcade />
               </Suspense>
             }
           />

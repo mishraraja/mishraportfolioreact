@@ -25,6 +25,23 @@ const ARCADE_PAGES = {
   interview: "/dsa/learn/interview",
 };
 
+const JAVA_PAGES = {
+  labs: "/java/labs",
+  revise: "/java/revise",
+  vs: "/java/play/this-or-that",
+  output: "/java/play/guess-output",
+  core: "/java/core-java",
+  oop: "/java/oop",
+  collections: "/java/collections",
+  threads: "/java/concurrency",
+  spring: "/java/spring",
+  micro: "/java/microservices",
+  sql: "/java/database",
+  testing: "/java/testing",
+  git: "/java/git",
+  agile: "/java/agile",
+};
+
 /**
  * A genuine little shell. Every command returns real data from the site's own
  * content files, so nothing here is a mock-up of a mock-up.
@@ -185,6 +202,20 @@ export function Terminal() {
           return [
             "Booting the DSA Arcade -> " + target,
             "  also try: dsa radar | dsa roadmap | dsa patterns | dsa bigo | dsa interview",
+          ];
+        },
+      },
+      java: {
+        desc: "play the Java backend arcade",
+        run: (args) => {
+          const target = JAVA_PAGES[(args[0] || "").toLowerCase()] || "/java";
+          setTimeout(() => {
+            setTerminalOpen(false);
+            navigate(target);
+          }, 350);
+          return [
+            "Booting the Backend Arcade -> " + target,
+            "  also try: java labs | java vs | java output | java revise | java threads | java spring | java sql | java git",
           ];
         },
       },

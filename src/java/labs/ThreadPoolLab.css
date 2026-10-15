@@ -1,0 +1,116 @@
+.tpool__stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 0.8fr);
+  gap: var(--space-4);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .tpool__stage {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tpool__workers {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(118px, 1fr));
+  gap: var(--space-2);
+}
+
+.tpool__worker {
+  display: grid;
+  justify-items: start;
+  gap: 2px;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  font-size: var(--fs-label);
+}
+
+.tpool__worker strong {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+}
+
+.tpool__worker.is-busy {
+  border-color: color-mix(in srgb, var(--color-accent-2) 55%, transparent);
+  background: var(--color-accent-2-soft);
+}
+
+.tpool__chef {
+  font-size: 1.3rem;
+}
+
+.tpool__task {
+  font-family: var(--font-mono);
+  color: var(--color-fg-muted);
+}
+
+.tpool__queue {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.tpool__slot {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  border: 1px dashed var(--color-border-strong);
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+}
+
+.tpool__slot.is-full {
+  border-style: solid;
+  border-color: var(--color-accent);
+  background: var(--color-accent-soft);
+}
+
+.tpool__slot--more {
+  border-style: dotted;
+  color: var(--color-fg-faint);
+}
+
+.tpool__rules {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.tpool__rules li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  font-size: var(--fs-small);
+  color: var(--color-fg-muted);
+  transition: background var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out);
+}
+
+.tpool__rules li.is-on {
+  border-color: var(--color-accent-border);
+  background: var(--color-accent-soft);
+  color: var(--color-fg);
+}
+
+.tpool__num {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border-strong);
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+}
+
+.tpool__rules li.is-on .tpool__num {
+  border-color: var(--color-accent);
+  color: var(--color-accent-strong);
+}

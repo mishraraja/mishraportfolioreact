@@ -190,3 +190,74 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ---------- the Backend Arcade, right underneath ---------- */
+.java-teaser {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: var(--space-6);
+  align-items: center;
+  margin-top: var(--space-8);
+  padding: var(--space-6);
+  border-radius: var(--radius-xl);
+  border: 1px solid color-mix(in srgb, var(--color-accent-2) 35%, transparent);
+  background: linear-gradient(160deg, var(--color-accent-2-soft), transparent 60%), var(--color-surface);
+}
+
+.java-teaser__badge {
+  display: inline-block;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid color-mix(in srgb, var(--color-accent-2) 45%, transparent);
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-accent-2-strong);
+}
+
+.java-teaser__title {
+  margin-top: var(--space-3);
+  font-size: var(--fs-h3);
+}
+
+.java-teaser__copy p {
+  margin-top: var(--space-3);
+  line-height: 1.6;
+  color: var(--color-fg-muted);
+}
+
+.java-teaser__labs {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.java-teaser__labs li {
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+}
+
+.java-teaser__labs li > span {
+  font-size: 1.3rem;
+}
+
+.java-teaser__labs strong {
+  font-family: var(--font-display);
+}
+
+.java-teaser__labs p {
+  margin-top: 2px;
+  font-size: var(--fs-small);
+  line-height: 1.5;
+  color: var(--color-fg-muted);
+}
+
+@media (max-width: 900px) {
+  .java-teaser {
+    grid-template-columns: 1fr;
+    padding: var(--space-5);
+  }
+}

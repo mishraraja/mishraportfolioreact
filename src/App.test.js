@@ -150,6 +150,19 @@ describe("routing", () => {
     expect(within(nav).getByRole("link", { name: /dsa arcade/i })).toHaveAttribute("href", "/dsa");
   });
 
+  test("the navigation links to the Java Arcade", () => {
+    render(<App />);
+    const nav = screen.getByRole("navigation", { name: /primary/i });
+    expect(within(nav).getByRole("link", { name: /java arcade/i })).toHaveAttribute("href", "/java");
+  });
+
+  test("the Backend Arcade loads on its own route", async () => {
+    window.history.pushState({}, "", "/java");
+    render(<App />);
+    expect(await screen.findByText(/hard backend topics/i, {}, { timeout: 8000 })).toBeInTheDocument();
+    window.history.pushState({}, "", "/");
+  });
+
   test("the DSA Arcade loads on its own route", async () => {
     window.history.pushState({}, "", "/dsa");
     render(<App />);

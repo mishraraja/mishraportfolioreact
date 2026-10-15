@@ -1,0 +1,92 @@
+.journey__track {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
+  gap: var(--space-2);
+}
+
+.journey__station {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 52px;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-surface) 88%, transparent);
+  font-size: var(--fs-small);
+  color: var(--color-fg-muted);
+  transition: border-color var(--dur-base) var(--ease-out), background var(--dur-base) var(--ease-out), opacity var(--dur-base) var(--ease-out);
+}
+
+.journey__icon {
+  font-size: 1.2rem;
+}
+
+.journey__label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+}
+
+.journey__station.is-seen {
+  border-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
+  color: var(--color-fg);
+}
+
+.journey__station.is-here {
+  border-color: var(--color-accent);
+  background: var(--color-accent-soft);
+  color: var(--color-fg);
+}
+
+.journey__station.is-skipped {
+  opacity: 0.4;
+  border-style: dashed;
+}
+
+.journey__packet {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-accent-2);
+  box-shadow: 0 0 12px var(--color-accent-2);
+}
+
+.journey__response {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-bg);
+}
+
+.journey__response strong {
+  font-family: var(--font-mono);
+}
+
+.journey__response code {
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  overflow-wrap: anywhere;
+  color: var(--color-fg-muted);
+}
+
+.journey__response.is-ok {
+  border-color: color-mix(in srgb, var(--color-success) 55%, transparent);
+}
+
+.journey__response.is-ok strong {
+  color: var(--color-success);
+}
+
+.journey__response.is-err {
+  border-color: color-mix(in srgb, var(--color-danger) 55%, transparent);
+}
+
+.journey__response.is-err strong {
+  color: var(--color-danger);
+}

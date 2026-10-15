@@ -13,6 +13,7 @@ import { fileURLToPath } from "node:url";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const BUILD = resolve(__dirname, "../build");
 const PROBLEMS = resolve(__dirname, "../src/dsa/data/problems");
+const JAVA = resolve(__dirname, "../src/java");
 const SITE = process.env.SITE_URL || "https://rajamishra.vercel.app";
 
 const ROUTES = [
@@ -23,7 +24,27 @@ const ROUTES = [
   { path: "/dsa/learn/big-o", priority: "0.7", changefreq: "monthly" },
   { path: "/dsa/learn/interview", priority: "0.7", changefreq: "monthly" },
   { path: "/dsa/radar", priority: "0.7", changefreq: "monthly" },
+  { path: "/java", priority: "0.9", changefreq: "weekly" },
+  { path: "/java/labs", priority: "0.8", changefreq: "monthly" },
+  { path: "/java/revise", priority: "0.8", changefreq: "monthly" },
+  { path: "/java/play/this-or-that", priority: "0.7", changefreq: "monthly" },
+  { path: "/java/play/guess-output", priority: "0.7", changefreq: "monthly" },
 ];
+
+/** Backend Arcade worlds and labs, read from their data files (top-level `id:` entries only). */
+async function javaRoutes() {
+  try {
+    const worlds = await readFile(resolve(JAVA, "data/worlds.js"), "utf8");
+    const labs = await readFile(resolve(JAVA, "labs/index.js"), "utf8");
+    const ids = (source) => [...source.matchAll(/^ {4}id: "([^"]+)"/gm)].map((m) => m[1]);
+    return [
+      ...ids(worlds).map((id) => ({ path: "/java/" + id, priority: "0.7", changefreq: "monthly" })),
+      ...ids(labs).map((id) => ({ path: "/java/lab/" + id, priority: "0.6", changefreq: "monthly" })),
+    ];
+  } catch {
+    return [];
+  }
+}
 
 async function problemRoutes() {
   try {
@@ -48,7 +69,7 @@ async function main() {
   }
 
   const today = new Date().toISOString().split("T")[0];
-  const routes = [...ROUTES, ...(await problemRoutes())];
+  const routes = [...ROUTES, ...(await problemRoutes()), ...(await javaRoutes())];
 
   const urls = routes.map(
     (r) =>

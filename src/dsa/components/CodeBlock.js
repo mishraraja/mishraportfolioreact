@@ -15,6 +15,15 @@ const KEYWORDS = {
       " "
     )
   ),
+  // SQL is matched case-insensitively, so these are lower case.
+  sql: new Set(
+    "select from where join inner left right full outer cross on group by having order asc desc limit offset insert into values update set delete create table index unique alter add drop primary key foreign references not null and or as distinct count sum avg min max begin commit rollback transaction isolation level read committed uncommitted repeatable serializable union all exists in between like is case when then else end with over partition rank dense_rank row_number explain".split(
+      " "
+    )
+  ),
+  shell: new Set("git".split(" ")),
+  yaml: new Set("true false null".split(" ")),
+  gherkin: new Set("Feature Story Scenario Given When Then And But".split(" ")),
 };
 
 // Comments and strings first, so a '#' inside a Java string or a '//' used as
@@ -22,11 +31,19 @@ const KEYWORDS = {
 const TOKENS = {
   java: /(\/\/.*$)|("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')|(\b\d+(?:\.\d+)?\b)|(@\w+)|(\b[A-Za-z_]\w*\b)/g,
   python: /(#.*$)|("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')|(\b\d+(?:\.\d+)?\b)|(@\w+)|(\b[A-Za-z_]\w*\b)/g,
+  sql: /(--.*$)|('(?:[^'\\]|\\.)*')|(\b\d+(?:\.\d+)?\b)|(:\w+)|(\b[A-Za-z_]\w*\b)/g,
+  shell: /(#.*$)|("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')|(\b\d+\b)|(\s--?[\w-]+)|(\b[A-Za-z_][\w-]*\b)/g,
+  yaml: /(#.*$)|("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')|(\b\d+(?:\.\d+)?\b)|(\$\{[^}]*\})|(\b[A-Za-z_][\w-]*\b)/g,
 };
+
+TOKENS.gherkin = TOKENS.yaml;
+
+const LABELS = { java: "Java", python: "Python", sql: "SQL", shell: "Terminal", yaml: "YAML", gherkin: "Gherkin" };
 
 function renderLine(line, lang) {
   const re = new RegExp(TOKENS[lang].source, "g");
   const keywords = KEYWORDS[lang];
+  const caseless = lang === "sql";
   const out = [];
   let last = 0;
   let m = re.exec(line);
@@ -39,7 +56,7 @@ function renderLine(line, lang) {
     else if (num) cls = "n";
     else if (annotation) cls = "a";
     else if (word) {
-      if (keywords.has(word)) cls = "k";
+      if (keywords.has(caseless ? word.toLowerCase() : word)) cls = "k";
       else if (/^[A-Z]/.test(word)) cls = "t";
       else if (line[m.index + word.length] === "(") cls = "f";
     }
@@ -67,12 +84,16 @@ function readLang() {
   }
 }
 
-/** Java and Python side by side — or Java alone, when that's all there is. */
-export function CodeBlock({ java, python }) {
+/**
+ * Java and Python side by side — or Java alone, when that's all there is.
+ * Pass `code` and `lang` instead for a single snippet (SQL, a terminal, YAML).
+ */
+export function CodeBlock({ java, python, code: snippet, lang: snippetLang = "java" }) {
   const [preferred, setLang] = useState(readLang);
   const [copied, setCopied] = useState(false);
-  const lang = python ? preferred : "java";
-  const code = lang === "java" ? java : python;
+  const single = snippet !== undefined;
+  const lang = single ? snippetLang : python ? preferred : "java";
+  const code = single ? snippet : lang === "java" ? java : python;
 
   function choose(next) {
     setLang(next);
@@ -98,7 +119,7 @@ export function CodeBlock({ java, python }) {
   return (
     <div className="code">
       <div className="code__bar">
-        {python ? (
+        {python && !single ? (
           <div className="code__tabs" role="tablist" aria-label="Language">
             {[
               ["java", "Java"],
@@ -110,7 +131,7 @@ export function CodeBlock({ java, python }) {
             ))}
           </div>
         ) : (
-          <span className="code__tab is-on">Java</span>
+          <span className="code__tab is-on">{LABELS[lang]}</span>
         )}
         <button type="button" className="code__copy" onClick={copy}>
           {copied ? "Copied ✓" : "Copy"}

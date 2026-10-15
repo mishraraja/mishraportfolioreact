@@ -1,0 +1,44 @@
+.nplus__slider {
+  display: grid;
+  gap: 6px;
+}
+
+.nplus__results {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.6fr);
+  gap: var(--space-4);
+  align-items: start;
+}
+
+@media (max-width: 760px) {
+  .nplus__results {
+    grid-template-columns: 1fr;
+  }
+}
+
+.nplus__meter {
+  justify-items: start;
+}
+
+.nplus__meter .meter {
+  width: 100%;
+}
+
+.nplus__count {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 3.2rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-accent-2-strong);
+}
+
+.nplus__log .lab-log li {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nplus__more {
+  font-style: italic;
+}

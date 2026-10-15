@@ -14,6 +14,7 @@ export function Navbar() {
   const navigate = useNavigate();
   const onHome = pathname === "/";
   const inArcade = pathname.startsWith("/dsa");
+  const inJava = pathname.startsWith("/java");
 
   useLockBodyScroll(mobileOpen);
 
@@ -63,6 +64,13 @@ export function Navbar() {
         >
           DSA Arcade
         </Link>
+        <Link
+          to="/java"
+          className={`nav__link nav__link--arcade ${inJava ? "nav__link--active" : ""}`}
+          aria-current={inJava ? "page" : undefined}
+        >
+          Java Arcade
+        </Link>
       </nav>
 
       <div className="nav__actions">
@@ -103,6 +111,13 @@ export function Navbar() {
             onClick={() => setMobileOpen(false)}
           >
             🕹️ DSA Arcade
+          </Link>
+          <Link
+            to="/java"
+            className={`nav__mobile-link nav__mobile-link--arcade ${inJava ? "nav__mobile-link--active" : ""}`}
+            onClick={() => setMobileOpen(false)}
+          >
+            ☕ Java Arcade
           </Link>
         </div>
       )}

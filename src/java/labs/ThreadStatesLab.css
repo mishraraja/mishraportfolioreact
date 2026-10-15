@@ -1,0 +1,65 @@
+.tstate__diagram {
+  overflow-x: auto;
+}
+
+.tstate__svg {
+  width: 100%;
+  min-width: 520px;
+  max-width: 760px;
+  justify-self: center;
+}
+
+.tstate__node rect {
+  fill: var(--color-bg);
+  stroke: var(--color-border-strong);
+  stroke-width: 1.5;
+  transition: fill var(--dur-base) var(--ease-out), stroke var(--dur-base) var(--ease-out);
+}
+
+.tstate__node text {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  text-anchor: middle;
+  fill: var(--color-fg-muted);
+}
+
+.tstate__node.is-visited rect {
+  stroke: color-mix(in srgb, var(--color-success) 70%, transparent);
+}
+
+.tstate__node.is-current rect {
+  fill: var(--color-accent-soft);
+  stroke: var(--color-accent);
+  stroke-width: 2.5;
+}
+
+.tstate__node.is-current text {
+  fill: var(--color-fg);
+}
+
+.tstate__edge {
+  fill: none;
+  stroke: var(--color-border-strong);
+  stroke-width: 1.5;
+  transition: stroke var(--dur-base) var(--ease-out);
+}
+
+.tstate__edge.is-on {
+  stroke: var(--color-accent);
+  stroke-width: 2.5;
+}
+
+.tstate__head {
+  fill: var(--color-border-strong);
+}
+
+.tstate__head.is-on {
+  fill: var(--color-accent);
+}
+
+.tstate__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
