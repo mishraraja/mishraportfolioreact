@@ -16,6 +16,7 @@ import { Terminal } from "./components/easter/Terminal";
 import { ChessPuzzle } from "./components/easter/ChessPuzzle";
 import { IdleNudge } from "./components/easter/IdleNudge";
 import { Hero } from "./sections/Hero";
+import { MissionControl } from "./sections/MissionControl";
 import { About } from "./sections/About";
 import { Experience } from "./sections/Experience";
 import { Projects } from "./sections/Projects";
@@ -58,6 +59,7 @@ function Home() {
   return (
     <>
       <Hero />
+      <MissionControl />
       <About />
       <Experience />
       <Projects />

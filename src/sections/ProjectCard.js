@@ -9,6 +9,7 @@ export function ProjectCard({ project, index }) {
   const tilt = useTilt(6);
 
   return (
+    <div className="project-story">
     <Component
       className="project-card"
       data-cursor={href ? "View" : undefined}
@@ -54,5 +55,14 @@ export function ProjectCard({ project, index }) {
 
       {href ? <span className="project-card__link">View Project →</span> : null}
     </Component>
+    <details className="project-story__details">
+      <summary>Behind the build <span className="sr-only">— {project.title}</span></summary>
+      <dl>
+        <div><dt>01 / The problem</dt><dd>{project.problem}</dd></div>
+        <div><dt>02 / My contribution</dt><dd><strong>{project.role}.</strong> {project.solution}</dd></div>
+        <div><dt>03 / What got built</dt><dd>{project.description}</dd></div>
+      </dl>
+    </details>
+    </div>
   );
 }

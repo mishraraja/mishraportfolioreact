@@ -9,6 +9,7 @@ import { useMagnetic } from "../hooks/useMagnetic";
 import { useExperience } from "../context/ExperienceContext";
 import { TOTAL_ACHIEVEMENTS } from "../lib/achievements";
 import { sfx } from "../lib/sound";
+import { MissionPanel } from "./MissionControl";
 import "./Hero.css";
 
 const containerVariants = {
@@ -178,6 +179,7 @@ export function Hero() {
           transition={{ duration: 1, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
         >
           <OrbitalSystem />
+          <MissionPanel />
         </motion.div>
       </div>
 

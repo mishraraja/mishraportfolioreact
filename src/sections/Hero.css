@@ -195,8 +195,14 @@
 /* ---------- visual column ---------- */
 .hero__visual {
   display: flex;
+  flex-direction: column;
+  min-width: 0;
   justify-content: center;
   align-items: center;
+}
+
+.hero__visual .mission-panel {
+  width: 100%;
 }
 
 /* ---------- scroll cue ---------- */

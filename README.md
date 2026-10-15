@@ -81,6 +81,25 @@ No environment variables are required to start the app. Optional script settings
 
 ## What Makes It Different
 
+### Mission Control on the homepage
+
+The hero now offers three entry points: selected work, a quick coding challenge,
+and the developer's story, with a greeting based on the visitor's local time.
+Below the hero, an interactive lab follows a simulated request through API,
+service, database and response stages. A rotating set of three Java/DSA questions
+offers explanations and links into the existing arcades. The opening question
+changes with the day of the month; visitors can cycle through all three.
+
+The lab loads as a separate chunk when its section approaches the viewport, with
+an explicit load button as a fallback. Request playback pauses offscreen or in
+hidden tabs; reduced-motion visitors advance manually. Sounds use the existing
+opt-in sound setting. No new packages, external APIs or media downloads are
+needed for these additions.
+
+Project cards retain their existing destinations and add a native expandable
+"Behind the build" story using the existing problem, contribution and delivered
+functionality descriptions. No performance or business metrics are invented.
+
 ### An API simulator you can interact with
 
 The `#api` section is a Spring-Boot-shaped service running entirely in the
