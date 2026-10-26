@@ -1,21 +1,24 @@
-# Security Policy
+﻿# Security Policy
 
-## Supported Versions
+Security fixes target the current `main` branch. Older snapshots are not maintained.
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
+## Reporting a vulnerability
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+Email [rajamishra131297@gmail.com](mailto:rajamishra131297@gmail.com) with the
+affected route or file, reproduction steps, and potential impact. Do not include
+credentials or other people's personal data. Please report sensitive issues
+privately before opening a public issue. Response times are not guaranteed.
 
-## Reporting a Vulnerability
+## Deployment boundaries
 
-Use this section to tell people how to report a vulnerability.
+Learning progress stays in browser storage; Google sign-in does not isolate or
+sync it. Treat imported backups as untrusted data. The API console and Java labs
+are simulations, not backend services.
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+Gemini credentials belong only in server environment variables. AI replies are
+disabled by default. The chat endpoint's in-memory throttling is per function
+instance and does not provide a global quota. See [chat setup](docs/CHAT_SETUP.md).
+
+Run `npm audit` when updating dependencies. Build and test tooling advisories
+must be reviewed separately from code shipped to visitors; a passing build is
+not evidence that the dependency tree is free of vulnerabilities.

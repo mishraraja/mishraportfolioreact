@@ -10,6 +10,7 @@ import "../dsa/sharedStyles";
 import "./JavaArcade.css";
 
 const LINKS = [
+  { to: "/learning", label: "Progress & backup", icon: "+" },
   { to: "/java", label: "Worlds", icon: "🧭", end: true },
   { to: "/java/labs", label: "Labs", icon: "🧪" },
   { to: "/java/play/this-or-that", label: "This or That", icon: "⚖️" },

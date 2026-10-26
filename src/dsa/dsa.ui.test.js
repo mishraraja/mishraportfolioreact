@@ -23,6 +23,12 @@ beforeEach(() => {
 });
 
 describe("hub", () => {
+  test("damaged stored progress does not crash the arcade", () => {
+    localStorage.setItem("rm.dsa.progress.v1", JSON.stringify({ xp: 10, days: null, problems: [] }));
+    const { container } = renderAt("/dsa");
+    expect(container.querySelectorAll("a.pcard")).toHaveLength(75);
+  });
+
   test("shows every problem on the map", () => {
     const { container } = renderAt("/dsa");
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(/every one of them playable/i);

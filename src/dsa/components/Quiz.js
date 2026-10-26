@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { sfx } from "../../lib/sound";
 import { daysUntilDue } from "../progress";
+import { recordAnswer } from "../../learning/storage";
 
 /** Deterministic shuffle, so the right answer isn't always first but the order never jumps around. */
 function seededOrder(length, seedText) {
@@ -35,6 +36,7 @@ export function Quiz({ problem, record, due, onSolved }) {
 
   function pick(i) {
     if (solved || wrong.has(i)) return;
+    recordAnswer("dsa:" + problem.slug, problem.title, "/dsa/" + problem.slug, i === answer);
     if (i === answer) {
       setSolved(true);
       setOutcome(onSolved());

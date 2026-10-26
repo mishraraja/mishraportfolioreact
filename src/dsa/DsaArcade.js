@@ -10,6 +10,7 @@ import { Playbook } from "./pages/Playbook";
 import "./sharedStyles";
 
 const LINKS = [
+  { to: "/learning", label: "Progress & backup", icon: "+" },
   { to: "/dsa", label: "Problems", icon: "🧭", end: true },
   { to: "/dsa/learn/patterns", label: "Patterns", icon: "🧠" },
   { to: "/dsa/radar", label: "Pattern Radar", icon: "📡" },

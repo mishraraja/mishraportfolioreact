@@ -1,0 +1,23 @@
+.learning-page { padding-top: 8rem; padding-bottom: 5rem; max-width: 1050px; }
+.learning-page header { max-width: 760px; margin-bottom: 1.5rem; }
+.learning-page h1 { font-size: var(--fs-h1); line-height: 1.15; margin: 1rem 0; }
+.learning-page h2 { font-size: var(--fs-h3); line-height: 1.3; }
+.learning-page h3 { font-size: 1.1rem; line-height: 1.4; }
+.learning-page p { margin-top: .8rem; color: var(--color-fg-muted); }
+.learning-card { padding: clamp(1rem, 3vw, 2rem); margin-top: 1.5rem; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); min-width: 0; }
+.learning-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem; margin: 1rem 0; }
+.learning-actions > *, .learning-page button { max-width: 100%; }
+.learning-page button, .learning-actions > a { display: inline-flex; align-items: center; min-height: 44px; padding: .6rem .9rem; border: 1px solid var(--color-border-strong); border-radius: var(--radius-sm); background: var(--color-bg); color: var(--color-fg); font-size: .875rem; text-align: left; }
+.learning-page button:hover:not(:disabled), .learning-actions > a:hover { border-color: var(--color-accent); }
+.learning-page button:disabled { opacity: .55; cursor: not-allowed; }
+.learning-list { list-style: none; padding: 0; margin: 1rem 0; }
+.learning-list li { display: grid; gap: .3rem; padding: .8rem 0; border-bottom: 1px solid var(--color-border); overflow-wrap: anywhere; }
+.learning-list a { color: var(--color-accent-strong); min-height: 44px; align-content: center; }
+.learning-list span, .learning-note { font-size: .85rem; color: var(--color-fg-muted); }
+.learning-page summary { min-height: 44px; padding: .6rem 0; cursor: pointer; }
+.learning-file { display: grid; gap: .5rem; max-width: 100%; }
+.learning-file input { max-width: 100%; font: inherit; font-size: .875rem; }
+.learning-confirm { margin-top: 1rem; padding: 1rem; border: 1px solid var(--color-accent-border); border-radius: var(--radius-md); }
+.engineering-flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); gap: 1rem; padding: 0; list-style: none; }
+.engineering-flow li { padding: 1rem; border: 1px solid var(--color-border); border-radius: var(--radius-md); }
+.learning-page code { overflow-wrap: anywhere; }

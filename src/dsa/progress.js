@@ -2,6 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 import { AnimatePresence, motion } from "framer-motion";
 import { useExperience } from "../context/ExperienceContext";
 import { sfx } from "../lib/sound";
+import { validateProgress } from "../learning/storage";
 
 /**
  * Progress for the arcade: XP, levels, a daily streak and spaced review.
@@ -39,7 +40,7 @@ const EMPTY = {
 function read() {
   try {
     const parsed = JSON.parse(window.localStorage.getItem(STORAGE_KEY) || "null");
-    return parsed && typeof parsed === "object" ? { ...EMPTY, ...parsed } : EMPTY;
+    return parsed && typeof parsed === "object" ? validateProgress("dsa", { ...EMPTY, ...parsed }) : EMPTY;
   } catch {
     return EMPTY;
   }

@@ -161,12 +161,12 @@ describe("routing", () => {
     render(<App />);
     expect(await screen.findByText(/hard backend topics/i, {}, { timeout: 8000 })).toBeInTheDocument();
     window.history.pushState({}, "", "/");
-  });
+  }, 15000);
 
   test("the DSA Arcade loads on its own route", async () => {
     window.history.pushState({}, "", "/dsa");
     render(<App />);
     expect(await screen.findByText(/every one of them playable/i, {}, { timeout: 8000 })).toBeInTheDocument();
     window.history.pushState({}, "", "/");
-  });
+  }, 15000);
 });

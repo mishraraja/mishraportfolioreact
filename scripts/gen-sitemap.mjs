@@ -17,6 +17,8 @@ const JAVA = resolve(__dirname, "../src/java");
 const SITE = process.env.SITE_URL || "https://rajamishra.vercel.app";
 
 const ROUTES = [
+  { path: "/learning", priority: "0.7", changefreq: "monthly" },
+  { path: "/engineering", priority: "0.7", changefreq: "monthly" },
   { path: "/", priority: "1.0", changefreq: "weekly" },
   { path: "/dsa", priority: "0.9", changefreq: "weekly" },
   { path: "/dsa/learn/patterns", priority: "0.8", changefreq: "monthly" },

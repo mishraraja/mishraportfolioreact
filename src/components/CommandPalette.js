@@ -9,6 +9,8 @@ import { sfx } from "../lib/sound";
 import "./CommandPalette.css";
 
 const LEARN = [
+  { id: "learning", label: "Progress, revision and backups", icon: "+", path: "/learning" },
+  { id: "engineering", label: "Technical case study: this site", icon: "+", path: "/engineering" },
   { id: "dsa", label: "Open the DSA Arcade — 75 playable interview problems", icon: "🕹", path: "/dsa" },
   { id: "dsa-radar", label: "Play Pattern Radar", icon: "📡", path: "/dsa/radar" },
   { id: "dsa-roadmap", label: "DSA: the 8-week roadmap", icon: "🗺", path: "/dsa/learn/roadmap" },

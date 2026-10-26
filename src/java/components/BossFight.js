@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { passMark } from "../progress";
 import { seededOrder } from "../shuffle";
 import { sfx } from "../../lib/sound";
+import { recordAnswer } from "../../learning/storage";
 
 /** Five interview questions, one mistake allowed. The end-of-world check. */
 export function BossFight({ world, questions, record, onFinish }) {
@@ -30,6 +31,7 @@ export function BossFight({ world, questions, record, onFinish }) {
 
   function pick(i) {
     if (picked !== null) return;
+    recordAnswer("java:" + world.id + ":" + index, world.name + ": " + current.q, "/java/" + world.id, i === current.answer);
     setPicked(i);
     if (i === current.answer) {
       setScore((s) => s + 1);

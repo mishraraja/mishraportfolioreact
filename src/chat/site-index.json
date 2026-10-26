@@ -1,0 +1,1028 @@
+[
+  {
+    "id": "profile",
+    "title": "About Raja",
+    "href": "/#about",
+    "text": "Java backend developer with 5+ years of experience across Spring Boot, Spring Security, Hibernate/JPA, Kafka, PostgreSQL and AWS — focused on solutions that are as maintainable as they are functional. I'm a Java backend developer with over five years of hands-on experience crafting digital solutions. My core expertise is Java, extended through Spring Framework, Spring Security and Hibernate/JPA into Spring Boot services — backed by PostgreSQL and MySQL, and increasingly Kafka and AWS for the systems that need to scale. I care about elegant code as much as working code — engineering solutions that meet the brief and are a pleasure to maintain. If you're looking for a developer who brings that kind of care to the work, that's what I aim to offer. Master of Computer Applications (MCA), Computer Science Education: 2018 – 2021 Interests: Reading, Traveling, Playing Chess"
+  },
+  {
+    "id": "skills",
+    "title": "Skills",
+    "href": "/#skills",
+    "text": "Backend Engineering: Java, Spring Boot, Spring Security, Hibernate/JPA Data & Messaging: PostgreSQL, MySQL, Apache Kafka Full Stack Delivery: React, Angular, Node.js, AWS"
+  },
+  {
+    "id": "contact",
+    "title": "Contact Raja",
+    "href": "/#contact",
+    "text": "Email: rajamishra131297@gmail.com LinkedIn: https://www.linkedin.com/in/rajakrmishra/ GitHub: https://github.com/mishraraja Raja is open to work."
+  },
+  {
+    "id": "resume",
+    "title": "Resume",
+    "href": "/resume.pdf",
+    "text": "Download Raja Mishra's resume from the resume link on the portfolio."
+  },
+  {
+    "id": "projects",
+    "title": "Projects overview",
+    "href": "/#projects",
+    "text": "Projects: Higher Education Portal, Office Management System, Campus Vehicle Entry & Exit System, Pathology Management Web App."
+  },
+  {
+    "id": "project:gov-education-portal",
+    "title": "Higher Education Portal",
+    "href": "/#projects",
+    "text": "A citizen-facing government portal for state-level higher education administration — university listings, student registration and admissions workflows, serving a large user base. A state education department needed a single online portal for university information, student sign-up and admissions, replacing scattered offline processes. Building and maintaining backend services in Java and Spring Boot for a live, actively-used government portal — ongoing work on a large-scale production system. Role: Software Developer Stack: Java, Spring Boot Mar 2022 – Present"
+  },
+  {
+    "id": "project:office-management-system",
+    "title": "Office Management System",
+    "href": "/#projects",
+    "text": "A desktop application that streamlines day-to-day office operations — employee records, task assignment, documents and meetings — in one place. Office admin work was spread across manual processes with no single system tracking employees, tasks, documents or meetings. Built a Java desktop app covering user auth and roles, employee records, task tracking, document storage and a meeting scheduler, backed by a MySQL schema designed for the relationships between them. Role: Solo developer Stack: Java, Java Swing, JavaFX, MySQL Jan 2021 – May 2021"
+  },
+  {
+    "id": "project:campus-vehicle-system",
+    "title": "Campus Vehicle Entry & Exit System",
+    "href": "/#projects",
+    "text": "A desktop application managing vehicle registration, token issuance and permit verification for campus security. Campus security needed a reliable way to register, verify and log vehicle entry and exit. Built a Java Swing application backed by an Oracle database, with automated token issuance, real-time permit verification and full entry/exit logging for auditing. Role: Solo developer Stack: Java, Java Swing, Oracle Database Jan 2020 – Jun 2020"
+  },
+  {
+    "id": "project:pathology-web-app",
+    "title": "Pathology Management Web App",
+    "href": "/#projects",
+    "text": "A responsive web app for patient registration, appointment scheduling and health record access at a pathology lab. Patients needed a straightforward way to register, book check-up appointments and access past results online. Led front-end design and styling with JavaScript, HTML and CSS in a three-person team, building a fully responsive interface with secure record storage on the backend. Role: Front-end lead, team of 3 Stack: JavaScript, HTML, CSS, Java, SQL Feb 2017 – May 2017"
+  },
+  {
+    "id": "dsa:two-sum",
+    "title": "Two Sum",
+    "href": "/dsa/two-sum",
+    "text": "Given an array of integers and a target, return the indices of the two numbers that add up to the target. Exactly one answer exists, and you can't use the same element twice. For each number x, the partner you need is target − x. A hash map of the numbers you've already seen answers “is my partner here?” in O(1). Pattern: hashing Time: O(n). Space: O(n). One pass over the array; the map may end up holding every number."
+  },
+  {
+    "id": "dsa:best-time-to-buy-and-sell-stock",
+    "title": "Best Time to Buy and Sell Stock",
+    "href": "/dsa/best-time-to-buy-and-sell-stock",
+    "text": "Given daily stock prices, choose one day to buy and a later day to sell. Return the maximum profit, or 0 if no profit is possible. The best sale on any day only depends on the lowest price before it. Track that minimum as you go, and the answer is the biggest (price − minimum) you ever see. Pattern: greedy Time: O(n). Space: O(1). One pass, two variables."
+  },
+  {
+    "id": "dsa:contains-duplicate",
+    "title": "Contains Duplicate",
+    "href": "/dsa/contains-duplicate",
+    "text": "Return true if any value appears at least twice in the array, and false if every element is distinct. A HashSet remembers everything you've seen with O(1) checks. The first repeat ends the search. Pattern: hashing Time: O(n). Space: O(n). Each number is checked and stored once."
+  },
+  {
+    "id": "dsa:product-of-array-except-self",
+    "title": "Product of Array Except Self",
+    "href": "/dsa/product-of-array-except-self",
+    "text": "Return an array where answer[i] is the product of every element except nums[i]. Solve it in O(n) without using division. answer[i] = (product of everything left of i) × (product of everything right of i). Two sweeps build both halves, and no division is needed. Pattern: prefix-suffix Time: O(n). Space: O(1) extra. Two sweeps; the output array doesn't count as extra space."
+  },
+  {
+    "id": "dsa:maximum-subarray",
+    "title": "Maximum Subarray",
+    "href": "/dsa/maximum-subarray",
+    "text": "Find the contiguous subarray with the largest sum and return that sum. Kadane's algorithm: at each number, either extend the current run or start fresh — whichever is bigger. The best run you ever see is the answer. Pattern: greedy Time: O(n). Space: O(1). One pass, two running values."
+  },
+  {
+    "id": "dsa:maximum-product-subarray",
+    "title": "Maximum Product Subarray",
+    "href": "/dsa/maximum-product-subarray",
+    "text": "Find the contiguous subarray with the largest product and return that product. Track the maximum AND the minimum product ending at each position. For each number, the new max is the largest of x, max × x and min × x. Pattern: greedy Time: O(n). Space: O(1). One pass with three running values."
+  },
+  {
+    "id": "dsa:find-minimum-in-rotated-sorted-array",
+    "title": "Find Minimum in Rotated Sorted Array",
+    "href": "/dsa/find-minimum-in-rotated-sorted-array",
+    "text": "A sorted array of distinct numbers was rotated some number of times. Find its minimum element in O(log n). Compare nums[mid] with nums[right]. If mid is bigger, the minimum is right of mid; otherwise it's at mid or to its left. Pattern: binary-search Time: O(log n). Space: O(1). The search range halves every step."
+  },
+  {
+    "id": "dsa:search-in-rotated-sorted-array",
+    "title": "Search in Rotated Sorted Array",
+    "href": "/dsa/search-in-rotated-sorted-array",
+    "text": "A sorted array of distinct numbers was rotated. Return the index of target, or -1 if it isn't there, in O(log n). At every step one half is sorted. Check whether the target falls inside the sorted half's range, and throw away the other half. Pattern: binary-search Time: O(log n). Space: O(1). Each step discards half the range."
+  },
+  {
+    "id": "dsa:3sum",
+    "title": "3Sum",
+    "href": "/dsa/3sum",
+    "text": "Return all unique triplets [a, b, c] from the array such that a + b + c = 0. Sort, then for each pinned number run a two-pointer search for a pair summing to its negative. Skip repeated values to avoid duplicate triplets. Pattern: two-pointers Time: O(n²). Space: O(1) extra. Sorting is O(n log n); each pin runs one O(n) two-pointer sweep."
+  },
+  {
+    "id": "dsa:container-with-most-water",
+    "title": "Container With Most Water",
+    "href": "/dsa/container-with-most-water",
+    "text": "Given wall heights, pick two walls that, with the ground, hold the most water. Return that amount of water. Start at both ends. Water = min(height) × width. Move the pointer at the shorter wall, because it's the bottleneck. Pattern: two-pointers Time: O(n). Space: O(1). Each step moves one pointer inward."
+  },
+  {
+    "id": "dsa:sum-of-two-integers",
+    "title": "Sum of Two Integers",
+    "href": "/dsa/sum-of-two-integers",
+    "text": "Return the sum of two integers a and b without using the + or − operators. a ^ b is the sum without carries; (a & b) << 1 is the carries. Repeat with those two until the carry is 0. Pattern: bit-manipulation Time: O(1). Space: O(1). At most 32 rounds for 32-bit integers."
+  },
+  {
+    "id": "dsa:number-of-1-bits",
+    "title": "Number of 1 Bits",
+    "href": "/dsa/number-of-1-bits",
+    "text": "Return the number of 1 bits in the binary representation of a non-negative integer (its Hamming weight). n & (n − 1) clears the lowest set bit. The loop runs once per 1 bit, not once per bit. Pattern: bit-manipulation Time: O(k). Space: O(1). k is the number of set bits — at most 32."
+  },
+  {
+    "id": "dsa:counting-bits",
+    "title": "Counting Bits",
+    "href": "/dsa/counting-bits",
+    "text": "For every i from 0 to n, return the number of 1 bits in i. bits(i) = bits(i >> 1) + (i & 1). Each answer reuses one you computed earlier. Pattern: bit-manipulation Time: O(n). Space: O(n). Constant work per number, plus the output array."
+  },
+  {
+    "id": "dsa:missing-number",
+    "title": "Missing Number",
+    "href": "/dsa/missing-number",
+    "text": "An array holds n distinct numbers from the range [0, n]. Return the one number in that range that's missing. XOR every index 0..n with every value. Each value that's present cancels its matching index, leaving only the missing number. Pattern: bit-manipulation Time: O(n). Space: O(1). One pass, one accumulator."
+  },
+  {
+    "id": "dsa:reverse-bits",
+    "title": "Reverse Bits",
+    "href": "/dsa/reverse-bits",
+    "text": "Reverse the bits of a 32-bit unsigned integer. 32 times: result = (result << 1) | (n & 1), then n >>>= 1. Pattern: bit-manipulation Time: O(1). Space: O(1). Always exactly 32 iterations."
+  },
+  {
+    "id": "dsa:climbing-stairs",
+    "title": "Climbing Stairs",
+    "href": "/dsa/climbing-stairs",
+    "text": "You can climb 1 or 2 steps at a time. How many distinct ways are there to climb n steps? ways(i) = ways(i − 1) + ways(i − 2), with ways(0) = ways(1) = 1. It's Fibonacci, and only the last two values are ever needed. Pattern: dp-1d Time: O(n). Space: O(1). One pass keeping two numbers."
+  },
+  {
+    "id": "dsa:coin-change",
+    "title": "Coin Change",
+    "href": "/dsa/coin-change",
+    "text": "Given coin denominations and an amount, return the fewest coins needed to make that amount, or -1 if it's impossible. Each coin can be used any number of times. fewest(a) = 1 + min over coins c ≤ a of fewest(a − c), with fewest(0) = 0. Amounts nothing can make stay at infinity. Pattern: dp-1d Time: O(amount · coins). Space: O(amount). Each amount tries every coin once."
+  },
+  {
+    "id": "dsa:longest-increasing-subsequence",
+    "title": "Longest Increasing Subsequence",
+    "href": "/dsa/longest-increasing-subsequence",
+    "text": "Return the length of the longest strictly increasing subsequence. The elements don't have to be next to each other. lis(i) = longest increasing subsequence ending at i = 1 + max lis(j) over earlier j with nums[j] < nums[i]. The answer is the largest lis(i). Pattern: dp-1d Time: O(n²). Space: O(n). Each element looks back at every earlier one."
+  },
+  {
+    "id": "dsa:longest-common-subsequence",
+    "title": "Longest Common Subsequence",
+    "href": "/dsa/longest-common-subsequence",
+    "text": "Return the length of the longest subsequence common to two strings. A subsequence keeps order but may skip characters. dp[i][j] = LCS of the first i letters and the first j letters. On a match, dp[i−1][j−1] + 1; otherwise max(dp[i−1][j], dp[i][j−1]). Pattern: dp-2d Time: O(m · n). Space: O(m · n). One constant-time cell per pair of prefixes."
+  },
+  {
+    "id": "dsa:word-break",
+    "title": "Word Break",
+    "href": "/dsa/word-break",
+    "text": "Decide whether a string can be split into a sequence of one or more dictionary words (words may be reused). ok[i] = true if some ok[j] is true and s[j..i) is a dictionary word. ok[0] = true; the answer is ok[n]. Pattern: dp-1d Time: O(n²). Space: O(n). Each end position checks every start (substring checks aside)."
+  },
+  {
+    "id": "dsa:combination-sum-iv",
+    "title": "Combination Sum IV",
+    "href": "/dsa/combination-sum-iv",
+    "text": "Given distinct positive integers and a target, return how many ordered sequences of those numbers (repeats allowed) add up to the target. ways(t) = sum over each number x ≤ t of ways(t − x), with ways(0) = 1. Looping over t on the outside counts every order separately. Pattern: dp-1d Time: O(target · n). Space: O(target). Each total tries every number once."
+  },
+  {
+    "id": "dsa:house-robber",
+    "title": "House Robber",
+    "href": "/dsa/house-robber",
+    "text": "Each house on a street holds some money, and robbing two adjacent houses trips the alarm. Return the most money you can rob. best(i) = max(best(i − 1), nums[i] + best(i − 2)). Only the last two values are ever needed. Pattern: dp-1d Time: O(n). Space: O(1). One pass with two running values."
+  },
+  {
+    "id": "dsa:house-robber-ii",
+    "title": "House Robber II",
+    "href": "/dsa/house-robber-ii",
+    "text": "Same as House Robber, but the houses stand in a circle, so the first and last houses are neighbours. The first and last houses can't both be robbed. Answer = max(rob(houses 0…n−2), rob(houses 1…n−1)), with n = 1 handled separately. Pattern: dp-1d Time: O(n). Space: O(1). Two linear passes."
+  },
+  {
+    "id": "dsa:decode-ways",
+    "title": "Decode Ways",
+    "href": "/dsa/decode-ways",
+    "text": "Letters are encoded as A = 1 … Z = 26. Given a string of digits, return how many ways it can be decoded. ways(i) = (digit i−1 is 1–9 ? ways(i−1) : 0) + (last two digits are 10–26 ? ways(i−2) : 0), with ways(0) = 1. Pattern: dp-1d Time: O(n). Space: O(1). One pass; only the last two counts are needed."
+  },
+  {
+    "id": "dsa:unique-paths",
+    "title": "Unique Paths",
+    "href": "/dsa/unique-paths",
+    "text": "A robot starts at the top-left of an m × n grid and can only move right or down. How many unique paths reach the bottom-right? paths[r][c] = paths[r − 1][c] + paths[r][c − 1]. The top row and left column are all 1s. Pattern: dp-2d Time: O(m · n). Space: O(n). One cell at a time; a single rolling row is enough."
+  },
+  {
+    "id": "dsa:jump-game",
+    "title": "Jump Game",
+    "href": "/dsa/jump-game",
+    "text": "Each element is your maximum jump length from that position. Starting at index 0, decide whether you can reach the last index. Track reach = max(reach, i + nums[i]). If i ever exceeds reach, you're stuck; if reach covers the last index, you win. Pattern: greedy Time: O(n). Space: O(1). One pass, one variable."
+  },
+  {
+    "id": "dsa:clone-graph",
+    "title": "Clone Graph",
+    "href": "/dsa/clone-graph",
+    "text": "Return a deep copy of a connected undirected graph. (In the playground, the graph is an adjacency list: entry i lists the neighbours of node i + 1.) DFS with a map from original → clone. Create and register a node's clone before visiting its neighbours; if a neighbour is already registered, reuse its clone. Pattern: graph-traversal Time: O(V + E). Space: O(V). Each node is cloned once and each edge is copied once per direction."
+  },
+  {
+    "id": "dsa:course-schedule",
+    "title": "Course Schedule",
+    "href": "/dsa/course-schedule",
+    "text": "There are numCourses courses and pairs [a, b] meaning course b must be taken before course a. Decide whether it's possible to finish every course. Kahn's algorithm: count each course's unmet prerequisites (in-degree). Repeatedly take a course with none, and remove its outgoing arrows. If every course gets taken, there's no cycle. Pattern: topo-sort Time: O(V + E). Space: O(V + E). Every course and every prerequisite arrow is handled once."
+  },
+  {
+    "id": "dsa:pacific-atlantic-water-flow",
+    "title": "Pacific Atlantic Water Flow",
+    "href": "/dsa/pacific-atlantic-water-flow",
+    "text": "Rain falls on an island of heights. Water flows to neighbours of equal or lower height. The Pacific touches the top and left edges; the Atlantic touches the bottom and right. Return every cell whose water can reach both oceans. Run one search from all Pacific border cells and one from all Atlantic border cells, moving only to neighbours at least as high. Answer = cells reached by both. Pattern: graph-traversal Time: O(m · n). Space: O(m · n). Each search visits each cell at most once."
+  },
+  {
+    "id": "dsa:number-of-islands",
+    "title": "Number of Islands",
+    "href": "/dsa/number-of-islands",
+    "text": "Given a grid of '1' (land) and '0' (water), count the islands. An island is land connected horizontally or vertically. Scan every cell. On unvisited land, add one to the count and flood-fill (DFS/BFS) the whole island, marking it visited. Pattern: graph-traversal Time: O(m · n). Space: O(m · n). Each cell is flooded at most once."
+  },
+  {
+    "id": "dsa:longest-consecutive-sequence",
+    "title": "Longest Consecutive Sequence",
+    "href": "/dsa/longest-consecutive-sequence",
+    "text": "Return the length of the longest run of consecutive integers in an unsorted array, in O(n) time. Put everything in a HashSet. Only start counting at x when x − 1 is missing, then walk x + 1, x + 2… Each run is walked exactly once. Pattern: hashing Time: O(n). Space: O(n). Every number is part of exactly one run, and each run is walked once from its start."
+  },
+  {
+    "id": "dsa:alien-dictionary",
+    "title": "Alien Dictionary",
+    "href": "/dsa/alien-dictionary",
+    "text": "Words from an alien language are sorted by its unknown alphabet. Return one valid ordering of its letters, or \"\" if the order is contradictory. Each adjacent pair of words gives at most one edge (first differing letter). Topologically sort the letters; a cycle — or a word before its own prefix — means no valid order. Pattern: topo-sort Time: O(total letters). Space: O(unique letters + rules). Each pair of words is compared once, then Kahn's algorithm runs on at most 26 letters."
+  },
+  {
+    "id": "dsa:graph-valid-tree",
+    "title": "Graph Valid Tree",
+    "href": "/dsa/graph-valid-tree",
+    "text": "Given n nodes labelled 0 to n − 1 and a list of undirected edges, decide whether they form a valid tree. A tree has exactly n − 1 edges and no cycle. Check the count, then union every edge; if two endpoints already share a root, there's a cycle. Pattern: union-find Time: O(n · α(n)). Space: O(n). Near-constant time per union/find with path compression."
+  },
+  {
+    "id": "dsa:number-of-connected-components-in-an-undirected-graph",
+    "title": "Number of Connected Components in an Undirected Graph",
+    "href": "/dsa/number-of-connected-components-in-an-undirected-graph",
+    "text": "Given n nodes labelled 0 to n − 1 and a list of undirected edges, return the number of connected components. Start with n components. For each edge, union the endpoints; every union that actually merges two different roots removes one component. Pattern: union-find Time: O((n + E) · α(n)). Space: O(n). Near-constant time per union/find."
+  },
+  {
+    "id": "dsa:merge-k-sorted-lists",
+    "title": "Merge k Sorted Lists",
+    "href": "/dsa/merge-k-sorted-lists",
+    "text": "Merge k sorted linked lists into one sorted list and return it. Push every list's head into a min-heap. Pop the smallest, append it, and push that node's successor. The heap never holds more than k nodes. Pattern: heap Time: O(N log k). Space: O(k). N total nodes, each costing one heap push and one pop on a heap of size ≤ k."
+  },
+  {
+    "id": "dsa:top-k-frequent-elements",
+    "title": "Top K Frequent Elements",
+    "href": "/dsa/top-k-frequent-elements",
+    "text": "Return the k most frequent elements of an array, in any order. Count frequencies, then bucket-sort by frequency (bucket index = count). Walk the buckets from high to low, collecting k values. Pattern: heap Time: O(n). Space: O(n). A frequency can't exceed n, so there are only n + 1 buckets."
+  },
+  {
+    "id": "dsa:find-median-from-data-stream",
+    "title": "Find Median from Data Stream",
+    "href": "/dsa/find-median-from-data-stream",
+    "text": "Design a structure with addNum(num) and findMedian(). (In the playground, a stream of numbers is added one by one and the median is recorded after each.) A max-heap holds the smaller half and a min-heap holds the larger half, with sizes differing by at most one. The median comes from the tops. Pattern: heap Time: O(log n) add, O(1) median. Space: O(n). Each add does a constant number of heap operations."
+  },
+  {
+    "id": "dsa:insert-interval",
+    "title": "Insert Interval",
+    "href": "/dsa/insert-interval",
+    "text": "Given sorted, non-overlapping intervals and a new interval, insert it so the list stays sorted and non-overlapping, merging where needed. One pass in three phases: copy intervals that end before it, merge the ones that overlap, copy the ones that start after. Pattern: intervals Time: O(n). Space: O(n). Each interval is looked at once; the output holds up to n + 1 intervals."
+  },
+  {
+    "id": "dsa:merge-intervals",
+    "title": "Merge Intervals",
+    "href": "/dsa/merge-intervals",
+    "text": "Merge all overlapping intervals and return the non-overlapping intervals that cover the same ranges. Sort by start. Each interval can only overlap the last interval you placed — extend it, or start a new one. Pattern: intervals Time: O(n log n). Space: O(n). Sorting dominates; the merge itself is one pass."
+  },
+  {
+    "id": "dsa:non-overlapping-intervals",
+    "title": "Non-overlapping Intervals",
+    "href": "/dsa/non-overlapping-intervals",
+    "text": "Return the minimum number of intervals you need to remove so the rest don't overlap. Sort by end time. Keep an interval if it starts at or after the last kept end; otherwise remove it. Pattern: greedy Time: O(n log n). Space: O(1) extra. Sorting, then one greedy pass."
+  },
+  {
+    "id": "dsa:meeting-rooms",
+    "title": "Meeting Rooms",
+    "href": "/dsa/meeting-rooms",
+    "text": "Given meeting time intervals, decide whether one person could attend every meeting. Sort by start and compare each meeting only with its neighbour. Any overlap shows up between neighbours. Pattern: intervals Time: O(n log n). Space: O(1) extra. Sorting dominates the single scan."
+  },
+  {
+    "id": "dsa:meeting-rooms-ii",
+    "title": "Meeting Rooms II",
+    "href": "/dsa/meeting-rooms-ii",
+    "text": "Given meeting time intervals, return the minimum number of conference rooms required. Sort by start. A min-heap holds each busy room's end time; its top is the next room to free up. Reuse it or add a room. Pattern: heap Time: O(n log n). Space: O(n). Sorting, plus a heap operation per meeting."
+  },
+  {
+    "id": "dsa:reverse-linked-list",
+    "title": "Reverse Linked List",
+    "href": "/dsa/reverse-linked-list",
+    "text": "Reverse a singly linked list and return the new head. Walk with prev, curr and next. Save next, point curr back at prev, then step both forward. prev ends up as the new head. Pattern: list-rewire Time: O(n). Space: O(1). One pass, three pointers, rewired in place."
+  },
+  {
+    "id": "dsa:linked-list-cycle",
+    "title": "Linked List Cycle",
+    "href": "/dsa/linked-list-cycle",
+    "text": "Decide whether a linked list contains a cycle. (In the playground, pos is the index the last node links back to, or -1.) Move slow 1 step and fast 2 steps. If fast hits null there's no cycle; if they ever meet, there is one. Pattern: fast-slow Time: O(n). Space: O(1). Inside a loop the gap closes by one node per step."
+  },
+  {
+    "id": "dsa:merge-two-sorted-lists",
+    "title": "Merge Two Sorted Lists",
+    "href": "/dsa/merge-two-sorted-lists",
+    "text": "Merge two sorted linked lists into one sorted list by splicing their nodes together, and return its head. Use a dummy head and a tail pointer. Repeatedly attach the smaller front node, then attach whatever remains. Pattern: list-rewire Time: O(n + m). Space: O(1). Each node is attached once; nodes are reused, not copied."
+  },
+  {
+    "id": "dsa:remove-nth-node-from-end-of-list",
+    "title": "Remove Nth Node From End of List",
+    "href": "/dsa/remove-nth-node-from-end-of-list",
+    "text": "Remove the n-th node from the end of a linked list in one pass and return the head. Start two pointers at a dummy node. Move fast n steps, then move both until fast is on the last node. slow is right before the target. Pattern: fast-slow Time: O(n). Space: O(1). A single pass with a fixed gap."
+  },
+  {
+    "id": "dsa:reorder-list",
+    "title": "Reorder List",
+    "href": "/dsa/reorder-list",
+    "text": "Reorder L0 → L1 → … → Ln into L0 → Ln → L1 → Ln−1 → L2 → … in place. Three classics chained together: find the middle (slow/fast), reverse the second half, then merge the halves alternately. Pattern: list-rewire Time: O(n). Space: O(1). Three linear passes, all rewiring in place."
+  },
+  {
+    "id": "dsa:set-matrix-zeroes",
+    "title": "Set Matrix Zeroes",
+    "href": "/dsa/set-matrix-zeroes",
+    "text": "If a cell is 0, set its entire row and column to 0. Do it in place. Use the first row and first column as markers for which columns and rows to zero. Remember separately whether the first row and first column themselves started with a 0. Pattern: matrix Time: O(m · n). Space: O(1). A few passes over the grid; the markers live inside it."
+  },
+  {
+    "id": "dsa:spiral-matrix",
+    "title": "Spiral Matrix",
+    "href": "/dsa/spiral-matrix",
+    "text": "Return all elements of a matrix in spiral order, starting at the top-left and moving clockwise. Keep four boundaries: top, bottom, left, right. Walk one side, then shrink that boundary. Stop when the boundaries cross. Pattern: matrix Time: O(m · n). Space: O(1) extra. Every cell is visited exactly once."
+  },
+  {
+    "id": "dsa:rotate-image",
+    "title": "Rotate Image",
+    "href": "/dsa/rotate-image",
+    "text": "Rotate an n × n matrix 90° clockwise, in place. Transpose (swap matrix[i][j] with matrix[j][i]), then reverse each row. Together they make a clockwise quarter-turn. Pattern: matrix Time: O(n²). Space: O(1). Every cell is swapped a constant number of times, in place."
+  },
+  {
+    "id": "dsa:word-search",
+    "title": "Word Search",
+    "href": "/dsa/word-search",
+    "text": "Decide whether a word can be traced through horizontally or vertically adjacent cells of a letter grid, using each cell at most once. DFS from every cell that matches the first letter. Mark cells as used on the way in, and unmark them on the way back out (backtracking). Pattern: backtracking Time: O(cells · 3^L). Space: O(L). After the first step, each move has at most 3 unused directions; recursion depth is the word length."
+  },
+  {
+    "id": "dsa:longest-substring-without-repeating-characters",
+    "title": "Longest Substring Without Repeating Characters",
+    "href": "/dsa/longest-substring-without-repeating-characters",
+    "text": "Return the length of the longest substring that contains no repeated characters. Keep a window [L, R] with no repeats and remember where each letter was last seen. On a repeat inside the window, jump L to one past that last position. Pattern: sliding-window Time: O(n). Space: O(k). Each pointer only moves forward; k is the alphabet size."
+  },
+  {
+    "id": "dsa:longest-repeating-character-replacement",
+    "title": "Longest Repeating Character Replacement",
+    "href": "/dsa/longest-repeating-character-replacement",
+    "text": "You may change up to k characters of an uppercase string to any letter. Return the length of the longest substring of one repeated letter you can make. A window is fine when (length − count of its most common letter) ≤ k. Grow the right edge; if the window breaks, slide the left edge along by one. Pattern: sliding-window Time: O(n). Space: O(26). Both pointers only move forward; the counts cover 26 letters."
+  },
+  {
+    "id": "dsa:minimum-window-substring",
+    "title": "Minimum Window Substring",
+    "href": "/dsa/minimum-window-substring",
+    "text": "Return the shortest substring of s that contains every character of t, including duplicates. Return an empty string if there is none. Expand R until the window covers every needed letter, then shrink L while it still does, recording the shortest window. Repeat until R reaches the end. Pattern: sliding-window Time: O(|s| + |t|). Space: O(k). Each index enters and leaves the window at most once."
+  },
+  {
+    "id": "dsa:valid-anagram",
+    "title": "Valid Anagram",
+    "href": "/dsa/valid-anagram",
+    "text": "Return true if t is an anagram of s — the same letters with the same counts, in any order. Count letters up for s and down for t. They're anagrams exactly when every count returns to zero. Pattern: hashing Time: O(n). Space: O(26). One pass; the tally has at most 26 letters."
+  },
+  {
+    "id": "dsa:group-anagrams",
+    "title": "Group Anagrams",
+    "href": "/dsa/group-anagrams",
+    "text": "Group the strings that are anagrams of each other. The groups can be returned in any order. Give every word a key that all its anagrams share (its sorted letters). Group words by key in a hash map. Pattern: hashing Time: O(n · k log k). Space: O(n · k). n words of length k, each sorted once."
+  },
+  {
+    "id": "dsa:valid-parentheses",
+    "title": "Valid Parentheses",
+    "href": "/dsa/valid-parentheses",
+    "text": "Given a string of brackets ()[]{}, decide whether every bracket is closed by the same type, in the correct order. Push openers onto a stack. Each closer must match the top of the stack. Valid means no mismatches and an empty stack at the end. Pattern: stack Time: O(n). Space: O(n). One pass; the stack can hold up to n openers."
+  },
+  {
+    "id": "dsa:valid-palindrome",
+    "title": "Valid Palindrome",
+    "href": "/dsa/valid-palindrome",
+    "text": "After lowercasing and removing every non-alphanumeric character, decide whether a string reads the same forwards and backwards. Two pointers from both ends: skip non-alphanumerics, compare case-insensitively, and move inward. No cleaned copy needed. Pattern: two-pointers Time: O(n). Space: O(1). Each pointer crosses the string at most once, in place."
+  },
+  {
+    "id": "dsa:longest-palindromic-substring",
+    "title": "Longest Palindromic Substring",
+    "href": "/dsa/longest-palindromic-substring",
+    "text": "Return the longest substring of s that is a palindrome. Try all 2n − 1 centers (letters and gaps). Expand outward while both ends match, and keep the longest. Pattern: two-pointers Time: O(n²). Space: O(1). 2n − 1 centers, each expanding up to n/2 steps."
+  },
+  {
+    "id": "dsa:palindromic-substrings",
+    "title": "Palindromic Substrings",
+    "href": "/dsa/palindromic-substrings",
+    "text": "Count how many substrings of s are palindromes. Substrings at different positions count separately. Expand around all 2n − 1 centers. Every successful expansion step is exactly one new palindrome, so just count them. Pattern: two-pointers Time: O(n²). Space: O(1). 2n − 1 centers, each expanding up to n/2 steps."
+  },
+  {
+    "id": "dsa:encode-and-decode-strings",
+    "title": "Encode and Decode Strings",
+    "href": "/dsa/encode-and-decode-strings",
+    "text": "Design encode(list of strings) → one string, and decode(that string) → the original list. The strings may contain any character. Encode each word as length + '#' + word. Decode by reading digits up to '#', then taking exactly that many characters. Pattern: design Time: O(total characters). Space: O(total characters). Every character is written once and read once."
+  },
+  {
+    "id": "dsa:maximum-depth-of-binary-tree",
+    "title": "Maximum Depth of Binary Tree",
+    "href": "/dsa/maximum-depth-of-binary-tree",
+    "text": "Return the maximum depth of a binary tree: the number of nodes on the longest root-to-leaf path. depth(node) = 1 + max(depth(left), depth(right)), with depth(null) = 0. Trust the recursion to answer for each subtree. Pattern: tree-dfs Time: O(n). Space: O(h). Every node is visited once; the call stack is as deep as the tree."
+  },
+  {
+    "id": "dsa:same-tree",
+    "title": "Same Tree",
+    "href": "/dsa/same-tree",
+    "text": "Return true if two binary trees have the same structure and the same values at every position. Both null → match. One null → mismatch. Otherwise the values must match and both pairs of subtrees must match. Pattern: tree-dfs Time: O(n). Space: O(h). Each pair of nodes is compared at most once."
+  },
+  {
+    "id": "dsa:invert-binary-tree",
+    "title": "Invert Binary Tree",
+    "href": "/dsa/invert-binary-tree",
+    "text": "Invert a binary tree — mirror it left to right — and return its root. Swap each node's left and right children, then invert both subtrees. Every node is swapped exactly once. Pattern: tree-dfs Time: O(n). Space: O(h). One swap per node; recursion depth is the height."
+  },
+  {
+    "id": "dsa:binary-tree-maximum-path-sum",
+    "title": "Binary Tree Maximum Path Sum",
+    "href": "/dsa/binary-tree-maximum-path-sum",
+    "text": "A path is any sequence of connected nodes, each used at most once, and it need not pass through the root. Return the maximum sum of any path. gain(node) = node + max(0, gain(left), gain(right)) is what a node offers its parent. At each node, also try node + left + right as a candidate answer. Pattern: tree-dfs Time: O(n). Space: O(h). One post-order pass."
+  },
+  {
+    "id": "dsa:binary-tree-level-order-traversal",
+    "title": "Binary Tree Level Order Traversal",
+    "href": "/dsa/binary-tree-level-order-traversal",
+    "text": "Return the values of a binary tree level by level, from left to right. BFS with a queue. Before each level, snapshot the queue's size — exactly that many nodes belong to the current level. Pattern: tree-bfs Time: O(n). Space: O(w). Each node is queued once; w is the widest level."
+  },
+  {
+    "id": "dsa:serialize-and-deserialize-binary-tree",
+    "title": "Serialize and Deserialize Binary Tree",
+    "href": "/dsa/serialize-and-deserialize-binary-tree",
+    "text": "Design functions that turn a binary tree into a string and rebuild exactly the same tree from that string. Preorder with '#' for nulls. The markers pin down the shape, so deserialization can read the tokens back in the same order, recursively. Pattern: tree-dfs Time: O(n). Space: O(n). Each node and each null marker is written and read once."
+  },
+  {
+    "id": "dsa:subtree-of-another-tree",
+    "title": "Subtree of Another Tree",
+    "href": "/dsa/subtree-of-another-tree",
+    "text": "Return true if subRoot appears somewhere inside root as an exact subtree — a node plus all of its descendants. For every node in root, check sameTree(node, subRoot). The first full match wins. Pattern: tree-dfs Time: O(m · n). Space: O(h). A full comparison may start at each of the m nodes."
+  },
+  {
+    "id": "dsa:construct-binary-tree-from-preorder-and-inorder-traversal",
+    "title": "Construct Binary Tree from Preorder and Inorder Traversal",
+    "href": "/dsa/construct-binary-tree-from-preorder-and-inorder-traversal",
+    "text": "Given the preorder and inorder traversals of a tree with distinct values, rebuild the tree. The next preorder value is the root of the current range. Its position in inorder splits the range into left and right subtrees. Recurse left, then right. Pattern: tree-dfs Time: O(n). Space: O(n). A hash map finds each root's inorder position in O(1)."
+  },
+  {
+    "id": "dsa:validate-binary-search-tree",
+    "title": "Validate Binary Search Tree",
+    "href": "/dsa/validate-binary-search-tree",
+    "text": "Decide whether a binary tree is a valid BST: every left subtree holds smaller values and every right subtree holds larger values. Pass down an open range (lo, hi). Each node must satisfy lo < val < hi; its left child gets (lo, val) and its right child gets (val, hi). Pattern: bst Time: O(n). Space: O(h). Each node is checked once against its range."
+  },
+  {
+    "id": "dsa:kth-smallest-element-in-a-bst",
+    "title": "Kth Smallest Element in a BST",
+    "href": "/dsa/kth-smallest-element-in-a-bst",
+    "text": "Return the k-th smallest value (1-indexed) in a binary search tree. An inorder traversal visits BST values in ascending order. Do it iteratively with a stack and stop at the k-th visit. Pattern: bst Time: O(h + k). Space: O(h). Slide down to the minimum, then take k steps."
+  },
+  {
+    "id": "dsa:lowest-common-ancestor-of-a-binary-search-tree",
+    "title": "Lowest Common Ancestor of a BST",
+    "href": "/dsa/lowest-common-ancestor-of-a-binary-search-tree",
+    "text": "Given a BST and two of its nodes p and q, return their lowest common ancestor — the deepest node that has both as descendants (a node counts as its own descendant). From the root: if p and q are both smaller, go left; both larger, go right. Otherwise the current node is the split point — the LCA. Pattern: bst Time: O(h). Space: O(1). One root-to-node walk, no recursion needed."
+  },
+  {
+    "id": "dsa:implement-trie-prefix-tree",
+    "title": "Implement Trie (Prefix Tree)",
+    "href": "/dsa/implement-trie-prefix-tree",
+    "text": "Implement a trie with insert(word), search(word) and startsWith(prefix). (In the playground, each line is one operation.) Each node maps a letter to a child and has an end-of-word flag. Words sharing a prefix share the path. search needs the flag; startsWith doesn't. Pattern: trie Time: O(L) per operation. Space: O(total letters). L is the word length; each letter is one step."
+  },
+  {
+    "id": "dsa:design-add-and-search-words-data-structure",
+    "title": "Design Add and Search Words Data Structure",
+    "href": "/dsa/design-add-and-search-words-data-structure",
+    "text": "Support addWord(word) and search(word), where '.' in a search matches any one letter. (In the playground, each line is one operation.) Store words in a trie. Search recursively: a letter follows one child, while '.' tries every child. Succeed only at a word-end mark. Pattern: trie Time: O(L) add, up to O(26^L) search. Space: O(total letters). Dots can force the search to branch at every position."
+  },
+  {
+    "id": "dsa:word-search-ii",
+    "title": "Word Search II",
+    "href": "/dsa/word-search-ii",
+    "text": "Given a letter grid and a list of words, return every word that can be traced through adjacent cells without reusing a cell. Build a trie of the words, then DFS from every cell, moving through the trie in step. Abandon a path the moment the trie has no matching child. Pattern: trie Time: O(cells · 4 · 3^(L−1)). Space: O(total letters). Each DFS branches to at most 3 unvisited neighbours; the trie prunes most paths early."
+  },
+  {
+    "id": "java:agile-waterfall",
+    "title": "Agile vs Waterfall",
+    "href": "/java/agile",
+    "text": "Waterfall runs phases in sequence with scope fixed up front; Agile delivers working increments in short cycles and adapts to feedback, which is why most product teams use it. **Waterfall**: requirements → design → build → test → deploy, in order. Change late is expensive. Suits fixed scope and heavy regulation. **Agile**: short iterations that each deliver working software, with feedback steering what comes next. The Agile Manifesto values individuals and interactions, working software, customer collaboration and responding to change — *over* processes, documentation, contracts and plans. **Scrum** and **Kanban** are frameworks under the Agile umbrella."
+  },
+  {
+    "id": "java:scrum",
+    "title": "Scrum: roles, events, artifacts",
+    "href": "/java/agile",
+    "text": "Scrum has three roles — Product Owner, Scrum Master, Developers — five events from Planning through Retrospective, and three artifacts, with the Definition of Done deciding when an increment is really finished. **Roles** — Product Owner orders the backlog for value · Scrum Master facilitates and removes impediments · Developers self-manage to deliver the sprint goal. **Events** — Sprint (1–4 weeks) · Sprint Planning · Daily Scrum (15 minutes) · Sprint Review · Sprint Retrospective. **Artifacts** — Product Backlog · Sprint Backlog · Increment, checked against the **Definition of Done**. Backlog refinement is an ongoing activity, not a formal event."
+  },
+  {
+    "id": "java:stories-estimation",
+    "title": "User stories, points & velocity",
+    "href": "/java/agile",
+    "text": "We write user stories with testable acceptance criteria, size them in relative story points with planning poker, and use velocity only to forecast. Format: **As a** …, **I want** …, **so that** … — plus acceptance criteria (Given / When / Then). Good stories are **INVEST**: Independent, Negotiable, Valuable, Estimable, Small, Testable. Points are **relative**, often Fibonacci (1, 2, 3, 5, 8, 13), estimated together with **planning poker**. **Velocity** = points finished per sprint — a forecasting tool, never a performance score. Epic → story → sub-task. A **spike** is a time-boxed investigation."
+  },
+  {
+    "id": "java:kanban",
+    "title": "Kanban",
+    "href": "/java/agile",
+    "text": "Kanban visualises flow and limits work in progress, and we improve it by watching cycle time and throughput rather than by planning sprints. **Visualise** the workflow as columns: To do → In progress → Review → Done. **WIP limits** cap work in each column and expose bottlenecks. It's a **pull** system with continuous flow — no fixed sprints required. Metrics: **lead time** (request → done), **cycle time** (start → done), **throughput**. A great fit for support and operations teams; **Scrumban** mixes both approaches."
+  },
+  {
+    "id": "java:jira-confluence",
+    "title": "Jira & Confluence",
+    "href": "/java/agile",
+    "text": "We track epics, stories and bugs in Jira with the issue key in every branch and commit, and keep designs, decisions and runbooks in Confluence. Jira hierarchy: **Epic → Story / Task / Bug → Sub-task**, moving through a workflow like To Do → In Progress → In Review → Done. Scrum and Kanban boards, the backlog, sprints, and **JQL** filters such as `project = SHOP AND sprint in openSprints()`. Put the **issue key** (like `SHOP-142`) in branch names and commits so the code links to the ticket. Confluence holds requirements, design docs, architecture decision records, runbooks and retro notes."
+  },
+  {
+    "id": "java:devops-cicd",
+    "title": "DevOps & CI/CD",
+    "href": "/java/agile",
+    "text": "Every push runs our pipeline — build, tests, static analysis, image, deploy to staging — and we release with canary or blue-green deployments, measuring ourselves with the DORA metrics. **Continuous integration**: every push builds and tests (GitHub Actions, Jenkins, GitLab CI). **Continuous delivery**: every green build *could* go to production at the press of a button. **Continuous deployment**: it goes automatically. Typical pipeline: compile → unit tests → static analysis (SonarQube) → Docker image → integration tests → staging → smoke tests → production. Release strategies: **rolling**, **blue-green**, **canary**. Infrastructure as code with Terraform; run on Kubernetes. **DORA metrics**: deployment frequency, lead time for changes, change failure rate, time to restore."
+  },
+  {
+    "id": "java:collection-map",
+    "title": "The collections family",
+    "href": "/java/collections",
+    "text": "Lists keep order and allow duplicates, Sets keep elements unique, Maps associate keys with values and aren't Collections, and Collections is just the helper class. `Iterable` → `Collection` → **List**, **Set**, **Queue/Deque**. **Map is not a Collection.** Lists: `ArrayList`, `LinkedList`. Sets: `HashSet`, `LinkedHashSet`, `TreeSet`. Queues: `ArrayDeque` (stack or queue), `PriorityQueue` (a heap). Maps: `HashMap`, `LinkedHashMap`, `TreeMap`, `ConcurrentHashMap`. `Collection` is the interface; `Collections` is the utility class (`sort`, `unmodifiableList`, `synchronizedMap`)."
+  },
+  {
+    "id": "java:hashmap-internals",
+    "title": "How HashMap works inside",
+    "href": "/java/collections",
+    "text": "HashMap hashes the key to a bucket, resolves collisions with a chain that turns into a red-black tree past eight nodes, and doubles its table once size exceeds capacity times 0.75. An array of buckets. **Default capacity 16, load factor 0.75** — it resizes past 12 entries, doubling the table. Bucket index = `(n - 1) & (h ^ (h >>> 16))`: the high bits are mixed in, then masked, because `n` is a power of two. **put**: find the bucket, walk it comparing hash then `equals()`. A match replaces the value; otherwise a node is appended. Collisions form a linked list. Since Java 8, a bucket with **8+ nodes becomes a red-black tree** (once the table has 64+ buckets), so the worst case is O(log n), not O(n). One `null` key is allowed (bucket 0). Not thread-safe; iteration order isn't guaranteed."
+  },
+  {
+    "id": "java:arraylist-linkedlist",
+    "title": "ArrayList vs LinkedList",
+    "href": "/java/collections",
+    "text": "ArrayList gives O(1) random access and cache-friendly iteration; LinkedList only wins when inserting at a position you're already holding, so ArrayList — or ArrayDeque for queues — is my default. **ArrayList**: a resizable array. `get(i)` is **O(1)**; `add` at the end is amortised O(1) (grows by 50%); insert or remove in the middle is O(n). **LinkedList**: doubly linked nodes. `get(i)` is **O(n)**; add or remove at either end is O(1). LinkedList's cheap insert only counts once you're *at* the position — getting there is O(n). Every LinkedList node costs extra memory and scatters across the heap, which is slow for the CPU cache. Default to ArrayList. Need a queue or stack? Use **ArrayDeque**."
+  },
+  {
+    "id": "java:sets-and-sorted",
+    "title": "HashSet, LinkedHashSet, TreeSet",
+    "href": "/java/collections",
+    "text": "HashSet is backed by a HashMap, so it's O(1) and unordered; LinkedHash collections keep insertion or access order, which gives an LRU cache; Tree collections keep keys sorted in O(log n). **HashSet is a HashMap in disguise**: your elements are the keys, and every value is one shared dummy object. **LinkedHash*** keeps insertion order. `LinkedHashMap` in *access order* plus `removeEldestEntry` is a ready-made **LRU cache**. **TreeSet / TreeMap** are red-black trees: O(log n), always sorted, with `floor`, `ceiling`, `headMap` and `tailMap`. Tree collections need `Comparable` elements or a `Comparator`, and don't accept `null` keys."
+  },
+  {
+    "id": "java:comparable-comparator",
+    "title": "Comparable vs Comparator",
+    "href": "/java/collections",
+    "text": "Comparable defines one natural order inside the class; Comparator defines any number of external orders and composes with thenComparing. **Comparable**: `compareTo` lives *inside* the class and defines its one natural order (`String`, `Integer`, `LocalDate`). **Comparator**: a separate object, so you can have many orders. Build them with `comparing`, `thenComparing` and `reversed`. Never compare by subtracting (`a - b`): it overflows. Use `Integer.compare`. `TreeSet` and `TreeMap` treat `compare == 0` as a *duplicate*, whatever `equals` says."
+  },
+  {
+    "id": "java:fail-fast",
+    "title": "Fail-fast vs fail-safe iterators",
+    "href": "/java/collections",
+    "text": "Fail-fast iterators compare a modification count and throw ConcurrentModificationException; concurrent collections iterate a snapshot or a weakly consistent view — and to remove while looping I use removeIf. ArrayList and HashMap iterators track a **modCount** and throw **ConcurrentModificationException** when it changes underneath them. That happens even on **one thread** — remove inside a for-each loop and you'll see it. To remove while looping, use `removeIf` or `Iterator.remove()`. **CopyOnWriteArrayList** iterates a snapshot, and every write copies the array: great for rarely changing listener lists. **ConcurrentHashMap** iterators are *weakly consistent*: no exception, and they may or may not see concurrent updates."
+  },
+  {
+    "id": "java:concurrenthashmap",
+    "title": "ConcurrentHashMap",
+    "href": "/java/collections",
+    "text": "ConcurrentHashMap reads without locks, locks only the bucket being written, rejects nulls and gives atomic compute and merge — which I use instead of check-then-act. `Hashtable` and `Collections.synchronizedMap` lock the **whole map** on every call. ConcurrentHashMap (Java 8+) **reads without locking**, uses CAS to fill an empty bucket and locks only that **one bucket** on a collision. **No null keys or values**: `get` returning null has to mean “absent”. Use the atomic compound operations — `putIfAbsent`, `computeIfAbsent`, `merge`. Check-then-act is still a race. `size()` is only an estimate while other threads are writing."
+  },
+  {
+    "id": "java:immutable-collections",
+    "title": "Immutable, unmodifiable, fixed-size",
+    "href": "/java/collections",
+    "text": "List.of is truly immutable and null-hostile, unmodifiableList is a read-only view over a list that can still change, and Arrays.asList is fixed-size but writable. `List.of`, `Set.of` and `Map.of` (Java 9) are **truly immutable** and **reject nulls**; `Set.of` and `Map.of` also reject duplicates. `Collections.unmodifiableList(list)` is a read-only **view** — changes to the original show through. `Arrays.asList` is **fixed-size**: `set` works, `add` and `remove` throw `UnsupportedOperationException`. `List.copyOf` and `stream().toList()` give you unmodifiable copies."
+  },
+  {
+    "id": "java:collection-complexity",
+    "title": "Complexity cheat card",
+    "href": "/java/collections",
+    "text": "I pick collections by their hot operation: HashMap for lookups by key, ArrayList for indexed reads, ArrayDeque for queues and stacks, TreeMap when order matters and PriorityQueue for top-k. **ArrayList** — get O(1) · add at end O(1)* · insert/remove middle O(n) · contains O(n) **LinkedList** — get O(n) · add/remove at the ends O(1) · contains O(n) **HashMap / HashSet** — get, put, contains O(1) average · O(log n) worst case in a treeified bucket **TreeMap / TreeSet** — get, put, remove O(log n) · always sorted **PriorityQueue** — offer, poll O(log n) · peek O(1) · contains O(n) **ArrayDeque** — push, pop, offer, poll at either end O(1)*"
+  },
+  {
+    "id": "java:creating-threads",
+    "title": "Thread, Runnable & Callable",
+    "href": "/java/concurrency",
+    "text": "Runnable returns nothing, Callable returns a value and can throw; start() spawns a thread while run() is just a method call — and in production code I submit tasks to an ExecutorService. **Runnable**: `void run()` — no result, no checked exceptions. **Callable<V>**: `V call() throws Exception` — submit it and get a **Future** back. `start()` creates a new thread that calls `run()`. Calling `run()` yourself just runs the code **on the current thread**. Extending `Thread` uses up your one superclass. Implement Runnable, or better, submit tasks to an executor."
+  },
+  {
+    "id": "java:thread-lifecycle",
+    "title": "The thread lifecycle",
+    "href": "/java/concurrency",
+    "text": "The states are NEW, RUNNABLE, BLOCKED, WAITING, TIMED_WAITING and TERMINATED; BLOCKED means waiting for a monitor, WAITING means waiting for a signal — and sleep keeps locks while wait releases them. **NEW** → `start()` → **RUNNABLE**. Java doesn't separate “running” from “ready to run”. **BLOCKED**: waiting to enter a `synchronized` block whose monitor another thread holds. **WAITING**: `wait()`, `join()` or `LockSupport.park()` with no timeout — until another thread signals. **TIMED_WAITING**: `sleep(ms)`, `wait(ms)`, `join(ms)`. **TERMINATED**: `run()` returned or threw. `sleep()` **keeps** any locks it holds; `wait()` **releases** the monitor, and after `notify()` the thread must win the monitor back (BLOCKED) before it runs."
+  },
+  {
+    "id": "java:race-synchronized",
+    "title": "Race conditions & synchronized",
+    "href": "/java/concurrency",
+    "text": "count++ is a read-modify-write, so unsynchronized threads can lose updates; synchronized makes that critical section mutually exclusive using the object's monitor. `count++` is **three steps**: read, add, write. Two threads can interleave them and lose an update. A **race condition** is any bug where the result depends on thread timing. The code that must not interleave is the **critical section**. `synchronized` methods lock `this`; `static synchronized` locks the Class object; a synchronized block locks whatever object you name. Intrinsic locks are **reentrant**: a thread that holds a lock can enter it again. Lock on a `private final` object, so outside code can't grab your lock."
+  },
+  {
+    "id": "java:volatile",
+    "title": "volatile & visibility",
+    "href": "/java/concurrency",
+    "text": "volatile guarantees visibility of the latest write across threads, but not atomicity — perfect for a shutdown flag, wrong for a counter. Without `volatile`, a thread might **never see** another thread's write (CPU caches, JIT optimisations). `volatile` guarantees every read sees the **latest write**. It does **not** make compound actions atomic: `volatile int n; n++` still races. Good for stop flags and the instance field in double-checked locking. Use atomics or locks for counters."
+  },
+  {
+    "id": "java:atomics-cas",
+    "title": "Atomics & compare-and-swap",
+    "href": "/java/concurrency",
+    "text": "Atomic classes use compare-and-swap: read, compute, and write only if the value is unchanged, retrying otherwise — lock-free, and usually faster than synchronized for simple counters. `AtomicInteger`, `AtomicLong` and `AtomicReference` are built on **CAS**, a single CPU instruction. `incrementAndGet` loops: read, compute, `compareAndSet`, and retry if another thread got there first. Lock-free means no thread ever blocks. Under heavy contention, **LongAdder** scales better for counters. The **ABA problem**: the value goes A → B → A, so CAS succeeds even though something changed. `AtomicStampedReference` adds a version."
+  },
+  {
+    "id": "java:executors",
+    "title": "ExecutorService & thread pools",
+    "href": "/java/concurrency",
+    "text": "A ThreadPoolExecutor fills core threads, then the queue, then grows to max, then rejects — so with an unbounded queue it never grows past core, which is why I configure bounded queues explicitly. Creating threads is expensive; a pool **reuses** them. `ThreadPoolExecutor(core, max, keepAlive, queue, handler)`: fewer than **core** threads → start one; else **queue** it; queue full → grow to **max**; still full → **reject**. `newFixedThreadPool` uses an **unbounded** queue: it never grows past core, and the queue can eat all your memory. Rejection policies: `AbortPolicy` (default, throws), `CallerRunsPolicy` (the caller runs it, which slows producers — backpressure). Always `shutdown()`. Size CPU-bound pools near the core count; I/O-bound pools can be larger, or use virtual threads."
+  },
+  {
+    "id": "java:locks-synchronizers",
+    "title": "Locks & synchronizers",
+    "href": "/java/concurrency",
+    "text": "I reach for ReentrantLock when I need tryLock, interruptible or fair locking, CountDownLatch to wait for N tasks, Semaphore to cap concurrency and BlockingQueue for producer–consumer. **ReentrantLock**: `tryLock(timeout)`, `lockInterruptibly()`, optional fairness, multiple `Condition`s. Always `unlock()` in `finally`. **ReadWriteLock**: many readers at once, or one writer. **CountDownLatch**: one thread waits until N others finish. One-shot. **CyclicBarrier**: N threads wait for *each other*, then all go. Reusable. **Semaphore**: at most N threads inside at once. **BlockingQueue**: the producer–consumer workhorse."
+  },
+  {
+    "id": "java:deadlock",
+    "title": "Deadlock",
+    "href": "/java/concurrency",
+    "text": "A deadlock needs mutual exclusion, hold-and-wait, no preemption and circular wait; I break circular wait with a consistent lock order, or use tryLock with a timeout, and diagnose with a thread dump. Deadlock needs **all four Coffman conditions**: mutual exclusion, hold and wait, no preemption, circular wait. Break **circular wait** with a global lock order — always lock the lower account id first. Break **hold and wait** with `tryLock(timeout)`: give up everything and retry. Diagnose with a thread dump (`jstack <pid>`), which reports “Found one Java-level deadlock”. **Livelock**: threads keep backing off for each other and stay busy without progress. **Starvation**: one thread never gets its turn."
+  },
+  {
+    "id": "java:completable-future",
+    "title": "CompletableFuture",
+    "href": "/java/concurrency",
+    "text": "CompletableFuture composes async steps with thenApply, thenCompose, thenCombine and allOf, recovers with exceptionally, and should run on an executor I choose rather than the common pool. `Future.get()` **blocks**. `CompletableFuture` lets you compose steps without blocking. `supplyAsync` starts work · `thenApply` transforms a result · `thenCompose` chains another async call · `thenCombine` joins two · `allOf` waits for many. `exceptionally` and `handle` recover from failures; `orTimeout` (Java 9) gives up. Pass your own executor — the default common ForkJoinPool is shared by the whole JVM."
+  },
+  {
+    "id": "java:jdk-jre-jvm",
+    "title": "JDK vs JRE vs JVM",
+    "href": "/java/core-java",
+    "text": "JDK is JRE plus dev tools, JRE is the JVM plus class libraries, and the JVM runs bytecode — the bytecode is portable, each OS gets its own JVM. `javac` (a JDK tool) compiles `.java` source into `.class` **bytecode**. The **JVM** loads classes, verifies the bytecode, then runs it — interpreting at first, then **JIT-compiling** hot methods to native code. **JRE = JVM + standard class libraries.** JDK = JRE + developer tools (`javac`, `jar`, `javap`, `jshell`, debugger). Bytecode is platform-independent; **the JVM itself is platform-specific**. That's what makes “write once, run anywhere” work. Since Java 11 there's no separate JRE download — `jlink` builds a trimmed runtime for your app instead."
+  },
+  {
+    "id": "java:jvm-memory",
+    "title": "Stack, heap and Metaspace",
+    "href": "/java/core-java",
+    "text": "Locals and references live on the calling thread's stack, objects live on the shared heap, and class metadata lives in Metaspace. **Each thread has its own stack** of frames: local variables, primitives and *references*. Too-deep recursion → `StackOverflowError`. **The heap is shared by all threads** and holds every object and array. Run out → `OutOfMemoryError: Java heap space`. The heap is split into **young generation** (Eden + survivor spaces) and **old generation**, because most objects die young. **Metaspace** (Java 8+, replaced PermGen) holds class metadata in native memory. Static fields live with the `Class` object on the heap. The String pool moved onto the heap in Java 7."
+  },
+  {
+    "id": "java:string-pool",
+    "title": "String pool & immutability",
+    "href": "/java/core-java",
+    "text": "Strings are immutable, which lets the JVM share literals in the pool safely — so always compare them with equals(), never ==. String **literals are interned** into the pool; `new String(...)` always makes a new heap object. `==` compares **references** (same object?). `equals()` compares **content** (same characters?). Strings are **immutable**: `concat`, `replace`, `toUpperCase` all return a *new* String and leave the original alone. Immutability is what makes sharing safe: thread-safe for free, `hashCode` cached, safe as `HashMap` keys and for class names, URLs and passwords. Building strings in a loop? Use `StringBuilder`. (`StringBuffer` is the older, synchronized version.)"
+  },
+  {
+    "id": "java:wrappers",
+    "title": "Wrappers, autoboxing & the Integer cache",
+    "href": "/java/core-java",
+    "text": "Autoboxing calls Integer.valueOf, which caches -128 to 127 — so compare wrappers with equals(), and watch for NPEs when unboxing null. **Autoboxing**: `Integer x = 5` compiles to `Integer.valueOf(5)`. **Unboxing**: `int y = x` compiles to `x.intValue()`. `Integer.valueOf` returns **cached objects for -128..127**, so `==` happens to work for small numbers and silently breaks at 128. Unboxing a `null` wrapper throws **NullPointerException** — a classic with `Map<String, Integer>.get()`. Collections and generics need objects: `List<Integer>`, never `List<int>`. Boxing inside hot loops creates garbage; prefer primitives or `IntStream` there."
+  },
+  {
+    "id": "java:exceptions",
+    "title": "Checked vs unchecked exceptions",
+    "href": "/java/core-java",
+    "text": "Checked exceptions are recoverable conditions the compiler makes you handle; unchecked ones are programming errors — and @Transactional only rolls back on unchecked by default. `Throwable` splits into **`Error`** (OutOfMemoryError, StackOverflowError — don't catch) and **`Exception`**. **Checked** (`IOException`, `SQLException`): the compiler forces `try/catch` or `throws`. **Unchecked** = `RuntimeException` and its children (`NullPointerException`, `IllegalArgumentException`, `IllegalStateException`). `finally` always runs (unless the JVM dies). **try-with-resources** closes `AutoCloseable` resources automatically, in reverse order. `throw` raises one exception; `throws` declares what a method might raise. Spring's `@Transactional` rolls back on unchecked exceptions by default — **not** on checked ones."
+  },
+  {
+    "id": "java:static-final",
+    "title": "static, final, finally, finalize",
+    "href": "/java/core-java",
+    "text": "static means one per class, final means assign/override/extend once — and final locks the reference, not the object it points at. **static** members belong to the class: one copy, no object needed. Static methods can't touch instance fields. **final variable**: assigned once. **final method**: can't be overridden. **final class**: can't be extended (`String` is final). A final *reference* is not an immutable *object*: a `final List` can still be added to. **static block** runs once, when the class is loaded. **finally** belongs to try/catch. **finalize()** is deprecated since Java 9 — use try-with-resources or `Cleaner`."
+  },
+  {
+    "id": "java:garbage-collection",
+    "title": "Garbage collection",
+    "href": "/java/core-java",
+    "text": "The GC frees objects that are unreachable from GC roots, generationally because most objects die young — and a leak in Java is just a reference you forgot to drop. An object is garbage when it's **unreachable from GC roots**: stack locals, static fields, active threads, JNI references. **Minor GC** cleans the young generation (fast, frequent). Survivors get promoted to the old generation. **Major/Full GC** is slower. **G1** is the default collector since Java 9. **ZGC** and **Shenandoah** keep pauses in the low milliseconds for big heaps. `System.gc()` is only a hint. Size the heap with `-Xms` / `-Xmx`. **Java can still leak memory**: objects you forgot to drop stay reachable — ever-growing static maps, unremoved listeners, `ThreadLocal`s in pooled threads."
+  },
+  {
+    "id": "java:generics",
+    "title": "Generics, erasure & PECS",
+    "href": "/java/core-java",
+    "text": "Generics are checked at compile time and erased at runtime; use extends when you read from a collection and super when you write into it — PECS. Generics give **compile-time type safety** and remove casts. **Type erasure**: `List<String>` and `List<Integer>` are the same class at runtime, so no `new T()` and no `instanceof List<String>`. **PECS — Producer Extends, Consumer Super.** Read from `? extends T`; write into `? super T`. Bounded types: `<T extends Comparable<T>>` lets you call `compareTo` on T."
+  },
+  {
+    "id": "java:streams",
+    "title": "Lambdas & the Stream API",
+    "href": "/java/core-java",
+    "text": "Streams are lazy pipelines: intermediate operations only describe the work, and nothing runs until a terminal operation like collect. A **lambda** implements a **functional interface** (one abstract method): `Predicate`, `Function`, `Consumer`, `Supplier`. **Intermediate** operations (`filter`, `map`, `sorted`, `distinct`) are **lazy**. **Terminal** operations (`collect`, `forEach`, `reduce`, `count`) run the pipeline. A stream **can't be reused** after a terminal operation. `map` turns one item into one item; `flatMap` turns one item into many and flattens them. Parallel streams share the common ForkJoinPool — measure before using, and never with blocking I/O."
+  },
+  {
+    "id": "java:optional-time",
+    "title": "Optional & java.time",
+    "href": "/java/core-java",
+    "text": "Optional makes “might be missing” part of the return type; prefer orElseGet for expensive defaults, and use java.time because it's immutable. Create with `Optional.ofNullable(x)`. `Optional.of(null)` throws **NullPointerException**. Unwrap with `map`, `orElse`, `orElseGet`, `orElseThrow`, `ifPresent` — not `get()`. `orElse(x)` **always evaluates** x; `orElseGet(supplier)` only runs when empty. Use Optional for **return types**, not fields, parameters or collections. `LocalDate`, `LocalDateTime`, `ZonedDateTime`, `Instant` are **immutable and thread-safe** — unlike `Date` and `SimpleDateFormat`."
+  },
+  {
+    "id": "java:serialization",
+    "title": "Serialization & transient",
+    "href": "/java/core-java",
+    "text": "Serializable is a marker interface; pin serialVersionUID, mark secrets transient, and use JSON or Protobuf between services rather than native serialization. Implement `Serializable` (a **marker interface** with no methods). Declare `serialVersionUID` yourself; a mismatch on read throws `InvalidClassException`. **`transient` and `static` fields are not serialized.** Native Java deserialization of untrusted data is a known security hole. Services talk JSON (Jackson) or Protobuf instead."
+  },
+  {
+    "id": "java:modern-java",
+    "title": "Records, sealed types & virtual threads",
+    "href": "/java/core-java",
+    "text": "Records remove data-class boilerplate, sealed types plus pattern matching give exhaustive switches, and virtual threads let plain blocking code scale. **Records** (Java 16): immutable data carriers with constructor, accessors, `equals`, `hashCode` and `toString` generated. **Sealed** types (Java 17) restrict which classes may extend them, so `switch` can be checked for exhaustiveness. **Pattern matching** for `instanceof` and `switch` removes casts. **Virtual threads** (Java 21) are JVM-managed and cheap, so blocking I/O code scales without reactive rewrites. Text blocks (`\"\"\"`) and `var` for local type inference."
+  },
+  {
+    "id": "java:acid",
+    "title": "ACID transactions",
+    "href": "/java/database",
+    "text": "ACID means a transaction is all-or-nothing, keeps constraints valid, is isolated from concurrent work to a chosen level, and survives crashes once committed. **Atomicity**: every statement commits, or everything rolls back. **Consistency**: constraints, foreign keys and checks stay valid. **Isolation**: concurrent transactions don't see each other's intermediate state — how much depends on the isolation level. **Durability**: committed data survives crashes, thanks to the write-ahead log."
+  },
+  {
+    "id": "java:isolation-levels",
+    "title": "Isolation levels & read anomalies",
+    "href": "/java/database",
+    "text": "Read uncommitted allows dirty reads, read committed stops them, repeatable read also stops non-repeatable reads and serializable stops phantoms — each step trades throughput for correctness, and I handle lost updates with @Version. **READ UNCOMMITTED** allows dirty reads. **READ COMMITTED** stops dirty reads, but a re-read can change. The default in Postgres, Oracle and SQL Server. **REPEATABLE READ** also stops non-repeatable reads. The SQL standard still allows phantoms (InnoDB and Postgres prevent most of them). The default in MySQL InnoDB. **SERIALIZABLE** behaves as if transactions ran one at a time: safest, slowest, and may abort with serialization failures you must retry. **Lost updates** — two read-then-write transactions overwriting each other — are usually fixed with optimistic locking (`@Version`) or `SELECT … FOR UPDATE`."
+  },
+  {
+    "id": "java:joins",
+    "title": "Joins, visualised",
+    "href": "/java/database",
+    "text": "INNER keeps matches only, LEFT keeps every left row with NULLs for missing matches, FULL keeps both sides, and a LEFT JOIN with WHERE right.id IS NULL finds the rows that have no match. **INNER** — only matching rows. **LEFT** — every left row, NULLs where the right side has no match. **RIGHT** — the mirror. **FULL OUTER** — every row from both sides (MySQL doesn't have it; emulate with `UNION`). **CROSS** — every combination. **SELF** — a table joined to itself, like employee → manager. **Anti-join**: `LEFT JOIN … WHERE right.id IS NULL` finds rows with no match. On an outer join, a condition in `ON` behaves differently from the same condition in `WHERE`."
+  },
+  {
+    "id": "java:indexes",
+    "title": "Indexes",
+    "href": "/java/database",
+    "text": "Indexes turn scans into B-tree lookups; I design composite indexes around the leftmost-prefix rule, check plans with EXPLAIN, and remember every index slows down writes. A **B-tree index** makes lookups O(log n) instead of a full table scan. **Clustered** index: rows are stored in key order (InnoDB's primary key). **Non-clustered**: a separate structure pointing at the rows. **Composite indexes follow the leftmost-prefix rule**: `(customer_id, created_at)` helps `WHERE customer_id = ?`, not `WHERE created_at > ?` alone. A **covering index** holds every column the query needs, so the table is never touched. Costs: slower writes and more storage. Wrapping a column in a function (`LOWER(email)`) prevents index use unless the index is on that expression. Check with `EXPLAIN`."
+  },
+  {
+    "id": "java:normalization",
+    "title": "Normalization (1NF → BCNF)",
+    "href": "/java/database",
+    "text": "Normalization stores each fact once — atomic columns, no partial or transitive dependencies — and I denormalize only deliberately, for read-heavy paths. **1NF**: atomic values, no repeating groups (no `phone1, phone2`, no comma-separated lists). **2NF**: 1NF, and no column depends on only *part* of a composite key. **3NF**: 2NF, and no transitive dependencies (a non-key column depending on another non-key column, like zip → city). **BCNF**: every column that determines another is a candidate key. **Denormalization** is deliberate duplication for read speed (reports, read models), accepting update anomalies."
+  },
+  {
+    "id": "java:sql-essentials",
+    "title": "SQL essentials & classic queries",
+    "href": "/java/database",
+    "text": "WHERE filters rows before grouping and HAVING filters groups after, and for “top N per group” I reach for a window function like DENSE_RANK. **DDL** `CREATE`, `ALTER`, `DROP`, `TRUNCATE` · **DML** `INSERT`, `UPDATE`, `DELETE` · **DQL** `SELECT` · **DCL** `GRANT`, `REVOKE` · **TCL** `COMMIT`, `ROLLBACK`, `SAVEPOINT`. **WHERE** filters rows *before* grouping; **HAVING** filters groups *after*. Logical order: `FROM` → `WHERE` → `GROUP BY` → `HAVING` → `SELECT` → `ORDER BY` → `LIMIT`. Window functions — `ROW_NUMBER`, `RANK`, `DENSE_RANK` — rank inside groups without collapsing rows."
+  },
+  {
+    "id": "java:jdbc",
+    "title": "JDBC & PreparedStatement",
+    "href": "/java/database",
+    "text": "I always bind parameters with PreparedStatement — it prevents SQL injection and lets the database cache the plan — and take connections from a pool like HikariCP. Borrow a `Connection` from a pool (**HikariCP**, Boot's default), prepare the statement, bind parameters, execute, read the `ResultSet`, close with try-with-resources. **PreparedStatement prevents SQL injection** — parameters are values, never SQL — and lets the database reuse the plan. Use `addBatch` / `executeBatch` for bulk inserts. Spring's `JdbcTemplate` / `JdbcClient` remove the boilerplate."
+  },
+  {
+    "id": "java:jpa-lifecycle",
+    "title": "Entity states & dirty checking",
+    "href": "/java/database",
+    "text": "Managed entities are tracked by the persistence context, so changes are flushed by dirty checking at commit; the context doubles as the first-level cache, and a second-level cache is optional and shared. States: **transient** (new, untracked) → **managed** (in the persistence context) → **detached** (context closed) or **removed**. **Dirty checking**: at flush or commit, Hibernate compares managed entities with their snapshots and writes the UPDATEs. No `save()` needed. **First-level cache** = the persistence context itself: per transaction, always on. **Second-level cache** is shared across sessions and optional — for data that rarely changes. Touch a lazy association on a detached entity → **LazyInitializationException**."
+  },
+  {
+    "id": "java:n-plus-one",
+    "title": "The N+1 query problem",
+    "href": "/java/database",
+    "text": "N+1 is one query for the parents plus one per parent for a lazy association; I spot it in the SQL logs and fix it with a fetch join, an entity graph or batch fetching — EAGER doesn't fix it. Caused by touching a **lazy association inside a loop**. **EAGER doesn't fix it**: for a JPQL or derived query, Hibernate still loads each collection with its own SELECT — just straight away. Fixes: **`JOIN FETCH`**, **`@EntityGraph`**, **batch fetching** (`@BatchSize` or `default_batch_fetch_size`: 1 + N/size queries), or DTO projections. Defaults: `@ManyToOne` and `@OneToOne` are EAGER, `@OneToMany` and `@ManyToMany` are LAZY — set the to-one side LAZY too. Catch it early with SQL logging, Hibernate statistics or query-count assertions in tests."
+  },
+  {
+    "id": "java:spring-data",
+    "title": "Spring Data JPA repositories",
+    "href": "/java/database",
+    "text": "Spring Data generates repository implementations from method names or @Query, supports paging and projections, and needs @Modifying for bulk updates. `CrudRepository` → `PagingAndSortingRepository` → **`JpaRepository`**. **Derived queries** from method names: `findBy`, `existsBy`, `countBy`, with `And`, `Or`, `Between`, `LessThan`, `Containing`, `OrderBy`. `@Query` for JPQL (or `nativeQuery = true`); `Pageable` and `Sort` for paging. **Projections** (interfaces or records) load only the columns you need. Update and delete queries need `@Modifying`, inside a transaction."
+  },
+  {
+    "id": "java:three-areas",
+    "title": "Working tree, index & commits",
+    "href": "/java/git",
+    "text": "Changes move from the working tree to the index with add, and into history with commit; a branch is a pointer to a commit, and HEAD points at the current branch. **Working tree** → `git add` → **index (staging area)** → `git commit` → **repository**. A commit is a **snapshot** plus parent pointer(s), author and message, named by its SHA hash. A **branch** is just a movable pointer to a commit. **HEAD** points at the branch you're on. `git diff` compares working tree with index; `git diff --staged` compares index with the last commit."
+  },
+  {
+    "id": "java:merge-rebase",
+    "title": "Merge vs rebase",
+    "href": "/java/git",
+    "text": "Merge preserves history with a merge commit, while rebase rewrites my commits on top of the target for a linear history — so I rebase only my own unshared branches. **Merge** joins branches with a merge commit (or a **fast-forward** when nothing diverged). Non-destructive: existing commits stay as they are. **Rebase** replays your commits on top of another branch, creating **new commits with new hashes** and a linear history. **Golden rule: never rebase commits other people have already pulled.** Interactive rebase (`git rebase -i`) squashes and rewords commits before a pull request. `git pull --rebase` puts your local commits on top of what was fetched, instead of adding a merge commit."
+  },
+  {
+    "id": "java:reset-revert",
+    "title": "reset vs revert",
+    "href": "/java/git",
+    "text": "reset moves the branch pointer and rewrites local history — soft keeps changes staged, mixed unstaged, hard discards them — while revert adds an undo commit, which is what I use on shared branches. `git reset --soft HEAD~1`: move the branch back one commit, **keep the changes staged**. `git reset --mixed HEAD~1` (the default): keep the changes, **unstaged**. `git reset --hard HEAD~1`: **throw the changes away**. Handle with care. `git revert <sha>`: add a **new commit that undoes** an old one. History stays intact — safe on shared branches. “Lost” a commit? **`git reflog`** remembers where HEAD has been."
+  },
+  {
+    "id": "java:stash",
+    "title": "git stash",
+    "href": "/java/git",
+    "text": "git stash shelves uncommitted work so I can switch context cleanly; pop re-applies and drops it, apply re-applies and keeps it. `git stash` saves tracked changes, staged and unstaged, and cleans the working tree. Add `-u` for untracked files. `git stash pop` re-applies the latest stash **and removes it**; `git stash apply` keeps it in the list. Stashes form a stack: `git stash list`, `git stash drop`. Popping can conflict, just like a merge."
+  },
+  {
+    "id": "java:conflicts",
+    "title": "Merge conflicts",
+    "href": "/java/git",
+    "text": "I resolve conflicts by understanding both changes, editing to the correct combined result, staging the file and continuing — and I keep branches short-lived so conflicts stay small. Happens when **both sides changed the same lines** (or one side deleted a file the other edited). Git marks the file with `<<<<<<<`, `=======` and `>>>>>>>` sections. Edit to the right result, remove the markers, `git add` the file, then `git commit` (merge) or `git rebase --continue`. `git merge --abort` or `git rebase --abort` takes you back to before you started. Prevention: small pull requests and pulling in `main` often."
+  },
+  {
+    "id": "java:branching-workflow",
+    "title": "Workflow, .gitignore & cherry-pick",
+    "href": "/java/git",
+    "text": "We work on short-lived branches merged through reviewed pull requests with green CI, cherry-pick hotfixes onto release branches and tag every release. Feature branch → **pull request** → code review → **CI green** → merge. **Trunk-based** (short branches, feature flags) vs **GitFlow** (develop, release and hotfix branches). `.gitignore` build output, IDE files, logs and `.env`. **Never commit secrets.** `git cherry-pick <sha>` copies one commit elsewhere, like a hotfix onto a release branch. Tag releases: `git tag -a v1.4.0`."
+  },
+  {
+    "id": "java:monolith-vs-micro",
+    "title": "Monolith vs microservices",
+    "href": "/java/microservices",
+    "text": "Microservices trade in-process simplicity for independent deployment and scaling; I'd split a modular monolith only when team or scaling needs justify the operational cost. Microservices are **independently deployable** services built around business capabilities (orders, payments, inventory). Each service **owns its data**. No reaching into another service's tables. **Wins**: independent deploys and scaling, fault isolation, team autonomy, freedom of tech choice. **Costs**: network latency and partial failure, no cross-service transactions, harder testing, heavy monitoring and tracing needs. A **modular monolith** is often the right start. Split when team size or scaling needs justify the operational cost."
+  },
+  {
+    "id": "java:api-gateway",
+    "title": "API gateway",
+    "href": "/java/microservices",
+    "text": "The gateway is the single front door: it routes to services and centralises auth, rate limiting and TLS, while business logic stays in the services. One **entry point** for clients, routing each request to the right service. Handles **cross-cutting concerns**: authentication (JWT checks), rate limiting, TLS termination, CORS, request logging. Spring Cloud Gateway, Kong, NGINX or a cloud API gateway. **Backend for Frontend (BFF)**: a gateway per client type (web, mobile) that shapes responses for it. Keep business logic *out* of the gateway."
+  },
+  {
+    "id": "java:service-discovery",
+    "title": "Service discovery",
+    "href": "/java/microservices",
+    "text": "Services register themselves with a registry and callers resolve logical names to healthy instances; on Kubernetes the platform's Services and DNS do that job. Containers and autoscaling mean **IP addresses keep changing**. Instances register with a **registry** (Eureka, Consul) and send heartbeats; dead ones get dropped. **Client-side** discovery: the caller asks the registry and load-balances itself (Spring Cloud LoadBalancer). **Server-side** discovery: a load balancer or platform does it for you. On **Kubernetes**, Services and DNS already provide discovery — usually no Eureka needed."
+  },
+  {
+    "id": "java:circuit-breaker",
+    "title": "Circuit breaker & resilience",
+    "href": "/java/microservices",
+    "text": "A circuit breaker counts failures in a sliding window, opens to fail fast with a fallback, then half-opens to test recovery — so one slow dependency can't exhaust every caller's threads. **CLOSED**: calls flow while the breaker counts failures in a sliding window. Failure rate over the threshold → **OPEN**. **OPEN**: calls **fail fast** or return a fallback, giving the sick service room to recover. After a wait → **HALF_OPEN**: a few trial calls. Success → CLOSED; any failure → OPEN again. It stops **cascading failures**, where callers' threads all hang on one slow dependency. Combine with **timeouts**, **retries with backoff** (idempotent calls only) and **bulkheads**. Resilience4j is the library (Hystrix is retired)."
+  },
+  {
+    "id": "java:sync-async",
+    "title": "Sync vs async: REST & Kafka",
+    "href": "/java/microservices",
+    "text": "I use synchronous calls when the caller needs an answer now and events when services can react later — Kafka keeps order per partition, so I key messages by entity id and make consumers idempotent. **REST / gRPC**: simple, immediate answers — but both sides must be up, and latency adds up along a chain of calls. **Messaging** (Kafka, RabbitMQ): decouples services, absorbs traffic spikes and lets consumers catch up later. The price is **eventual consistency**. **Kafka**: topics split into partitions, **order only within a partition**, consumer groups share partitions, messages are retained and replayable. **RabbitMQ**: flexible routing to queues, with per-message acknowledgements. Delivery is usually **at-least-once**, so consumers must be **idempotent**."
+  },
+  {
+    "id": "java:saga-outbox",
+    "title": "Saga & transactional outbox",
+    "href": "/java/microservices",
+    "text": "Across services I use sagas — local transactions with compensating actions — plus a transactional outbox so the database write and the event can never disagree. There's **no ACID transaction across services**, and two-phase commit blocks and scales badly. A **saga** is a sequence of local transactions, each with a **compensating action** to undo it. **Choreography**: services react to each other's events. **Orchestration**: one coordinator directs every step. **Transactional outbox**: write the event into an outbox table *in the same database transaction*, and let a relay publish it. That solves the **dual-write problem**. Use idempotency keys so retries don't charge a customer twice."
+  },
+  {
+    "id": "java:config-observability",
+    "title": "Config & observability",
+    "href": "/java/microservices",
+    "text": "I externalise config, emit structured logs with trace ids, export Micrometer metrics to Prometheus and propagate traces with OpenTelemetry, so one request can be followed across every service. Centralised config: **Spring Cloud Config** (backed by Git), or Kubernetes ConfigMaps and Secrets. **Logs**: structured JSON with a correlation or trace id on every line. **Metrics**: Micrometer → Prometheus → Grafana. Watch p95/p99 latency, error rate and saturation. **Traces**: OpenTelemetry or Micrometer Tracing propagate a `traceId` across calls (Zipkin, Jaeger, Tempo). Actuator health groups feed Kubernetes **liveness** and **readiness** probes."
+  },
+  {
+    "id": "java:four-pillars",
+    "title": "The four pillars",
+    "href": "/java/oop",
+    "text": "Encapsulation protects state, abstraction hides implementation behind a contract, inheritance reuses an IS-A relationship, and polymorphism lets one call behave differently depending on the runtime type. **Encapsulation** — private state behind methods that protect its rules (a balance that can't go negative). **Abstraction** — expose *what* something does, hide *how*: interfaces and abstract classes. **Inheritance** — reuse through an IS-A relationship with `extends`. One superclass, many interfaces. **Polymorphism** — one call, many behaviours. *Compile-time* = overloading; *runtime* = overriding (dynamic dispatch)."
+  },
+  {
+    "id": "java:overload-override",
+    "title": "Overloading vs overriding",
+    "href": "/java/oop",
+    "text": "Overloading is compile-time polymorphism chosen by parameter types; overriding is runtime polymorphism chosen by the object's actual class. **Overloading**: same name, *different parameter list*, usually in one class. Resolved at **compile time**. A different return type alone isn't enough. **Overriding**: a subclass redefines a method with the *same signature*. Resolved at **runtime** by the object's actual class. An override can't **reduce visibility** or **throw broader checked exceptions**; it *may* return a subtype (covariant return). `static`, `private` and `final` methods can't be overridden. Always add `@Override` — it turns typos into compile errors."
+  },
+  {
+    "id": "java:interface-abstract",
+    "title": "Interface vs abstract class",
+    "href": "/java/oop",
+    "text": "An interface defines a capability a class can have many of; an abstract class shares state and partial implementation, and a class can extend only one. **Interface**: a contract. A class can implement many. Since Java 8 it can have `default` and `static` methods; fields are always `public static final`. **Abstract class**: can hold **state**, constructors and partly finished logic. A class can extend only one. Use an interface for a *capability* unrelated classes share (`Comparable`, `Runnable`). Use an abstract class for a shared *base with state* (Template Method). An interface with exactly one abstract method is a **functional interface** — a lambda can implement it."
+  },
+  {
+    "id": "java:equals-hashcode",
+    "title": "The equals & hashCode contract",
+    "href": "/java/oop",
+    "text": "Equal objects must have equal hash codes, because hash-based collections use hashCode to find the bucket and equals to confirm the match — so override both from the same fields. **If `a.equals(b)` then `a.hashCode() == b.hashCode()`** — mandatory. The reverse isn't required (that's a collision). Default `equals` is identity (`==`); default `hashCode` is identity-based. Override **both**, from the **same fields**. Don't mutate a field used in `hashCode` while the object is a key: the entry becomes unreachable. Records generate a correct `equals` and `hashCode` for you."
+  },
+  {
+    "id": "java:composition",
+    "title": "Composition over inheritance",
+    "href": "/java/oop",
+    "text": "I prefer composition: holding collaborators and delegating keeps classes loosely coupled and testable, and I reserve inheritance for genuine, stable IS-A relationships. Inheritance ties a subclass to its parent's internals: change the parent and subclasses break (the **fragile base class** problem). Composition holds a reference and **delegates**. It's easier to test (inject a mock) and to change at runtime. Spring's dependency injection *is* composition. Inherit only for a true, stable IS-A relationship where the subclass can stand in for the parent anywhere."
+  },
+  {
+    "id": "java:solid",
+    "title": "SOLID principles",
+    "href": "/java/oop",
+    "text": "SOLID is single responsibility, open/closed, Liskov substitution, interface segregation and dependency inversion — and Spring's DI makes the last two the default. **S — Single responsibility**: one reason to change. `InvoicePdfRenderer`, not `InvoiceManagerHelperUtil`. **O — Open/closed**: open for extension, closed for modification. A new payment method is a new class, not a new `if`. **L — Liskov substitution**: a subclass must work anywhere its parent does. **I — Interface segregation**: many small interfaces beat one fat one. **D — Dependency inversion**: depend on abstractions; let the container inject implementations."
+  },
+  {
+    "id": "java:singleton",
+    "title": "Singleton, done safely",
+    "href": "/java/oop",
+    "text": "For a thread-safe lazy singleton I'd use the holder idiom or an enum; double-checked locking needs a volatile field. In Spring, singleton scope means one instance per application context. Private constructor plus a static accessor. **Holder idiom**: lazy *and* thread-safe, because class loading is thread-safe. **Enum singleton**: the simplest version, and safe against serialization and reflection attacks. **Double-checked locking** only works if the field is `volatile`. Spring beans are singletons **per container**, not per JVM — and you rarely need a hand-written singleton in a Spring app."
+  },
+  {
+    "id": "java:factory-builder",
+    "title": "Factory & Builder",
+    "href": "/java/oop",
+    "text": "A factory hides which concrete class gets created; a builder makes objects with many optional fields readable and immutable. **Factory** centralises creation and returns an interface: `List.of`, `LocalDate.of`, Spring's `BeanFactory`. **Builder** handles many optional fields readably and produces an immutable object: `HttpRequest.newBuilder()`, Lombok's `@Builder`. A builder beats **telescoping constructors** (`new Pizza(true, false, true, null, 2)` — which boolean was cheese?)."
+  },
+  {
+    "id": "java:spring-patterns",
+    "title": "Observer, Strategy & Proxy",
+    "href": "/java/oop",
+    "text": "Spring is a pattern catalogue: singleton beans, factories, proxies for @Transactional, templates like JdbcTemplate, observers through application events and strategies through injected implementations. **Observer**: publishers notify listeners without knowing them — Spring's `ApplicationEvent` and `@EventListener`. Kafka is the same idea at system scale. **Strategy**: interchangeable algorithms behind one interface — a `Comparator`, or injected `PaymentGateway` beans. **Proxy**: a stand-in that adds behaviour — Spring AOP wraps beans for `@Transactional`, `@Cacheable` and `@Async`. **Template Method**: `JdbcTemplate` and `RestTemplate` do the boilerplate and call your code for the part that varies."
+  },
+  {
+    "id": "java:ioc-di",
+    "title": "IoC & dependency injection",
+    "href": "/java/spring",
+    "text": "Inversion of control means the container creates and wires my objects; I use constructor injection so dependencies are explicit, final and easy to mock. **Inversion of control**: the container (`ApplicationContext`) creates your objects and wires them together. **Constructor injection** (recommended): dependencies are explicit and `final`, and the class is trivial to unit test. A single constructor needs no `@Autowired`. **Setter injection** suits optional dependencies. **Field injection** hides dependencies and blocks `final` — avoid it. Several beans of one type? Mark one `@Primary`, or pick with `@Qualifier`. `ApplicationContext` extends `BeanFactory` with events, AOP, i18n and eager singleton creation. Boot 2.6+ rejects circular dependencies by default."
+  },
+  {
+    "id": "java:stereotypes",
+    "title": "@Component, @Service, @Repository, @Bean",
+    "href": "/java/spring",
+    "text": "@Component, @Service, @Repository and @Controller are specialised component-scan badges — @Repository adds exception translation — and @Bean registers third-party objects from a @Configuration class. `@Component` is the generic badge. `@Service` marks business logic. `@Repository` also **translates persistence exceptions** into Spring's `DataAccessException` hierarchy. `@RestController` = `@Controller` + `@ResponseBody`: return values are written as JSON. `@Bean` methods in a `@Configuration` class register objects you can't annotate yourself. `@SpringBootApplication` scans its **own package and sub-packages** for components."
+  },
+  {
+    "id": "java:bean-lifecycle",
+    "title": "Bean scopes & lifecycle",
+    "href": "/java/spring",
+    "text": "Beans are singletons by default; the container instantiates, injects, runs post-processors and @PostConstruct, wraps proxies and calls @PreDestroy on shutdown — never for prototypes. **Scopes**: `singleton` (default, one per container), `prototype` (new each time), and for web apps `request`, `session`, `application`. **Lifecycle**: instantiate → inject dependencies → Aware callbacks → `BeanPostProcessor` before-init → **`@PostConstruct`** → `afterPropertiesSet` → init-method → `BeanPostProcessor` after-init (**proxies are created here**) → ready → **`@PreDestroy`** → destroy. Spring **never calls destroy callbacks on prototype beans** — you own their clean-up. A prototype injected into a singleton is injected *once*. Use `ObjectProvider<T>` to get a fresh one each time. Singletons are shared by every request thread, so keep them **stateless**."
+  },
+  {
+    "id": "java:auto-configuration",
+    "title": "Auto-configuration & starters",
+    "href": "/java/spring",
+    "text": "@SpringBootApplication enables auto-configuration, which registers beans conditionally — on classes present, properties set and beans missing — so defining my own bean switches the default off. `@SpringBootApplication` = `@Configuration` + `@EnableAutoConfiguration` + `@ComponentScan`. Auto-configurations are listed in `META-INF/spring/…AutoConfiguration.imports` (Boot 3; `spring.factories` in Boot 2). They're **conditional**: `@ConditionalOnClass`, `@ConditionalOnProperty`, and **`@ConditionalOnMissingBean`** — which is why your own bean wins. **Starters** are curated dependency bundles, like `spring-boot-starter-web` (Spring MVC, Jackson, embedded Tomcat). See what applied and why with `--debug` or `/actuator/conditions`."
+  },
+  {
+    "id": "java:rest-controllers",
+    "title": "REST controllers & mappings",
+    "href": "/java/spring",
+    "text": "I map resources with @GetMapping/@PostMapping and friends, bind @PathVariable, @RequestParam and a validated @RequestBody, and return ResponseEntity when the status code matters — like 201 with a Location header. `@GetMapping`, `@PostMapping`, `@PutMapping`, `@PatchMapping`, `@DeleteMapping` under a class-level `@RequestMapping`. `@PathVariable` — `/orders/{id}` · `@RequestParam` — `?status=PAID` · `@RequestBody` — JSON into an object (Jackson). Return `ResponseEntity` to control the status and headers; add `@Valid` for Bean Validation (`@NotBlank`, `@Positive`). **GET, PUT and DELETE are idempotent**; POST isn't. PATCH updates part of a resource. Status codes: 200 OK · 201 Created · 204 No Content · 400 · 401 · 403 · 404 · 409 Conflict · 500."
+  },
+  {
+    "id": "java:controller-advice",
+    "title": "Global exception handling",
+    "href": "/java/spring",
+    "text": "I centralise error handling in a @RestControllerAdvice that maps exceptions to status codes and returns ProblemDetail bodies, so every endpoint fails the same way. `@ExceptionHandler` inside a controller handles that controller only; in a **`@RestControllerAdvice`** it handles every controller. Map domain exceptions to status codes: `OrderNotFoundException` → 404, a validation failure → 400. A failed `@Valid @RequestBody` throws **`MethodArgumentNotValidException`**. Spring 6 ships **`ProblemDetail`** (RFC 9457) for a standard error body. Never leak stack traces or SQL to API clients."
+  },
+  {
+    "id": "java:transactional",
+    "title": "@Transactional, really",
+    "href": "/java/spring",
+    "text": "@Transactional works through a proxy: it rolls back on unchecked exceptions by default, REQUIRED joins an existing transaction while REQUIRES_NEW suspends it, and a self-call skips the proxy entirely. It's **proxy-based**: begin before the method, commit after it, **roll back on RuntimeException or Error by default**. Checked exceptions need `rollbackFor`. **Self-invocation bypasses the proxy**: `this.otherMethod()` gets no transactional behaviour of its own. Propagation: **REQUIRED** (default — join or start one), **REQUIRES_NEW** (suspend the caller's, start a fresh one), `MANDATORY`, `NESTED`. Use `readOnly = true` for queries. Keep transactions short; no slow remote calls inside."
+  },
+  {
+    "id": "java:profiles-config",
+    "title": "Profiles & configuration",
+    "href": "/java/spring",
+    "text": "I keep environment differences in profile-specific files, bind them into typed @ConfigurationProperties, and pull secrets from the environment or a vault. `application-{profile}.yml` files, activated with `spring.profiles.active` or `SPRING_PROFILES_ACTIVE`. `@Profile(\"dev\")` registers a bean only when that profile is active. Precedence, highest first: command-line arguments → environment variables → profile-specific files → `application.yml`. **`@ConfigurationProperties`** gives typed, validated, grouped config; `@Value` is fine for a single value. Secrets come from environment variables, Vault or a secrets manager — never from the repo."
+  },
+  {
+    "id": "java:filters-security",
+    "title": "Filters, interceptors & Spring Security",
+    "href": "/java/spring",
+    "text": "Spring Security is a chain of servlet filters in front of DispatcherServlet; for APIs I go stateless with JWT validation, and 401 means unauthenticated while 403 means forbidden. **Filters** run *before* DispatcherServlet: authentication, CORS, request logging. **HandlerInterceptors** run around a controller call and know which handler was chosen. Spring Security is a **SecurityFilterChain**. Authentication = *who are you*; authorization = *what may you do*. Stateless APIs validate a **JWT** on every request; no server session. **401** = not authenticated. **403** = authenticated, but not allowed."
+  },
+  {
+    "id": "java:test-pyramid",
+    "title": "The test pyramid",
+    "href": "/java/testing",
+    "text": "I keep a wide base of fast unit tests, a focused layer of integration tests against real infrastructure, and only a few end-to-end tests for critical journeys. **Unit tests**: one class, dependencies mocked, milliseconds each. **Integration tests**: real Spring wiring and a real database (Testcontainers). **Contract tests** check that services agree on their APIs (Spring Cloud Contract, Pact). **End-to-end tests**: few, slow, flaky-prone — keep them to the critical journeys. Good tests are **FIRST**: Fast, Independent, Repeatable, Self-validating, Timely. Structure them as *given / when / then*."
+  },
+  {
+    "id": "java:junit5",
+    "title": "JUnit 5 essentials",
+    "href": "/java/testing",
+    "text": "In JUnit 5 I use parameterized tests to cover many inputs, assertThrows for failure paths and assertAll when one scenario has several checks. `@Test`, `@BeforeEach` / `@AfterEach`, `@BeforeAll` / `@AfterAll` (static by default), `@DisplayName`, `@Nested`, `@Disabled`. `assertEquals`, `assertTrue`, **`assertThrows`**, `assertAll` (reports every failure together), `assertTimeout`. **`@ParameterizedTest`** with `@ValueSource`, `@CsvSource` or `@MethodSource` — one test, many inputs. JUnit 5 = **Platform** (runs tests) + **Jupiter** (the new API) + **Vintage** (runs JUnit 4 tests). AssertJ's `assertThat(x).isEqualTo(y)` reads better and fails with clearer messages."
+  },
+  {
+    "id": "java:mockito",
+    "title": "Mockito: mocks, spies & verify",
+    "href": "/java/testing",
+    "text": "A mock returns defaults until stubbed, while a spy wraps a real object and runs real code unless stubbed; I stub with when/thenReturn, use doReturn for spies, and verify the interactions that matter. **mock()**: every method returns a default — `0`, `false`, `null`, an empty collection — until you stub it. Stub with `when(x.call()).thenReturn(...)` or `thenThrow(...)`. Check interactions with `verify(x, times(1)).call()` and `never()`. **spy()** wraps a real object: **real methods run** unless stubbed. Stub a spy with **`doReturn(v).when(spy).call()`** — `when(spy.call())` runs the real method while you're still setting up. `@Mock` + `@InjectMocks` with `@ExtendWith(MockitoExtension.class)`. Capture arguments with `ArgumentCaptor`."
+  },
+  {
+    "id": "java:spring-test-slices",
+    "title": "@SpringBootTest vs test slices",
+    "href": "/java/testing",
+    "text": "I test controllers with @WebMvcTest and MockMvc, repositories with @DataJpaTest, and keep @SpringBootTest for a few end-to-end integration tests, because slices are faster and more focused. **@SpringBootTest** loads the full context — for integration tests, often with `webEnvironment = RANDOM_PORT`. **@WebMvcTest(Controller.class)** loads only the MVC layer (controllers, advice, filters, converters) and gives you **MockMvc**. Services are replaced with `@MockitoBean`. **@DataJpaTest** loads JPA repositories, and **rolls back after each test**. Other slices: `@JsonTest`, `@RestClientTest`, `@WebFluxTest`. Spring caches contexts between tests; a different set of mock beans means a new context, which is slow."
+  },
+  {
+    "id": "java:testcontainers",
+    "title": "Testcontainers",
+    "href": "/java/testing",
+    "text": "I run repository and integration tests against real infrastructure with Testcontainers and @ServiceConnection, because an in-memory database hides dialect and locking differences. H2's SQL dialect differs from Postgres and MySQL (JSONB, native queries, locking), so bugs hide until production. Testcontainers runs **real** Postgres, Kafka, Redis and more in throwaway Docker containers. Spring Boot 3.1+ **`@ServiceConnection`** wires connection details from the container automatically. Share one static container across tests for speed, and run your Flyway or Liquibase migrations against it."
+  },
+  {
+    "id": "java:tdd-coverage",
+    "title": "TDD & code coverage",
+    "href": "/java/testing",
+    "text": "TDD is red, green, refactor; I read JaCoCo coverage as a map of untested branches rather than a target, because coverage proves code ran, not that it was checked. **Red → green → refactor**, in small loops. TDD pushes you towards testable design and leaves a safety net behind for every change. **JaCoCo** measures line and branch coverage (`mvn verify`, then `target/site/jacoco`), and can fail the build under a threshold. Coverage measures *execution*, not *verification*: a test with no assertions still covers lines. **Mutation testing** (PIT) plants small bugs and checks whether your tests notice."
+  },
+  {
+    "id": "dsa",
+    "title": "DSA Arcade",
+    "href": "/dsa",
+    "text": "DSA Arcade contains animated interview problems, Java and Python solutions, quizzes, a pattern playbook, an eight-week roadmap and browser-saved progress."
+  },
+  {
+    "id": "java",
+    "title": "Java Backend Arcade",
+    "href": "/java",
+    "text": "Java Backend Arcade includes topic worlds, concept cards, interactive labs, topic quizzes, games and a revision sheet. Labs are browser simulations, not a Java runtime."
+  },
+  {
+    "id": "learning",
+    "title": "Progress, backups and offline learning",
+    "href": "/learning",
+    "text": "Learning tools provide revision based on quiz answers, JSON progress backups and optional offline downloads. Learning progress stays in your browser. Google sign-in is optional and requires configuration; it does not sync progress between devices."
+  },
+  {
+    "id": "engineering",
+    "title": "How this site works",
+    "href": "/engineering",
+    "text": "This portfolio uses React, JavaScript and CSS on Vercel. Arcades load as separate chunks. Browser storage saves learning progress. The technical case study explains the architecture and its limitations."
+  }
+]

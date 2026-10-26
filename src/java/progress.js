@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useExperience } from "../context/ExperienceContext";
 import { dayKey, streakOf } from "../dsa/progress";
 import { sfx } from "../lib/sound";
+import { validateProgress } from "../learning/storage";
 
 /**
  * Progress for the Backend Arcade: concepts understood, lab missions cleared,
@@ -42,7 +43,7 @@ const EMPTY = {
 function read() {
   try {
     const parsed = JSON.parse(window.localStorage.getItem(STORAGE_KEY) || "null");
-    return parsed && typeof parsed === "object" ? { ...EMPTY, ...parsed } : EMPTY;
+    return parsed && typeof parsed === "object" ? validateProgress("java", { ...EMPTY, ...parsed }) : EMPTY;
   } catch {
     return EMPTY;
   }

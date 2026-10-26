@@ -36,6 +36,8 @@ export function Footer() {
           </a>
 
           <nav className="footer__nav" aria-label="Footer">
+            <Link to="/learning">Learning tools</Link>
+            <Link to="/engineering">Technical case study</Link>
             {navItems.map((item) => (
               <a
                 key={item.id}

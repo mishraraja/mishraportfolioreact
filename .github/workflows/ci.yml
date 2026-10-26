@@ -44,6 +44,12 @@ jobs:
         env:
           CI: false
 
+      - name: Test offline worker
+        run: npm run test:offline
+
+      - name: Test chat endpoint
+        run: npm run test:chat
+
       - name: Report bundle size
         run: |
           echo "### Bundle size" >> "$GITHUB_STEP_SUMMARY"

@@ -15,24 +15,31 @@ on a schedule, with a saved snapshot available when live requests fail.
 
 ## Current Project Status
 
-Repository review: **15 October 2026**. This README describes the local working
-tree, including work that has not yet been committed or deployed.
+Repository review: **26 October 2026**. This README describes the reviewed source
+tree. Live deployment and external-service verification are tracked separately.
 
 | Area | Current implementation |
 | --- | --- |
 | Portfolio (`/`) | Hero, about, experience, four project entries, skills, API simulator, GitHub activity and contact links |
 | DSA Arcade (`/dsa`) | 75 animated problems, Java/Python solutions, quizzes, pattern practice, roadmap and browser-saved progress |
-| Backend Arcade (`/java`) | 10 topic worlds, concept cards, 16 interactive labs, boss quizzes, two games and a revision sheet; currently uncommitted |
-| Runtime | React frontend; API responses and Java labs are JavaScript simulations |
-| Persistence | Browser storage for preferences and learning progress; no accounts or server-side progress sync |
-| Delivery | Production build and sitemap scripts, Vercel configuration, GitHub Actions workflows |
+| Backend Arcade (`/java`) | 10 topic worlds, concept cards, 16 interactive labs, boss quizzes, two games and a revision sheet |
+| Learning tools (`/learning`) | Revision based on quiz answers, validated progress export/import, optional offline downloads and Google sign-in integration |
+| Technical case study (`/engineering`) | Architecture, implementation choices and limitations of this repository |
+| Site chat | Lazy-loaded local search of public content; optional Gemini replies through a Vercel function, with source links and local fallback |
+| Runtime | React frontend; learning API demo and Java labs are simulations; optional site-chat endpoint calls Gemini from a Vercel function |
+| Persistence | Browser storage and manual JSON backups; optional Firebase Google authentication, no account-linked progress or cloud sync |
+| Delivery | Production build, sitemap, versioned offline assets, gzip budgets, Vercel configuration and GitHub Actions checks |
 
-At review time, local `main` was at `0b5ca51`, **31 commits behind `origin/main`**
-after fetching, with no local commits ahead. Those remote commits change only
-`public/data/github.json`. There were **14 modified tracked files** and **65
-untracked files under `src/java/`**, with nothing staged. These working-tree
-changes are not part of the `main` commit history yet. This review updates the
-README only; it does not commit, merge, push or verify the live deployment.
+The current upgrade adds frontend features that need no paid backend. Google
+sign-in stays unavailable until a Firebase project is configured. See
+[free hosting and authentication setup](docs/FREE_HOSTING.md) for activation,
+offline behavior, test commands and options for a later backend. Local files
+describe implementation status, not proof that GitHub or the live deployment
+contains the same version.
+
+The chat works without an API key. To enable optional AI replies, follow
+[the chatbot setup guide](docs/CHAT_SETUP.md). The Gemini key belongs only in
+Vercel's server environment, never in React variables. AI is off by default.
 
 No UI kit, no chart library, no confetti package, no 3D engine, and not a single
 audio file. The starfield is hand-rolled canvas, the solar system is SVG driven
@@ -44,6 +51,8 @@ by an orbit loop, and every sound is synthesised at runtime.
 - Framer Motion for choreography
 - react-icons
 - Plain CSS with design tokens (`src/styles/tokens.css`) — no CSS framework
+- Firebase Authentication for optional Google sign-in
+- Playwright and axe-core for production-browser checks
 - Canvas, SVG, WebAudio and the GitHub REST API, all hand-wired
 
 ## Getting Started
@@ -255,7 +264,8 @@ The point is that nobody has to maintain the numbers on this page.
 | --- | --- | --- |
 | `ci.yml` | push, PR | Tests and builds on Node 20 and 22, reports bundle size |
 | `refresh-data.yml` | daily at 02:30 UTC | Pulls GitHub stats and commits the snapshot if it changed |
-| `lighthouse.yml` | PR, manual | Performance/accessibility audit; configured with `continue-on-error`, so it is advisory |
+| `lighthouse.yml` | PR, manual | Enforced mobile performance and accessibility scores |
+| `browser.yml` | push, PR, manual | Production-browser tests on desktop Chromium, 320px mobile Chromium and mobile WebKit |
 | `dependabot.yml` | weekly | Grouped dependency updates |
 
 The GitHub section uses three tiers: a six-hour session cache, the daily snapshot in
@@ -265,32 +275,37 @@ data loads, the hook reports an offline state. A snapshot can become stale.
 
 ## Build, Tests and Deployment
 
-Local validation on 15 October 2026 (Node `v24.19.0`, npm `9.8.1`):
+Local validation on 26 October 2026: **350 Jest tests across 11 suites passed**,
+plus **4 offline-worker tests** and **9 chat endpoint/search tests**. Production
+build results and gzip budgets are printed by `npm run build`.
 
-- **Tests:** all 316 tests across 5 suites passed. Test output includes React
-  `act` deprecation and React Router future-flag warnings.
-- **Build:** completed successfully, with CSS ordering warnings involving
-  `DsaArcade.css`, `Hub.css`, `CodeBlock.css` and `Player.css` in shared chunks.
-- **Postbuild:** generated a 113-page sitemap and `robots.txt`.
-- **Scope:** automated local checks; visual browser QA and live deployment
-  verification were not performed in this review.
+Browser verification and remaining security/deployment work are recorded in
+[the project review](docs/PROJECT_REVIEW.md). After compatible dependency updates,
+`npm audit` reports 62 advisories (22 high, 31 moderate, 9 low), with no critical
+advisories. This includes build/test dependencies as well as unused SDK modules;
+it is not a count of confirmed vulnerabilities in the deployed app.
 
 `npm run test:ci -- --runInBand` runs the existing Jest/React Testing Library
 suite once. It covers app rendering, all DSA example traces and input round
 trips, animation frames, arcade navigation, Java content integrity, lab rendering
-and selected interactive missions.
+and selected interactive missions, backup validation and review scheduling.
+`npm run test:offline` checks offline routing, failed installations and cache
+cleanup. `npm run test:browser` requires installed Playwright browsers and checks
+the new pages, imports and offline navigation against a production build.
+Browser and live OAuth results must be reported separately from unit tests;
+configuration of those checks alone does not establish they have passed.
 
-`npm run build` writes the static app to `build/`, then runs the sitemap script
-for portfolio, DSA and Backend Arcade pages. The build script sets `CI=false`,
-so compiler warnings do not automatically fail the build.
+`npm run build` writes the static app to `build/`, generates the sitemap and
+offline asset manifest, and enforces gzip bundle budgets. The build script sets
+`CI=false`, so compiler warnings do not automatically fail the build; exceeded
+bundle budgets do fail it.
 
 Vercel configuration is in `vercel.json`. When hosting elsewhere, configure SPA
 fallback to `index.html` so direct visits to nested routes work. The configured
 site address is linked above; local implementation does not establish which
 features are deployed there.
 
-Known documentation follow-up: `SECURITY.md` still contains template policy text
-and example version numbers unrelated to package version `2.0.0`.
+See [SECURITY.md](SECURITY.md) for supported revisions and private reporting.
 
 ## Project Structure
 

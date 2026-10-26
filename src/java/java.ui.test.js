@@ -36,6 +36,12 @@ beforeEach(() => {
 });
 
 describe("hub", () => {
+  test("damaged stored progress does not crash the arcade", () => {
+    localStorage.setItem(KEY, JSON.stringify({ xp: 10, days: null, concepts: [] }));
+    const { container } = renderAt("/java");
+    expect(container.querySelectorAll("a.jworld")).toHaveLength(WORLDS.length);
+  });
+
   test("shows all ten worlds", () => {
     const { container } = renderAt("/java");
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(/made playable/i);
