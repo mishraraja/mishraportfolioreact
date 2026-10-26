@@ -34,6 +34,9 @@ in this review and must be committed together because the app imports those file
   backup restoration checks. Both Chromium profiles passed offline navigation
   and download removal; the WebKit offline simulation is intentionally skipped.
   Command: `npm run test:browser -- --workers=2 --reporter=list --trace=off`.
+  All cases finished, but the Windows runner stalled during teardown and was
+  stopped manually; a clean runner exit is still unverified. Linux CI must be
+  checked separately.
 - Pattern scan found no matching Google API keys, private keys or GitHub tokens
   in the reviewed application, API, public assets, scripts and configuration.
   Pattern matching is not a complete secret audit.
@@ -44,6 +47,11 @@ The final npm audit reports 62 affected packages: 22 high, 31 moderate, 9 low,
 and zero critical. Counts include transitive and build/test dependencies because
 react-scripts is currently a production dependency. The initial production-only
 scan and final full scan use different scopes and should not be compared as totals.
+GitHub's push response separately reported 69 Dependabot findings (2 critical,
+37 high, 26 moderate, 4 low). Its counts differ from the local npm scan and may
+reflect a different advisory database or scan revision. Recheck GitHub's security
+dashboard after it rescans the updated lockfile; critical alerts are not claimed
+resolved there.
 
 - react-scripts 5 brings older Webpack, Jest, PostCSS, SVG and service-worker
   tooling. Its suggested forced audit fix installs react-scripts 0.0.0, which
