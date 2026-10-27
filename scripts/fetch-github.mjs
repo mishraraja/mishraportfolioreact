@@ -30,7 +30,7 @@ async function api(path) {
 }
 
 async function main() {
-  console.log(`Fetching GitHub data for @${USERNAME}…`);
+  console.log("Fetching the public GitHub snapshot…");
 
   const user = await api(`/users/${USERNAME}`);
   const repos = await api(`/users/${USERNAME}/repos?per_page=100&sort=pushed`);
@@ -86,13 +86,11 @@ async function main() {
   await mkdir(dirname(OUT), { recursive: true });
   await writeFile(OUT, `${JSON.stringify(payload, null, 2)}\n`, "utf8");
 
-  console.log(
-    `Wrote ${OUT}\n  repos: ${payload.totals.repos}  stars: ${payload.totals.stars}  followers: ${payload.user.followers}`
-  );
+  console.log("Public GitHub snapshot refreshed.");
 }
 
-main().catch((err) => {
-  console.error(`Refresh failed: ${err.message}`);
+main().catch(() => {
+  console.error("GitHub refresh failed; keeping the committed snapshot.");
   // Never fail the build over a rate limit — the committed snapshot stands.
   process.exit(process.env.STRICT === "1" ? 1 : 0);
 });

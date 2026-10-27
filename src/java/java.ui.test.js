@@ -64,7 +64,7 @@ describe("world page", () => {
   test("a card opens to three tabs and can be marked understood", () => {
     renderAt("/java/core-java");
     const concept = CONCEPTS.find((c) => c.id === "string-pool");
-    fireEvent.click(screen.getByRole("button", { name: new RegExp(concept.title.replace(/[&]/g, "\\&")) }));
+    fireEvent.click(screen.getByRole("button", { name: (name) => name.includes(concept.title) }));
     fireEvent.click(screen.getByRole("tab", { name: /interview/i }));
     expect(screen.getByText(/the follow-up trap/i)).toBeInTheDocument();
     click("💡 I get it now");
