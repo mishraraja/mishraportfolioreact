@@ -17,7 +17,15 @@ const ExperienceContext = createContext(null);
 function readStored() {
   if (typeof window === "undefined") return {};
   try {
-    return JSON.parse(window.localStorage.getItem(STORAGE_KEY) || "{}") || {};
+    const saved = JSON.parse(window.localStorage.getItem(STORAGE_KEY) || "{}");
+    if (!saved || typeof saved !== "object" || Array.isArray(saved)) return {};
+    const theme = THEMES.some((item) => item.id === saved.theme) ? saved.theme : "nebula";
+    return {
+      theme,
+      soundOn: saved.soundOn === true,
+      unlocked: Array.isArray(saved.unlocked) ? saved.unlocked.filter((id) => getAchievement(id)) : [],
+      seenThemes: Array.isArray(saved.seenThemes) ? saved.seenThemes.filter((id) => THEMES.some((item) => item.id === id)) : [theme],
+    };
   } catch {
     // Private browsing, blocked storage, corrupted JSON — all non-fatal.
     return {};
@@ -47,6 +55,8 @@ export function ExperienceProvider({ children }) {
   const [confettiBurst, setConfettiBurst] = useState(0);
 
   const toastTimer = useRef(null);
+
+  useEffect(() => () => clearTimeout(toastTimer.current), []);
 
   /* ---------------- persistence ---------------- */
   useEffect(() => {

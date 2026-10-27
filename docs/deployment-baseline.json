@@ -1,0 +1,193 @@
+{
+  "checkedAt": "2026-10-27T07:39:15.232Z",
+  "commit": "fd294392dadc9a9cb3054fbc02565a90b91342f1",
+  "base": "https://rajamishra.vercel.app",
+  "checks": [
+    {
+      "path": "/index.html",
+      "status": 200,
+      "identical": true,
+      "sha256": "86cb510088cf875709cb9bc37697aecfa0d675b83fe9ad8e53816f3329ba40a8"
+    },
+    {
+      "path": "/asset-manifest.json",
+      "status": 200,
+      "identical": true,
+      "sha256": "7453863d6b49d4aa22047903c049a6bddaa1a971a4796ba0287abf4804d94dfd"
+    },
+    {
+      "path": "/offline-worker.js",
+      "status": 200,
+      "identical": true,
+      "sha256": "c762fbcd8440a1285f70f1356e610f5360b8852d4e54eca01ebef1b1b857fe24"
+    },
+    {
+      "path": "/offline-assets.js",
+      "status": 200,
+      "identical": true,
+      "sha256": "77433993ad1eb2dc3cec5f5f9cdf494324a50a58ee91deb84ba5c52c50c207ca"
+    },
+    {
+      "path": "/offline-info.json",
+      "status": 200,
+      "identical": true,
+      "sha256": "66bc7e7779338100063efb8e334e8b2cdecb76ca6af48782f97cd8ba320e1e57"
+    },
+    {
+      "path": "/resume.pdf",
+      "status": 200,
+      "identical": true,
+      "sha256": "1efe3d34d059023605d157246102f07ab5586e271acbd3108bc2f73fd21c95ab"
+    },
+    {
+      "path": "/manifest.json",
+      "status": 200,
+      "identical": true,
+      "sha256": "a55494a4db4bcdad7620b40f91cf481ecc38fc43d947b9e9a4fc3a9110fa2fcb"
+    },
+    {
+      "path": "/favicon.svg",
+      "status": 200,
+      "identical": true,
+      "sha256": "b7487b6cccf75066a447c58a2923747eac8f221795bb84066726a6232744afcc"
+    },
+    {
+      "path": "/projects/gov-education-portal.jpg",
+      "status": 200,
+      "identical": true,
+      "sha256": "b808664f761fe10c94f27e5fa0923e073bb94c0cd3364fe06f57c6e609264b45"
+    },
+    {
+      "path": "/assets/CodeBlock-Chs_mBmR.js",
+      "status": 200,
+      "identical": true,
+      "sha256": "cf8092410d2855e57402c0a2bba3513f973398051cd0183e84701d110182e74e"
+    },
+    {
+      "path": "/assets/CodeBlock-Dz2v-8ax.css",
+      "status": 200,
+      "identical": true,
+      "sha256": "0084dad6c42b3e43f3ff4a9a893abc3487f2e9d7905a7b1410600d2bc428da45"
+    },
+    {
+      "path": "/assets/Learning-D8jV7mxu.css",
+      "status": 200,
+      "identical": true,
+      "sha256": "7b72834ae410131b62aaea164a9e8e82989ede2cc13f520924a99c817c21fd2b"
+    },
+    {
+      "path": "/assets/index.esm-CWfqI4qA.js",
+      "status": 200,
+      "identical": true,
+      "sha256": "4a8ee3ec0047e572321158cb89987e6240f840dca980229192b5b678e12078b7"
+    },
+    {
+      "path": "/assets/jsx-runtime-Dn_YclF2.js",
+      "status": 200,
+      "identical": true,
+      "sha256": "69d8d9b5752d3eea0762c1d71123a64791e4fb7196449a9d772feae1eb0a43b4"
+    },
+    {
+      "path": "/assets/storage-DS_k-Qq-.js",
+      "status": 200,
+      "identical": true,
+      "sha256": "020f35c13f2efd54012b860242803675f068359803d53e7b6fdf1464c63385f2"
+    },
+    {
+      "path": "/assets/useTitle-DmGNdvlP.js",
+      "status": 200,
+      "identical": true,
+      "sha256": "2c1dbafcf2b9acd7894e7ea0728b26e86e48edc883256381373d85f1bfee18de"
+    },
+    {
+      "path": "/assets/index-BDswDemf.js",
+      "status": 200,
+      "identical": true,
+      "sha256": "2e3e7791248aba0c267243ccc4aacafa9ee64118dc518a39ecdb1b0ec9846f68"
+    },
+    {
+      "path": "/assets/index-C3vgaLBK.css",
+      "status": 200,
+      "identical": true,
+      "sha256": "29489a7aed36c90a724120a0acbfc036d329ebc9baa5005f3e47f6400c4a08ae"
+    },
+    {
+      "path": "/assets/index.esm-CWsEb7XD.js",
+      "status": 200,
+      "identical": true,
+      "sha256": "81bd4741873c8d56edc135317b71fbe81910356d8a600780aea11f2ae0ea8bba"
+    },
+    {
+      "path": "/assets/index.esm-Bvrh0MkM.js",
+      "status": 200,
+      "identical": true,
+      "sha256": "95a8b5857952057e8f1733c7b5131308c7e1cbb423ed34d56ebfad13907db8a3"
+    },
+    {
+      "path": "/assets/web-vitals-EF2FPrUq.js",
+      "status": 200,
+      "identical": true,
+      "sha256": "478cd0d36959dc4ec555c8a789c921bd73a36077bfac66f7743b188f153ead3e"
+    },
+    {
+      "path": "/assets/SiteChat-DCPfoQmh.js",
+      "status": 200,
+      "identical": true,
+      "sha256": "490fd0301ed29d77f9617fadd2ea332e2fd0a450ba752a9f308f3052cd009b02"
+    },
+    {
+      "path": "/assets/DsaArcade-gfq-JDWd.js",
+      "status": 200,
+      "identical": true,
+      "sha256": "d5fe02d70d4c7c72a46cde14875223aeb3d531462dd0059bcb5ef7da1d1a4524"
+    },
+    {
+      "path": "/assets/DsaArcade-OIuovhby.css",
+      "status": 200,
+      "identical": true,
+      "sha256": "e8c8ec0733ddc97715b420d4d586a2031bc4a75f8cbcc079acb60d7232cc01fa"
+    },
+    {
+      "path": "/assets/JavaArcade-B3cK6qGs.js",
+      "status": 200,
+      "identical": true,
+      "sha256": "af4ca7014e9caffcb754f74a80138c1e023e4258a8e2f4e3cf303e0fe34c929b"
+    },
+    {
+      "path": "/assets/JavaArcade-Cf1SGlhb.css",
+      "status": 200,
+      "identical": true,
+      "sha256": "514ab1ebc728486c5b64064fdd18c79c6dae836873cbf9be775d5e17912dd8b4"
+    },
+    {
+      "path": "/assets/Engineering-7nG0YGWI.js",
+      "status": 200,
+      "identical": true,
+      "sha256": "bffa863cd82fbe0ea9189724360ddb2d3cdc588522c6651be113a5437a5e4e3f"
+    },
+    {
+      "path": "/assets/Learning-DQyrh--B.js",
+      "status": 200,
+      "identical": true,
+      "sha256": "898af31fdea34da2eff260e6245010d8cd3e0d0d1aa6262454705d33cd23f4c3"
+    },
+    {
+      "path": "/assets/GithubActivity-SQRSVvsc.js",
+      "status": 200,
+      "identical": true,
+      "sha256": "1b352736c20abb799322bd8c7a08042e42d503693c6c3be6881177baeffabcb2"
+    },
+    {
+      "path": "/assets/GithubActivity-DUhxFj7L.css",
+      "status": 200,
+      "identical": true,
+      "sha256": "ba80d869412ccc4a264cd3566c7ac95ec19ad8398fe2678c3c06bc334ca3eb98"
+    },
+    {
+      "path": "/assets/MissionPlayground-DmrtrIh-.js",
+      "status": 200,
+      "identical": true,
+      "sha256": "07cd3541dfa0e9a0db1120aae94714e3e2f07644936587e0ac65b1be62b0eea6"
+    }
+  ]
+}

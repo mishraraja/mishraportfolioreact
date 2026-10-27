@@ -3,8 +3,11 @@ import { readFile, stat } from "node:fs/promises";
 import path from "node:path";
 
 const root = path.resolve("build");
+const deployment = JSON.parse(await readFile(new URL("../vercel.json", import.meta.url), "utf8"));
+const securityHeaders = Object.fromEntries(deployment.headers.find((rule) => rule.source === "/(.*)").headers.map(({ key, value }) => [key, value]));
 const types = { ".html": "text/html", ".js": "application/javascript", ".css": "text/css", ".json": "application/json", ".svg": "image/svg+xml", ".png": "image/png", ".jpg": "image/jpeg", ".ico": "image/x-icon", ".pdf": "application/pdf" };
 http.createServer(async (req, res) => {
+  for (const [key, value] of Object.entries(securityHeaders)) res.setHeader(key, value);
   try {
     if (req.method !== "GET" && req.method !== "HEAD") { res.writeHead(405).end(); return; }
     const pathname = decodeURIComponent(new URL(req.url, "http://localhost").pathname);

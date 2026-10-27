@@ -89,6 +89,7 @@ export function useGithubData() {
         const user = await userRes.json();
         const repos = await repoRes.json();
         if (!Array.isArray(repos)) return null;
+        const own = repos.filter((repo) => !repo.fork);
 
         const languages = {};
         repos.forEach((r) => {
@@ -110,9 +111,9 @@ export function useGithubData() {
             url: user.html_url,
           },
           totals: {
-            repos: repos.filter((r) => !r.fork).length,
-            stars: repos.reduce((sum, r) => sum + (r.stargazers_count || 0), 0),
-            forks: repos.reduce((sum, r) => sum + (r.forks_count || 0), 0),
+            repos: own.length,
+            stars: own.reduce((sum, r) => sum + (r.stargazers_count || 0), 0),
+            forks: own.reduce((sum, r) => sum + (r.forks_count || 0), 0),
           },
           languages: Object.entries(languages)
             .sort((a, b) => b[1] - a[1])

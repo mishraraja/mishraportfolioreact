@@ -1,0 +1,445 @@
+{
+  "checkedAt": "2026-10-27T07:57:01.657Z",
+  "results": [
+    {
+      "url": "https://github.com/mishraraja",
+      "status": 200,
+      "finalUrl": "https://github.com/mishraraja"
+    },
+    {
+      "url": "https://github.com/mishraraja/chancellorPortalReact",
+      "status": 200,
+      "finalUrl": "https://github.com/mishraraja/chancellorPortalReact"
+    },
+    {
+      "url": "https://github.com/mishraraja/kamrasaathi",
+      "status": 200,
+      "finalUrl": "https://github.com/mishraraja/kamrasaathi"
+    },
+    {
+      "url": "https://github.com/mishraraja/mishraportfolioangular",
+      "status": 200,
+      "finalUrl": "https://github.com/mishraraja/mishraportfolioangular"
+    },
+    {
+      "url": "https://github.com/mishraraja/mishraportfolioreact",
+      "status": 200,
+      "finalUrl": "https://github.com/mishraraja/mishraportfolioreact"
+    },
+    {
+      "url": "https://github.com/mishraraja/mishraportfolioreact/blob/main/public/offline-worker.js",
+      "status": 200,
+      "finalUrl": "https://github.com/mishraraja/mishraportfolioreact/blob/main/public/offline-worker.js"
+    },
+    {
+      "url": "https://github.com/mishraraja/mishraportfolioreact/blob/main/src/dsa/engine/trace.js",
+      "status": 200,
+      "finalUrl": "https://github.com/mishraraja/mishraportfolioreact/blob/main/src/dsa/engine/trace.js"
+    },
+    {
+      "url": "https://github.com/mishraraja/mishraportfolioreact/blob/main/src/learning/storage.js",
+      "status": 200,
+      "finalUrl": "https://github.com/mishraraja/mishraportfolioreact/blob/main/src/learning/storage.js"
+    },
+    {
+      "url": "https://github.com/mishraraja/react_app",
+      "status": 200,
+      "finalUrl": "https://github.com/mishraraja/react_app"
+    },
+    {
+      "url": "https://leetcode.com/problems/3sum/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/3sum/"
+    },
+    {
+      "url": "https://leetcode.com/problems/alien-dictionary/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/alien-dictionary/"
+    },
+    {
+      "url": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/"
+    },
+    {
+      "url": "https://leetcode.com/problems/binary-tree-level-order-traversal/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/binary-tree-level-order-traversal/"
+    },
+    {
+      "url": "https://leetcode.com/problems/binary-tree-maximum-path-sum/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/binary-tree-maximum-path-sum/"
+    },
+    {
+      "url": "https://leetcode.com/problems/climbing-stairs/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/climbing-stairs/"
+    },
+    {
+      "url": "https://leetcode.com/problems/clone-graph/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/clone-graph/"
+    },
+    {
+      "url": "https://leetcode.com/problems/coin-change/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/coin-change/"
+    },
+    {
+      "url": "https://leetcode.com/problems/combination-sum-iv/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/combination-sum-iv/"
+    },
+    {
+      "url": "https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/"
+    },
+    {
+      "url": "https://leetcode.com/problems/container-with-most-water/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/container-with-most-water/"
+    },
+    {
+      "url": "https://leetcode.com/problems/contains-duplicate/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/contains-duplicate/"
+    },
+    {
+      "url": "https://leetcode.com/problems/counting-bits/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/counting-bits/"
+    },
+    {
+      "url": "https://leetcode.com/problems/course-schedule/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/course-schedule/"
+    },
+    {
+      "url": "https://leetcode.com/problems/decode-ways/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/decode-ways/"
+    },
+    {
+      "url": "https://leetcode.com/problems/design-add-and-search-words-data-structure/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/design-add-and-search-words-data-structure/"
+    },
+    {
+      "url": "https://leetcode.com/problems/encode-and-decode-strings/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/encode-and-decode-strings/"
+    },
+    {
+      "url": "https://leetcode.com/problems/find-median-from-data-stream/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/find-median-from-data-stream/"
+    },
+    {
+      "url": "https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/"
+    },
+    {
+      "url": "https://leetcode.com/problems/graph-valid-tree/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/graph-valid-tree/"
+    },
+    {
+      "url": "https://leetcode.com/problems/group-anagrams/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/group-anagrams/"
+    },
+    {
+      "url": "https://leetcode.com/problems/house-robber-ii/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/house-robber-ii/"
+    },
+    {
+      "url": "https://leetcode.com/problems/house-robber/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/house-robber/"
+    },
+    {
+      "url": "https://leetcode.com/problems/implement-trie-prefix-tree/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/implement-trie-prefix-tree/"
+    },
+    {
+      "url": "https://leetcode.com/problems/insert-interval/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/insert-interval/"
+    },
+    {
+      "url": "https://leetcode.com/problems/invert-binary-tree/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/invert-binary-tree/"
+    },
+    {
+      "url": "https://leetcode.com/problems/jump-game/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/jump-game/"
+    },
+    {
+      "url": "https://leetcode.com/problems/kth-smallest-element-in-a-bst/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/kth-smallest-element-in-a-bst/"
+    },
+    {
+      "url": "https://leetcode.com/problems/linked-list-cycle/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/linked-list-cycle/"
+    },
+    {
+      "url": "https://leetcode.com/problems/longest-common-subsequence/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/longest-common-subsequence/"
+    },
+    {
+      "url": "https://leetcode.com/problems/longest-consecutive-sequence/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/longest-consecutive-sequence/"
+    },
+    {
+      "url": "https://leetcode.com/problems/longest-increasing-subsequence/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/longest-increasing-subsequence/"
+    },
+    {
+      "url": "https://leetcode.com/problems/longest-palindromic-substring/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/longest-palindromic-substring/"
+    },
+    {
+      "url": "https://leetcode.com/problems/longest-repeating-character-replacement/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/longest-repeating-character-replacement/"
+    },
+    {
+      "url": "https://leetcode.com/problems/longest-substring-without-repeating-characters/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/longest-substring-without-repeating-characters/"
+    },
+    {
+      "url": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/"
+    },
+    {
+      "url": "https://leetcode.com/problems/maximum-depth-of-binary-tree/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/maximum-depth-of-binary-tree/"
+    },
+    {
+      "url": "https://leetcode.com/problems/maximum-product-subarray/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/maximum-product-subarray/"
+    },
+    {
+      "url": "https://leetcode.com/problems/maximum-subarray/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/maximum-subarray/"
+    },
+    {
+      "url": "https://leetcode.com/problems/meeting-rooms-ii/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/meeting-rooms-ii/"
+    },
+    {
+      "url": "https://leetcode.com/problems/meeting-rooms/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/meeting-rooms/"
+    },
+    {
+      "url": "https://leetcode.com/problems/merge-intervals/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/merge-intervals/"
+    },
+    {
+      "url": "https://leetcode.com/problems/merge-k-sorted-lists/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/merge-k-sorted-lists/"
+    },
+    {
+      "url": "https://leetcode.com/problems/merge-two-sorted-lists/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/merge-two-sorted-lists/"
+    },
+    {
+      "url": "https://leetcode.com/problems/minimum-window-substring/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/minimum-window-substring/"
+    },
+    {
+      "url": "https://leetcode.com/problems/missing-number/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/missing-number/"
+    },
+    {
+      "url": "https://leetcode.com/problems/non-overlapping-intervals/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/non-overlapping-intervals/"
+    },
+    {
+      "url": "https://leetcode.com/problems/number-of-1-bits/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/number-of-1-bits/"
+    },
+    {
+      "url": "https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/"
+    },
+    {
+      "url": "https://leetcode.com/problems/number-of-islands/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/number-of-islands/"
+    },
+    {
+      "url": "https://leetcode.com/problems/pacific-atlantic-water-flow/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/pacific-atlantic-water-flow/"
+    },
+    {
+      "url": "https://leetcode.com/problems/palindromic-substrings/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/palindromic-substrings/"
+    },
+    {
+      "url": "https://leetcode.com/problems/product-of-array-except-self/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/product-of-array-except-self/"
+    },
+    {
+      "url": "https://leetcode.com/problems/remove-nth-node-from-end-of-list/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/remove-nth-node-from-end-of-list/"
+    },
+    {
+      "url": "https://leetcode.com/problems/reorder-list/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/reorder-list/"
+    },
+    {
+      "url": "https://leetcode.com/problems/reverse-bits/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/reverse-bits/"
+    },
+    {
+      "url": "https://leetcode.com/problems/reverse-linked-list/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/reverse-linked-list/"
+    },
+    {
+      "url": "https://leetcode.com/problems/rotate-image/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/rotate-image/"
+    },
+    {
+      "url": "https://leetcode.com/problems/same-tree/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/same-tree/"
+    },
+    {
+      "url": "https://leetcode.com/problems/search-in-rotated-sorted-array/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/search-in-rotated-sorted-array/"
+    },
+    {
+      "url": "https://leetcode.com/problems/serialize-and-deserialize-binary-tree/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/serialize-and-deserialize-binary-tree/"
+    },
+    {
+      "url": "https://leetcode.com/problems/set-matrix-zeroes/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/set-matrix-zeroes/"
+    },
+    {
+      "url": "https://leetcode.com/problems/spiral-matrix/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/spiral-matrix/"
+    },
+    {
+      "url": "https://leetcode.com/problems/subtree-of-another-tree/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/subtree-of-another-tree/"
+    },
+    {
+      "url": "https://leetcode.com/problems/sum-of-two-integers/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/sum-of-two-integers/"
+    },
+    {
+      "url": "https://leetcode.com/problems/top-k-frequent-elements/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/top-k-frequent-elements/"
+    },
+    {
+      "url": "https://leetcode.com/problems/two-sum/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/two-sum/"
+    },
+    {
+      "url": "https://leetcode.com/problems/unique-paths/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/unique-paths/"
+    },
+    {
+      "url": "https://leetcode.com/problems/valid-anagram/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/valid-anagram/"
+    },
+    {
+      "url": "https://leetcode.com/problems/valid-palindrome/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/valid-palindrome/"
+    },
+    {
+      "url": "https://leetcode.com/problems/valid-parentheses/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/valid-parentheses/"
+    },
+    {
+      "url": "https://leetcode.com/problems/validate-binary-search-tree/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/validate-binary-search-tree/"
+    },
+    {
+      "url": "https://leetcode.com/problems/word-break/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/word-break/"
+    },
+    {
+      "url": "https://leetcode.com/problems/word-search-ii/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/word-search-ii/"
+    },
+    {
+      "url": "https://leetcode.com/problems/word-search/",
+      "status": 403,
+      "finalUrl": "https://leetcode.com/problems/word-search/"
+    },
+    {
+      "url": "https://twitter.com/mishraja_",
+      "status": 200,
+      "finalUrl": "https://x.com/mishraja_"
+    },
+    {
+      "url": "https://universities.jharkhand.gov.in/home",
+      "error": "fetch failed",
+      "code": "UNABLE_TO_VERIFY_LEAF_SIGNATURE"
+    },
+    {
+      "url": "https://www.instagram.com/mishra_rajakr/",
+      "status": 200,
+      "finalUrl": "https://www.instagram.com/mishra_rajakr/"
+    },
+    {
+      "url": "https://www.linkedin.com/in/rajakrmishra/",
+      "status": 999,
+      "finalUrl": "https://www.linkedin.com/in/rajakrmishra"
+    }
+  ]
+}

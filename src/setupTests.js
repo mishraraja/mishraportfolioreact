@@ -8,6 +8,14 @@ import { TextEncoder, TextDecoder } from "node:util";
 global.TextEncoder = TextEncoder;
 global.TextDecoder = TextDecoder;
 
+// jsdom has no CSS feature detection; the contribution calendar probes it.
+if (!global.CSS) global.CSS = {};
+if (!global.CSS.supports) global.CSS.supports = (property, value) => {
+  const style = document.createElement("span").style;
+  style.setProperty(property, value);
+  return style.getPropertyValue(property) !== "";
+};
+
 // jsdom doesn't implement these — framer-motion's whileInView and the
 // scroll-spy/reduced-motion hooks all depend on them being present.
 class MockIntersectionObserver {

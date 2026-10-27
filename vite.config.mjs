@@ -1,5 +1,9 @@
 import { defineConfig, loadEnv, transformWithOxc } from "vite";
 import react from "@vitejs/plugin-react";
+import { readFileSync } from "node:fs";
+
+const deployment = JSON.parse(readFileSync(new URL("./vercel.json", import.meta.url), "utf8"));
+const securityHeaders = Object.fromEntries(deployment.headers.find((rule) => rule.source === "/(.*)").headers.map(({ key, value }) => [key, value]));
 
 export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), "REACT_APP_");
@@ -31,6 +35,6 @@ export default defineConfig(({ command, mode }) => {
       entries: ["index.html"],
       rolldownOptions: { moduleTypes: { ".js": "jsx" } },
     },
-    server: { host: "127.0.0.1", port: 3000 },
+    server: { host: "127.0.0.1", port: 3000, headers: securityHeaders },
   };
 });

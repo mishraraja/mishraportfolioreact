@@ -6,7 +6,6 @@ import ChatLauncher from "./chat/ChatLauncher";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { ScrollProgress } from "./components/ScrollProgress";
-import { CustomCursor } from "./components/CustomCursor";
 import { CommandPalette } from "./components/CommandPalette";
 import { ControlDock } from "./components/ControlDock";
 import { TrophyCase } from "./components/TrophyCase";
@@ -51,13 +50,13 @@ function Home() {
 
   // Section links followed from another page arrive with the section to land on.
   useEffect(() => {
-    const target = location.state && location.state.scrollTo;
+    const target = location.hash.slice(1) || location.state?.scrollTo;
     if (!target) return undefined;
     const timer = setTimeout(() => {
-      document.getElementById(target)?.scrollIntoView({ behavior: "smooth" });
+      document.getElementById(target)?.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
     }, 80);
     return () => clearTimeout(timer);
-  }, [location.state]);
+  }, [location.state, location.hash]);
 
   return (
     <>
@@ -82,6 +81,12 @@ function ScrollOnRouteChange() {
   const { pathname, state } = useLocation();
 
   useEffect(() => {
+    const canonical = document.querySelector('link[rel="canonical"]');
+    if (canonical) {
+      const url = new URL(pathname, canonical.href).href;
+      canonical.href = url;
+      document.querySelector('meta[property="og:url"]')?.setAttribute("content", url);
+    }
     if (state && state.scrollTo) return;
     // Instant, not smooth: the new page shouldn't visibly scroll up through itself.
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
@@ -115,7 +120,7 @@ function GlobalInteractions() {
   useEffect(() => {
     function onKey(e) {
       const tag = e.target?.tagName;
-      if (tag === "INPUT" || tag === "TEXTAREA" || e.target?.isContentEditable) return;
+      if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || e.target?.isContentEditable) return;
       if (e.metaKey || e.ctrlKey || e.altKey) return;
 
       // Single letters are reserved for the typed-word eggs ("chess", "hire"),
@@ -182,7 +187,6 @@ function Shell() {
       <CosmicBackground />
 
       {/* Chrome */}
-      <CustomCursor />
       <ScrollProgress />
       <Navbar />
       <ControlDock />

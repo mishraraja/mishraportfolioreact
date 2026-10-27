@@ -39,7 +39,7 @@ export function Patterns() {
     const id = hash.slice(1);
     setOpen(id);
     const timer = setTimeout(() => {
-      document.getElementById("pattern-" + id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 90);
     return () => clearTimeout(timer);
   }, [hash]);
@@ -99,7 +99,7 @@ export function Patterns() {
             const done = problems.filter((x) => statusOf(x.slug) === "mastered").length;
             const isOpen = open === p.id;
             return (
-              <section key={p.id} id={"pattern-" + p.id} className={"pattern" + (isOpen ? " is-open" : "")}>
+              <section key={p.id} id={p.id} className={"pattern" + (isOpen ? " is-open" : "")}>
                 <button
                   type="button"
                   className="pattern__head"

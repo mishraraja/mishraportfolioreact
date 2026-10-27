@@ -16,7 +16,7 @@ export function useKonami(onUnlock) {
     function onKey(e) {
       // Don't swallow arrow keys while someone is typing in a field.
       const tag = e.target?.tagName;
-      if (tag === "INPUT" || tag === "TEXTAREA" || e.target?.isContentEditable) return;
+      if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || e.target?.isContentEditable) return;
 
       const expected = SEQUENCE[pos.current];
       const key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
@@ -47,7 +47,7 @@ export function useTypedWord(word, onMatch) {
   useEffect(() => {
     function onKey(e) {
       const tag = e.target?.tagName;
-      if (tag === "INPUT" || tag === "TEXTAREA" || e.target?.isContentEditable) return;
+      if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || e.target?.isContentEditable) return;
       if (e.key.length !== 1) return;
 
       buf.current = (buf.current + e.key.toLowerCase()).slice(-word.length);

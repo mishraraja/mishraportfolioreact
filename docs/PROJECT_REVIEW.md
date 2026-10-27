@@ -1,5 +1,8 @@
 ﻿# Project review — 27 October 2026
 
+This records the earlier Vite migration baseline. See the subsequent
+[end-to-end audit](END_TO_END_AUDIT.md) for current dependencies and verification.
+
 ## Fixes completed
 
 - Replaced Create React App / react-scripts with Vite 8 and standalone Jest 30,

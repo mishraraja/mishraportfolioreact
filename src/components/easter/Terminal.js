@@ -364,7 +364,7 @@ export function Terminal() {
   useEffect(() => {
     function onKey(e) {
       const tag = e.target?.tagName;
-      const typing = tag === "INPUT" || tag === "TEXTAREA" || e.target?.isContentEditable;
+      const typing = tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || e.target?.isContentEditable;
 
       if (e.key === "`" && !typing) {
         e.preventDefault();

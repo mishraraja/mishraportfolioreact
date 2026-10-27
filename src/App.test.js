@@ -9,6 +9,13 @@ beforeEach(() => {
 });
 
 describe("page shell", () => {
+  test("malformed saved preferences do not crash the page", () => {
+    localStorage.setItem("rm.portfolio.state.v1", JSON.stringify({ theme: "missing", unlocked: {}, seenThemes: 123, soundOn: "false" }));
+    render(<App />);
+    expect(screen.getByRole("heading", { level: 1 })).toBeInTheDocument();
+    expect(document.documentElement.getAttribute("data-theme")).toBe("nebula");
+  });
+
   test("renders the hero headline", () => {
     render(<App />);
     expect(screen.getByRole("heading", { level: 1 })).toBeInTheDocument();
@@ -37,9 +44,9 @@ describe("theme switching", () => {
     expect(document.documentElement.getAttribute("data-theme")).toBe("supernova");
   });
 
-  test("typing in a field does not trigger the theme shortcut", () => {
+  test.each(["input", "textarea", "select"])("typing in a %s does not trigger the theme shortcut", (tag) => {
     render(<App />);
-    const input = document.createElement("input");
+    const input = document.createElement(tag);
     document.body.appendChild(input);
     fireEvent.keyDown(input, { key: "t" });
     expect(document.documentElement.getAttribute("data-theme")).toBe("nebula");

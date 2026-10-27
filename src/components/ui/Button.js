@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { useReducedMotion } from "../../hooks/useReducedMotion";
 import "./Button.css";
 
 /**
@@ -14,10 +15,11 @@ export function Button({
   ...rest
 }) {
   const ref = useRef(null);
+  const reduced = useReducedMotion();
   const Component = as;
 
   function onMouseMove(e) {
-    if (!magnetic || !ref.current || window.matchMedia("(pointer: coarse)").matches) return;
+    if (!magnetic || reduced || !ref.current || window.matchMedia("(pointer: coarse)").matches) return;
     const rect = ref.current.getBoundingClientRect();
     const x = e.clientX - rect.left - rect.width / 2;
     const y = e.clientY - rect.top - rect.height / 2;

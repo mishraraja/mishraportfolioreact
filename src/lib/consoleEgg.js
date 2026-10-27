@@ -27,7 +27,7 @@ export function installConsoleEgg(unlock) {
 
   console.log(
     "%cYou opened the console. Of course you did.%c\n\n" +
-      "This site is React 18 + framer-motion, no UI kit, no chart library,\n" +
+      "This site is React 19 + framer-motion, no UI kit, no chart library,\n" +
       "no confetti package. The audio is synthesised with WebAudio at runtime,\n" +
       "the particles are hand-rolled canvas, and the API console is a\n" +
       "Spring-Boot-shaped service running entirely in this tab.\n",

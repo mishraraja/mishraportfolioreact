@@ -47,7 +47,7 @@ by an orbit loop, and every sound is synthesised at runtime.
 
 ## Built With
 
-- React 18 + React Router 7
+- React 19 + React Router 7
 - Vite 8 for development and production builds; Jest 30 for unit tests
 - Framer Motion for choreography
 - react-icons
@@ -58,7 +58,7 @@ by an orbit loop, and every sound is synthesised at runtime.
 
 ## Getting Started
 
-Use Node.js 22.13 or Node.js 24 or newer with npm. CI tests Node 22 and 24.
+Use Node.js 22.18 or Node.js 24.11 or newer with npm. CI tests Node 22 and 24.
 The repository includes `package-lock.json`.
 
 ```bash
@@ -277,12 +277,12 @@ data loads, the hook reports an offline state. A snapshot can become stale.
 
 ## Build, Tests and Deployment
 
-Local validation on 27 October 2026: **350 Jest tests across 11 suites passed**,
+Local validation on 27 October 2026: **358 Jest tests across 13 suites passed**,
 plus **4 offline-worker tests** and **9 chat endpoint/search tests**. Production
 build results and gzip budgets are printed by `npm run build`.
 
 Browser verification and remaining security/deployment work are recorded in
-[the project review](docs/PROJECT_REVIEW.md). The old Create React App toolchain
+[the end-to-end audit](docs/END_TO_END_AUDIT.md) and [the project review](docs/PROJECT_REVIEW.md). The old Create React App toolchain
 was replaced with Vite and standalone Jest. The updated dependency tree reports
 zero npm audit advisories. Keep running the audit as dependencies and advisories change.
 
@@ -311,7 +311,7 @@ See [SECURITY.md](SECURITY.md) for supported revisions and private reporting.
 
 ```
 src/
-  components/   nav, footer, cursor, control dock, trophy case, command palette
+  components/   nav, footer, control dock, trophy case, command palette
     background/ the cosmic sky: starfield, nebula, grid, warp
     orbital/    the hero orrery
     easter/     terminal, chess puzzle, idle nudge
@@ -345,7 +345,8 @@ of placeholder content.
 ## Accessibility
 
 Everything decorative gets out of the way. `prefers-reduced-motion` disables the
-scramble, the starfield, orbital motion, confetti, the cursor and the boot log. The hero
+scramble, the starfield, orbital motion, confetti and the boot log. Native system
+cursors remain visible across themes and respect operating-system pointer settings. The hero
 headline carries its real text for screen readers while it decrypts visually.
 Focus states are never removed, every overlay is a labelled dialog, and the
 keyboard shortcuts ignore keystrokes aimed at inputs.

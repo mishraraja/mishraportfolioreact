@@ -64,14 +64,22 @@ export function ApiConsole() {
   const [called, setCalled] = useState(() => new Set());
   const { unlock } = useExperience();
   const liveRef = useRef(null);
+  const requestId = useRef(0);
+  const autoCheckAllowed = useRef(true);
+
+  useEffect(() => () => { requestId.current += 1; }, []);
 
   const send = useCallback(
     async (endpoint) => {
+      autoCheckAllowed.current = false;
+      const id = ++requestId.current;
       setLoading(true);
       setResponse(null);
       sfx.request();
 
       const res = await callEndpoint(endpoint);
+      // Changing endpoints or leaving the page invalidates an older response.
+      if (id !== requestId.current) return;
       setResponse(res);
       setLoading(false);
 
@@ -95,17 +103,20 @@ export function ApiConsole() {
   useEffect(() => {
     const el = liveRef.current;
     if (!el) return undefined;
+    let timer;
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           io.disconnect();
-          setTimeout(() => send(ENDPOINTS[0]), 400);
+          timer = setTimeout(() => {
+            if (autoCheckAllowed.current) send(ENDPOINTS[0]);
+          }, 400);
         }
       },
       { threshold: 0.25 }
     );
     io.observe(el);
-    return () => io.disconnect();
+    return () => { io.disconnect(); clearTimeout(timer); };
   }, [send]);
 
   return (
@@ -122,7 +133,7 @@ export function ApiConsole() {
           {/* Endpoint list */}
           <aside className="api__sidebar">
             <div className="api__sidebar-head">
-              <span className="api__base">https://rajamishra.dev</span>
+              <span className="api__base">In-browser API simulator</span>
               <span className={"api__pill api__pill--" + (called.size === ENDPOINTS.length ? "ok" : "idle")}>
                 {called.size}/{ENDPOINTS.length} called
               </span>
@@ -135,7 +146,10 @@ export function ApiConsole() {
                     type="button"
                     className={"api__endpoint " + (active.id === ep.id ? "api__endpoint--on" : "")}
                     onClick={() => {
+                      autoCheckAllowed.current = false;
+                      requestId.current += 1;
                       setActive(ep);
+                      setLoading(false);
                       setResponse(null);
                       sfx.click();
                     }}

@@ -9,11 +9,10 @@ import {
   SiPostgresql,
   SiMysql,
   SiApachekafka,
-  SiAmazonaws,
   SiAngular,
   SiApachetomcat,
 } from "react-icons/si";
-import { TbApi, TbShieldLock } from "react-icons/tb";
+import { TbApi, TbShieldLock, TbBrandAws } from "react-icons/tb";
 import { BsDiagram3 } from "react-icons/bs";
 
 export const skillGroups = [
@@ -47,7 +46,7 @@ export const skillGroups = [
       { name: "PostgreSQL", icon: SiPostgresql },
       { name: "MySQL", icon: SiMysql },
       { name: "Apache Kafka", icon: SiApachekafka },
-      { name: "AWS", icon: SiAmazonaws },
+      { name: "AWS", icon: TbBrandAws },
     ],
   },
   {

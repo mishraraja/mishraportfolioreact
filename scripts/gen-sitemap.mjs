@@ -43,8 +43,8 @@ async function javaRoutes() {
       ...ids(worlds).map((id) => ({ path: "/java/" + id, priority: "0.7", changefreq: "monthly" })),
       ...ids(labs).map((id) => ({ path: "/java/lab/" + id, priority: "0.6", changefreq: "monthly" })),
     ];
-  } catch {
-    return [];
+  } catch (error) {
+    throw new Error("Could not read Java routes", { cause: error });
   }
 }
 
@@ -57,8 +57,8 @@ async function problemRoutes() {
       for (const match of source.matchAll(/slug: "([^"]+)"/g)) slugs.push(match[1]);
     }
     return slugs.sort().map((slug) => ({ path: "/dsa/" + slug, priority: "0.6", changefreq: "monthly" }));
-  } catch {
-    return [];
+  } catch (error) {
+    throw new Error("Could not read DSA routes", { cause: error });
   }
 }
 
@@ -102,5 +102,5 @@ async function main() {
 
 main().catch((err) => {
   console.error("Sitemap generation failed: " + err.message);
-  process.exit(0);
+  process.exitCode = 1;
 });

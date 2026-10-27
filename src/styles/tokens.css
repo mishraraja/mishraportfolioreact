@@ -22,7 +22,7 @@
   /* ---- Color: text ---- */
   --color-fg: #eef0ff;
   --color-fg-muted: #9098c4;
-  --color-fg-faint: #5a6291;
+  --color-fg-faint: #858db6;
 
   /* ---- Color: the three light sources ---- */
   --color-accent: #8b7bff; /* nebula violet — primary */
@@ -142,9 +142,6 @@
   --z-overlay: 70;
   --z-modal: 80;
   --z-toast: 90;
-  /* The cursor replaces the native one, so it has to sit above everything —
-     including modals and toasts — or it vanishes inside them. */
-  --z-cursor: 100;
 }
 
 @media (prefers-reduced-motion: reduce) {

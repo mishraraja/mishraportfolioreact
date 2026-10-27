@@ -12,7 +12,6 @@ export function ProjectCard({ project, index }) {
     <div className="project-story">
     <Component
       className="project-card"
-      data-cursor={href ? "View" : undefined}
       initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-10% 0px" }}

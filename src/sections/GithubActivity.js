@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import GitHubCalendar from "react-github-calendar";
+import { GitHubCalendar } from "react-github-calendar";
 import { SectionHeading } from "../components/ui/SectionHeading";
 import { Reveal } from "../components/ui/Reveal";
 import { useGithubData } from "../hooks/useGithubData";
@@ -68,7 +68,7 @@ export function GithubActivity() {
           index="07"
           eyebrow="Proof of work"
           title="Still building, most days."
-          description="These numbers are pulled live from GitHub every time this page loads. Nobody types them in."
+          description="GitHub activity with a saved snapshot while live updates load or are unavailable."
         />
 
         {/* Live stat row */}
@@ -156,7 +156,6 @@ export function GithubActivity() {
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.45, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
                   onPointerEnter={sfx.hover}
-                  data-cursor="open"
                 >
                   <span className="gh__repo-head">
                     <span className="gh__repo-name">{repo.name}</span>
@@ -186,7 +185,7 @@ export function GithubActivity() {
           {status === "loading"
             ? "Fetching live data from GitHub…"
             : status === "offline"
-            ? "GitHub rate limit reached — showing the latest committed snapshot."
+            ? "GitHub data is unavailable. Please try again later."
             : data?.source === "live"
             ? "Live from the GitHub API, just now."
             : "From the nightly snapshot."}

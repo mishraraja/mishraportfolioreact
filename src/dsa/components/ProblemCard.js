@@ -29,7 +29,7 @@ export function StatusBadge({ status, record }) {
 export function ProblemCard({ problem, status, record }) {
   const pattern = getPattern(problem.pattern);
   return (
-    <Link to={"/dsa/" + problem.slug} className={"pcard pcard--" + status} onPointerEnter={sfx.hover} data-cursor="Play">
+    <Link to={"/dsa/" + problem.slug} className={"pcard pcard--" + status} onPointerEnter={sfx.hover}>
       <span className="pcard__top">
         <span className="pcard__emoji" aria-hidden="true">
           {problem.emoji}
