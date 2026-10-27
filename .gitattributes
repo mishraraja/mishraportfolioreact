@@ -1,2 +1,5 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Public JSON is copied directly into builds on both Windows and Linux.
+public/**/*.json text eol=lf
