@@ -12,7 +12,8 @@ http.createServer(async (req, res) => {
     const relative = path.relative(root, file);
     if (relative.startsWith("..") || path.isAbsolute(relative)) { res.writeHead(403).end(); return; }
     const found = await stat(file).catch(() => null);
-    if (!found?.isFile()) {
+    if (pathname === "/") file = path.join(root, "index.html");
+    else if (!found?.isFile()) {
       if (!req.headers.accept?.includes("text/html")) { res.writeHead(404).end(); return; }
       file = path.join(root, "index.html");
     }

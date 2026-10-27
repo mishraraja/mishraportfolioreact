@@ -19,7 +19,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [20.x, 22.x]
+        node-version: [22.x, 24.x]
 
     steps:
       - name: Check out the repository
@@ -34,10 +34,16 @@ jobs:
       - name: Install dependencies
         run: npm ci --prefer-offline --no-audit
 
+      - name: Check dependency security
+        run: npm audit --audit-level=moderate
+
       - name: Run tests
-        run: npm test -- --watchAll=false --passWithNoTests
+        run: npm run test:ci -- --runInBand
         env:
           CI: true
+
+      - name: Lint source and tooling
+        run: npm run lint
 
       - name: Build production bundle
         run: npm run build
@@ -56,11 +62,11 @@ jobs:
           echo "" >> "$GITHUB_STEP_SUMMARY"
           echo '```' >> "$GITHUB_STEP_SUMMARY"
           du -sh build >> "$GITHUB_STEP_SUMMARY"
-          find build/static/js -name '*.js' -exec du -h {} + | sort -rh | head -5 >> "$GITHUB_STEP_SUMMARY"
+          find build/assets -name '*.js' -exec du -h {} + | sort -rh | head -5 >> "$GITHUB_STEP_SUMMARY"
           echo '```' >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload build artifact
-        if: matrix.node-version == '22.x'
+        if: matrix.node-version == '24.x'
         uses: actions/upload-artifact@v4
         with:
           name: build

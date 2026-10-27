@@ -15,7 +15,7 @@ on a schedule, with a saved snapshot available when live requests fail.
 
 ## Current Project Status
 
-Repository review: **26 October 2026**. This README describes the reviewed source
+Repository review: **27 October 2026**. This README describes the reviewed source
 tree. Live deployment and external-service verification are tracked separately.
 
 | Area | Current implementation |
@@ -47,7 +47,8 @@ by an orbit loop, and every sound is synthesised at runtime.
 
 ## Built With
 
-- React 18 + React Router 6
+- React 18 + React Router 7
+- Vite 8 for development and production builds; Jest 30 for unit tests
 - Framer Motion for choreography
 - react-icons
 - Plain CSS with design tokens (`src/styles/tokens.css`) — no CSS framework
@@ -57,8 +58,8 @@ by an orbit loop, and every sound is synthesised at runtime.
 
 ## Getting Started
 
-Use Node.js 22 with npm to match one of the configured CI environments (CI also
-tests Node 20). The repository includes `package-lock.json`.
+Use Node.js 22.13 or Node.js 24 or newer with npm. CI tests Node 22 and 24.
+The repository includes `package-lock.json`.
 
 ```bash
 npm ci
@@ -76,6 +77,7 @@ Append `?skipIntro=1` to skip the startup animation during development.
 | `npm run build` | Production build, then writes `sitemap.xml` and `robots.txt` |
 | `npm test` | Test suite (watch mode) |
 | `npm run test:ci` | Single run, for CI |
+| `npm run lint` | Check application, tests and build scripts |
 | `npm run data:refresh` | Pull fresh GitHub stats into `public/data/github.json` |
 | `npm run sitemap` | Regenerate sitemap and robots files in an existing `build/` directory |
 
@@ -262,7 +264,7 @@ The point is that nobody has to maintain the numbers on this page.
 
 | Workflow | Trigger | What it does |
 | --- | --- | --- |
-| `ci.yml` | push, PR | Tests and builds on Node 20 and 22, reports bundle size |
+| `ci.yml` | push, PR | Audits, lints, tests and builds on Node 22 and 24, reports bundle size |
 | `refresh-data.yml` | daily at 02:30 UTC | Pulls GitHub stats and commits the snapshot if it changed |
 | `lighthouse.yml` | PR, manual | Enforced mobile performance and accessibility scores |
 | `browser.yml` | push, PR, manual | Production-browser tests on desktop Chromium, 320px mobile Chromium and mobile WebKit |
@@ -275,15 +277,14 @@ data loads, the hook reports an offline state. A snapshot can become stale.
 
 ## Build, Tests and Deployment
 
-Local validation on 26 October 2026: **350 Jest tests across 11 suites passed**,
+Local validation on 27 October 2026: **350 Jest tests across 11 suites passed**,
 plus **4 offline-worker tests** and **9 chat endpoint/search tests**. Production
 build results and gzip budgets are printed by `npm run build`.
 
 Browser verification and remaining security/deployment work are recorded in
-[the project review](docs/PROJECT_REVIEW.md). After compatible dependency updates,
-`npm audit` reports 62 advisories (22 high, 31 moderate, 9 low), with no critical
-advisories. This includes build/test dependencies as well as unused SDK modules;
-it is not a count of confirmed vulnerabilities in the deployed app.
+[the project review](docs/PROJECT_REVIEW.md). The old Create React App toolchain
+was replaced with Vite and standalone Jest. The updated dependency tree reports
+zero npm audit advisories. Keep running the audit as dependencies and advisories change.
 
 `npm run test:ci -- --runInBand` runs the existing Jest/React Testing Library
 suite once. It covers app rendering, all DSA example traces and input round
@@ -296,9 +297,8 @@ Browser and live OAuth results must be reported separately from unit tests;
 configuration of those checks alone does not establish they have passed.
 
 `npm run build` writes the static app to `build/`, generates the sitemap and
-offline asset manifest, and enforces gzip bundle budgets. The build script sets
-`CI=false`, so compiler warnings do not automatically fail the build; exceeded
-bundle budgets do fail it.
+offline asset manifest, and enforces gzip bundle budgets. CI runs lint, dependency
+auditing and tests separately; failed build steps or exceeded budgets fail CI.
 
 Vercel configuration is in `vercel.json`. When hosting elsewhere, configure SPA
 fallback to `index.html` so direct visits to nested routes work. The configured

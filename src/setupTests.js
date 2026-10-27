@@ -3,6 +3,10 @@
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
 import "@testing-library/jest-dom";
+import { TextEncoder, TextDecoder } from "node:util";
+
+global.TextEncoder = TextEncoder;
+global.TextDecoder = TextDecoder;
 
 // jsdom doesn't implement these — framer-motion's whileInView and the
 // scroll-spy/reduced-motion hooks all depend on them being present.

@@ -1,7 +1,8 @@
-const { test, afterEach } = require("node:test");
+const { test, before, afterEach } = require("node:test");
 const assert = require("node:assert/strict");
 const entries = require("../src/chat/site-index.json");
-const { search, fallback } = require("../src/chat/search.js");
+let search, fallback;
+before(async () => { ({ search, fallback } = await import("../src/chat/search.mjs")); });
 const originalFetch = global.fetch;
 const savedEnv = { CHAT_AI_ENABLED: process.env.CHAT_AI_ENABLED, GEMINI_API_KEY: process.env.GEMINI_API_KEY, GEMINI_MODEL: process.env.GEMINI_MODEL };
 afterEach(() => { global.fetch = originalFetch; for (const [key, value] of Object.entries(savedEnv)) { if (value === undefined) delete process.env[key]; else process.env[key] = value; } });

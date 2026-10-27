@@ -19,4 +19,4 @@ function fallback(question, entries) {
   const sources = search(question, entries);
   return { mode: "local", answer: sources.length ? "Here are the closest passages from this site:" : "I don't have that information on this site. Try a project name, a Java topic, a DSA problem, or ask how to contact Raja.", sources: sources.map(({ id, title, href, text }) => ({ id, title, href, text: text.slice(0, 1100) + (text.length > 1100 ? "…" : "") })) };
 }
-module.exports = { search, fallback };
+export { search, fallback };

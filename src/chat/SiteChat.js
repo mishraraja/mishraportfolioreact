@@ -2,9 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useLockBodyScroll } from "../hooks/useLockBodyScroll";
 import entries from "./site-index.json";
-import searchTools from "./search.js";
+import { fallback } from "./search.mjs";
 import { OrbitMark, SendArrow, CloseIcon } from "./ChatIcons";
-const { fallback } = searchTools;
 
 export default function SiteChat({ onClose }) {
   const [question, setQuestion] = useState("");

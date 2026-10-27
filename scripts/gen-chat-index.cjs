@@ -1,7 +1,7 @@
 // Read literal public content without executing lesson code or importing secrets.
 const fs = require("node:fs");
 const path = require("node:path");
-const { parse } = require("@babel/parser"); // Included by react-scripts.
+const { parse } = require("@babel/parser");
 function literal(node) {
   if (!node) return undefined;
   if (["StringLiteral", "NumericLiteral", "BooleanLiteral"].includes(node.type)) return node.value;

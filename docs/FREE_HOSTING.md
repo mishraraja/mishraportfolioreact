@@ -22,7 +22,7 @@ Google sign-in and the Gemini API key are separate configurations.
    app's Firebase configuration: `apiKey`, `authDomain`, `projectId`, `appId`.
    Keep the supplied Firebase auth domain (normally `PROJECT.firebaseapp.com`).
 5. Add the same `REACT_APP_FIREBASE_*` values to Vercel's project environment
-   variables. Redeploy: CRA reads these values at build time. Restart the local
+   variables. Redeploy: Vite reads the four allowed values at build time. Restart the local
    development server after changing `.env.local`.
 6. Open `/learning`, select **Sign in with Google**, and test a successful login,
    cancelling the popup, sign-out and account deletion. Test on a phone too.
@@ -88,7 +88,7 @@ node scripts/serve-build.mjs
 ```
 
 Open `http://127.0.0.1:4173/learning`. Offline downloads are intentionally disabled
-in the CRA development server to avoid caching development assets.
+in the Vite development server to avoid caching development assets.
 
 ## Checks before deployment
 

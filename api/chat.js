@@ -1,5 +1,5 @@
 const entries = require("../src/chat/site-index.json");
-const { search, fallback } = require("../src/chat/search.js");
+const searchTools = import("../src/chat/search.mjs");
 const { createHash } = require("node:crypto");
 
 // Best-effort limits for each warm function instance, not a global quota.
@@ -19,6 +19,7 @@ function enabled() {
   return process.env.CHAT_AI_ENABLED === "true" && Boolean(process.env.GEMINI_API_KEY) && /^[a-z0-9.-]+$/.test(process.env.GEMINI_MODEL || "");
 }
 module.exports = async function handler(req, res) {
+  const { search, fallback } = await searchTools;
   res.setHeader("Cache-Control", "no-store");
   res.setHeader("X-Content-Type-Options", "nosniff");
   if (req.method === "GET") return res.status(200).json({ aiEnabled: enabled() });

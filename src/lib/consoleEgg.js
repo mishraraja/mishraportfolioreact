@@ -14,7 +14,6 @@ export function installConsoleEgg(unlock) {
   const muted = "color:#9a99a6";
   const mono = "font-family:monospace;color:#6cd39a";
 
-  /* eslint-disable no-console */
   console.log(
     "%c\n" +
       "  ██████╗  █████╗      ██╗ █████╗ \n" +
@@ -77,5 +76,4 @@ export function installConsoleEgg(unlock) {
     },
   });
   console.log("%c", probe);
-  /* eslint-enable no-console */
 }

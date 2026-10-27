@@ -26,10 +26,6 @@ updates:
         update-types:
           - minor
           - patch
-    ignore:
-      # react-scripts majors rewrite the build; upgrade deliberately.
-      - dependency-name: react-scripts
-        update-types: ["version-update:semver-major"]
 
   # Keep the workflows themselves current.
   - package-ecosystem: github-actions

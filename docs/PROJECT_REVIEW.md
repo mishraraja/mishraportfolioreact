@@ -1,79 +1,62 @@
-﻿# Project review — 26 October 2026
+﻿# Project review — 27 October 2026
 
-## Git synchronization
+## Fixes completed
 
-The initial checkout was 11 commits behind origin/main. All 11 commits only
-refreshed public/data/github.json. They were fast-forwarded without discarding
-local changes. Existing local chat, learning, offline and CI work is included
-in this review and must be committed together because the app imports those files.
+- Replaced Create React App / react-scripts with Vite 8 and standalone Jest 30,
+  removing the vulnerable legacy Webpack, SVG, PostCSS and development-server tree.
+- Updated React Router to 7.18.4. Added production-browser checks for homepage,
+  direct lesson links and navigation between arcade pages.
+- Overrode Firebase's pinned older gRPC dependency with patched gRPC 1.14.5 or newer
+  within the same major. Keep this override until Firebase updates its pin.
+  This app imports Firebase app/auth; Firestore is not used at runtime.
+- Moved shared chat retrieval to an ES module consumed by the browser and server.
+- Preserved the build output directory, sitemap, offline release manifests and
+  existing gzip budgets through a Vite manifest adapter.
+- Updated Vercel to use Vite, retain the chat function, and route deep links to
+  the app without rewriting API requests.
+- Retained the existing REACT_APP_FIREBASE_* settings through an explicit four-key
+  allowlist. Server environment variables are not passed to client code.
+- Added explicit lint and npm audit checks to CI. Removed stale CRA configuration.
+- CI now validates supported Node 22 and 24 releases. The local minimum is
+  Node 22.13 to match the build and lint tools.
+- Confirmed the browser runner exits cleanly with normal process permissions.
+  The earlier Windows teardown stall was caused by the restricted execution
+  environment; no forced-exit workaround was added to the project.
 
-## Fixes
+The earlier progress-validation, reserved-ID, production-chat and security-policy
+fixes remain in place.
 
-- Fix production chat search: CRA emitted the `.cjs` import as an asset URL,
-  causing every send to throw. The shared CommonJS implementation now uses
-  `.js`, which both the browser bundler and Node endpoint load as code.
-- Validate saved DSA and Java progress before rendering, so malformed storage
-  cannot crash the arcades. Added regression tests for both routes.
-- Reject reserved review-record IDs to prevent corrupting answer history.
-- Align asynchronous route test deadlines with their assertion wait periods.
-- Ignore all environment-file variants while keeping the blank example tracked.
-- Replace the template security policy with actual reporting and support details.
-- Apply compatible npm updates. The lockfile updates 44 installed packages,
-  including fixes for all three initially reported critical advisories.
+## Verification
 
-## Validation
+- All 350 Jest tests passed across 11 suites under Jest 30.
+- ESLint checks application code, tests and tooling; CI rejects warnings as well
+  as lint errors.
+- All 9 chat API/search tests and all 4 offline-worker tests passed.
+- Production Playwright suite: 17 passed, 1 intentionally skipped, clean exit.
+  Desktop Chromium, 320px mobile Chromium and mobile WebKit covered chat, layout,
+  accessibility, backup restoration and arcade navigation. Both Chromium profiles
+  also passed offline navigation and download removal. The WebKit offline
+  simulation remains intentionally skipped.
+- Development server: learning page, Two Sum, Core Java and local chat passed a
+  browser smoke check without runtime errors.
+- Production build passed; sitemap contains 115 routes, offline bundle 24 files.
+  Gzip budgets: initial JavaScript 147.7 / 185 KiB, initial CSS 16.8 / 25 KiB,
+  all JavaScript 510.0 / 800 KiB.
+- Build environment smoke check confirmed public Firebase config is included,
+  while a server-key sentinel and an unlisted REACT_APP_* sentinel are excluded.
+- npm install/audit reported zero advisories for the replacement dependency tree.
+  Advisory databases change; CI checks the installed lockfile again on each run.
 
-- Jest: 350 tests passed across 11 suites.
-- Chat API and search: 9 tests passed, using a mocked AI provider.
-- Offline service worker: 4 tests passed.
-- Production build compiled successfully; sitemap contains 115 routes.
-- Gzip budgets passed: initial JavaScript 146.8 KiB / 185 KiB, initial CSS
-  16.9 KiB / 25 KiB, all JavaScript 510.9 KiB / 800 KiB.
-- Playwright: 14 passed, 1 intentionally skipped. Desktop Chromium, 320px
-  mobile Chromium and mobile WebKit passed chat, accessibility, layout and
-  backup restoration checks. Both Chromium profiles passed offline navigation
-  and download removal; the WebKit offline simulation is intentionally skipped.
-  Command: `npm run test:browser -- --workers=2 --reporter=list --trace=off`.
-  All cases finished, but the Windows runner stalled during teardown and was
-  stopped manually; a clean runner exit is still unverified. Linux CI must be
-  checked separately.
-- Pattern scan found no matching Google API keys, private keys or GitHub tokens
-  in the reviewed application, API, public assets, scripts and configuration.
-  Pattern matching is not a complete secret audit.
+## Configuration still owned by the deployment
 
-## Remaining work and limits
+Google sign-in requires Firebase public settings, an enabled provider and authorized
+hosting domains. Gemini replies require server-only credentials and an enabled
+model. No real credentials were supplied or invented, and live OAuth / Gemini
+requests have not been verified. Local search and learning work without them.
 
-The final npm audit reports 62 affected packages: 22 high, 31 moderate, 9 low,
-and zero critical. Counts include transitive and build/test dependencies because
-react-scripts is currently a production dependency. The initial production-only
-scan and final full scan use different scopes and should not be compared as totals.
-GitHub's push response separately reported 69 Dependabot findings (2 critical,
-37 high, 26 moderate, 4 low). Its counts differ from the local npm scan and may
-reflect a different advisory database or scan revision. Recheck GitHub's security
-dashboard after it rescans the updated lockfile; critical alerts are not claimed
-resolved there.
+Progress remains browser-local and shared within a browser profile. Backups are
+implemented; account-owned storage and cloud synchronization are not. The API
+console and Java labs remain frontend simulations, and the hire action opens email.
 
-- react-scripts 5 brings older Webpack, Jest, PostCSS, SVG and service-worker
-  tooling. Its suggested forced audit fix installs react-scripts 0.0.0, which
-  would break the build. Plan a tested build-tool migration rather than using it.
-- Firebase includes Firestore and its affected grpc dependency, although this
-  app imports only Firebase app/auth. npm suggests a major Firebase downgrade;
-  that was not applied. Review the SDK dependency separately.
-- React Router 6.30.6 retains moderate advisories. The audit's fix requires a
-  tested migration to React Router 7.18 or later. App navigation currently uses
-  fixed routes and validated local learning links; SSR hydration is not used.
-- Optional Google sign-in requires Firebase configuration and authorized domains.
-  Mocked tests do not verify a live OAuth login. Sign-in does not sync progress.
-- Optional Gemini replies require server-only credentials and an enabled model.
-  Provider responses have not been verified live. Per-instance chat throttling
-  is not a durable global quota.
-- Learning progress is local to the browser, shared within its browser profile,
-  and removable by clearing storage. Manual backups are implemented; account
-  isolation and cloud synchronization are not implemented.
-- The API console and Java labs are frontend simulations. The hire action opens
-  an email link; it does not submit or persist an application.
-- A Git push does not prove that Vercel deployment or GitHub CI has passed.
-  Deployment, live external services and Lighthouse scores require separate checks.
-
-This review checks the repository and automated behavior; it does not establish
-that every possible security issue or content error has been eliminated.
+A passing local build is not evidence of the final GitHub CI or Vercel deployment
+status. Check those services after the pushed revision finishes processing.
