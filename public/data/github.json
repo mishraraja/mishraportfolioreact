@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-10-26T08:03:22.338Z",
+  "generatedAt": "2026-10-27T08:18:08.401Z",
   "source": "snapshot",
   "user": {
     "login": "mishraraja",
     "name": "Raja Mishra",
     "avatar": "https://avatars.githubusercontent.com/u/121672623?v=4",
     "bio": null,
-    "publicRepos": 6,
+    "publicRepos": 7,
     "followers": 1,
     "following": 2,
     "createdAt": "2022-12-30T11:49:17Z",
     "url": "https://github.com/mishraraja"
   },
   "totals": {
-    "repos": 5,
+    "repos": 6,
     "stars": 0,
     "forks": 0
   },
@@ -37,7 +37,19 @@
       "language": "JavaScript",
       "stars": 0,
       "forks": 0,
-      "pushedAt": "2026-10-26T00:33:43Z",
+      "pushedAt": "2026-10-27T06:33:30Z",
+      "topics": []
+    },
+    {
+      "id": 1434102260,
+      "name": "mishraraja.github.io",
+      "description": null,
+      "url": "https://github.com/mishraraja/mishraraja.github.io",
+      "homepage": null,
+      "language": null,
+      "stars": 0,
+      "forks": 0,
+      "pushedAt": "2026-10-26T08:27:48Z",
       "topics": []
     },
     {
