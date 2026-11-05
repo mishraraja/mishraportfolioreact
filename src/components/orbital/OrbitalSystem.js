@@ -88,6 +88,10 @@ export function OrbitalSystem() {
 
     function frame(now) {
       raf = null;
+      if (!reduced && now - last < 1000 / 30) {
+        if (visible && !document.hidden) raf = requestAnimationFrame(frame);
+        return;
+      }
       const dt = Math.min((now - last) / 1000, 0.1);
       last = now;
 

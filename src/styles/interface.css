@@ -44,7 +44,7 @@ main, footer { position: relative; z-index: var(--z-content); }
 .jworldpage .concept { border: 0; border-block: 1px solid var(--color-border); border-radius: 0; background: none; box-shadow: none; }
 .deferred-section { min-height: 600px; }
 .deferred-section__load { display: inline-flex; gap: 1rem; align-items: center; min-height: 44px; margin-top: 1.5rem; padding: .75rem 1.25rem; border: 1px solid var(--color-accent-border); border-radius: 4px; color: var(--color-accent-strong); background: var(--color-accent-soft); }
-.trophy > .overlay-window-bar, .chess > .overlay-window-bar { margin: calc(-1 * var(--space-6)) calc(-1 * var(--space-6)) var(--space-5); }
+.trophy > .overlay-window-bar { margin: calc(-1 * var(--space-6)) calc(-1 * var(--space-6)) var(--space-5); }
 .site-chat .window-control { color: #302021; font: inherit; }
 [data-theme="cyberpunk"] .btn { border-radius: 4px; }
 [data-theme="cyberpunk"] .cosmos__grid { opacity: .45; background-size: 56px 56px; }

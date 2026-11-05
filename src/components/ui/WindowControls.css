@@ -1,12 +1,13 @@
-.window-controls { display: inline-flex; align-items: center; gap: 2px; flex-shrink: 0; }
-.window-control { position: relative; display: grid; place-items: center; width: 32px; height: 36px; padding: 0; border-radius: 6px; color: #302021; isolation: isolate; }
-.window-control::before { content: ""; position: absolute; z-index: -1; width: 16px; height: 16px; border-radius: 50%; border: 1px solid #0002; background: var(--window-dot); }
+.window-controls { display: inline-flex; align-items: center; gap: 0; flex-shrink: 0; padding: 4px; }
+.window-control { position: relative; display: grid; place-items: center; width: 20px; height: 28px; padding: 0; border-radius: 4px; color: #4b201a; isolation: isolate; }
+.window-control::before { content: ""; position: absolute; z-index: -1; width: 12px; height: 12px; border-radius: 50%; border: 1px solid #0002; background: var(--window-dot); }
 .window-control--close { --window-dot: #ff6058; }
 .window-control--minimize { --window-dot: #ffbd2e; }
 .window-control--resize { --window-dot: #28c941; }
-.window-control span { font: 600 13px/1 sans-serif; }
-.window-control:hover::before { box-shadow: 0 0 0 4px color-mix(in srgb, var(--window-dot) 18%, transparent); }
+.window-control svg { opacity: 0; transition: opacity .12s; }
+.window-controls:hover .window-control svg, .window-controls:has(.window-control:focus-visible) .window-control svg { opacity: .85; }
+.window-control:active::before { filter: brightness(.88); }
 .window-control:focus-visible { outline-offset: 0; }
 .overlay-window-bar { display: flex; align-items: center; gap: 1rem; min-height: 46px; padding: .25rem 1rem .25rem .6rem; border-bottom: 1px solid var(--color-border); }
 .overlay-window-bar > span { color: var(--color-fg-muted); font: .55rem/1.6 var(--font-mono); letter-spacing: .12em; }
-@media (pointer: coarse) { .window-control { width: 40px; height: 44px; } }
+@media (pointer: coarse) { .window-control { width: 32px; height: 44px; } .window-control svg { opacity: .85; } }

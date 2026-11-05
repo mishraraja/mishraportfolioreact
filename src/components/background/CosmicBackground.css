@@ -12,10 +12,6 @@
   position: absolute;
   inset: -10%;
   background: var(--gradient-nebula);
-  filter: blur(10px);
-  transform: translate3d(var(--nx, 0), var(--ny, 0), 0);
-  transition: transform 1.4s var(--ease-out);
-  will-change: transform;
 }
 
 /* A slow breathing pulse keeps the clouds from feeling like a static image. */
@@ -33,11 +29,9 @@
 
 @keyframes nebula-drift {
   0% {
-    transform: translate3d(-3%, 2%, 0) scale(1);
     opacity: 0.7;
   }
   100% {
-    transform: translate3d(4%, -3%, 0) scale(1.15);
     opacity: 1;
   }
 }

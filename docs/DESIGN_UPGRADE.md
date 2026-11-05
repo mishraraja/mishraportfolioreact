@@ -35,6 +35,9 @@ from its app. No third-party component source or graphics were copied.
   six themes; keyboard cycling, the command palette and terminal share the registry.
 - Use a large typographic masthead, an original contour field and an unframed
   systems scene that transitions between the orbit and a finite request simulation.
+  The laptop refinement reduces the name to at most 68px and removes the crossing
+  horizon, fixed top progress line, and decorative rules below the hero copy,
+  retaining the curved field.
 - Keep the hero copy first on narrow screens, followed by the orbital scene.
 - Collapse the floating chat launcher to its orbit icon on small phones so it
   covers less content while keeping its accessible name.
@@ -48,6 +51,10 @@ from its app. No third-party component source or graphics were copied.
 - Share the same functional red close control across terminal, command palette,
   site chat, chess and secrets. Only the terminal needs minimize/maximize actions;
   other overlays do not display decorative inactive controls.
+- Desktop window dots are 12px with 20px centre spacing. Glyphs appear on group
+  hover or visible keyboard focus; touch controls retain visible glyphs and larger targets.
+- Expand chess into 24 source-credited, rules-validated puzzles, difficulty sets,
+  three attempts, automatic replies and solution review. See [chess notes](CHESS_PUZZLES.md).
 - Replace the About focus cards with an interactive, connected engineering atlas.
 - Use open chapter headers and ruled sections through the portfolio, DSA, Java,
   learning and engineering. Keep actual controls and data structures bounded.
@@ -58,12 +65,15 @@ from its app. No third-party component source or graphics were copied.
 
 ## Performance and accessibility
 
-- No new dependencies or remote visual assets.
+- No remote visual assets. Add only chess.js 1.4.0, confined to the lazy chess chunk.
 - Remove the default 1.75-second boot delay; preserve the log with `?intro=1`.
 - Defer API and GitHub components until within 600px of the viewport, with
   explicit load buttons as a fallback.
 - Load chess, trophies and the optional intro only on demand.
-- Limit ambient canvas drawing to 30fps and device pixel ratio to 1.5.
+- Paint the starfield only on resize/theme changes, at a pixel ratio capped at 1.25.
+  Remove cursor-driven background repainting, per-star scroll gradients, full-screen
+  blur, and scroll-linked contour transforms. Keep the nebula's compositor opacity pulse.
+- Cap orbital SVG placement at 30fps and stabilize the navigation observer inputs.
 - Stop orbital frames offscreen, in hidden tabs, and when motion is reduced.
 - Persist a motion pause preference, while always respecting OS reduced motion.
 - Move font discovery into the HTML head with preconnects and `display=swap`.
@@ -76,6 +86,13 @@ from its app. No third-party component source or graphics were copied.
 Baseline initial transfer: **178.2 KiB JavaScript + 16.6 KiB CSS gzip**.
 Use the build output for final values; the existing 185/25 KiB budgets are
 unchanged. Bundle size is not a measured Lighthouse or Core Web Vitals result.
+
+The laptop refinement's initial JavaScript is **173.3 KiB gzip** (178.5 KiB before
+this revision), with chess remaining a separate, on-demand chunk. In a local
+1366×768 Chrome comparison over three idle seconds, script work fell from
+64.6ms to 19.9ms, and style/layout counts from 118 to 80. This is a bounded local
+measurement, not a frame-rate or Core Web Vitals claim. The browser test saves
+its current measurements as `laptop-idle-metrics.json` for review.
 
 ## Delivery checks
 

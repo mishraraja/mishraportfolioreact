@@ -1,259 +1,158 @@
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { Chess } from "chess.js";
+import { FaChessBishop, FaChessKing, FaChessKnight, FaChessPawn, FaChessQueen, FaChessRook } from "react-icons/fa";
 import { AnimatePresence, motion } from "framer-motion";
 import { useExperience } from "../../context/ExperienceContext";
 import { useLockBodyScroll } from "../../hooks/useLockBodyScroll";
+import { useDialogFocus } from "../../hooks/useDialogFocus";
+import { useReducedMotion } from "../../hooks/useReducedMotion";
+import { WindowControls } from "../ui/WindowControls";
+import { attemptMove, CHESS_PUZZLES, drawPuzzle, legalMoves, LEVELS, MAX_ATTEMPTS, opponentReply, puzzleHint, solutionNotation, startPuzzle } from "./puzzleEngine";
 import { sfx } from "../../lib/sound";
 import "./ChessPuzzle.css";
-import { WindowControls } from "../ui/WindowControls";
-import { useDialogFocus } from "../../hooks/useDialogFocus";
 
-const FILES = ["a", "b", "c", "d", "e", "f", "g", "h"];
-const RANKS = [8, 7, 6, 5, 4, 3, 2, 1];
+const FILES = [..."abcdefgh"];
+const PIECES = { k: FaChessKing, q: FaChessQueen, r: FaChessRook, b: FaChessBishop, n: FaChessKnight, p: FaChessPawn };
+const NAMES = { k: "king", q: "queen", r: "rook", b: "bishop", n: "knight", p: "pawn" };
+const SIDES = { w: "White", b: "Black" };
+let sessionLevel = "beginner";
 
-/**
- * A classic back-rank mate in one. White rook lifts to the eighth rank; the
- * black king is sealed in by its own pawns. One move, one answer: Rd8#.
- */
-/**
- * Every piece carries its own id. framer-motion animates by layoutId, so two
- * pieces sharing one would be treated as the same element and collapse into
- * each other the moment anything moves.
- */
-const START = {
-  g8: { id: "bk", type: "k", color: "b" },
-  f7: { id: "bp-f", type: "p", color: "b" },
-  g7: { id: "bp-g", type: "p", color: "b" },
-  h7: { id: "bp-h", type: "p", color: "b" },
-  d1: { id: "wr", type: "r", color: "w" },
-  g1: { id: "wk", type: "k", color: "w" },
-};
-
-const SOLUTION = { from: "d1", to: "d8" };
-
-const GLYPH = {
-  wk: "♔", wq: "♕", wr: "♖", wb: "♗", wn: "♘", wp: "♙",
-  bk: "♚", bq: "♛", br: "♜", bb: "♝", bn: "♞", bp: "♟",
-};
-
-function square(fileIndex, rankIndex) {
-  return FILES[fileIndex] + RANKS[rankIndex];
-}
-
-/** Legal destinations for the two white pieces on the board. */
-function movesFor(sq, board) {
-  const piece = board[sq];
-  if (!piece || piece.color !== "w") return [];
-
-  const f = FILES.indexOf(sq[0]);
-  const r = RANKS.indexOf(Number(sq[1]));
-  const out = [];
-
-  function walk(df, dr, once) {
-    let nf = f + df;
-    let nr = r + dr;
-    while (nf >= 0 && nf < 8 && nr >= 0 && nr < 8) {
-      const target = square(nf, nr);
-      const occupant = board[target];
-      if (!occupant) out.push(target);
-      else {
-        if (occupant.color !== piece.color) out.push(target);
-        break;
-      }
-      if (once) break;
-      nf += df;
-      nr += dr;
-    }
-  }
-
-  if (piece.type === "r") {
-    walk(1, 0); walk(-1, 0); walk(0, 1); walk(0, -1);
-  }
-  if (piece.type === "k") {
-    [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [1, -1], [-1, 1], [-1, -1]].forEach(([df, dr]) =>
-      walk(df, dr, true)
-    );
-  }
-  return out;
+function ChessPiece({ type, colour }) {
+  const Icon = PIECES[type];
+  return <span className={"chess__piece chess__piece--" + colour} aria-hidden="true"><Icon /></span>;
 }
 
 export function ChessPuzzle() {
-  const { chessOpen, setChessOpen, unlock, fireConfetti, hasUnlocked } = useExperience();
-  const [board, setBoard] = useState(START);
+  const { chessOpen, setChessOpen, unlock } = useExperience();
+  const reduced = useReducedMotion();
+  const [level, setLevel] = useState(sessionLevel);
+  const [puzzle, setPuzzle] = useState(() => drawPuzzle(level));
+  const [round, setRound] = useState(() => startPuzzle(puzzle));
   const [selected, setSelected] = useState(null);
-  const [result, setResult] = useState(null);
-  const [attempts, setAttempts] = useState(0);
-
-  useLockBodyScroll(chessOpen);
+  const [promotion, setPromotion] = useState(null);
+  const [hint, setHint] = useState("");
+  const [revealed, setRevealed] = useState(false);
+  const [focusSquare, setFocusSquare] = useState(round.lastMove[1]);
+  const [session, setSession] = useState({ solved: 0, played: 1 });
   const dialogRef = useRef(null);
+  const boardRef = useRef(null);
+  const roundRef = useRef(round);
+  const replyRef = useRef(null);
+  useEffect(() => { roundRef.current = round; }, [round]);
+  useLockBodyScroll(chessOpen);
   useDialogFocus(chessOpen, dialogRef, close);
 
-  const legal = useMemo(
-    () => (selected ? movesFor(selected, board) : []),
-    [selected, board]
-  );
+  const game = useMemo(() => new Chess(round.fen), [round.fen]);
+  const legal = useMemo(() => selected ? legalMoves(round, selected) : [], [round, selected]);
+  const files = round.player === "b" ? [...FILES].reverse() : FILES;
+  const ranks = round.player === "b" ? [1, 2, 3, 4, 5, 6, 7, 8] : [8, 7, 6, 5, 4, 3, 2, 1];
+  const active = round.status === "playing";
+  const checkSquare = game.isCheck() ? game.board().flat().find((piece) => piece?.type === "k" && piece.color === game.turn())?.square : null;
 
-  const solved = result === "solved";
+  useEffect(() => {
+    if (round.status !== "replying") return undefined;
+    replyRef.current = setTimeout(() => {
+      setRound((previous) => opponentReply(puzzle, previous));
+      replyRef.current = null;
+    }, reduced ? 180 : 500);
+    return () => clearTimeout(replyRef.current);
+  }, [puzzle, round.status, reduced]);
 
-  function reset() {
-    setBoard(START);
-    setSelected(null);
-    setResult(null);
+  function close() { clearTimeout(replyRef.current); setChessOpen(false); sfx.close(); }
+  function loadPuzzle(next, nextLevel = level, focusBoard = false) {
+    clearTimeout(replyRef.current);
+    const state = startPuzzle(next);
+    sessionLevel = nextLevel;
+    roundRef.current = state;
+    setPuzzle(next); setLevel(nextLevel); setRound(state); setSelected(null); setPromotion(null); setHint(""); setRevealed(false); setFocusSquare(state.lastMove[1]);
+    requestAnimationFrame(() => {
+      if (dialogRef.current) dialogRef.current.scrollTop = 0;
+      if (focusBoard) boardRef.current?.querySelector('[data-square="' + state.lastMove[1] + '"]')?.focus({ preventScroll: true });
+    });
   }
-
-  function close() {
-    setChessOpen(false);
-    sfx.close();
-    setTimeout(reset, 300);
+  function nextPuzzle(nextLevel = level, focusBoard = false) {
+    loadPuzzle(drawPuzzle(nextLevel, puzzle.id), nextLevel, focusBoard);
+    setSession((previous) => ({ ...previous, played: previous.played + 1 }));
   }
-
-  function onSquare(sq) {
-    if (solved) return;
-
-    const piece = board[sq];
-
-    if (selected && legal.includes(sq)) {
-      const moved = { ...board };
-      delete moved[selected];
-      moved[sq] = board[selected];
-      setBoard(moved);
-
-      if (selected === SOLUTION.from && sq === SOLUTION.to) {
-        setResult("solved");
-        sfx.success();
-        fireConfetti();
-        unlock("grandmaster");
-      } else {
-        setResult("wrong");
-        setAttempts((a) => a + 1);
-        sfx.error();
-        // Put the piece back so the puzzle stays solvable.
-        setTimeout(() => {
-          setBoard(START);
-          setResult(null);
-        }, 1100);
+  function move(from, to, promote) {
+    const previous = roundRef.current;
+    const next = attemptMove(puzzle, previous, { from, to, ...(promote ? { promotion: promote } : {}) });
+    roundRef.current = next;
+    setRound(next); setSelected(null); setPromotion(null); setHint("");
+    if (next.status === "solved" && previous.status !== "solved") {
+      setSession((value) => ({ ...value, solved: value.solved + 1 })); unlock("grandmaster"); sfx.success();
+    } else if (next.mistakes > previous.mistakes) sfx.error();
+    else sfx.click();
+  }
+  function onSquare(square) {
+    setFocusSquare(square);
+    if (!active || promotion) return;
+    if (selected) {
+      const options = legal.filter((candidate) => candidate.to === square);
+      if (options.length) {
+        if (options.some((candidate) => candidate.promotion)) setPromotion({ from: selected, to: square });
+        else move(selected, square);
+        return;
       }
-      setSelected(null);
-      return;
     }
-
-    if (piece && piece.color === "w") {
-      setSelected(sq === selected ? null : sq);
-      sfx.click();
-      return;
-    }
-    setSelected(null);
+    const piece = game.get(square);
+    setSelected(piece?.color === round.player ? (selected === square ? null : square) : null);
+  }
+  function boardKeys(event, file, rank) {
+    const direction = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] }[event.key];
+    if (!direction) return;
+    event.preventDefault();
+    const nextFile = Math.max(0, Math.min(7, file + direction[0]));
+    const nextRank = Math.max(0, Math.min(7, rank + direction[1]));
+    const square = files[nextFile] + ranks[nextRank];
+    setFocusSquare(square); boardRef.current.querySelector('[data-square="' + square + '"]')?.focus();
   }
 
-  return (
-    <AnimatePresence>
-      {chessOpen ? (
-        <motion.div
-          className="chess-overlay"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={close}
-        >
-          <motion.div
-            ref={dialogRef}
-            className="chess"
-            role="dialog"
-            aria-modal="true"
-            aria-label="Chess puzzle: mate in one"
-            initial={{ opacity: 0, y: 22, scale: 0.96 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 16, scale: 0.97 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="overlay-window-bar"><WindowControls title="puzzle" onClose={close} /><span>OFF THE CLOCK / CHESS</span></div>
-            <header className="chess__head">
-              <div>
-                <span className="eyebrow">Off the clock</span>
-                <h2 className="chess__title">Mate in one.</h2>
-                <p className="chess__sub text-muted">
-                  You are White. One move ends it. Chess is on his list of things
-                  he actually does away from a keyboard.
-                </p>
-              </div>
-            </header>
-
-            <div className="chess__board" role="grid" aria-label="Chess board">
-              {RANKS.map((rank, rIdx) => (
-                <div className="chess__rank" role="row" key={rank}>
-                  {FILES.map((file, fIdx) => {
-                    const sq = file + rank;
-                    const piece = board[sq];
-                    const dark = (fIdx + rIdx) % 2 === 1;
-                    const isTarget = legal.includes(sq);
-                    const isSel = selected === sq;
-
-                    return (
-                      <button
-                        key={sq}
-                        role="gridcell"
-                        type="button"
-                        className={
-                          "chess__sq " +
-                          (dark ? "chess__sq--dark " : "chess__sq--light ") +
-                          (isSel ? "chess__sq--sel " : "") +
-                          (isTarget ? "chess__sq--target " : "") +
-                          (solved && sq === SOLUTION.to ? "chess__sq--mate" : "")
-                        }
-                        onClick={() => onSquare(sq)}
-                        aria-label={sq + (piece ? " " + piece.color + piece.type : " empty")}
-                      >
-                        {fIdx === 0 ? <span className="chess__coord chess__coord--r">{rank}</span> : null}
-                        {rIdx === 7 ? <span className="chess__coord chess__coord--f">{file}</span> : null}
-                        {piece ? (
-                          <motion.span
-                            layoutId={"piece-" + piece.id}
-                            className={"chess__piece chess__piece--" + piece.color}
-                            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                          >
-                            {GLYPH[piece.color + piece.type]}
-                          </motion.span>
-                        ) : null}
-                        {isTarget && !piece ? <span className="chess__dot" aria-hidden="true" /> : null}
-                      </button>
-                    );
-                  })}
-                </div>
-              ))}
-            </div>
-
-            <div className="chess__status" aria-live="polite">
-              {solved ? (
-                <motion.p
-                  className="chess__msg chess__msg--win"
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                >
-                  <strong>Rd8#</strong> - back-rank mate. His own pawns locked the king in.
-                  Well played.
-                </motion.p>
-              ) : result === "wrong" ? (
-                <p className="chess__msg chess__msg--bad">Not mate. Resetting the position…</p>
-              ) : (
-                <p className="chess__msg text-muted">
-                  {attempts >= 2
-                    ? "Hint: the black king has no squares on the seventh rank."
-                    : "Click a white piece, then its destination."}
-                </p>
-              )}
-            </div>
-
-            <footer className="chess__foot">
-              <button type="button" className="chess__reset" onClick={reset}>
-                Reset position
-              </button>
-              {hasUnlocked("grandmaster") ? (
-                <span className="chess__solved-tag">Solved</span>
-              ) : null}
-            </footer>
-          </motion.div>
-        </motion.div>
-      ) : null}
-    </AnimatePresence>
-  );
+  return <AnimatePresence>{chessOpen && <motion.div className="chess-overlay" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={close}>
+    <motion.div ref={dialogRef} className="chess" role="dialog" aria-modal="true" aria-label="Chess puzzle studio"
+      initial={reduced ? false : { opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: .2 }} onClick={(event) => event.stopPropagation()}>
+      <div className="overlay-window-bar"><WindowControls title="puzzle" onClose={close} /><span>OFF THE CLOCK / CHESS STUDIO</span><span className="chess__session">{session.solved}/{session.played} solved</span></div>
+      <header className="chess__head"><div><span className="eyebrow">A little deeper each time</span><h2 className="chess__title">Find the finish.</h2><p className="chess__sub">Random positions. Real tactics. Three attempts to find the complete mating line.</p></div>
+        <div className="chess__difficulty"><label htmlFor="chess-difficulty">Difficulty</label><select id="chess-difficulty" value={level} onChange={(event) => nextPuzzle(event.target.value)}>{[...LEVELS, "all"].map((item) => <option value={item} key={item}>{item === "all" ? "Mix all levels" : item[0].toUpperCase() + item.slice(1)}</option>)}</select></div>
+      </header>
+      <div className="chess__workspace">
+        <div className="chess__play">
+          <div className="chess__board-meta"><span>YOU PLAY {SIDES[round.player].toUpperCase()}</span><span>{round.status === "replying" ? "OPPONENT’S TURN" : round.status === "solved" ? "CHECKMATE" : "MATE IN " + puzzle.mateIn}</span></div>
+          <div ref={boardRef} className="chess__board" role="grid" aria-label="Chess board. Arrow keys move between squares; Enter selects a piece or move." aria-busy={round.status === "replying"}>
+            {ranks.map((rank, rankIndex) => <div className="chess__rank" role="row" key={rank}>{files.map((file, fileIndex) => {
+              const square = file + rank, piece = game.get(square), dark = (FILES.indexOf(file) + rank) % 2 === 0;
+              const target = legal.some((candidate) => candidate.to === square);
+              const last = round.lastMove?.includes(square);
+              return <button key={square} type="button" role="gridcell" data-square={square} tabIndex={focusSquare === square ? 0 : -1}
+                aria-label={square + (piece ? " " + SIDES[piece.color] + " " + NAMES[piece.type] : " empty")}
+                aria-selected={selected === square} aria-disabled={!active || Boolean(promotion)}
+                className={"chess__sq chess__sq--" + (dark ? "dark" : "light") + (last ? " is-last" : "") + (selected === square ? " is-selected" : "") + (target ? " is-target" : "") + (square === checkSquare ? " is-check" : "")}
+                onClick={() => onSquare(square)} onKeyDown={(event) => boardKeys(event, fileIndex, rankIndex)}>
+                {fileIndex === 0 && <span className="chess__coord chess__coord--r" aria-hidden="true">{rank}</span>}
+                {rankIndex === 7 && <span className="chess__coord chess__coord--f" aria-hidden="true">{file}</span>}
+                {piece && <ChessPiece type={piece.type} colour={piece.color} />}
+                {target && !piece && <span className="chess__dot" aria-hidden="true" />}
+              </button>;
+            })}</div>)}
+          </div>
+          {promotion && <div className="chess__promotion" role="group" aria-label="Choose promotion">{["q", "r", "b", "n"].map((piece) => <button autoFocus={piece === "q"} key={piece} type="button" aria-label={"Promote to " + NAMES[piece]} onClick={() => move(promotion.from, promotion.to, piece)}><ChessPiece type={piece} colour={round.player} /><span>{NAMES[piece]}</span></button>)}<button type="button" onClick={() => setPromotion(null)}>Cancel</button></div>}
+          <p className="chess__board-help">Select a piece, then a highlighted square. Arrow keys + Enter work too.</p>
+        </div>
+        <div className="chess__study">
+          <div className="chess__puzzle-meta"><span>{puzzle.level} / {puzzle.rating} rating</span><span>{CHESS_PUZZLES.filter((item) => level === "all" || item.level === level).length} puzzles in this set</span></div>
+          <div className="chess__attempts" aria-label={(MAX_ATTEMPTS - round.mistakes) + " attempts remaining"}><span>Attempts</span><div aria-hidden="true">{[0, 1, 2].map((i) => <i key={i} className={i < MAX_ATTEMPTS - round.mistakes ? "is-available" : ""} />)}</div><strong>{MAX_ATTEMPTS - round.mistakes} / 3</strong></div>
+          <div className={"chess__status chess__status--" + round.status} role="status" aria-live="polite"><strong>{round.status === "solved" ? "Nicely calculated." : round.status === "failed" ? "Take a closer look." : round.status === "replying" ? "Your move connected." : "Your move."}</strong><p>{round.message}</p></div>
+          {!!round.moves.length && <div className="chess__notation" aria-label="Moves played">{round.moves.map((san, i) => <span key={i}><small>{i % 2 === 0 ? "YOU" : "REPLY"}</small>{san}</span>)}</div>}
+          {hint && <p className="chess__hint" role="status">{hint}</p>}
+          {revealed && <div className="chess__solution"><span>FULL SOLUTION / ALTERNATING SIDES</span><p>{solutionNotation(puzzle)}</p></div>}
+          <div className="chess__actions">
+            {active && <button type="button" onClick={() => setHint(puzzleHint(puzzle, round))}>Show a hint</button>}
+            {round.status === "failed" && <><button type="button" onClick={() => setRevealed(true)}>Show solution</button><button type="button" onClick={() => loadPuzzle(puzzle, level, true)}>Retry puzzle</button></>}
+            <button type="button" className="chess__next" onClick={() => nextPuzzle(level, true)}>New random puzzle <span aria-hidden="true">↗</span></button>
+          </div>
+          <footer className="chess__source"><a href={"https://lichess.org/training/" + puzzle.id} target="_blank" rel="noreferrer">Lichess #{puzzle.id} ↗</a><span>CC0 puzzle set · works offline</span></footer>
+        </div>
+      </div>
+    </motion.div>
+  </motion.div>}</AnimatePresence>;
 }

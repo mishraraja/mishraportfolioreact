@@ -7,13 +7,14 @@ import { useScrollSpy } from "../hooks/useScrollSpy";
 import { useLockBodyScroll } from "../hooks/useLockBodyScroll";
 import "./Navbar.css";
 import { WindowControls } from "./ui/WindowControls";
+const SECTION_IDS = ["home", ...navItems.map((item) => item.id)];
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const menuRef = useRef(null);
   const toggleRef = useRef(null);
-  const activeId = useScrollSpy(["home", ...navItems.map((item) => item.id)]);
+  const activeId = useScrollSpy(SECTION_IDS);
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const onHome = pathname === "/";

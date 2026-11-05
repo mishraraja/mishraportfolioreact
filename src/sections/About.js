@@ -28,7 +28,7 @@ function HobbyChip({ hobby }) {
           sfx.open();
         }}
         onPointerEnter={sfx.hover}
-        title="Play a mate in one"
+        title="Play a random chess puzzle"
       >
         <span aria-hidden="true" className="tag__glyph">
           {"♞"}

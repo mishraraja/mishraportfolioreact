@@ -259,7 +259,7 @@ export function Terminal() {
             setTerminalOpen(false);
             setChessOpen(true);
           }, 500);
-          return ["Setting up the board... you are White. Mate in one."];
+          return ["Opening the chess studio. Random puzzles, three levels, three attempts."];
         },
       },
       secrets: {

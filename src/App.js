@@ -5,7 +5,6 @@ import { ExperienceProvider, useExperience } from "./context/ExperienceContext";
 import ChatLauncher from "./chat/ChatLauncher";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
-import { ScrollProgress } from "./components/ScrollProgress";
 import { CommandPalette } from "./components/CommandPalette";
 import { ControlDock } from "./components/ControlDock";
 import { CosmicBackground } from "./components/background/CosmicBackground";
@@ -185,7 +184,6 @@ function Shell() {
       <CosmicBackground />
 
       {/* Chrome */}
-      <ScrollProgress />
       <Navbar />
       <ControlDock />
 

@@ -94,7 +94,7 @@ test("window controls close, minimize, restore and expand without losing the ses
   await page.goto("/java");
   await page.getByRole("button", { name: "Open terminal", exact: true }).click();
   await terminal.getByLabel("Terminal input").fill("chess"); await terminal.getByLabel("Terminal input").press("Enter");
-  const puzzle = page.getByRole("dialog", { name: "Chess puzzle: mate in one" });
+  const puzzle = page.getByRole("dialog", { name: "Chess puzzle studio" });
   await expect(puzzle).toBeVisible();
   await puzzle.getByRole("button", { name: "Close puzzle", exact: true }).click();
   await expect(puzzle).not.toBeVisible();

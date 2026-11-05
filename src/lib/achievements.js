@@ -67,7 +67,7 @@ export const ACHIEVEMENTS = [
     id: "grandmaster",
     name: "Grandmaster",
     icon: "♞",
-    desc: "Solved the mate-in-one puzzle.",
+    desc: "Solved a chess puzzle.",
     hint: "He plays chess. Ask him about it.",
   },
   {

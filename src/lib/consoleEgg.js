@@ -64,7 +64,7 @@ export function installConsoleEgg(unlock) {
       "Cmd/Ctrl+K opens the command palette",
       "T cycles six colour themes",
       "The Konami code boots a CRT",
-      "Type 'chess' anywhere for a mate-in-one",
+      "Type 'chess' anywhere for random chess puzzles",
       "The API console has a 403 endpoint worth reading",
       "Stand still for a minute and the site talks to you",
     ];

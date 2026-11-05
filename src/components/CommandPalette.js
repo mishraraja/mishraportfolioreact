@@ -90,7 +90,7 @@ export function CommandPalette() {
       },
       {
         id: "chess",
-        label: "Play the mate-in-one puzzle",
+        label: "Play chess puzzles — beginner to advanced",
         group: "Play",
         icon: "♞",
         action: () => {

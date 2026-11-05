@@ -3,7 +3,7 @@
 .observatory-field > svg { width: 100%; height: 100%; max-width: none; }
 .hero__masthead { position: relative; }
 .hero__edition { display: flex; justify-content: space-between; gap: 1rem; color: var(--color-fg-muted); font: .58rem/1.6 var(--font-mono); letter-spacing: .13em; }
-.hero__name { position: relative; margin: .75rem 0 2rem; color: var(--color-fg); font: 500 clamp(4rem, 11.6vw, 10.5rem)/1.05 var(--font-display); letter-spacing: -.085em; white-space: nowrap; }
+.hero__name { position: relative; margin: .9rem 0 1.75rem; color: var(--color-fg); font: 500 clamp(2.5rem, 5vw, 4.25rem)/1.1 var(--font-display); letter-spacing: -.065em; white-space: nowrap; }
 .hero__name > span { color: var(--color-accent-strong); }
 .hero__name sup { display: inline-block; margin-left: 1.5rem; vertical-align: top; padding-top: 1.2rem; color: var(--color-fg-muted); font: .55rem/1.5 var(--font-mono); letter-spacing: .08em; }
 .hero__grid { position: relative; display: grid; grid-template-columns: 1.02fr 1fr; align-items: center; gap: clamp(2rem, 4vw, 4rem); }
@@ -18,7 +18,7 @@
 .hero__cta { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 1.75rem; }
 .hero__magnet { display: inline-block; }
 .hero__cta .btn { padding: .85rem 1.3rem; border-radius: 4px; font-size: .87rem; }
-.hero__stats { display: grid; grid-template-columns: .8fr 1.2fr 1fr; gap: 1rem; padding-top: 1.25rem; margin: 2rem 0 0; border-top: 1px solid var(--color-border-strong); }
+.hero__stats { display: grid; grid-template-columns: .8fr 1.2fr 1fr; gap: 1rem; padding-top: 1.25rem; margin: 2rem 0 0; }
 .hero__stats dt { font: .53rem/1.6 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--color-fg-muted); }
 .hero__stats dd { margin: .4rem 0 0; font: 500 clamp(.85rem, 1.4vw, 1.1rem)/1.3 var(--font-display); color: var(--color-fg); }
 .hero__status { display: flex; align-items: center; gap: .6rem; margin-top: 1.2rem; color: var(--color-fg-muted); font: .6rem/1.6 var(--font-mono); }
@@ -29,7 +29,7 @@
 .hero__visual-head { align-items: center; margin-bottom: 1rem; }
 .hero__visual-head > span:first-child { display: inline-flex; align-items: center; gap: .5rem; color: var(--color-accent-strong); }
 .hero__visual-head i { width: 5px; height: 5px; border-radius: 50%; background: var(--color-accent); }
-.hero__visual > .segments { display: inline-flex; padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; border-bottom: 1px solid var(--color-border); }
+.hero__visual > .segments { display: inline-flex; padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
 .hero__visual .segments__button { min-height: 40px; padding-inline: 1.1rem; font-size: .72rem; border-radius: 0; }
 .hero__visual .segments__selection { border-radius: 0; background: var(--color-accent-soft); box-shadow: inset 0 -1px var(--color-accent); }
 .hero__scene { min-height: 520px; }
@@ -40,9 +40,9 @@
 .hero__visual .orbital__readout-name { font-size: 1.5rem; }
 .hero__visual .orbital__readout-detail { font-size: .78rem; }
 .hero__visual .orbital__controls { gap: .6rem; }
-.hero__visual-foot { border-top: 1px solid var(--color-border); padding-top: .9rem; }
+.hero__visual-foot { padding-top: .9rem; }
 .hero__visual .request-flow__readout { border: 0; border-left: 1px solid var(--color-accent); border-radius: 0; background: none; padding: .5rem 0 .5rem 1.2rem; }
-.hero__index { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 2rem; border-block: 1px solid var(--color-border-strong); }
+.hero__index { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 2rem; }
 .hero__index a { display: flex; align-items: center; gap: 1rem; padding: 1.5rem 1rem 1.5rem 0; min-height: 90px; }
 .hero__index a + a { border-left: 1px solid var(--color-border); padding-left: 1.5rem; }
 .hero__index a > span { color: var(--color-accent-strong); font: .65rem var(--font-mono); }
@@ -66,7 +66,7 @@
   .hero.section { padding-top: 6.5rem; }
   .hero__edition { font-size: .48rem; letter-spacing: .05em; }
   .hero__edition > span:last-child { display: none; }
-  .hero__name { margin-top: .9rem; margin-bottom: 1.25rem; font-size: 12.5vw; letter-spacing: -.075em; }
+  .hero__name { margin-top: .9rem; margin-bottom: 1.25rem; font-size: clamp(2.3rem, 10vw, 3.4rem); letter-spacing: -.065em; }
   .hero__headline { margin-top: 1.1rem; font-size: clamp(2.35rem, 9.5vw, 3.2rem); letter-spacing: -.055em; }
   .hero__sub { margin-top: 1.1rem; font-size: .94rem; }
   .hero__cta { gap: .6rem; margin-top: 1.2rem; }

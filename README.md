@@ -7,8 +7,7 @@ A React developer portfolio and interview-learning app built around **a software
 system drawn as a solar system**, with separate DSA and Java Backend Arcades.
 
 The stack orbits a star. Skills are a constellation chart. The whole page sits
-in a parallax starfield that reacts to your cursor, stretches into streaks when
-you scroll fast, and throws the occasional shooting star. Underneath the sky is
+in a lightweight starfield painted only on resize or theme changes. Underneath the sky is
 a browser-based REST simulator, an interactive terminal, twelve hidden
 things worth finding, and a data pipeline that refreshes its own GitHub numbers
 on a schedule, with a saved snapshot available when live requests fail.
@@ -111,7 +110,8 @@ The terminal has correctly spelled ASCII branding, suggested commands, keyboard
 focus containment and colours inherited from every theme. Its red close,
 yellow minimize and green expand buttons work; minimizing preserves the session.
 Restore it from the small shell bar. Other overlays share the same red close
-control, without displaying inactive minimize or expand buttons.
+control, without displaying inactive minimize or expand buttons. Desktop window
+dots use compact Mac-style spacing and reveal symbols on hover or keyboard focus.
 
 The interface draws on [Watermelon UI](https://ui.watermelon.sh/animated-components/category/tabs)
 for component patterns, the existing [Motion](https://motion.dev/) dependency
@@ -126,8 +126,9 @@ See [design and delivery notes](docs/DESIGN_UPGRADE.md) for the implementation m
 The portfolio now opens immediately. Use `?intro=1` for the original boot-log
 Easter egg. API and GitHub sections load near the viewport, and chess and
 trophies load when opened. A persistent motion control pauses ambient effects;
-the orbital loop also stops offscreen and in hidden tabs. Operating-system
-reduced-motion preferences take precedence. The starfield draws at most 30fps.
+the orbital loop also stops offscreen and in hidden tabs and caps ambient updates
+at 30fps. Operating-system reduced-motion preferences take precedence. The
+starfield has no continuous drawing loop or scroll-velocity effects.
 
 After `npm run build`, use `npm run verify:live` to compare the deployed manifest
 and initial asset bytes with your local build. `/deployment.json` records the
@@ -212,10 +213,11 @@ control dock.
 ### Other things worth finding
 
 - An optional Spring Boot startup log at `?intro=1`
-- A playable mate-in-one chess puzzle
-- A parallax starfield that brightens near the cursor and warps when you scroll
-- Shooting stars, on their own schedule
-- Spring button feedback, spotlight cards, a staggered readable headline
+- A chess studio with 24 random puzzles, three difficulty levels, legal moves,
+  automatic opponent replies and three attempts per puzzle ([details](docs/CHESS_PUZZLES.md))
+- A theme-aware starfield and a gently breathing nebula, with no scroll redraws
+- A 30fps stack orbit and a connected engineering atlas
+- Spring button feedback and a staggered readable headline
 - A live clock in the author's timezone
 - A nudge if you stand still too long
 - ASCII art and callable functions in the DevTools console
@@ -354,7 +356,7 @@ See [SECURITY.md](SECURITY.md) for supported revisions and private reporting.
 ```
 src/
   components/   nav, footer, control dock, trophy case, command palette
-    background/ the cosmic sky: starfield, nebula, grid, warp
+    background/ the cosmic sky: static starfield, nebula, grid
     orbital/    the hero orrery
     easter/     terminal, chess puzzle, idle nudge
     fx/         confetti, achievement toast
@@ -387,7 +389,7 @@ of placeholder content.
 ## Accessibility
 
 Everything decorative gets out of the way. `prefers-reduced-motion` disables the
-scramble, the starfield, orbital motion, confetti and the boot log. Native system
+entry motion, the starfield, orbital motion, confetti and the boot log. Native system
 cursors remain visible across themes and respect operating-system pointer settings. The hero
 headline carries its complete text for screen readers while words enter visually.
 Focus states are never removed, every overlay is a labelled dialog, and the
