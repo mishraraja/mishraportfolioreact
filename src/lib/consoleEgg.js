@@ -41,11 +41,13 @@ export function installConsoleEgg(unlock) {
   console.log("%c  whoami()      %c the short version", mono, muted);
 
   window.hire = function hire() {
+    unlock("inspector");
     window.location.href = "mailto:" + profile.social.email + "?subject=Let%27s%20work%20together";
     return "Opening your mail client. Good call.";
   };
 
   window.whoami = function whoami() {
+    unlock("inspector");
     return {
       name: profile.name,
       role: profile.roles[0],
@@ -56,10 +58,11 @@ export function installConsoleEgg(unlock) {
   };
 
   window.secrets = function secrets() {
+    unlock("inspector");
     return [
       "Backtick (`) opens a working shell",
       "Cmd/Ctrl+K opens the command palette",
-      "T cycles five colour themes",
+      "T cycles six colour themes",
       "The Konami code boots a CRT",
       "Type 'chess' anywhere for a mate-in-one",
       "The API console has a 403 endpoint worth reading",
@@ -67,13 +70,6 @@ export function installConsoleEgg(unlock) {
     ];
   };
 
-  // Reward the curiosity — but only once the panel is actually open.
-  const probe = new Image();
-  Object.defineProperty(probe, "id", {
-    get() {
-      unlock("inspector");
-      return "devtools";
-    },
-  });
-  console.log("%c", probe);
+  // Console object previews can invoke getters with DevTools closed (notably
+  // in Safari). Reward an explicit console command instead of probing previews.
 }

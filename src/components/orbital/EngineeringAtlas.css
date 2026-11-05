@@ -1,0 +1,12 @@
+.engineering-atlas { margin-top: 3rem; }
+.engineering-atlas__label { display: flex; justify-content: space-between; gap: 1rem; color: var(--color-fg-muted); font: .54rem/1.6 var(--font-mono); letter-spacing: .1em; }
+.engineering-atlas__label > span:first-child { color: var(--color-accent-strong); }
+.engineering-atlas__map { width: 100%; height: auto; margin-block: .5rem; }
+.engineering-atlas__layers { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--color-border-strong); }
+.engineering-atlas__layers button { position: relative; display: flex; flex-direction: column; gap: .65rem; align-items: flex-start; text-align: left; min-width: 0; padding: 1.3rem 1rem 1rem 0; color: var(--color-fg-muted); }
+.engineering-atlas__layers button > span { color: var(--color-accent-strong); font: .6rem var(--font-mono); }
+.engineering-atlas__layers strong { font-size: .9rem; font-weight: 500; color: var(--color-fg); }
+.engineering-atlas__layers small { font-size: .75rem; line-height: 1.7; }
+.engineering-atlas__layers i { position: absolute; left: 0; right: 0; top: -1px; height: 2px; background: var(--color-accent); }
+.engineering-atlas__layers button[aria-pressed="true"] strong { color: var(--color-accent-strong); }
+@media (max-width: 600px) { .engineering-atlas__layers { grid-template-columns: 1fr; } .engineering-atlas__layers button { padding: 1rem 0; } .engineering-atlas__layers button + button { border-top: 1px solid var(--color-border); } .engineering-atlas__label { font-size: .45rem; } }

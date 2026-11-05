@@ -1,28 +1,9 @@
-import { profile, focusAreas } from "../data/profile";
-import { Reveal, RevealGroup, revealItemVariants } from "../components/ui/Reveal";
-import { motion } from "framer-motion";
-import { useSpotlight } from "../hooks/useMagnetic";
+import { profile } from "../data/profile";
+import { Reveal } from "../components/ui/Reveal";
+import { EngineeringAtlas } from "../components/orbital/EngineeringAtlas";
 import { useExperience } from "../context/ExperienceContext";
 import { sfx } from "../lib/sound";
 import "./About.css";
-
-/** A focus card that lights up under the cursor and flips to show the stack. */
-function FocusCard({ area }) {
-  const ref = useSpotlight();
-
-  return (
-    <motion.div
-      ref={ref}
-      className="about__focus-card"
-      variants={revealItemVariants}
-      onPointerEnter={sfx.hover}
-    >
-      <span className="about__focus-glow" aria-hidden="true" />
-      <h3>{area.label}</h3>
-      <p className="text-muted">{area.detail}</p>
-    </motion.div>
-  );
-}
 
 /**
  * Hobbies are not decoration here. Each one does something: chess opens a real
@@ -77,18 +58,15 @@ export function About() {
 
         <div className="about__content-col">
           <Reveal>
-            <h2 className="about__statement">{profile.bio[0]}</h2>
+            <h2 className="about__statement">I build the systems behind the experience.</h2>
           </Reveal>
 
           <Reveal delay={0.1}>
+            <p className="about__body text-muted">{profile.bio[0]}</p>
             <p className="about__body text-muted">{profile.bio[1]}</p>
           </Reveal>
 
-          <RevealGroup className="about__focus" stagger={0.08}>
-            {focusAreas.map((area) => (
-              <FocusCard key={area.label} area={area} />
-            ))}
-          </RevealGroup>
+          <EngineeringAtlas />
 
           <Reveal delay={0.15} className="about__hobbies">
             <span className="about__hobbies-label text-muted">Outside of engineering</span>

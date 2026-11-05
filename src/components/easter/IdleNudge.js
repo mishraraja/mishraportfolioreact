@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useIdle } from "../../hooks/useIdle";
 import { useExperience } from "../../context/ExperienceContext";
 import "./IdleNudge.css";
+import { WindowControls } from "../ui/WindowControls";
 
 const MESSAGES = [
   "Still there? The terminal is behind the backtick key.",
@@ -59,14 +60,7 @@ export function IdleNudge() {
             >
               Open shell
             </button>
-            <button
-              type="button"
-              className="nudge__dismiss"
-              onClick={() => setDismissed(true)}
-              aria-label="Dismiss hint"
-            >
-              &times;
-            </button>
+            <WindowControls title="hint" onClose={() => setDismissed(true)} />
           </div>
         </motion.div>
       ) : null}

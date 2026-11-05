@@ -1,6 +1,5 @@
 import { useId, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { useTilt } from "../hooks/useTilt";
 import { useReducedMotion } from "../hooks/useReducedMotion";
 import "./ProjectCard.css";
 
@@ -17,8 +16,9 @@ function ProjectBlueprint({ project }) {
     <div className="project-blueprint" aria-hidden="true">
       <div className="project-blueprint__caption"><span>SYSTEM MAP</span><span>{project.category.includes("desktop") ? "DESKTOP" : "WEB"} ↗</span></div>
       <svg className="project-blueprint__routes" viewBox="0 0 400 220" preserveAspectRatio="none" fill="none">
-        <path d="M90 65H310V170H90ZM200 65V170M90 115H310" stroke="var(--color-accent-3)" strokeOpacity=".3" strokeDasharray="4 5" />
-        <circle cx="200" cy="115" r="27" stroke="var(--color-accent)" strokeOpacity=".6" />
+        <path d="M40 110H110C170 110 130 50 200 50S230 170 290 170H360M200 25V195" stroke="var(--color-border-strong)" strokeDasharray="3 6" />
+        <motion.path d="M40 110H110C170 110 130 50 200 50S230 170 290 170H360" stroke="var(--color-accent)" strokeWidth="1.5" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 1.5 }} />
+        {[40, 110, 200, 290, 360].map((x, i) => <circle key={x} cx={x} cy={[110, 110, 50, 170, 170][i]} r={i === 2 ? 7 : 3} fill="var(--color-accent-3)" />)}
       </svg>
       <div className="project-blueprint__nodes">{blueprint.nodes.map((node, i) => (
         <div key={node}><span>{String(i + 1).padStart(2, "0")}</span><b>{node}</b></div>
@@ -35,7 +35,6 @@ export function ProjectCard({ project, index, order = index }) {
   const href = project.liveUrl || project.repoUrl;
   const Component = href ? motion.a : motion.div;
   const linkProps = href ? { href, target: "_blank", rel: "noreferrer" } : {};
-  const tilt = useTilt(6);
 
   return (
     <motion.article className="project-story" layout={reduced ? false : "position"}
@@ -50,12 +49,7 @@ export function ProjectCard({ project, index, order = index }) {
     >
       <span className="project-card__index">{String(index + 1).padStart(2, "0")}</span>
 
-      <div
-        className="project-card__media"
-        ref={tilt.ref}
-        onMouseMove={tilt.onMouseMove}
-        onMouseLeave={tilt.onMouseLeave}
-      >
+      <div className="project-card__media">
         {project.image ? (
           <img src={project.image} alt="" loading="lazy" decoding="async" width="800" height="500" />
         ) : (

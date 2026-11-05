@@ -8,7 +8,7 @@ import { useExperience } from "../context/ExperienceContext";
 import { sfx } from "../lib/sound";
 import { RequestFlow } from "../components/orbital/RequestFlow";
 import { SegmentedControl } from "../components/ui/SegmentedControl";
-import { SignalTerrain } from "../components/ui/SignalTerrain";
+import { ObservatoryField } from "../components/orbital/ObservatoryField";
 import "./Hero.css";
 
 const containerVariants = {
@@ -74,7 +74,11 @@ export function Hero() {
 
   return (
     <section id="home" className="hero section">
-      <SignalTerrain />
+      <ObservatoryField />
+      <div className="container hero__masthead">
+        <div className="hero__edition"><span>INDEPENDENT MIND. SYSTEMS THINKING.</span><span>JAVA / CLOUD / ENGINEERING</span></div>
+        <motion.div className="hero__name" initial={reduced ? false : { opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .9, ease: [.16, 1, .3, 1] }}>Raja <span>Mishra</span><sup>PORTFOLIO / 26</sup></motion.div>
+      </div>
       <div className="container hero__grid">
         <MotionDiv
           className="hero__copy"
@@ -82,10 +86,6 @@ export function Hero() {
           initial={reduced ? undefined : "hidden"}
           animate={reduced ? undefined : "show"}
         >
-          <motion.div variants={reduced ? undefined : itemVariants} className="hero__signature">
-            <span className="hero__name">Raja Mishra<span aria-hidden="true">↗</span></span>
-            <span className="hero__edition">SOFTWARE ENGINEER / JAVA & CLOUD</span>
-          </motion.div>
           <motion.div variants={reduced ? undefined : itemVariants} className="hero__badge">
             <span className="hero__badge-pulse" aria-hidden="true" />
             {profile.openToWork ? "Open to new opportunities" : "Building with Java & Spring Boot"}
@@ -161,7 +161,7 @@ export function Hero() {
           animate={reduced ? undefined : { opacity: 1, y: 0 }}
           transition={{ duration: .6, delay: .12, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="hero__visual-head"><span><i />THE SYSTEMS LAB</span><span>EXPLORE HOW I THINK</span></div>
+          <div className="hero__visual-head"><span><i />A LIVING STACK</span><span>01 / INTERACTIVE STUDY</span></div>
           <SegmentedControl label="System visualisation" value={scene} onChange={setScene}
             options={[{ id: "orbit", label: "Stack orbit" }, { id: "flow", label: "Request flow" }]} />
           <div className="hero__scene">
@@ -171,14 +171,13 @@ export function Hero() {
               </motion.div>
             </AnimatePresence>
           </div>
-          <div className="hero__visual-foot"><span>JAVA / SPRING / CLOUD</span><span>INTERACTIVE BY DESIGN ↗</span></div>
+          <div className="hero__visual-foot"><span>EVERY PART CONNECTS.</span><span>SO DOES THE EXPERIENCE. ↗</span></div>
         </motion.div>
       </div>
 
-      <div className="hero__scroll" aria-hidden="true">
-        <span className="hero__scroll-line" />
-        <span className="hero__scroll-text">scroll</span>
-      </div>
+      <nav className="container hero__index" aria-label="Explore the portfolio">
+        {[["01", "Selected work", "Systems with a purpose", "projects"], ["02", "Enter the lab", "Explore. Test. Understand.", "mission-lab"], ["03", "Start a conversation", "Build something worthwhile", "contact"]].map(([number, title, detail, id]) => <a key={id} href={"#" + id}><span>{number}</span><div><strong>{title}</strong><small>{detail}</small></div><span aria-hidden="true">↗</span></a>)}
+      </nav>
     </section>
   );
 }

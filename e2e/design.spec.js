@@ -62,10 +62,78 @@ test("terminal follows every theme, stays readable and returns keyboard focus", 
   await expect(dialog).not.toBeVisible(); await expect(opener).toBeFocused();
 });
 
+test("window controls close, minimize, restore and expand without losing the session", async ({ page }, testInfo) => {
+  test.setTimeout(90000);
+  await page.goto("/");
+  await page.getByRole("button", { name: "Open terminal", exact: true }).click();
+  const terminal = page.getByRole("dialog", { name: "Interactive terminal" });
+  const input = terminal.getByLabel("Terminal input");
+  await input.fill("echo retained-session"); await input.press("Enter");
+  const normal = await terminal.boundingBox();
+  await terminal.getByRole("button", { name: "Maximize terminal", exact: true }).click();
+  await expect(terminal.getByRole("button", { name: "Restore terminal", exact: true })).toHaveAttribute("aria-pressed", "true");
+  const expanded = await terminal.boundingBox();
+  expect(expanded.height).toBeGreaterThan(normal.height);
+  await terminal.getByRole("button", { name: "Restore terminal", exact: true }).click();
+  await terminal.getByRole("button", { name: "Minimize terminal", exact: true }).click();
+  await expect(terminal).not.toBeVisible();
+  await expect(page.locator("body")).not.toHaveCSS("overflow", "hidden");
+  if (page.viewportSize().width <= 880) {
+    const minimized = await page.locator(".term-minimized").boundingBox();
+    const dock = await page.locator(".dock").boundingBox();
+    expect(minimized.y + minimized.height).toBeLessThan(dock.y);
+  }
+  await page.getByRole("button", { name: "Restore terminal", exact: true }).click();
+  await expect(terminal.locator(".term__line--out")).toHaveText("retained-session");
+  await input.press("ArrowUp"); await expect(input).toHaveValue("echo retained-session");
+  await expect(terminal.getByRole("button", { name: "Close terminal", exact: true })).toHaveCount(1);
+  await page.screenshot({ path: testInfo.outputPath("working-terminal.png") });
+  await terminal.getByRole("button", { name: "Close terminal", exact: true }).click();
+  await expect(terminal).not.toBeVisible();
+  await expect(page.locator(".term-minimized")).toHaveCount(0);
+  await page.goto("/java");
+  await page.getByRole("button", { name: "Open terminal", exact: true }).click();
+  await terminal.getByLabel("Terminal input").fill("chess"); await terminal.getByLabel("Terminal input").press("Enter");
+  const puzzle = page.getByRole("dialog", { name: "Chess puzzle: mate in one" });
+  await expect(puzzle).toBeVisible();
+  await puzzle.getByRole("button", { name: "Close puzzle", exact: true }).click();
+  await expect(puzzle).not.toBeVisible();
+  await page.getByRole("button", { name: /^Secrets found:/ }).click();
+  const secrets = page.getByRole("dialog", { name: "Secrets found" });
+  await expect(secrets).toBeVisible();
+  await secrets.getByRole("button", { name: "Close secrets", exact: true }).click();
+  await expect(secrets).not.toBeVisible();
+  await page.keyboard.press("Control+k");
+  const palette = page.getByRole("dialog", { name: "Command palette" });
+  await expect(palette).toBeVisible();
+  await palette.getByRole("button", { name: "Close command palette", exact: true }).click();
+  await expect(palette).not.toBeVisible();
+  if (page.viewportSize().width < 768) {
+    const menuOpener = page.getByRole("button", { name: "Open menu", exact: true });
+    await menuOpener.click();
+    const menu = page.getByRole("dialog", { name: "Mobile navigation" });
+    await menu.getByRole("button", { name: "Close menu", exact: true }).click();
+    await expect(menu).not.toBeVisible();
+    await expect(menuOpener).toBeFocused();
+  }
+});
+
+test("the engineering atlas connects each discipline with keyboard controls", async ({ page }, testInfo) => {
+  await page.goto("/");
+  const layers = page.getByRole("group", { name: "Engineering disciplines" });
+  await layers.getByRole("button", { name: /Data & Messaging/ }).click();
+  await expect(layers.getByRole("button", { name: /Data & Messaging/ })).toHaveAttribute("aria-pressed", "true");
+  await page.keyboard.press("Tab"); await page.keyboard.press("Enter");
+  await expect(layers.getByRole("button", { name: /Full Stack Delivery/ })).toHaveAttribute("aria-pressed", "true");
+  await page.locator("#about").scrollIntoViewIfNeeded();
+  await page.screenshot({ path: testInfo.outputPath("engineering-atlas.png") });
+});
+
 test("atmosphere and motion preferences persist without delaying the portfolio", async ({ page }, testInfo) => {
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.goto("/");
   await expect(page.locator("main h1")).toBeVisible();
+  await expect(page.getByText("Inspector", { exact: true })).toHaveCount(0);
   await expect(page.locator("html")).toHaveAttribute("data-theme", "observatory");
   await expect(page.getByText("Choose your atmosphere")).toHaveCount(0);
   await expect(page.getByRole("group", { name: "Hero colour theme" })).toHaveCount(0);

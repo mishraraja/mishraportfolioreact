@@ -1,9 +1,11 @@
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useExperience } from "../../context/ExperienceContext";
 import { useLockBodyScroll } from "../../hooks/useLockBodyScroll";
 import { sfx } from "../../lib/sound";
 import "./ChessPuzzle.css";
+import { WindowControls } from "../ui/WindowControls";
+import { useDialogFocus } from "../../hooks/useDialogFocus";
 
 const FILES = ["a", "b", "c", "d", "e", "f", "g", "h"];
 const RANKS = [8, 7, 6, 5, 4, 3, 2, 1];
@@ -82,6 +84,8 @@ export function ChessPuzzle() {
   const [attempts, setAttempts] = useState(0);
 
   useLockBodyScroll(chessOpen);
+  const dialogRef = useRef(null);
+  useDialogFocus(chessOpen, dialogRef, close);
 
   const legal = useMemo(
     () => (selected ? movesFor(selected, board) : []),
@@ -151,6 +155,7 @@ export function ChessPuzzle() {
           onClick={close}
         >
           <motion.div
+            ref={dialogRef}
             className="chess"
             role="dialog"
             aria-modal="true"
@@ -161,6 +166,7 @@ export function ChessPuzzle() {
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             onClick={(e) => e.stopPropagation()}
           >
+            <div className="overlay-window-bar"><WindowControls title="puzzle" onClose={close} /><span>OFF THE CLOCK / CHESS</span></div>
             <header className="chess__head">
               <div>
                 <span className="eyebrow">Off the clock</span>
@@ -170,9 +176,6 @@ export function ChessPuzzle() {
                   he actually does away from a keyboard.
                 </p>
               </div>
-              <button type="button" className="chess__close" onClick={close} aria-label="Close puzzle">
-                &times;
-              </button>
             </header>
 
             <div className="chess__board" role="grid" aria-label="Chess board">

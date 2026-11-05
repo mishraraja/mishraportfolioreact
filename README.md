@@ -99,17 +99,26 @@ through one dedicated appearance button; deliberate choices are remembered.
 Older automatically saved Nebula defaults migrate to Observatory. Cyberpunk
 remains an optional mint, magenta and ultraviolet atmosphere.
 
-The hero pairs readable, staggered text with an interactive systems panel:
+The hero pairs a large typographic masthead with an integrated, open systems scene:
 explore the stack as an orbit or trace a simulated request through four stages.
 The request animation plays only when requested, supports direct stage selection,
-and advances manually under reduced motion. Selected work uses a responsive
-two-column grid, sliding filters and animated expandable project details.
-The terminal has a readable Raja Mishra wordmark, suggested commands, keyboard
-focus containment and colours inherited from every theme.
+and advances manually under reduced motion. A vector contour field connects
+the composition, and the About section contains an interactive engineering atlas.
+Selected work uses alternating editorial stories with architecture diagrams,
+sliding filters and animated expandable details. Learning headers and chapters
+follow the same open layout rather than repeating framed cards.
+The terminal has correctly spelled ASCII branding, suggested commands, keyboard
+focus containment and colours inherited from every theme. Its red close,
+yellow minimize and green expand buttons work; minimizing preserves the session.
+Restore it from the small shell bar. Other overlays share the same red close
+control, without displaying inactive minimize or expand buttons.
 
 The interface draws on [Watermelon UI](https://ui.watermelon.sh/animated-components/category/tabs)
 for component patterns, the existing [Motion](https://motion.dev/) dependency
 for transitions, and [Haikei](https://haikei.app/) for layered SVG inspiration.
+The continuous composition and exploration-led direction also draw on
+[Lusion](https://lusion.co/) and [Bruno Simon](https://bruno-simon.com/), adapted
+to this backend portfolio's content and lightweight SVG implementation.
 The components and artwork are implemented locally in plain CSS and React;
 there is no added UI runtime, Tailwind migration, animation package or media download.
 See [design and delivery notes](docs/DESIGN_UPGRADE.md) for the implementation map.

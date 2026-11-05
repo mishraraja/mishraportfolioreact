@@ -4,12 +4,12 @@ import "./AchievementToast.css";
 
 /** The little "secret unlocked" card that slides in on every discovery. */
 export function AchievementToast() {
-  const { toast, dismissToast, total } = useExperience();
+  const { toast, dismissToast, total, terminalOpen, chessOpen, trophyOpen } = useExperience();
 
   return (
     <div className="toast-layer" aria-live="polite" aria-atomic="true">
       <AnimatePresence>
-        {toast ? (
+        {toast && !terminalOpen && !chessOpen && !trophyOpen ? (
           <motion.button
             key={toast.id}
             className="achv-toast"

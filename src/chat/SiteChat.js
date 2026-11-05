@@ -3,7 +3,8 @@ import { createPortal } from "react-dom";
 import { useLockBodyScroll } from "../hooks/useLockBodyScroll";
 import entries from "./site-index.json";
 import { fallback } from "./search.mjs";
-import { OrbitMark, SendArrow, CloseIcon } from "./ChatIcons";
+import { OrbitMark, SendArrow } from "./ChatIcons";
+import { WindowControls } from "../components/ui/WindowControls";
 
 export default function SiteChat({ onClose }) {
   const [question, setQuestion] = useState("");
@@ -72,7 +73,8 @@ export default function SiteChat({ onClose }) {
   }
   return createPortal(<div className="site-chat-backdrop" onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}>
     <section ref={panel} className="site-chat" role="dialog" aria-modal="true" aria-labelledby="site-chat-title" aria-describedby="site-chat-description" onKeyDown={keys}>
-      <header className="site-chat-header"><span className="site-chat-emblem"><OrbitMark /></span><div><span className="site-chat-kicker">MISSION COMMS / RM</span><h2 id="site-chat-title">Ask about this site</h2></div><button className="site-chat-close" type="button" onClick={onClose} aria-label="Close site chat" title="Close (Esc)"><CloseIcon /></button></header>
+      <div className="overlay-window-bar"><WindowControls title="site chat" onClose={onClose} /><span>MISSION COMMS / RM</span></div>
+      <header className="site-chat-header"><span className="site-chat-emblem"><OrbitMark /></span><div><span className="site-chat-kicker">SITE SEARCH</span><h2 id="site-chat-title">Ask about this site</h2></div></header>
       <div className="site-chat-channel"><span><i className="site-chat-signal" aria-hidden="true" />{useAI && aiEnabled ? "AI + SITE SOURCES" : "SITE SEARCH"}</span><span>{entries.length} PUBLIC SOURCES</span></div>
       <p id="site-chat-description" className="site-chat-description">Raja's work, projects, Java and DSA. Every result links back to the site.</p>
       {aiEnabled && <label className="site-chat-consent"><input type="checkbox" checked={useAI} onChange={(e) => setUseAI(e.target.checked)} /><span><strong>Use AI replies</strong> — Your question and public site passages go to Google. Free-tier messages may improve its products. Don't share sensitive information.</span></label>}

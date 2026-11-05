@@ -6,6 +6,7 @@ import { profile } from "../data/profile";
 import { useScrollSpy } from "../hooks/useScrollSpy";
 import { useLockBodyScroll } from "../hooks/useLockBodyScroll";
 import "./Navbar.css";
+import { WindowControls } from "./ui/WindowControls";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -137,9 +138,7 @@ export function Navbar() {
 
       {mobileOpen && createPortal(
         <div ref={menuRef} id="mobile-navigation" className="nav__mobile" role="dialog" aria-modal="true" aria-label="Mobile navigation">
-          <button type="button" className="nav__mobile-close" onClick={() => setMobileOpen(false)}>
-            Close menu
-          </button>
+          <div className="nav__mobile-window"><WindowControls title="menu" onClose={() => setMobileOpen(false)} /><span>NAVIGATION / RM</span></div>
           {navItems.map((item) => (
             <a
               key={item.id}

@@ -159,15 +159,6 @@
   flex-shrink: 0;
 }
 
-.nav__mobile-close {
-  align-self: flex-end;
-  min-height: 44px;
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-pill);
-  color: var(--color-fg);
-}
-
 .nav__mobile-link {
   font-family: var(--font-display);
   font-size: var(--fs-h3);

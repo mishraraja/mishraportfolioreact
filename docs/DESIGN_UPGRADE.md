@@ -19,6 +19,8 @@ a verification limit, not proof of a DNS outage.
 | [Watermelon UI catalog](https://ui.watermelon.sh/) and [Continuous Tabs](https://ui.watermelon.sh/animated-components/category/tabs) | Sliding selection, compact stateful controls, consistent component surfaces | Project filters, systems-view selector, shared interface CSS |
 | [Motion bundle guidance](https://motion.dev/docs/react-reduce-bundle-size) and [accessibility](https://motion.dev/docs/react-accessibility) | Reuse existing Framer Motion; layout transitions; reduced-motion policy; avoid duplicate runtimes | Project layout transitions, `MotionConfig`, shared motion preference context |
 | [Haikei](https://haikei.app/) | Layered waves and low-cost vector scenery | Original `SignalTerrain` SVG with inherited theme colours |
+| [Lusion](https://lusion.co/) | Continuous visual storytelling, large typography, work-led progression | Open hero canvas, oversized name, alternating project stories, shared chapter rules |
+| [Bruno Simon](https://bruno-simon.com/) | Exploration through meaningful interactive objects and clear visitor controls | Stack exploration, request tracing and a connected engineering atlas; implemented as small SVGs rather than a 3D world |
 
 Watermelon is a source-first component catalog, not a reason to install a second
 UI framework. This project already uses plain CSS and Framer Motion, so the
@@ -31,21 +33,28 @@ from its app. No third-party component source or graphics were copied.
 - Observatory is the light first-paint default. Remember explicit theme choices,
   and migrate older automatic dark defaults. One dedicated picker controls all
   six themes; keyboard cycling, the command palette and terminal share the registry.
-- Use staggered readable hero text and a systems panel that transitions between
-  the existing orbit and a finite, visitor-triggered request simulation.
+- Use a large typographic masthead, an original contour field and an unframed
+  systems scene that transitions between the orbit and a finite request simulation.
 - Keep the hero copy first on narrow screens, followed by the orbital scene.
 - Collapse the floating chat launcher to its orbit icon on small phones so it
   covers less content while keeping its accessible name.
 - Replace project initials with project-specific architecture sketches. Preserve
-  the real government portal image, project facts, links and native details.
-- Use a responsive project grid, pressed-state filters, stable numbering, result
-  counts and Motion layout/height transitions for project disclosures.
-- Replace the terminal ASCII banner with a readable Raja Mishra identity. All
-  terminal colours use the shared tokens. Add command suggestions, proper focus
-  containment, focus restoration and body-scroll locking.
-- Apply shared edge lighting and surfaces to portfolio cards, DSA, Java,
-  concept cards, labs, learning and engineering. Add distinct static signal
-  diagrams to the two arcade headers.
+  the real government portal image, project facts, links and expandable details.
+- Use alternating editorial project rows, pressed-state filters, stable numbering,
+  result counts and Motion layout/height transitions for project disclosures.
+- Restore correctly spelled ASCII Raja Mishra lettering. All terminal colours
+  use shared tokens. Add functioning close/minimize/maximize controls, session
+  preservation on minimize, suggestions, focus containment and restoration.
+- Share the same functional red close control across terminal, command palette,
+  site chat, chess and secrets. Only the terminal needs minimize/maximize actions;
+  other overlays do not display decorative inactive controls.
+- Replace the About focus cards with an interactive, connected engineering atlas.
+- Use open chapter headers and ruled sections through the portfolio, DSA, Java,
+  learning and engineering. Keep actual controls and data structures bounded.
+- Suppress achievement toasts while terminal, chess or secrets are open, so they
+  do not cover window controls or command output.
+- Award console exploration only after an explicit console function call.
+  Remove the image-preview getter that Safari can trigger during ordinary loading.
 
 ## Performance and accessibility
 

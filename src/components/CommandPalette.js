@@ -7,6 +7,8 @@ import { useLockBodyScroll } from "../hooks/useLockBodyScroll";
 import { useExperience } from "../context/ExperienceContext";
 import { sfx } from "../lib/sound";
 import "./CommandPalette.css";
+import { WindowControls } from "./ui/WindowControls";
+import { useDialogFocus } from "../hooks/useDialogFocus";
 
 const LEARN = [
   { id: "learning", label: "Progress, revision and backups", icon: "+", path: "/learning" },
@@ -29,6 +31,7 @@ export function CommandPalette() {
   const [query, setQuery] = useState("");
   const [cursor, setCursor] = useState(0);
   const listRef = useRef(null);
+  const dialogRef = useRef(null);
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
@@ -38,6 +41,7 @@ export function CommandPalette() {
   } = useExperience();
 
   useLockBodyScroll(open);
+  useDialogFocus(open, dialogRef, close);
 
   function close() {
     setOpen(false);
@@ -273,6 +277,7 @@ export function CommandPalette() {
           onClick={close}
         >
           <motion.div
+            ref={dialogRef}
             className="cmdk"
             role="dialog"
             aria-modal="true"
@@ -283,6 +288,7 @@ export function CommandPalette() {
             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
             onClick={(e) => e.stopPropagation()}
           >
+            <div className="overlay-window-bar"><WindowControls title="command palette" onClose={close} /><span>QUICK NAVIGATION</span></div>
             <div className="cmdk__input-wrap">
               <span className="cmdk__prompt" aria-hidden="true">
                 ⌘

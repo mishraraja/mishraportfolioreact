@@ -18,9 +18,7 @@
 .site-chat button { color:var(--color-fg); font:inherit; cursor:pointer; }
 .site-chat button:disabled { opacity:.5; cursor:not-allowed; }
 .site-chat button:focus-visible,.site-chat a:focus-visible,.site-chat-launch:focus-visible { outline:2px solid var(--color-accent-3); outline-offset:3px; }
-.site-chat-close { margin-left:auto; display:grid; place-items:center; min-width:44px; height:44px; border:1px solid var(--color-border); border-radius:50%; background:var(--color-surface); }
-.site-chat-close:hover { background:var(--color-accent-soft); }
-.site-chat-close svg,.site-chat-send svg { width:22px; height:22px; }
+.site-chat-send svg { width:22px; height:22px; }
 .site-chat-channel { display:flex; justify-content:space-between; gap:.5rem; padding:.65rem 1.25rem; border-block:1px solid var(--color-border); background:var(--color-bg-secondary); color:var(--color-fg-muted); font:.59rem/1.5 var(--font-mono); letter-spacing:.08em; flex-shrink:0; }
 .site-chat-channel > span:first-child { display:flex; align-items:center; gap:.5rem; }
 .site-chat-description { margin:0; padding:.85rem 1.25rem .5rem; color:var(--color-fg-muted); font-size:.79rem; flex-shrink:0; }

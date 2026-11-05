@@ -2,6 +2,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useExperience } from "../context/ExperienceContext";
 import { useLockBodyScroll } from "../hooks/useLockBodyScroll";
 import { sfx } from "../lib/sound";
+import { WindowControls } from "./ui/WindowControls";
+import { useRef } from "react";
+import { useDialogFocus } from "../hooks/useDialogFocus";
 import "./TrophyCase.css";
 
 /**
@@ -15,6 +18,8 @@ export function TrophyCase() {
   } = useExperience();
 
   useLockBodyScroll(trophyOpen);
+  const dialogRef = useRef(null);
+  useDialogFocus(trophyOpen, dialogRef, close);
 
   const pct = Math.round((unlockedCount / total) * 100);
   const complete = unlockedCount === total;
@@ -35,6 +40,7 @@ export function TrophyCase() {
           onClick={close}
         >
           <motion.div
+            ref={dialogRef}
             className="trophy"
             role="dialog"
             aria-modal="true"
@@ -45,6 +51,7 @@ export function TrophyCase() {
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             onClick={(e) => e.stopPropagation()}
           >
+            <div className="overlay-window-bar"><WindowControls title="secrets" onClose={close} /><span>DISCOVERY LOG / RM</span></div>
             <header className="trophy__head">
               <div>
                 <span className="eyebrow">Secret hunt</span>
@@ -57,9 +64,6 @@ export function TrophyCase() {
                     : "This site has " + total + " things worth finding. Locked ones come with a hint."}
                 </p>
               </div>
-              <button type="button" className="trophy__close" onClick={close} aria-label="Close">
-                &times;
-              </button>
             </header>
 
             <div className="trophy__meter">

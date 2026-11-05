@@ -8,9 +8,11 @@ import { experience } from "../../data/experience";
 import { useExperience } from "../../context/ExperienceContext";
 import { sfx } from "../../lib/sound";
 import { useLockBodyScroll } from "../../hooks/useLockBodyScroll";
+import { WindowControls } from "../ui/WindowControls";
+import { ASCII_BRAND, asciiWord } from "./asciiBrand";
 import "./Terminal.css";
 
-const BANNER = ["Raja Mishra", "Java Backend Developer / Portfolio shell"];
+const BANNER = [ASCII_BRAND, "Java Backend Developer / Portfolio shell"];
 
 const ARCADE_PAGES = {
   radar: "/dsa/radar",
@@ -54,12 +56,17 @@ export function Terminal() {
   const [input, setInput] = useState("");
   const [history, setHistory] = useState([]);
   const [histIndex, setHistIndex] = useState(-1);
+  const [minimized, setMinimized] = useState(false);
+  const [maximized, setMaximized] = useState(false);
   const bodyRef = useRef(null);
   const inputRef = useRef(null);
   const dialogRef = useRef(null);
   const openerRef = useRef(null);
   const welcomed = useRef(false);
   useLockBodyScroll(terminalOpen);
+  function close() { setMinimized(false); setTerminalOpen(false); sfx.close(); }
+  function minimize() { setMinimized(true); setTerminalOpen(false); sfx.close(); }
+  function restore() { setMinimized(false); setTerminalOpen(true); sfx.open(); }
   const restoreFocus = useCallback(() => {
     const previous = openerRef.current;
     const target = previous?.isConnected && previous !== document.body
@@ -334,18 +341,20 @@ export function Terminal() {
         return;
       }
       if (result === "EXIT") {
+        setMinimized(false);
         setTerminalOpen(false);
         sfx.close();
         return;
       }
       sfx.click();
-      printAll(Array.isArray(result) ? result : [String(result)]);
+      printAll(Array.isArray(result) ? result : [String(result)], name.toLowerCase() === "banner" ? "banner" : "out");
     },
     [commands, print, printAll, unlock, setTerminalOpen]
   );
 
   /* Greet on first open */
   useEffect(() => {
+    if (terminalOpen) setMinimized(false);
     if (terminalOpen && !welcomed.current) {
       welcomed.current = true;
       printAll([
@@ -426,6 +435,11 @@ export function Terminal() {
   }
 
   return (
+    <>
+    {minimized && !terminalOpen && <div className="term-minimized">
+      <WindowControls title="terminal" onClose={() => setMinimized(false)} />
+      <button type="button" onClick={restore} aria-label="Restore terminal"><span aria-hidden="true">&gt;_</span> portfolio.shell <span aria-hidden="true">↗</span></button>
+    </div>}
     <AnimatePresence onExitComplete={() => { if (!terminalOpen) restoreFocus(); }}>
       {terminalOpen ? (
         <motion.div
@@ -433,14 +447,11 @@ export function Terminal() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          onClick={() => {
-            setTerminalOpen(false);
-            sfx.close();
-          }}
+          onClick={close}
         >
           <motion.div
             ref={dialogRef}
-            className="term"
+            className={"term" + (maximized ? " term--maximized" : "")}
             role="dialog"
             aria-modal="true"
             aria-label="Interactive terminal"
@@ -453,35 +464,22 @@ export function Terminal() {
             }}
           >
             <header className="term__bar">
-              <span className="term__dots" aria-hidden="true">
-                <i className="term__dot term__dot--r" />
-                <i className="term__dot term__dot--y" />
-                <i className="term__dot term__dot--g" />
-              </span>
+              <WindowControls title="terminal" onClose={close} onMinimize={minimize} onResize={() => setMaximized((value) => !value)} expanded={maximized} />
               <span className="term__title">
                 {profile.name.toLowerCase().replace(" ", "")}@portfolio: ~
               </span>
-              <button
-                type="button"
-                className="term__close"
-                onClick={() => {
-                  setTerminalOpen(false);
-                  sfx.close();
-                }}
-                aria-label="Close terminal"
-              >
-                &times;
-              </button>
+              <span className="term__session" aria-hidden="true">zsh / 01</span>
             </header>
 
             <div className="term__identity">
-              <span className="term__monogram" aria-hidden="true">&gt;_</span>
-              <div><h2>Raja Mishra</h2><p>Java Backend Developer <span aria-hidden="true">/</span> Portfolio shell</p></div>
+              <div className="term__boot"><span>RM.OS / PERSONAL SHELL</span><span>SESSION READY</span></div>
+              <h2 className="term__brand" aria-label="Raja Mishra"><span aria-hidden="true">{asciiWord("RAJA")}<br /><br />{asciiWord("MISHRA")}</span></h2>
+              <div className="term__spec"><p><span>ROLE</span>Java Backend Developer</p><p><span>STACK</span>Java · Spring · Cloud</p><p><span>MODE</span>Local portfolio shell</p></div>
               <span className="term__theme">{retro ? "Retro" : themes.find((item) => item.id === theme)?.label}</span>
             </div>
             <div className="term__quick" role="group" aria-label="Suggested terminal commands">
-              <span>Try a command</span>
-              {["help", "whoami", "projects", "theme"].map((command) => <button type="button" key={command} onClick={() => { run(command); inputRef.current?.focus(); }}>{command}<span aria-hidden="true">↵</span></button>)}
+              <span>RUN /</span>
+              {["help", "whoami", "projects", "skills", "theme", "clear"].map((command) => <button type="button" key={command} onClick={() => { run(command); inputRef.current?.focus(); }}>{command}<span aria-hidden="true">↵</span></button>)}
             </div>
 
             <div className="term__body" ref={bodyRef}>
@@ -493,7 +491,7 @@ export function Terminal() {
               ))}
 
               <div className="term__input-row">
-                <span className="term__prompt">$</span>
+                <span className="term__prompt"><span className="term__cwd">~ </span>❯</span>
                 <input
                   ref={inputRef}
                   className="term__input"
@@ -516,11 +514,13 @@ export function Terminal() {
               <span>tab complete</span>
               <span>up/down history</span>
               <span>esc close</span>
+              <span className="term__history-count">{history.length} {history.length === 1 ? "command" : "commands"}</span>
             </footer>
           </motion.div>
         </motion.div>
       ) : null}
     </AnimatePresence>
+    </>
   );
 }
 

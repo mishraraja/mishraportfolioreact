@@ -1,57 +1,60 @@
-/* Shared interface finish. Inherits every atmosphere, including the light
-   theme. Static gradients and SVGs keep the visual depth inexpensive. */
+/* Continuous editorial canvas. Shared theme tokens carry the art direction
+   through the portfolio, the study tools, and every window. */
 main, footer { position: relative; z-index: var(--z-content); }
 [id] { scroll-margin-top: 7rem; }
 .signal-terrain { position: absolute; inset: auto 0 0; width: 100%; height: 32%; pointer-events: none; opacity: .8; }
-
-
-/* A thin edge light ties the portfolio, learning tools and both arcades
-   together without adding listeners to every card. */
-:is(.about__focus-card, .mission-card, .gh__stat, .stat, .pcard, .jlab, .concept, .learning-card, .tool, .world-card, .jworld) {
-  background-image: linear-gradient(140deg, color-mix(in srgb, var(--color-accent-soft) 40%, transparent), transparent 60%);
-  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--color-accent) 8%, transparent);
-}
-:is(.pcard, .jlab, .tool, .jworld):focus-visible { outline-offset: 5px; border-color: var(--color-accent); }
-.section-heading__index { border-radius: 10px; }
-.section-heading__index::after { border-radius: 13px; inset: -4px; opacity: .6; }
-.section-heading__eyebrow { letter-spacing: .18em; font-size: .68rem; }
-.nav { box-shadow: 0 8px 32px rgba(0, 0, 0, .12), inset 0 1px 0 var(--color-border); }
+.section-heading__index { width: auto; height: auto; min-width: 25px; background: none; border: 0; border-radius: 0; font-weight: 400; }
+.section-heading__index::after { display: none; }
+.section-heading__eyebrow { letter-spacing: .16em; font-size: .64rem; }
+.section-heading__title { font-size: clamp(2.5rem, 5vw, 4.8rem); letter-spacing: -.055em; background: none; color: var(--color-fg); }
+.section-heading__desc { font-size: 1rem; line-height: 1.8; }
+.nav { box-shadow: 0 8px 32px rgba(0, 0, 0, .06), inset 0 1px 0 var(--color-border); }
 .nav__brand { position: relative; }
 .nav__brand::after { content: ""; width: 5px; height: 5px; background: var(--color-accent-3); border-radius: 50%; position: absolute; right: -9px; top: 8px; }
 .nav__link--active { background: var(--color-accent-soft); }
+.nav__mobile-window { display: flex; align-items: center; gap: 1rem; padding-bottom: 1rem; color: var(--color-fg-muted); font: .6rem var(--font-mono); letter-spacing: .12em; }
 .dock__btn:focus-visible::after { opacity: 1; }
 .dock__swatch { min-height: 40px; }
-.contact__inner { position: relative; }
-.contact__inner::before { content: ""; position: absolute; inset: -2rem 1rem; z-index: -1; pointer-events: none; border: 1px solid var(--color-border); border-radius: var(--radius-xl); background: radial-gradient(ellipse at 50% 100%, var(--color-accent-soft), transparent 65%); }
-.contact__email { background: var(--color-bg-secondary); }
+.projects__toolbar .segments { border: 0; border-radius: 0; padding: 0; background: none; }
+.projects__toolbar .segments__button { border-radius: 0; }
+.projects__toolbar .segments__selection, .hero__visual .segments__selection { border-radius: 0; box-shadow: inset 0 -2px var(--color-accent); background: var(--color-accent-soft); }
+.mission-section .mission-heading { max-width: 850px; }
+.mission-heading h2 { font-size: clamp(2rem, 4.5vw, 4rem); letter-spacing: -.05em; }
+.mission-section .mission-grid { gap: 3rem; }
+.mission-section .mission-card { padding: 1.75rem 0; border: 0; border-top: 1px solid var(--color-border-strong); border-radius: 0; background: none; box-shadow: none; }
+.arcade-teaser .teaser-demo { padding: 1.5rem 0; border: 0; border-block: 1px solid var(--color-border-strong); border-radius: 0; background: none; box-shadow: none; }
+.skills .skills__chart-wrap { border: 0; border-radius: 0; background: none; padding-inline: 0; }
+.skills .skills__readout { border: 0; border-left: 1px solid var(--color-accent); border-radius: 0; background: none; backdrop-filter: none; }
+.github .gh__stat, #github .gh__stat { border: 0; border-top: 1px solid var(--color-border-strong); border-radius: 0; background: none; padding-inline: 0; box-shadow: none; }
+.contact__inner { position: relative; max-width: 900px; }
+.contact__headline { font-size: clamp(3rem, 7vw, 6rem); line-height: 1.05; letter-spacing: -.06em; }
+.contact__inner::before { content: ""; position: absolute; inset: -4rem -2rem; z-index: -1; pointer-events: none; background: radial-gradient(ellipse at 50% 60%, var(--color-accent-soft), transparent 65%); }
+.contact__email { background: none; }
 
-
-.hub .hub__hero, .jhub .hub__hero { position: relative; padding: clamp(1.25rem, 3vw, 2.5rem); border: 1px solid var(--color-border-strong); border-radius: var(--radius-xl); background: radial-gradient(ellipse at top right, var(--color-accent-soft), transparent 60%), var(--color-bg-secondary); max-width: none; }
+/* The learning pages use the same open chapter structure, keeping controls
+   and data structures visually distinct where they need a real boundary. */
+.hub .hub__hero, .jhub .hub__hero { position: relative; padding: 1rem 0 3rem; border: 0; border-bottom: 1px solid var(--color-border-strong); border-radius: 0; background: radial-gradient(ellipse at top right, var(--color-accent-soft), transparent 60%); max-width: none; }
 .hub__hero .arcade-lede { max-width: 65ch; }
-.hub__hero .arcade-title { max-width: 24ch; }
-.learning-page > header { position: relative; max-width: none; padding: clamp(1.25rem, 3vw, 2rem); border: 1px solid var(--color-accent-border); border-radius: var(--radius-xl); background: linear-gradient(120deg, var(--color-accent-soft), transparent), var(--color-bg-secondary); }
+.hub__hero .arcade-title { max-width: 24ch; letter-spacing: -.055em; }
+.learning-page > header { position: relative; max-width: none; padding: 0 0 2.5rem; border: 0; border-bottom: 1px solid var(--color-border-strong); border-radius: 0; background: radial-gradient(ellipse at top right, var(--color-accent-soft), transparent 65%); }
 .learning-page > header p { max-width: 65ch; }
+.learning-page .learning-card { padding: 2rem 0; border: 0; border-bottom: 1px solid var(--color-border); border-radius: 0; background: none; box-shadow: none; }
+:is(.hub, .jhub) :is(.pcard, .jlab, .jworld, .world-card, .tool, .stat) { border: 0; border-top: 1px solid var(--color-border-strong); border-radius: 0; background: none; box-shadow: none; }
+:is(.hub, .jhub) :is(.pcard, .jlab, .jworld, .world-card, .tool):hover { background: var(--color-accent-soft); transform: none; box-shadow: none; }
+.jworldpage .concept { border: 0; border-block: 1px solid var(--color-border); border-radius: 0; background: none; box-shadow: none; }
 .deferred-section { min-height: 600px; }
-.deferred-section__load { display: inline-flex; gap: 1rem; align-items: center; min-height: 44px; margin-top: 1.5rem; padding: .75rem 1.25rem; border: 1px solid var(--color-accent-border); border-radius: var(--radius-md); color: var(--color-accent-strong); background: var(--color-accent-soft); }
-
-/* Neon is an opt-in colour system, not a permanent layer over every theme. */
-[data-theme="cyberpunk"] .btn { border-radius: 10px; }
-[data-theme="cyberpunk"] .cosmos__grid { opacity: .55; background-size: 56px 56px; }
+.deferred-section__load { display: inline-flex; gap: 1rem; align-items: center; min-height: 44px; margin-top: 1.5rem; padding: .75rem 1.25rem; border: 1px solid var(--color-accent-border); border-radius: 4px; color: var(--color-accent-strong); background: var(--color-accent-soft); }
+.trophy > .overlay-window-bar, .chess > .overlay-window-bar { margin: calc(-1 * var(--space-6)) calc(-1 * var(--space-6)) var(--space-5); }
+.site-chat .window-control { color: #302021; font: inherit; }
+[data-theme="cyberpunk"] .btn { border-radius: 4px; }
+[data-theme="cyberpunk"] .cosmos__grid { opacity: .45; background-size: 56px 56px; }
 [data-theme="cyberpunk"] .section-heading__index { color: var(--color-accent); }
-
 @media (min-width: 1100px) {
   .hub .hub__hero, .jhub .hub__hero { padding-right: 33%; min-height: 390px; }
   .hub__hero .arcade-title { font-size: clamp(2.5rem, 4vw, 3.5rem); }
-  .hub__hero .arcade-signal { position: absolute; width: 29%; right: 2rem; top: 50%; transform: translateY(-50%); margin-top: 0; }
+  .hub__hero .arcade-signal { position: absolute; width: 29%; right: 0; top: 50%; transform: translateY(-50%); margin-top: 0; }
 }
-@media (max-width: 767px) {
-  .contact__inner::before { inset-inline: .6rem; }
-}
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  :is(.pcard, .jlab, .tool, .jworld):hover { box-shadow: inset 0 1px 0 var(--color-accent-border), 0 10px 30px -20px var(--color-accent); }
-}
+@media (max-width: 767px) { .contact__inner::before { inset-inline: 0; } }
 [data-motion="paused"] *, [data-motion="paused"] *::before, [data-motion="paused"] *::after { animation-play-state: paused !important; scroll-behavior: auto !important; }
 [data-motion="paused"] .cosmos__nebula { transform: none; transition: none; }
-@media (forced-colors: active) {
-  .segments__button[aria-pressed="true"] { outline: 2px solid Highlight; outline-offset: -3px; }
-}
+@media (forced-colors: active) { .segments__button[aria-pressed="true"] { outline: 2px solid Highlight; outline-offset: -3px; } }
