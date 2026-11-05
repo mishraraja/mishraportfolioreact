@@ -21,3 +21,7 @@ function visit(key) {
 for (const [key, chunk] of Object.entries(vite)) if (chunk.isEntry) visit(key);
 if (!entrypoints.size) throw new Error("Production build has no entrypoint.");
 await writeFile("build/asset-manifest.json", JSON.stringify({ files, entrypoints: [...entrypoints] }, null, 2));
+await writeFile("build/deployment.json", JSON.stringify({
+  sourceCommit: process.env.VERCEL_GIT_COMMIT_SHA || process.env.GITHUB_SHA || null,
+  builtAt: new Date().toISOString(),
+}, null, 2));

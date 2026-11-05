@@ -57,7 +57,7 @@ function IconPalette() {
 export function ControlDock() {
   const {
     themes, theme, setTheme, soundOn, toggleSound,
-    setTerminalOpen, setTrophyOpen, unlockedCount, total,
+    setTerminalOpen, setTrophyOpen, unlockedCount, total, motionPaused, toggleMotion,
   } = useExperience();
 
   const [paletteOpen, setPaletteOpen] = useState(false);
@@ -111,6 +111,15 @@ export function ControlDock() {
           ) : null}
         </AnimatePresence>
       </div>
+
+      <button type="button" className={"dock__btn " + (motionPaused ? "dock__btn--active" : "")}
+        onClick={toggleMotion} aria-pressed={motionPaused}
+        aria-label={motionPaused ? "Resume ambient motion" : "Pause ambient motion"}
+        data-tip={motionPaused ? "Motion paused" : "Pause motion"}>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+          {motionPaused ? <path d="m9 5 11 7-11 7V5Z" /> : <path d="M8 5v14M16 5v14" />}
+        </svg>
+      </button>
 
       <button
         type="button"

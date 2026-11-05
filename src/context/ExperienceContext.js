@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { ACHIEVEMENTS, TOTAL_ACHIEVEMENTS, getAchievement, rankFor } from "../lib/achievements";
 import { setSoundEnabled, sfx } from "../lib/sound";
+import { MotionPreferenceContext } from "./MotionPreferenceContext";
 
 export const THEMES = [
   { id: "nebula", label: "Nebula", swatch: "#8b7bff" },
@@ -8,6 +9,7 @@ export const THEMES = [
   { id: "deepfield", label: "Deep Field", swatch: "#38bdf8" },
   { id: "solar", label: "Solar", swatch: "#ff9f45" },
   { id: "observatory", label: "Observatory", swatch: "#5b46e5" },
+  { id: "cyberpunk", label: "Cyberpunk", swatch: "#41f4df" },
 ];
 
 const STORAGE_KEY = "rm.portfolio.state.v1";
@@ -23,6 +25,7 @@ function readStored() {
     return {
       theme,
       soundOn: saved.soundOn === true,
+      motionPaused: saved.motionPaused === true,
       unlocked: Array.isArray(saved.unlocked) ? saved.unlocked.filter((id) => getAchievement(id)) : [],
       seenThemes: Array.isArray(saved.seenThemes) ? saved.seenThemes.filter((id) => THEMES.some((item) => item.id === id)) : [theme],
     };
@@ -45,6 +48,8 @@ export function ExperienceProvider({ children }) {
 
   const [theme, setThemeState] = useState(stored.theme || "nebula");
   const [soundOn, setSoundOn] = useState(Boolean(stored.soundOn));
+  const [motionPaused, setMotionPaused] = useState(Boolean(stored.motionPaused));
+  const toggleMotion = useCallback(() => setMotionPaused((value) => !value), []);
   const [retro, setRetro] = useState(false);
   const [unlocked, setUnlocked] = useState(() => new Set(stored.unlocked || []));
   const [seenThemes, setSeenThemes] = useState(() => new Set(stored.seenThemes || [stored.theme || "nebula"]));
@@ -63,10 +68,15 @@ export function ExperienceProvider({ children }) {
     writeStored({
       theme,
       soundOn,
+      motionPaused,
       unlocked: [...unlocked],
       seenThemes: [...seenThemes],
     });
-  }, [theme, soundOn, unlocked, seenThemes]);
+  }, [theme, soundOn, motionPaused, unlocked, seenThemes]);
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-motion", motionPaused ? "paused" : "auto");
+  }, [motionPaused]);
 
   /* ---------------- theme -> DOM ---------------- */
   useEffect(() => {
@@ -184,6 +194,8 @@ export function ExperienceProvider({ children }) {
       themes: THEMES,
       soundOn,
       toggleSound,
+      motionPaused,
+      toggleMotion,
       retro,
       setRetro,
       toggleRetro,
@@ -207,13 +219,17 @@ export function ExperienceProvider({ children }) {
       fireConfetti,
     }),
     [
-      theme, setTheme, cycleTheme, soundOn, toggleSound, retro, toggleRetro, unlocked,
+      theme, setTheme, cycleTheme, soundOn, toggleSound, motionPaused, toggleMotion, retro, toggleRetro, unlocked,
       unlock, hasUnlocked, resetProgress, toast, terminalOpen, trophyOpen, chessOpen,
       confettiBurst, fireConfetti,
     ]
   );
 
-  return <ExperienceContext.Provider value={value}>{children}</ExperienceContext.Provider>;
+  return (
+    <MotionPreferenceContext.Provider value={motionPaused}>
+      <ExperienceContext.Provider value={value}>{children}</ExperienceContext.Provider>
+    </MotionPreferenceContext.Provider>
+  );
 }
 
 export function useExperience() {

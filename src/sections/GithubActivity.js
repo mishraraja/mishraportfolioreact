@@ -6,6 +6,7 @@ import { Reveal } from "../components/ui/Reveal";
 import { useGithubData } from "../hooks/useGithubData";
 import { sfx } from "../lib/sound";
 import "./GithubActivity.css";
+import { useReducedMotion } from "../hooks/useReducedMotion";
 
 const calendarTheme = {
   dark: ["#111116", "#2a2350", "#4a3aa8", "#6f57f0", "#a597ff"],
@@ -13,12 +14,13 @@ const calendarTheme = {
 
 /** Counts up to a value when it scrolls into view. Numbers deserve a moment. */
 function CountUp({ value, duration = 1100 }) {
+  const reduced = useReducedMotion();
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-40px" });
   const [display, setDisplay] = useState(0);
 
   useEffect(() => {
-    if (!inView || typeof value !== "number") return undefined;
+    if (reduced || !inView || typeof value !== "number") return undefined;
     let raf;
     const start = performance.now();
 
@@ -31,9 +33,9 @@ function CountUp({ value, duration = 1100 }) {
     }
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [inView, value, duration]);
+  }, [inView, value, duration, reduced]);
 
-  return <span ref={ref}>{typeof value === "number" ? display : "—"}</span>;
+  return <span ref={ref}>{typeof value === "number" ? (reduced ? value : display) : "—"}</span>;
 }
 
 function relativeTime(iso) {

@@ -38,6 +38,7 @@
     "test:chat": "node --test scripts/chat-api.test.cjs",
     "start": "vite --port 3000",
     "build": "vite build",
+    "verify:live": "node scripts/verify-live.mjs",
     "postbuild": "node scripts/gen-build-manifest.mjs && node scripts/gen-sitemap.mjs && node scripts/gen-offline.mjs && node scripts/check-budgets.mjs",
     "test:browser": "playwright test",
     "test:offline": "node --test scripts/offline-worker.test.cjs",
@@ -48,7 +49,9 @@
     "lint": "eslint . --max-warnings=0"
   },
   "overrides": {
-    "@grpc/grpc-js": "^1.14.5"
+    "@grpc/grpc-js": "^1.14.5",
+    "glob": "^14.0.2",
+    "minimatch": "^11.0.1"
   },
   "engines": {
     "node": "^22.18.0 || >=24.11.0"

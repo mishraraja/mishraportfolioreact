@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { MotionPreferenceContext } from "../context/MotionPreferenceContext";
 
 export function useReducedMotion() {
+  const paused = useContext(MotionPreferenceContext);
   const [reduced, setReduced] = useState(
     () =>
       typeof window !== "undefined" &&
@@ -14,5 +16,5 @@ export function useReducedMotion() {
     return () => mql.removeEventListener("change", handler);
   }, []);
 
-  return reduced;
+  return reduced || paused;
 }

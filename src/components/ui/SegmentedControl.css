@@ -1,0 +1,6 @@
+.segments { display: inline-flex; flex-wrap: wrap; gap: .3rem; padding: .3rem; border: 1px solid var(--color-border-strong); border-radius: var(--radius-md); background: var(--color-bg-secondary); isolation: isolate; }
+.segments__button { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: .65rem; min-height: 42px; padding: .5rem 1rem; border-radius: 8px; color: var(--color-fg-muted); font-size: .8rem; font-weight: 600; transition: color var(--dur-fast); }
+.segments__button:hover, .segments__button[aria-pressed="true"] { color: var(--color-fg); }
+.segments__selection { position: absolute; inset: 0; z-index: -1; border: 1px solid var(--color-accent-border); border-radius: inherit; background: var(--color-accent-soft); box-shadow: inset 0 1px 0 color-mix(in srgb, var(--color-accent) 18%, transparent); }
+.segments__count { font-family: var(--font-mono); color: var(--color-fg-muted); font-size: .65rem; }
+.segments__button[aria-pressed="true"] .segments__count { color: var(--color-accent-strong); }

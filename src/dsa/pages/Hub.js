@@ -8,6 +8,7 @@ import { useProgress, isDue } from "../progress";
 import { ProblemCard } from "../components/ProblemCard";
 import { useTitle } from "../useTitle";
 import { sfx } from "../../lib/sound";
+import { ArcadeSignal } from "../../components/ui/ArcadeSignal";
 import "../sharedStyles";
 
 const DIFFICULTIES = ["All", "Easy", "Medium", "Hard"];
@@ -145,6 +146,7 @@ export function Hub() {
             📡 Play Pattern Radar
           </Link>
         </div>
+        <ArcadeSignal kind="dsa" />
       </header>
 
       {/* ---------- progress ---------- */}

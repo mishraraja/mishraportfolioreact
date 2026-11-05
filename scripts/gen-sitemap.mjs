@@ -14,7 +14,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const BUILD = resolve(__dirname, "../build");
 const PROBLEMS = resolve(__dirname, "../src/dsa/data/problems");
 const JAVA = resolve(__dirname, "../src/java");
-const SITE = process.env.SITE_URL || "https://rajamishra.vercel.app";
+const SITE = process.env.SITE_URL || "https://www.rajamishra.me";
 
 const ROUTES = [
   { path: "/learning", priority: "0.7", changefreq: "monthly" },

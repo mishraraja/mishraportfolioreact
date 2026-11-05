@@ -24,7 +24,7 @@ export function CosmicBackground() {
     const ctx = canvas.getContext ? canvas.getContext("2d") : null;
     if (!ctx) return undefined;
 
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
     let w = 0;
     let h = 0;
     let raf = null;
@@ -138,6 +138,12 @@ export function CosmicBackground() {
 
     function frame(now) {
       if (!running) return;
+      // Ambient decoration needs only 30fps, including on 120/144Hz displays.
+      // Keep UI gestures and the orbital scene independent of this limit.
+      if (now - lastFrame < 1000 / 30) {
+        raf = requestAnimationFrame(frame);
+        return;
+      }
       const dt = Math.min(now - lastFrame, 60);
       lastFrame = now;
 
@@ -210,9 +216,9 @@ export function CosmicBackground() {
       const [sr, sg, sb] = hexToRgb(colors.star);
       shootingStars = shootingStars.filter((m) => m.life > 0);
       for (const m of shootingStars) {
-        m.x += m.vx;
-        m.y += m.vy;
-        m.life -= m.decay;
+        m.x += m.vx * dt / (1000 / 60);
+        m.y += m.vy * dt / (1000 / 60);
+        m.life -= m.decay * dt / (1000 / 60);
 
         const mag = Math.hypot(m.vx, m.vy) || 1;
         const tailX = m.x - (m.vx / mag) * m.len;

@@ -182,6 +182,35 @@
    Retro mode — unlocked, not chosen. The Konami code turns the whole system
    into a 1983 CRT: phosphor green, scanlines, the lot.
    ========================================================================== */
+/* Cyberpunk adds a new atmosphere while Nebula remains the default. */
+[data-theme="cyberpunk"] {
+  --color-void: #02070b;
+  --color-bg: #050a12;
+  --color-bg-secondary: #080f1b;
+  --color-surface: #0b1422;
+  --color-surface-hover: #101e30;
+  --color-surface-raised: #0e192a;
+  --color-border: rgba(104, 211, 224, .15);
+  --color-border-strong: rgba(104, 211, 224, .3);
+  --color-border-glow: rgba(65, 244, 223, .35);
+  --color-fg: #eafaff;
+  --color-fg-muted: #9aafc6;
+  --color-fg-faint: #8fa3bb;
+  --color-accent: #41f4df;
+  --color-accent-strong: #89ffec;
+  --color-accent-soft: rgba(65, 244, 223, .08);
+  --color-accent-border: rgba(65, 244, 223, .32);
+  --color-accent-2: #ff6cbd;
+  --color-accent-2-strong: #ff9cd3;
+  --color-accent-2-soft: rgba(255, 108, 189, .12);
+  --color-accent-3: #9b9fff;
+  --color-accent-3-soft: rgba(155, 159, 255, .12);
+  --color-star: #e0fff8;
+  --gradient-text: linear-gradient(110deg, #eafaff 15%, #89ffec 65%, #ff9cd3);
+  --gradient-nebula: radial-gradient(ellipse 75% 45% at 5% 0%, rgba(65, 244, 223, .12), transparent 65%), radial-gradient(ellipse 65% 55% at 95% 20%, rgba(255, 108, 189, .1), transparent 65%);
+  --glow-accent: 0 0 0 1px var(--color-accent-border), 0 0 32px -16px var(--color-accent);
+}
+
 [data-retro="on"] {
   --color-void: #050803;
   --color-bg: #0a0d05;

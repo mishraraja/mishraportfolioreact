@@ -75,6 +75,9 @@
 @keyframes site-chat-spin { to { transform:rotate(360deg); } }
 @media (max-width:880px) { .site-chat-launch { bottom:calc(5.5rem + env(safe-area-inset-bottom,0px)); } .site-chat-load-error { bottom:10rem; } }
 @media (max-width:480px) {
+.site-chat-launch { width:52px; height:52px; min-height:52px; justify-content:center; padding:.4rem; right:1rem; }
+.site-chat-launch > span:nth-child(2), .site-chat-launch .site-chat-signal { display:none; }
+.site-chat-launch-orbit { width:36px; height:36px; }
 .site-chat-backdrop { padding:.5rem; } .site-chat { width:100%; height:calc(100dvh - 1rem); border-radius:19px; }
 .site-chat-header { padding:.85rem; gap:.6rem; } .site-chat h2 { font-size:1rem; }
 .site-chat-channel { padding:.6rem .85rem; font-size:.52rem; } .site-chat-description { padding:.7rem .85rem .3rem; }

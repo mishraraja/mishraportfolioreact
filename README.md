@@ -1,6 +1,6 @@
 <h2 align="center">
   Raja Mishra — Portfolio<br/>
-  <a href="https://rajamishra.vercel.app/" target="_blank">rajamishra.vercel.app</a>
+  <a href="https://www.rajamishra.me/" target="_blank">rajamishra.me</a>
 </h2>
 
 A React developer portfolio and interview-learning app built around **a software
@@ -15,7 +15,7 @@ on a schedule, with a saved snapshot available when live requests fail.
 
 ## Current Project Status
 
-Repository review: **27 October 2026**. This README describes the reviewed source
+Repository review: **5 November 2026**. This README describes the reviewed source
 tree. Live deployment and external-service verification are tracked separately.
 
 | Area | Current implementation |
@@ -88,9 +88,35 @@ No environment variables are required to start the app. Optional script settings
 | `GH_USERNAME` | GitHub refresh script | `mishraraja` |
 | `GITHUB_TOKEN` | GitHub refresh script | Optional authentication for GitHub requests; keep it out of frontend code |
 | `STRICT` | GitHub refresh script | Set to `1` to exit with failure if refreshing fails |
-| `SITE_URL` | Sitemap script | `https://rajamishra.vercel.app` |
+| `SITE_URL` | Sitemap and live verification scripts | `https://www.rajamishra.me` |
 
 ## What Makes It Different
+
+### An orbital identity with an optional cyberpunk atmosphere
+
+Nebula remains the default. A sixth selectable atmosphere, Cyberpunk, brings
+mint, magenta and ultraviolet to the same interface. The hero includes an
+instrument frame and static layered SVG terrain. Selected work has sliding
+category filters, counts and project-specific architecture sketches. Shared
+surface styling extends into both arcades, labs and learning tools.
+
+The interface draws on [Watermelon UI](https://ui.watermelon.sh/animated-components/category/tabs)
+for component patterns, the existing [Motion](https://motion.dev/) dependency
+for transitions, and [Haikei](https://haikei.app/) for layered SVG inspiration.
+The components and artwork are implemented locally in plain CSS and React;
+there is no added UI runtime, Tailwind migration, animation package or media download.
+See [design and delivery notes](docs/DESIGN_UPGRADE.md) for the implementation map.
+
+The portfolio now opens immediately. Use `?intro=1` for the original boot-log
+Easter egg. API and GitHub sections load near the viewport, and chess and
+trophies load when opened. A persistent motion control pauses ambient effects;
+the orbital loop also stops offscreen and in hidden tabs. Operating-system
+reduced-motion preferences take precedence. The starfield draws at most 30fps.
+
+After `npm run build`, use `npm run verify:live` to compare the deployed manifest
+and initial asset bytes with your local build. `/deployment.json` records the
+source commit when supplied by Vercel or GitHub Actions. The canonical domain
+and generated sitemap use `https://www.rajamishra.me`.
 
 ### Homepage shortcuts, demo and coding questions
 
@@ -154,9 +180,9 @@ Nineteen technologies in five constellations, each star hand-placed by its
 group and jittered by a seed of its own name, so the chart is identical on every
 visit. Hover a star to read what that technology is actually used for.
 
-### Five skies and a sixth you unlock
+### Six skies and a seventh you unlock
 
-Nebula, Supernova, Deep Field, Solar and Observatory each swap one set of tokens,
+Nebula, Supernova, Deep Field, Solar, Observatory and Cyberpunk each swap one set of tokens,
 so every component — including the starfield canvas and the orrery — repaints
 automatically. The Konami code boots **retro mode**: a 1983 CRT with phosphor
 green, scanlines, flicker and a vignette.
@@ -169,7 +195,7 @@ control dock.
 
 ### Other things worth finding
 
-- A Spring Boot startup log on first load, once per session
+- An optional Spring Boot startup log at `?intro=1`
 - A playable mate-in-one chess puzzle
 - A parallax starfield that brightens near the cursor and warps when you scroll
 - Shooting stars, on their own schedule

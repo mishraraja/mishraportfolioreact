@@ -10,6 +10,8 @@ import { useExperience } from "../context/ExperienceContext";
 import { TOTAL_ACHIEVEMENTS } from "../lib/achievements";
 import { sfx } from "../lib/sound";
 import { MissionPanel } from "./MissionControl";
+import { SegmentedControl } from "../components/ui/SegmentedControl";
+import { SignalTerrain } from "../components/ui/SignalTerrain";
 import "./Hero.css";
 
 const containerVariants = {
@@ -62,7 +64,7 @@ function LiveStatus() {
 
 export function Hero() {
   const reduced = useReducedMotion();
-  const { unlock } = useExperience();
+  const { unlock, theme, setTheme } = useExperience();
   const MotionDiv = reduced ? "div" : motion.div;
 
   const headline = useScramble(profile.headline, { speed: 1.1 });
@@ -81,12 +83,13 @@ export function Hero() {
   }, [unlock]);
 
   function jump(id) {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    document.getElementById(id)?.scrollIntoView({ behavior: reduced ? "instant" : "smooth" });
     sfx.click();
   }
 
   return (
     <section id="home" className="hero section">
+      <SignalTerrain />
       <div className="container hero__grid">
         <MotionDiv
           className="hero__copy"
@@ -94,6 +97,10 @@ export function Hero() {
           initial={reduced ? undefined : "hidden"}
           animate={reduced ? undefined : "show"}
         >
+          <motion.div variants={reduced ? undefined : itemVariants} className="hero__signature">
+            <span>RAJA MISHRA <span aria-hidden="true">/</span> SOFTWARE ENGINEER</span>
+            <span className="hero__edition">PERSONAL SPACE · 2026</span>
+          </motion.div>
           <motion.div variants={reduced ? undefined : itemVariants} className="hero__badge">
             <span className="hero__badge-pulse" aria-hidden="true" />
             {profile.openToWork ? "Open to new opportunities" : "Building with Java & Spring Boot"}
@@ -170,6 +177,11 @@ export function Hero() {
             <kbd>`</kbd> opens a shell &middot; <kbd>&#8984;K</kbd> jumps anywhere &middot;{" "}
             <kbd>T</kbd> repaints the sky
           </motion.p>
+          <div className="hero__theme-control">
+            <span className="hero__theme-label">Choose your atmosphere</span>
+            <SegmentedControl label="Hero colour theme" value={theme} onChange={setTheme}
+              options={[{ id: "nebula", label: "Nebula" }, { id: "cyberpunk", label: "Cyberpunk" }]} />
+          </div>
         </MotionDiv>
 
         <motion.div
@@ -178,7 +190,9 @@ export function Hero() {
           animate={reduced ? undefined : { opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
         >
+          <div className="hero__visual-head"><span><i />STACK ORBITAL</span><span>DRAG TO EXPLORE ↗</span></div>
           <OrbitalSystem />
+          <div className="hero__visual-foot"><span>JAVA / SPRING / CLOUD</span><span>INTERACTIVE SYSTEM · 01</span></div>
           <MissionPanel />
         </motion.div>
       </div>

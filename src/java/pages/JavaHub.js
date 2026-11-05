@@ -6,6 +6,7 @@ import { LABS, getLab, labsInWorld } from "../labs";
 import { useJavaProgress } from "../progress";
 import { useTitle } from "../../dsa/useTitle";
 import { sfx } from "../../lib/sound";
+import { ArcadeSignal } from "../../components/ui/ArcadeSignal";
 
 const TOOLS = [
   {
@@ -111,6 +112,7 @@ export function JavaHub() {
             ⚖️ Play This or That
           </Link>
         </div>
+        <ArcadeSignal kind="backend" />
       </header>
 
       <section className="hub__stats" aria-label="Your progress">

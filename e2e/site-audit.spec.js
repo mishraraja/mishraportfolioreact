@@ -18,10 +18,10 @@ test("every sitemap page renders with valid internal links and assets", async ({
     await page.goto(path + "?skipIntro=1");
     await expect(page.locator("main h1").first()).toBeVisible();
     if (path === "/") await expect(page.locator("#github")).toBeAttached();
-    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", "https://rajamishra.vercel.app" + path);
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", "https://www.rajamishra.me" + path);
     await expect(page.locator("main")).not.toContainText("Whitelabel Error Page");
     if (path === "/" || path === "/dsa/two-sum") {
-      for (const theme of ["nebula", "supernova", "deepfield", "solar", "observatory"]) {
+      for (const theme of ["nebula", "supernova", "deepfield", "solar", "observatory", "cyberpunk"]) {
         await page.evaluate((value) => { document.documentElement.dataset.theme = value; }, theme);
         const accessibility = await new AxeBuilder({ page }).include("main").withTags(["wcag2a", "wcag2aa", "wcag21aa"]).analyze();
         expect(accessibility.violations, `${path} in ${theme}`).toEqual([]);

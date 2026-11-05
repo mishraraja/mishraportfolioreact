@@ -58,6 +58,8 @@ export function OrbitalSystem() {
   useEffect(() => {
     let raf = null;
     let last = performance.now();
+    let visible = true;
+    const svg = svgRef.current;
 
     function place(el, orbit, period, phase, radius) {
       const rx = orbit * MAX_ORBIT;
@@ -85,6 +87,7 @@ export function OrbitalSystem() {
     }
 
     function frame(now) {
+      raf = null;
       const dt = Math.min((now - last) / 1000, 0.1);
       last = now;
 
@@ -112,12 +115,26 @@ export function OrbitalSystem() {
         cometRef.current.style.opacity = (0.5 + depth * 0.5).toFixed(3);
       }
 
-      raf = requestAnimationFrame(frame);
+      if (!reduced && visible && !document.hidden) raf = requestAnimationFrame(frame);
     }
 
+    function syncVisibility() {
+      if (raf !== null) cancelAnimationFrame(raf);
+      raf = null;
+      last = performance.now();
+      if (visible && !document.hidden) raf = requestAnimationFrame(frame);
+    }
+    const observer = typeof IntersectionObserver !== "undefined" ? new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      syncVisibility();
+    }, { rootMargin: "100px" }) : null;
+    if (svg) observer?.observe(svg);
+    document.addEventListener("visibilitychange", syncVisibility);
     raf = requestAnimationFrame(frame);
     return () => {
-      if (raf) cancelAnimationFrame(raf);
+      if (raf !== null) cancelAnimationFrame(raf);
+      observer?.disconnect();
+      document.removeEventListener("visibilitychange", syncVisibility);
     };
   }, [reduced]);
 
@@ -176,7 +193,7 @@ export function OrbitalSystem() {
       <svg
         ref={svgRef}
         className="orbital__svg"
-        viewBox={"0 0 " + VIEW_W + " " + VIEW_H}
+        viewBox={"0 55 " + VIEW_W + " " + (VIEW_H - 110)}
         role="group"
         aria-label="The technology stack shown as a solar system"
       >

@@ -1,19 +1,17 @@
 import { useEffect, useState, lazy, Suspense } from "react";
 import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
+import { MotionConfig } from "framer-motion";
 import { ExperienceProvider, useExperience } from "./context/ExperienceContext";
-import { Loader } from "./components/Loader";
 import ChatLauncher from "./chat/ChatLauncher";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { ScrollProgress } from "./components/ScrollProgress";
 import { CommandPalette } from "./components/CommandPalette";
 import { ControlDock } from "./components/ControlDock";
-import { TrophyCase } from "./components/TrophyCase";
 import { CosmicBackground } from "./components/background/CosmicBackground";
 import { Confetti } from "./components/fx/Confetti";
 import { AchievementToast } from "./components/fx/AchievementToast";
 import { Terminal } from "./components/easter/Terminal";
-import { ChessPuzzle } from "./components/easter/ChessPuzzle";
 import { IdleNudge } from "./components/easter/IdleNudge";
 import { Hero } from "./sections/Hero";
 import { MissionControl } from "./sections/MissionControl";
@@ -22,7 +20,8 @@ import { Experience } from "./sections/Experience";
 import { Projects } from "./sections/Projects";
 import { ArcadeTeaser } from "./sections/Arcade";
 import { Skills } from "./sections/Skills";
-import { ApiConsole } from "./sections/ApiConsole";
+import { DeferredSection } from "./components/ui/DeferredSection";
+import { useReducedMotion } from "./hooks/useReducedMotion";
 import { Contact } from "./sections/Contact";
 import { NotFound } from "./sections/NotFound";
 import { useKonami, useTypedWord } from "./hooks/useKonami";
@@ -30,6 +29,12 @@ import { installConsoleEgg } from "./lib/consoleEgg";
 import "./styles/tokens.css";
 import "./styles/themes.css";
 import "./styles/base.css";
+import "./styles/interface.css";
+
+const Loader = lazy(() => import("./components/Loader").then((m) => ({ default: m.Loader })));
+const TrophyCase = lazy(() => import("./components/TrophyCase").then((m) => ({ default: m.TrophyCase })));
+const ChessPuzzle = lazy(() => import("./components/easter/ChessPuzzle").then((m) => ({ default: m.ChessPuzzle })));
+const ApiConsole = lazy(() => import("./sections/ApiConsole").then((m) => ({ default: m.ApiConsole })));
 
 const GithubActivity = lazy(() =>
   import("./sections/GithubActivity").then((m) => ({ default: m.GithubActivity }))
@@ -67,10 +72,10 @@ function Home() {
       <Projects />
       <ArcadeTeaser />
       <Skills />
-      <ApiConsole />
-      <Suspense fallback={<div className="section" style={{ minHeight: "40vh" }} />}>
+      <DeferredSection id="api" label="API console"><ApiConsole /></DeferredSection>
+      <DeferredSection id="github" label="GitHub activity">
         <GithubActivity />
-      </Suspense>
+      </DeferredSection>
       <Contact />
     </>
   );
@@ -143,29 +148,22 @@ function GlobalInteractions() {
 }
 
 /**
- * The boot log is a great first impression and a bad third one. Play it once
- * per browser session, then get out of the way. `?skipIntro=1` skips it
- * outright, which is also what screenshot tooling wants.
+ * The boot log is an optional Easter egg. The portfolio renders immediately;
+ * visitors who want the original startup sequence can use `?intro=1`.
  */
 function introDuration() {
   if (typeof window === "undefined") return 0;
 
   const params = new URLSearchParams(window.location.search);
-  if (params.get("skipIntro") === "1") return 0;
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return 300;
-
-  try {
-    if (sessionStorage.getItem("rm.booted") === "1") return 450;
-    sessionStorage.setItem("rm.booted", "1");
-  } catch {
-    /* storage blocked — just play the full intro */
-  }
+  if (params.get("intro") !== "1" || params.get("skipIntro") === "1") return 0;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return 0;
   return 1750;
 }
 
 function Shell() {
-  // Resolved exactly once — introDuration() marks the session as booted, so
-  // calling it twice would always report a returning visitor.
+  const { chessOpen, trophyOpen } = useExperience();
+  const reduced = useReducedMotion();
+  // Resolve the optional intro once so route changes never restart it.
   const [introMs] = useState(introDuration);
   const [loading, setLoading] = useState(introMs > 0);
 
@@ -176,12 +174,12 @@ function Shell() {
   }, [introMs]);
 
   return (
-    <>
+    <MotionConfig reducedMotion={reduced ? "always" : "user"}>
       <a href="#main" className="skip-link">
         Skip to content
       </a>
 
-      <Loader visible={loading} />
+      {loading && <Suspense fallback={null}><Loader visible={loading} /></Suspense>}
 
       {/* The sky everything sits in */}
       <CosmicBackground />
@@ -194,8 +192,10 @@ function Shell() {
       {/* Overlays */}
       <CommandPalette />
       <Terminal />
-      <ChessPuzzle />
-      <TrophyCase />
+      <Suspense fallback={null}>
+        {chessOpen && <ChessPuzzle />}
+        {trophyOpen && <TrophyCase />}
+      </Suspense>
       <IdleNudge />
       <Confetti />
       <AchievementToast />
@@ -229,7 +229,7 @@ function Shell() {
 
       <Footer />
       <ChatLauncher />
-    </>
+    </MotionConfig>
   );
 }
 

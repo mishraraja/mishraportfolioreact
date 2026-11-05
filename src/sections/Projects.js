@@ -4,6 +4,7 @@ import { profile } from "../data/profile";
 import { SectionHeading } from "../components/ui/SectionHeading";
 import { ProjectCard } from "./ProjectCard";
 import { Reveal } from "../components/ui/Reveal";
+import { SegmentedControl } from "../components/ui/SegmentedControl";
 import "./Projects.css";
 
 function EmptyState() {
@@ -47,30 +48,18 @@ export function Projects() {
           description="A closer look at what got built, why, and how."
         />
 
-        {projectCategories.length > 0 && (
-          <div className="projects__filters">
-            <button
-              className={`tag ${filter === "all" ? "tag--active" : ""}`}
-              onClick={() => setFilter("all")}
-            >
-              All
-            </button>
-            {projectCategories.map((cat) => (
-              <button
-                key={cat.id}
-                className={`tag ${filter === cat.id ? "tag--active" : ""}`}
-                onClick={() => setFilter(cat.id)}
-              >
-                {cat.label}
-              </button>
-            ))}
-          </div>
-        )}
+        <div className="projects__toolbar">
+          <SegmentedControl label="Filter projects" value={filter} onChange={setFilter}
+            options={[{ id: "all", label: "All work", count: projects.length }, ...projectCategories.map((cat) => ({
+              ...cat, count: projects.filter((project) => project.category?.includes(cat.id)).length,
+            }))]} />
+          <p className="projects__count" role="status">{String(filtered.length).padStart(2, "0")} projects / selected work</p>
+        </div>
 
         {filtered.length > 0 ? (
           <div className="projects__list">
             {filtered.map((project, i) => (
-              <ProjectCard key={project.id} project={project} index={i} />
+              <ProjectCard key={project.id} project={project} index={projects.indexOf(project)} order={i} />
             ))}
           </div>
         ) : (

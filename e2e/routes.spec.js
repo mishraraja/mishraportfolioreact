@@ -6,7 +6,7 @@ test("native cursor stays visible with normal motion across themes and dialogs",
   await page.goto("/?skipIntro=1");
   await expect(page.locator("main h1")).toBeVisible();
   await page.getByRole("button", { name: "Change colour theme" }).click();
-  for (const theme of ["Nebula", "Supernova", "Deep Field", "Solar", "Observatory"]) {
+  for (const theme of ["Nebula", "Supernova", "Deep Field", "Solar", "Observatory", "Cyberpunk"]) {
     await page.getByRole("button", { name: "Theme: " + theme, exact: true }).click();
     await page.mouse.move(200, 200);
     await expect(page.locator("body")).not.toHaveCSS("cursor", "none");
