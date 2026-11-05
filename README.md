@@ -94,11 +94,18 @@ No environment variables are required to start the app. Optional script settings
 
 ### An orbital identity with an optional cyberpunk atmosphere
 
-Nebula remains the default. A sixth selectable atmosphere, Cyberpunk, brings
-mint, magenta and ultraviolet to the same interface. The hero includes an
-instrument frame and static layered SVG terrain. Selected work has sliding
-category filters, counts and project-specific architecture sketches. Shared
-surface styling extends into both arcades, labs and learning tools.
+Observatory is the light default, including the first paint. Themes are chosen
+through one dedicated appearance button; deliberate choices are remembered.
+Older automatically saved Nebula defaults migrate to Observatory. Cyberpunk
+remains an optional mint, magenta and ultraviolet atmosphere.
+
+The hero pairs readable, staggered text with an interactive systems panel:
+explore the stack as an orbit or trace a simulated request through four stages.
+The request animation plays only when requested, supports direct stage selection,
+and advances manually under reduced motion. Selected work uses a responsive
+two-column grid, sliding filters and animated expandable project details.
+The terminal has a readable Raja Mishra wordmark, suggested commands, keyboard
+focus containment and colours inherited from every theme.
 
 The interface draws on [Watermelon UI](https://ui.watermelon.sh/animated-components/category/tabs)
 for component patterns, the existing [Motion](https://motion.dev/) dependency
@@ -120,8 +127,8 @@ and generated sitemap use `https://www.rajamishra.me`.
 
 ### Homepage shortcuts, demo and coding questions
 
-The hero now offers three entry points: selected work, a quick coding challenge,
-and the developer's story, with a greeting based on the visitor's local time.
+The hero offers selected work and the API console, alongside the interactive
+systems panel. The main navigation provides direct section and arcade links.
 Below the hero, an interactive lab follows a simulated request through API,
 service, database and response stages. A rotating set of three Java/DSA questions
 offers explanations and links into the existing arcades. The opening question
@@ -199,7 +206,7 @@ control dock.
 - A playable mate-in-one chess puzzle
 - A parallax starfield that brightens near the cursor and warps when you scroll
 - Shooting stars, on their own schedule
-- Magnetic buttons, spotlight cards, a decrypting headline
+- Spring button feedback, spotlight cards, a staggered readable headline
 - A live clock in the author's timezone
 - A nudge if you stand still too long
 - ASCII art and callable functions in the DevTools console
@@ -373,6 +380,6 @@ of placeholder content.
 Everything decorative gets out of the way. `prefers-reduced-motion` disables the
 scramble, the starfield, orbital motion, confetti and the boot log. Native system
 cursors remain visible across themes and respect operating-system pointer settings. The hero
-headline carries its real text for screen readers while it decrypts visually.
+headline carries its complete text for screen readers while words enter visually.
 Focus states are never removed, every overlay is a labelled dialog, and the
 keyboard shortcuts ignore keystrokes aimed at inputs.

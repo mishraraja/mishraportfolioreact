@@ -16,7 +16,7 @@ a verification limit, not proof of a DNS outage.
 
 | Reference | Applied pattern | Local implementation |
 | --- | --- | --- |
-| [Watermelon UI catalog](https://ui.watermelon.sh/) and [Continuous Tabs](https://ui.watermelon.sh/animated-components/category/tabs) | Sliding selection, compact stateful controls, consistent component surfaces | `SegmentedControl`, project counts, hero atmosphere selector, shared interface CSS |
+| [Watermelon UI catalog](https://ui.watermelon.sh/) and [Continuous Tabs](https://ui.watermelon.sh/animated-components/category/tabs) | Sliding selection, compact stateful controls, consistent component surfaces | Project filters, systems-view selector, shared interface CSS |
 | [Motion bundle guidance](https://motion.dev/docs/react-reduce-bundle-size) and [accessibility](https://motion.dev/docs/react-accessibility) | Reuse existing Framer Motion; layout transitions; reduced-motion policy; avoid duplicate runtimes | Project layout transitions, `MotionConfig`, shared motion preference context |
 | [Haikei](https://haikei.app/) | Layered waves and low-cost vector scenery | Original `SignalTerrain` SVG with inherited theme colours |
 
@@ -28,15 +28,21 @@ from its app. No third-party component source or graphics were copied.
 
 ## Interface changes
 
-- Keep Nebula as the default; add Cyberpunk to the hero, theme picker, keyboard
-  cycling and command palette through the existing theme registry.
-- Frame the interactive orbital scene and add a responsive SVG terrain layer.
+- Observatory is the light first-paint default. Remember explicit theme choices,
+  and migrate older automatic dark defaults. One dedicated picker controls all
+  six themes; keyboard cycling, the command palette and terminal share the registry.
+- Use staggered readable hero text and a systems panel that transitions between
+  the existing orbit and a finite, visitor-triggered request simulation.
 - Keep the hero copy first on narrow screens, followed by the orbital scene.
 - Collapse the floating chat launcher to its orbit icon on small phones so it
   covers less content while keeping its accessible name.
 - Replace project initials with project-specific architecture sketches. Preserve
   the real government portal image, project facts, links and native details.
-- Add pressed-state project filters, stable numbering and result counts.
+- Use a responsive project grid, pressed-state filters, stable numbering, result
+  counts and Motion layout/height transitions for project disclosures.
+- Replace the terminal ASCII banner with a readable Raja Mishra identity. All
+  terminal colours use the shared tokens. Add command suggestions, proper focus
+  containment, focus restoration and body-scroll locking.
 - Apply shared edge lighting and surfaces to portfolio cards, DSA, Java,
   concept cards, labs, learning and engineering. Add distinct static signal
   diagrams to the two arcade headers.
@@ -53,6 +59,10 @@ from its app. No third-party component source or graphics were copied.
 - Persist a motion pause preference, while always respecting OS reduced motion.
 - Move font discovery into the HTML head with preconnects and `display=swap`.
 - Keep native controls, keyboard focus, labels, and forced-colour states.
+- Use spring press feedback instead of moving button targets under the pointer.
+  Magnetic interaction loops stop once settled instead of running while idle.
+- Ordinary first scrolling records its discovery silently instead of covering
+  the work with a celebratory toast.
 
 Baseline initial transfer: **178.2 KiB JavaScript + 16.6 KiB CSS gzip**.
 Use the build output for final values; the existing 185/25 KiB budgets are

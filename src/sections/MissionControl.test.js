@@ -72,9 +72,11 @@ test("lab has an explicit load fallback when intersection has not fired", async 
 
 test("project story keeps the original destination and places disclosure outside the link", () => {
   const { container } = render(<ProjectCard project={projects[0]} index={0} />);
-  const details = container.querySelector("details");
+  const details = container.querySelector(".project-story__details");
   expect(details.closest("a")).toBeNull();
   expect(container.querySelector("a.project-card")).toHaveAttribute("href", projects[0].liveUrl);
+  fireEvent.click(within(details).getByRole("button", { name: /Project details/ }));
+  expect(within(details).getByRole("button")).toHaveAttribute("aria-expanded", "true");
   expect(within(details).getByText(projects[0].problem)).toBeInTheDocument();
   expect(within(details).getByText(projects[0].description)).toBeInTheDocument();
 });

@@ -1,10 +1,17 @@
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import { useReducedMotion } from "../../hooks/useReducedMotion";
 import "./Button.css";
 
+const motionComponents = new WeakMap();
+function animatedComponent(component) {
+  if (typeof component === "string") return motion[component];
+  if (!motionComponents.has(component)) motionComponents.set(component, motion.create(component));
+  return motionComponents.get(component);
+}
+
 /**
- * Shared button/link. Applies a subtle magnetic pull toward the cursor on
- * pointer devices; falls back to a plain hover state on touch / reduced motion.
+ * Shared button/link. Small spring feedback confirms hover and press without
+ * moving the target away from the pointer or running an idle animation loop.
  */
 export function Button({
   as = "button",
@@ -14,29 +21,16 @@ export function Button({
   magnetic = true,
   ...rest
 }) {
-  const ref = useRef(null);
   const reduced = useReducedMotion();
-  const Component = as;
-
-  function onMouseMove(e) {
-    if (!magnetic || reduced || !ref.current || window.matchMedia("(pointer: coarse)").matches) return;
-    const rect = ref.current.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-    ref.current.style.transform = `translate(${x * 0.2}px, ${y * 0.3}px)`;
-  }
-
-  function onMouseLeave() {
-    if (!ref.current) return;
-    ref.current.style.transform = "translate(0, 0)";
-  }
+  const Component = animatedComponent(as);
+  const animate = !reduced && magnetic && !rest.disabled && rest["aria-disabled"] !== "true";
 
   return (
     <Component
-      ref={ref}
       className={`btn btn--${variant} ${className}`}
-      onMouseMove={onMouseMove}
-      onMouseLeave={onMouseLeave}
+      whileHover={animate ? { y: -2 } : undefined}
+      whileTap={animate ? { scale: .98, y: 0 } : undefined}
+      transition={{ type: "spring", stiffness: 420, damping: 30 }}
       {...rest}
     >
       <span className="btn__label">{children}</span>

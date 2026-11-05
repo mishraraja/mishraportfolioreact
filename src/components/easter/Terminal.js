@@ -7,15 +7,10 @@ import { projects } from "../../data/projects";
 import { experience } from "../../data/experience";
 import { useExperience } from "../../context/ExperienceContext";
 import { sfx } from "../../lib/sound";
+import { useLockBodyScroll } from "../../hooks/useLockBodyScroll";
 import "./Terminal.css";
 
-const BANNER = [
-  "  ____      _         __  __ _     _               ",
-  " |  _ \\ ___| |__     |  \\/  (_)___| |__  _ __ __ _ ",
-  " | |_) / _ \\ '_ \\ _  | |\\/| | / __| '_ \\| '__/ _` |",
-  " |  _ <  __/ | | | |_| |  | | \\__ \\ | | | | | (_| |",
-  " |_| \\_\\___|_| |_|\\___/_|  |_|_|___/_| |_|_|  \\__,_|",
-];
+const BANNER = ["Raja Mishra", "Java Backend Developer / Portfolio shell"];
 
 const ARCADE_PAGES = {
   radar: "/dsa/radar",
@@ -50,7 +45,7 @@ export function Terminal() {
   const {
     terminalOpen, setTerminalOpen, unlock, cycleTheme, setTheme,
     toggleSound, setChessOpen, fireConfetti, toggleRetro, setTrophyOpen,
-    unlockedCount, total,
+    unlockedCount, total, themes, theme, retro,
   } = useExperience();
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -61,6 +56,16 @@ export function Terminal() {
   const [histIndex, setHistIndex] = useState(-1);
   const bodyRef = useRef(null);
   const inputRef = useRef(null);
+  const dialogRef = useRef(null);
+  const openerRef = useRef(null);
+  const welcomed = useRef(false);
+  useLockBodyScroll(terminalOpen);
+  const restoreFocus = useCallback(() => {
+    const previous = openerRef.current;
+    const target = previous?.isConnected && previous !== document.body
+      ? previous : document.querySelector('.dock button[aria-label="Open terminal"]');
+    target?.focus({ preventScroll: true });
+  }, []);
 
   const print = useCallback((content, type = "out") => {
     setLines((prev) => [...prev, { id: Math.random().toString(36).slice(2), content, type }]);
@@ -223,7 +228,7 @@ export function Terminal() {
         desc: "change the colour scheme",
         run: (args) => {
           const name = (args[0] || "").toLowerCase();
-          const valid = ["nebula", "supernova", "deepfield", "solar", "observatory"];
+          const valid = themes.map((item) => item.id);
           if (!name) {
             cycleTheme();
             return ["Cycled to the next theme."];
@@ -301,7 +306,7 @@ export function Terminal() {
   }, [
     cycleTheme, setTheme, toggleSound, setChessOpen, setTerminalOpen,
     fireConfetti, toggleRetro, setTrophyOpen, unlockedCount, total,
-    pathname, navigate,
+    pathname, navigate, themes,
   ]);
 
   const run = useCallback(
@@ -341,20 +346,35 @@ export function Terminal() {
 
   /* Greet on first open */
   useEffect(() => {
-    if (terminalOpen && lines.length === 0) {
-      printAll(BANNER, "banner");
+    if (terminalOpen && !welcomed.current) {
+      welcomed.current = true;
       printAll([
-        "",
-        "Portfolio shell v2.0 - type `help` to begin, `exit` to leave.",
-        "",
+        "Welcome. Explore the work, change the theme, or jump into a lab.",
+        "Type help to see commands. Escape closes the shell.",
       ], "sys");
     }
   }, [terminalOpen, lines.length, printAll]);
 
-  /* Focus + autoscroll */
+  /* Keep keyboard focus in the dialog, then return it to the opener. */
   useEffect(() => {
-    if (terminalOpen) setTimeout(() => inputRef.current?.focus(), 120);
-  }, [terminalOpen]);
+    if (!terminalOpen) return undefined;
+    const previous = document.activeElement;
+    openerRef.current = previous;
+    const dialog = dialogRef.current;
+    inputRef.current?.focus();
+    function onKey(event) {
+      if (event.key === "Escape") {
+        event.preventDefault(); event.stopPropagation(); setTerminalOpen(false); sfx.close();
+      }
+      if (event.key !== "Tab") return;
+      const controls = [...dialog.querySelectorAll("button:not(:disabled), input")];
+      const first = controls[0], last = controls[controls.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    }
+    dialog.addEventListener("keydown", onKey);
+    return () => { dialog.removeEventListener("keydown", onKey); restoreFocus(); };
+  }, [terminalOpen, setTerminalOpen, restoreFocus]);
 
   useEffect(() => {
     if (bodyRef.current) bodyRef.current.scrollTop = bodyRef.current.scrollHeight;
@@ -370,10 +390,6 @@ export function Terminal() {
         e.preventDefault();
         setTerminalOpen(true);
         sfx.open();
-      }
-      if (e.key === "Escape" && terminalOpen) {
-        setTerminalOpen(false);
-        sfx.close();
       }
     }
     window.addEventListener("keydown", onKey);
@@ -410,7 +426,7 @@ export function Terminal() {
   }
 
   return (
-    <AnimatePresence>
+    <AnimatePresence onExitComplete={() => { if (!terminalOpen) restoreFocus(); }}>
       {terminalOpen ? (
         <motion.div
           className="term-overlay"
@@ -423,6 +439,7 @@ export function Terminal() {
           }}
         >
           <motion.div
+            ref={dialogRef}
             className="term"
             role="dialog"
             aria-modal="true"
@@ -433,7 +450,6 @@ export function Terminal() {
             transition={{ duration: 0.26, ease: [0.16, 1, 0.3, 1] }}
             onClick={(e) => {
               e.stopPropagation();
-              inputRef.current?.focus();
             }}
           >
             <header className="term__bar">
@@ -457,6 +473,16 @@ export function Terminal() {
                 &times;
               </button>
             </header>
+
+            <div className="term__identity">
+              <span className="term__monogram" aria-hidden="true">&gt;_</span>
+              <div><h2>Raja Mishra</h2><p>Java Backend Developer <span aria-hidden="true">/</span> Portfolio shell</p></div>
+              <span className="term__theme">{retro ? "Retro" : themes.find((item) => item.id === theme)?.label}</span>
+            </div>
+            <div className="term__quick" role="group" aria-label="Suggested terminal commands">
+              <span>Try a command</span>
+              {["help", "whoami", "projects", "theme"].map((command) => <button type="button" key={command} onClick={() => { run(command); inputRef.current?.focus(); }}>{command}<span aria-hidden="true">↵</span></button>)}
+            </div>
 
             <div className="term__body" ref={bodyRef}>
               {lines.map((line) => (

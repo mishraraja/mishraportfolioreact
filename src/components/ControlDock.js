@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useExperience } from "../context/ExperienceContext";
 import { sfx } from "../lib/sound";
@@ -61,13 +61,26 @@ export function ControlDock() {
   } = useExperience();
 
   const [paletteOpen, setPaletteOpen] = useState(false);
+  const paletteGroup = useRef(null);
+  const paletteButton = useRef(null);
+  useEffect(() => {
+    if (!paletteOpen) return undefined;
+    function outside(event) { if (!paletteGroup.current?.contains(event.target)) setPaletteOpen(false); }
+    function onKey(event) {
+      if (event.key === "Escape") { setPaletteOpen(false); paletteButton.current?.focus(); }
+    }
+    document.addEventListener("pointerdown", outside);
+    document.addEventListener("keydown", onKey);
+    return () => { document.removeEventListener("pointerdown", outside); document.removeEventListener("keydown", onKey); };
+  }, [paletteOpen]);
   const pct = Math.round((unlockedCount / total) * 100);
 
   return (
     <div className="dock" role="toolbar" aria-label="Site controls">
       {/* Theme picker */}
-      <div className="dock__group">
+      <div className="dock__group" ref={paletteGroup}>
         <button
+          ref={paletteButton}
           type="button"
           className={"dock__btn " + (paletteOpen ? "dock__btn--active" : "")}
           onClick={() => {
@@ -91,6 +104,7 @@ export function ControlDock() {
               exit={{ opacity: 0, x: 10, scale: 0.95 }}
               transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
             >
+              <p className="dock__palette-title">Appearance</p>
               {themes.map((t) => (
                 <button
                   key={t.id}
@@ -136,7 +150,8 @@ export function ControlDock() {
       <button
         type="button"
         className="dock__btn"
-        onClick={() => {
+        onClick={(event) => {
+          event.currentTarget.focus({ preventScroll: true });
           setTerminalOpen(true);
           sfx.open();
         }}

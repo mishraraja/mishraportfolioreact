@@ -36,9 +36,11 @@ export function useMagnetic(strength = 0.35, radius = 90) {
         tgtX = 0;
         tgtY = 0;
       }
+      if (raf === null && !document.hidden) raf = requestAnimationFrame(tick);
     }
 
     function tick() {
+      raf = null;
       curX += (tgtX - curX) * 0.15;
       curY += (tgtY - curY) * 0.15;
       if (Math.abs(curX) < 0.01 && Math.abs(curY) < 0.01) {
@@ -46,11 +48,10 @@ export function useMagnetic(strength = 0.35, radius = 90) {
         curY = 0;
       }
       el.style.transform = `translate3d(${curX.toFixed(2)}px, ${curY.toFixed(2)}px, 0)`;
-      raf = requestAnimationFrame(tick);
+      if (Math.abs(tgtX - curX) > .01 || Math.abs(tgtY - curY) > .01) raf = requestAnimationFrame(tick);
     }
 
     window.addEventListener("pointermove", onMove, { passive: true });
-    raf = requestAnimationFrame(tick);
 
     return () => {
       window.removeEventListener("pointermove", onMove);

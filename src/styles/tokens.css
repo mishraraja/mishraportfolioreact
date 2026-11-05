@@ -7,6 +7,7 @@
    ========================================================================== */
 
 :root {
+  color-scheme: dark;
   /* ---- Color: deep space surfaces ---- */
   --color-void: #02030a;
   --color-bg: #04060f;

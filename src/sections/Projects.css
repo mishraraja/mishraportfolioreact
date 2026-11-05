@@ -12,10 +12,16 @@
 }
 
 .projects__list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
   gap: var(--space-6);
 }
+
+.projects__toolbar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 2rem; }
+.projects__count { font: .65rem/1.6 var(--font-mono); color: var(--color-fg-muted); letter-spacing: .03em; }
+@media (max-width: 800px) { .projects__list { grid-template-columns: 1fr; } }
+@media (max-width: 420px) { .projects__toolbar .segments__button { padding-inline: .7rem; } }
 
 .projects-empty {
   border: 1px dashed var(--color-border-strong);

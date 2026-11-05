@@ -118,6 +118,7 @@
 
 /* --- Observatory: the one light theme. Daylight at the telescope. --- */
 [data-theme="observatory"] {
+  color-scheme: light;
   --color-void: #e8e6e1;
   --color-bg: #f7f6f3;
   --color-bg-secondary: #efede8;
@@ -182,7 +183,7 @@
    Retro mode — unlocked, not chosen. The Konami code turns the whole system
    into a 1983 CRT: phosphor green, scanlines, the lot.
    ========================================================================== */
-/* Cyberpunk adds a new atmosphere while Nebula remains the default. */
+/* Cyberpunk is available from the dedicated theme picker. */
 [data-theme="cyberpunk"] {
   --color-void: #02070b;
   --color-bg: #050a12;

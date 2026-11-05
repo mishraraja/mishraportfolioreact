@@ -4,15 +4,16 @@ import { setSoundEnabled, sfx } from "../lib/sound";
 import { MotionPreferenceContext } from "./MotionPreferenceContext";
 
 export const THEMES = [
+  { id: "observatory", label: "Observatory", swatch: "#5b46e5" },
   { id: "nebula", label: "Nebula", swatch: "#8b7bff" },
   { id: "supernova", label: "Supernova", swatch: "#ff5fa2" },
   { id: "deepfield", label: "Deep Field", swatch: "#38bdf8" },
   { id: "solar", label: "Solar", swatch: "#ff9f45" },
-  { id: "observatory", label: "Observatory", swatch: "#5b46e5" },
   { id: "cyberpunk", label: "Cyberpunk", swatch: "#41f4df" },
 ];
 
 const STORAGE_KEY = "rm.portfolio.state.v1";
+export const DEFAULT_THEME = "observatory";
 
 const ExperienceContext = createContext(null);
 
@@ -21,9 +22,13 @@ function readStored() {
   try {
     const saved = JSON.parse(window.localStorage.getItem(STORAGE_KEY) || "{}");
     if (!saved || typeof saved !== "object" || Array.isArray(saved)) return {};
-    const theme = THEMES.some((item) => item.id === saved.theme) ? saved.theme : "nebula";
+    // Older versions saved Nebula automatically, without a visitor choosing it.
+    // Migrate those defaults to light; remember deliberate choices from now on.
+    const themeChosen = saved.themePreferenceVersion === 2 && saved.themeChosen === true;
+    const theme = themeChosen && THEMES.some((item) => item.id === saved.theme) ? saved.theme : DEFAULT_THEME;
     return {
       theme,
+      themeChosen,
       soundOn: saved.soundOn === true,
       motionPaused: saved.motionPaused === true,
       unlocked: Array.isArray(saved.unlocked) ? saved.unlocked.filter((id) => getAchievement(id)) : [],
@@ -46,13 +51,14 @@ function writeStored(state) {
 export function ExperienceProvider({ children }) {
   const stored = useRef(readStored()).current;
 
-  const [theme, setThemeState] = useState(stored.theme || "nebula");
+  const [theme, setThemeState] = useState(stored.theme || DEFAULT_THEME);
+  const [themeChosen, setThemeChosen] = useState(Boolean(stored.themeChosen));
   const [soundOn, setSoundOn] = useState(Boolean(stored.soundOn));
   const [motionPaused, setMotionPaused] = useState(Boolean(stored.motionPaused));
   const toggleMotion = useCallback(() => setMotionPaused((value) => !value), []);
   const [retro, setRetro] = useState(false);
   const [unlocked, setUnlocked] = useState(() => new Set(stored.unlocked || []));
-  const [seenThemes, setSeenThemes] = useState(() => new Set(stored.seenThemes || [stored.theme || "nebula"]));
+  const [seenThemes, setSeenThemes] = useState(() => new Set(stored.seenThemes || [stored.theme || DEFAULT_THEME]));
   const [toast, setToast] = useState(null);
   const [terminalOpen, setTerminalOpen] = useState(false);
   const [trophyOpen, setTrophyOpen] = useState(false);
@@ -67,12 +73,14 @@ export function ExperienceProvider({ children }) {
   useEffect(() => {
     writeStored({
       theme,
+      themeChosen,
+      themePreferenceVersion: 2,
       soundOn,
       motionPaused,
       unlocked: [...unlocked],
       seenThemes: [...seenThemes],
     });
-  }, [theme, soundOn, motionPaused, unlocked, seenThemes]);
+  }, [theme, themeChosen, soundOn, motionPaused, unlocked, seenThemes]);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-motion", motionPaused ? "paused" : "auto");
@@ -108,6 +116,9 @@ export function ExperienceProvider({ children }) {
 
         // Defer the celebration out of the state updater.
         queueMicrotask(() => {
+          // Ordinary scrolling should not cover the work with a celebration.
+          // The discovery still counts and remains visible in the trophy case.
+          if (id === "first-contact" && next.size !== TOTAL_ACHIEVEMENTS) return;
           sfx.unlock();
           setToast({ ...meta, count: next.size });
           clearTimeout(toastTimer.current);
@@ -138,8 +149,10 @@ export function ExperienceProvider({ children }) {
 
   const setTheme = useCallback(
     (id) => {
+      if (!THEMES.some((item) => item.id === id)) return;
       themeRef.current = id;
       setThemeState(id);
+      setThemeChosen(true);
       sfx.click();
       setSeenThemes((prev) => {
         if (prev.has(id)) return prev;

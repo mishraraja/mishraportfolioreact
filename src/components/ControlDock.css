@@ -112,6 +112,7 @@
 
 /* Palette flyout */
 .dock__palette {
+  translate: 0 -50%;
   position: absolute;
   right: calc(100% + 14px);
   top: 50%;
@@ -170,6 +171,8 @@
   color: var(--color-fg-faint);
 }
 
+.dock__palette-title { padding: .5rem .75rem; font: .65rem var(--font-mono); color: var(--color-fg-muted); letter-spacing: .08em; text-transform: uppercase; }
+
 /* On phones the rail lies down along the bottom edge */
 @media (max-width: 880px) {
   .dock {
@@ -189,6 +192,7 @@
     transform: translateX(-50%) translateY(0);
   }
   .dock__palette {
+    translate: -50% 0;
     right: auto;
     left: 50%;
     top: auto;

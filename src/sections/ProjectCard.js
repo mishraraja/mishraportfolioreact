@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { useId, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { useTilt } from "../hooks/useTilt";
 import { useReducedMotion } from "../hooks/useReducedMotion";
 import "./ProjectCard.css";
@@ -29,13 +30,16 @@ function ProjectBlueprint({ project }) {
 
 export function ProjectCard({ project, index, order = index }) {
   const reduced = useReducedMotion();
+  const [expanded, setExpanded] = useState(false);
+  const detailId = useId();
   const href = project.liveUrl || project.repoUrl;
   const Component = href ? motion.a : motion.div;
   const linkProps = href ? { href, target: "_blank", rel: "noreferrer" } : {};
   const tilt = useTilt(6);
 
   return (
-    <motion.div className="project-story" layout={reduced ? false : "position"}>
+    <motion.article className="project-story" layout={reduced ? false : "position"}
+      exit={{ opacity: 0, scale: reduced ? 1 : .985 }} transition={{ duration: .18 }}>
     <Component
       className="project-card"
       initial={reduced ? false : { opacity: 0, y: 24 }}
@@ -75,14 +79,24 @@ export function ProjectCard({ project, index, order = index }) {
 
       {href ? <span className="project-card__link">View Project →</span> : null}
     </Component>
-    <details className="project-story__details">
-      <summary>Project details <span className="sr-only">— {project.title}</span></summary>
+    <div className="project-story__details">
+      <button type="button" id={detailId + "-button"} aria-expanded={expanded} aria-controls={detailId}
+        onClick={() => setExpanded((value) => !value)}>
+        <span>Project details <span className="sr-only">— {project.title}</span></span>
+        <motion.span aria-hidden="true" animate={{ rotate: expanded ? 45 : 0 }} transition={{ duration: .2 }}>+</motion.span>
+      </button>
+      <AnimatePresence initial={false}>
+      {expanded && <motion.div id={detailId} role="region" aria-labelledby={detailId + "-button"}
+        initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }}
+        transition={{ duration: reduced ? 0 : .28, ease: [.16, 1, .3, 1] }} style={{ overflow: "hidden" }}>
       <dl>
         <div><dt>01 / The problem</dt><dd>{project.problem}</dd></div>
         <div><dt>02 / My contribution</dt><dd><strong>{project.role}.</strong> {project.solution}</dd></div>
         <div><dt>03 / What got built</dt><dd>{project.description}</dd></div>
       </dl>
-    </details>
-    </motion.div>
+      </motion.div>}
+      </AnimatePresence>
+    </div>
+    </motion.article>
   );
 }

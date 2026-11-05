@@ -13,7 +13,7 @@ describe("page shell", () => {
     localStorage.setItem("rm.portfolio.state.v1", JSON.stringify({ theme: "missing", unlocked: {}, seenThemes: 123, soundOn: "false" }));
     render(<App />);
     expect(screen.getByRole("heading", { level: 1 })).toBeInTheDocument();
-    expect(document.documentElement.getAttribute("data-theme")).toBe("nebula");
+    expect(document.documentElement.getAttribute("data-theme")).toBe("observatory");
   });
 
   test("renders the hero headline", () => {
@@ -28,7 +28,7 @@ describe("page shell", () => {
 
   test("applies a theme to the document root", () => {
     render(<App />);
-    expect(document.documentElement.getAttribute("data-theme")).toBe("nebula");
+    expect(document.documentElement.getAttribute("data-theme")).toBe("observatory");
   });
 
   test("exposes the site controls toolbar", () => {
@@ -38,10 +38,22 @@ describe("page shell", () => {
 });
 
 describe("theme switching", () => {
+  test("the old automatic dark preference migrates to Observatory", () => {
+    localStorage.setItem("rm.portfolio.state.v1", JSON.stringify({ theme: "nebula" }));
+    render(<App />);
+    expect(document.documentElement).toHaveAttribute("data-theme", "observatory");
+  });
+
+  test("a deliberate theme choice is preserved", () => {
+    localStorage.setItem("rm.portfolio.state.v1", JSON.stringify({ theme: "cyberpunk", themeChosen: true, themePreferenceVersion: 2 }));
+    render(<App />);
+    expect(document.documentElement).toHaveAttribute("data-theme", "cyberpunk");
+  });
+
   test("pressing T moves to the next theme", () => {
     render(<App />);
     fireEvent.keyDown(window, { key: "t" });
-    expect(document.documentElement.getAttribute("data-theme")).toBe("supernova");
+    expect(document.documentElement.getAttribute("data-theme")).toBe("nebula");
   });
 
   test.each(["input", "textarea", "select"])("typing in a %s does not trigger the theme shortcut", (tag) => {
@@ -49,12 +61,26 @@ describe("theme switching", () => {
     const input = document.createElement(tag);
     document.body.appendChild(input);
     fireEvent.keyDown(input, { key: "t" });
-    expect(document.documentElement.getAttribute("data-theme")).toBe("nebula");
+    expect(document.documentElement.getAttribute("data-theme")).toBe("observatory");
     document.body.removeChild(input);
   });
 });
 
 describe("terminal", () => {
+  test("the readable brand and theme command use the active theme registry", async () => {
+    render(<App />);
+    fireEvent.keyDown(window, { key: "`" });
+    const dialog = await screen.findByRole("dialog", { name: /interactive terminal/i });
+    expect(within(dialog).getByRole("heading", { name: "Raja Mishra" })).toBeInTheDocument();
+    expect(within(dialog).getByText("Observatory")).toBeInTheDocument();
+    const input = within(dialog).getByLabelText("Terminal input");
+    fireEvent.change(input, { target: { value: "theme cyberpunk" } });
+    fireEvent.keyDown(input, { key: "Enter" });
+    expect(document.documentElement).toHaveAttribute("data-theme", "cyberpunk");
+    expect(within(dialog).getByText("Cyberpunk")).toBeInTheDocument();
+    expect(within(dialog).getByText("Theme set to cyberpunk.")).toBeInTheDocument();
+  });
+
   test("backtick opens the shell", async () => {
     render(<App />);
     fireEvent.keyDown(window, { key: "`" });

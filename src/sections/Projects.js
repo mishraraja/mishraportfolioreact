@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import { projects, projectCategories } from "../data/projects";
 import { profile } from "../data/profile";
 import { SectionHeading } from "../components/ui/SectionHeading";
@@ -57,11 +58,13 @@ export function Projects() {
         </div>
 
         {filtered.length > 0 ? (
-          <div className="projects__list">
+          <LayoutGroup id="selected-work"><motion.div layout className="projects__list">
+            <AnimatePresence initial={false}>
             {filtered.map((project, i) => (
               <ProjectCard key={project.id} project={project} index={projects.indexOf(project)} order={i} />
             ))}
-          </div>
+            </AnimatePresence>
+          </motion.div></LayoutGroup>
         ) : (
           <EmptyState />
         )}

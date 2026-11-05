@@ -1,10 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="observatory">
 
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#08080b" />
+  <meta name="theme-color" content="#f7f6f3" />
+  <script>
+    // Apply an explicit visitor preference before paint. Old automatic dark
+    // defaults migrate to Observatory; malformed/blocked storage stays light.
+    try {
+      const saved = JSON.parse(localStorage.getItem("rm.portfolio.state.v1") || "{}");
+      const themes = ["observatory", "nebula", "supernova", "deepfield", "solar", "cyberpunk"];
+      if (saved && saved.themePreferenceVersion === 2 && saved.themeChosen === true && themes.includes(saved.theme)) {
+        document.documentElement.dataset.theme = saved.theme;
+        document.querySelector('meta[name="theme-color"]').content = saved.theme === "observatory" ? "#f7f6f3" : "#04060f";
+      }
+      if (saved && saved.motionPaused === true) document.documentElement.dataset.motion = "paused";
+    } catch { /* Light is the safe default when storage is unavailable. */ }
+  </script>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="manifest" href="/manifest.json" />
   <link rel="canonical" href="https://www.rajamishra.me/" />
