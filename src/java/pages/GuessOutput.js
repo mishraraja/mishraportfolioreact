@@ -18,7 +18,7 @@ function newGame(level) {
 }
 
 export function GuessOutput() {
-  useTitle("Guess the Output — Backend Arcade");
+  useTitle("Guess the Output — Backend Arcade", "Practice tracing Java code and predicting program output with short interactive challenges.");
   const { game, state } = useJavaProgress();
   const [level, setLevel] = useState("Mixed");
   const [phase, setPhase] = useState("intro");

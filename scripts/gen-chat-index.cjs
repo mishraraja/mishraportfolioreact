@@ -24,7 +24,7 @@ const { profile, focusAreas } = data("src/data/profile.js");
 add("profile", "About Raja", "/#about", [profile.positioning, ...profile.bio, profile.education.degree, "Education: " + profile.education.period, "Interests: " + profile.hobbies.join(", ")]);
 add("skills", "Skills", "/#skills", focusAreas.map((a) => a.label + ": " + a.detail));
 add("contact", "Contact Raja", "/#contact", ["Email: " + profile.social.email, "LinkedIn: " + profile.social.linkedin, "GitHub: " + profile.social.github, profile.openToWork ? "Raja is open to work." : "Check the contact section for availability."]);
-add("resume", "Resume", profile.resumeUrl, ["Download Raja Mishra's resume from the resume link on the portfolio."]);
+add("resume", "Resume access request", "/#contact", ["Request Raja Mishra's resume by email from the contact section."]);
 const { projects } = data("src/data/projects.js");
 add("projects", "Projects overview", "/#projects", ["Projects: " + projects.map((p) => p.title).join(", ") + "."]);
 for (const p of projects) add("project:" + p.id, p.title, "/#projects", [p.description, p.problem, p.solution, "Role: " + p.role, "Stack: " + p.stack.join(", "), p.period]);

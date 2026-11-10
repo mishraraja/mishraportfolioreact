@@ -47,7 +47,7 @@ function newGame() {
 }
 
 export function PatternRadar() {
-  useTitle("Pattern Radar — DSA Arcade");
+  useTitle("Pattern Radar — DSA Arcade", "Practice recognizing data structures and algorithms patterns from interview problem clues.");
   const { radar, state } = useProgress();
   const [phase, setPhase] = useState("intro");
   const [rounds, setRounds] = useState(newGame);

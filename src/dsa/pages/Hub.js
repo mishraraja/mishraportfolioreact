@@ -70,7 +70,7 @@ function StatTile({ label, value, detail, meter, meterColor }) {
 }
 
 export function Hub() {
-  useTitle("DSA Arcade — 75 interview problems you can play");
+  useTitle("DSA Arcade — 75 interview problems you can play", "Practice 75 data structures and algorithms interview problems with interactive walkthroughs and Java/Python solutions.");
   const progress = useProgress();
   const { statusOf, record, level, next, levelProgress, xp, streak, state } = progress;
   const navigate = useNavigate();

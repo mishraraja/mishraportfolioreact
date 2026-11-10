@@ -103,6 +103,32 @@
   will-change: transform;
 }
 
+.contact__resume-gate {
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  min-width: 220px;
+  min-height: 54px;
+  border-radius: var(--radius-pill);
+}
+
+.contact__resume-preview {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  color: var(--color-fg-faint);
+  font-size: .65rem;
+  filter: blur(5px);
+  opacity: .4;
+  white-space: nowrap;
+}
+
+.contact__resume-gate .btn { z-index: 1; }
+
 @media (max-width: 520px) {
   .contact__email {
     width: 100%;

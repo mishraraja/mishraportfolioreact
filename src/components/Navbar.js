@@ -118,9 +118,9 @@ export function Navbar() {
       </nav>
 
       <div className="nav__actions">
-        {profile.resumeUrl ? (
-          <a className="nav__resume" href={profile.resumeUrl} target="_blank" rel="noreferrer">
-            Resume
+        {profile.resumeRequestUrl ? (
+          <a className="nav__resume" href={profile.resumeRequestUrl}>
+            🔒 Resume access
           </a>
         ) : null}
         <button

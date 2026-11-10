@@ -57,7 +57,7 @@ function StatTile({ label, value, detail, meter, meterColor }) {
 }
 
 export function JavaHub() {
-  useTitle("Backend Arcade — Java backend interview prep you can play");
+  useTitle("Backend Arcade — Java backend interview prep you can play", "Study Java, Spring, SQL, testing and backend engineering through interactive cards, labs and interview games.");
   const { state, xp, level, next, levelProgress, streak, learned, labRecord, bossRecord } = useJavaProgress();
   const navigate = useNavigate();
 

@@ -165,10 +165,10 @@ export function Terminal() {
         ],
       },
       resume: {
-        desc: "download the CV",
+        desc: "request resume access by email",
         run: () => {
-          window.open(profile.resumeUrl, "_blank", "noopener");
-          return ["Opening " + profile.resumeUrl + " ..."];
+          window.location.href = profile.resumeRequestUrl;
+          return ["Opening an email to request resume access."];
         },
       },
       hire: {

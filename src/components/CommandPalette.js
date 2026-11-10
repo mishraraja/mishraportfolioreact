@@ -164,13 +164,13 @@ export function CommandPalette() {
           close();
         },
       },
-      profile.resumeUrl && {
+      profile.resumeRequestUrl && {
         id: "resume",
-        label: "Open resume",
+        label: "Request resume access",
         group: "Contact",
         icon: "📄",
         action: () => {
-          window.open(profile.resumeUrl, "_blank", "noopener");
+          window.location.href = profile.resumeRequestUrl;
           close();
         },
       },

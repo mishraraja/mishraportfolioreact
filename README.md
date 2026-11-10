@@ -1,6 +1,6 @@
 <h2 align="center">
   Raja Mishra — Portfolio<br/>
-  <a href="https://www.rajamishra.me/" target="_blank">rajamishra.me</a>
+  <a href="https://rajamishra.me/" target="_blank">rajamishra.me</a>
 </h2>
 
 A React developer portfolio and interview-learning app built around **a software
@@ -87,7 +87,7 @@ No environment variables are required to start the app. Optional script settings
 | `GH_USERNAME` | GitHub refresh script | `mishraraja` |
 | `GITHUB_TOKEN` | GitHub refresh script | Optional authentication for GitHub requests; keep it out of frontend code |
 | `STRICT` | GitHub refresh script | Set to `1` to exit with failure if refreshing fails |
-| `SITE_URL` | Sitemap and live verification scripts | `https://www.rajamishra.me` |
+| `LIVE_SITE_URL` | Optional live verification target | `https://rajamishra.me` |
 
 ## What Makes It Different
 
@@ -132,8 +132,8 @@ starfield has no continuous drawing loop or scroll-velocity effects.
 
 After `npm run build`, use `npm run verify:live` to compare the deployed manifest
 and initial asset bytes with your local build. `/deployment.json` records the
-source commit when supplied by Vercel or GitHub Actions. The canonical domain
-and generated sitemap use `https://www.rajamishra.me`.
+source commit when supplied by Vercel or GitHub Actions. The canonical domain,
+robots file and generated sitemap use `https://rajamishra.me`.
 
 ### Homepage shortcuts, demo and coding questions
 
@@ -381,8 +381,8 @@ scripts/        GitHub fetch + sitemap generation
 
 ## Editing Content
 
-All personal content — bio, skills, experience, projects, social links, resume
-URL — lives in `src/data/`. Update those files; the UI and the API console both
+All personal content — bio, skills, experience, projects, social links, and the
+resume access request — lives in `src/data/`. Update those files; the UI and the API console both
 pick up the change. Empty sections render an honest "coming soon" state instead
 of placeholder content.
 

@@ -29,7 +29,7 @@ const DECODER = [
 ];
 
 export function Patterns() {
-  useTitle("Pattern Playbook — DSA Arcade");
+  useTitle("Pattern Playbook — DSA Arcade", "Learn common data structures and algorithms interview patterns with examples and linked practice problems.");
   const { hash } = useLocation();
   const { statusOf } = useProgress();
   const [open, setOpen] = useState(() => (hash ? hash.slice(1) : null));

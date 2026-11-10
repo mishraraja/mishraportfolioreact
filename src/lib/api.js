@@ -128,7 +128,7 @@ export const ENDPOINTS = [
       nextStep: "mailto:" + profile.social.email,
       _links: {
         self: { href: "/api/v1/hire" },
-        resume: { href: profile.resumeUrl },
+        resume: { href: profile.resumeRequestUrl },
         linkedin: { href: profile.social.linkedin },
       },
     }),

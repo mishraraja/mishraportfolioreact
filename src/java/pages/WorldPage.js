@@ -20,7 +20,10 @@ export function WorldPage() {
   const { worldId } = useParams();
   const { hash } = useLocation();
   const world = getWorld(worldId);
-  useTitle(world ? world.name + " — Backend Arcade" : "World not found — Backend Arcade");
+  useTitle(
+    world ? world.name + " — Backend Arcade" : "World not found — Backend Arcade",
+    world ? `${world.blurb} Explore Java backend concepts, interview questions and practical labs.` : "Explore Java backend concepts and practical interview preparation in the Backend Arcade."
+  );
   const { learned, toggleConcept, labRecord, bossRecord, boss, visit, notify } = useJavaProgress();
   const [filter, setFilter] = useState("all");
 

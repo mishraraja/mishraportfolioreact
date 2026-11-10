@@ -9,12 +9,15 @@
 import { writeFile, access, readdir, readFile } from "node:fs/promises";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { CANONICAL_SITE_URL } from "./site-config.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const BUILD = resolve(__dirname, "../build");
 const PROBLEMS = resolve(__dirname, "../src/dsa/data/problems");
 const JAVA = resolve(__dirname, "../src/java");
-const SITE = process.env.SITE_URL || "https://www.rajamishra.me";
+// Keep sitemap URLs on the bare-domain origin that serves the canonical pages.
+// A stale Vercel SITE_URL override previously emitted www URLs that redirected.
+const SITE = CANONICAL_SITE_URL;
 
 const ROUTES = [
   { path: "/learning", priority: "0.7", changefreq: "monthly" },
@@ -70,16 +73,12 @@ async function main() {
     return;
   }
 
-  const today = new Date().toISOString().split("T")[0];
   const routes = [...ROUTES, ...(await problemRoutes()), ...(await javaRoutes())];
 
   const urls = routes.map(
     (r) =>
       "  <url>\n" +
       "    <loc>" + SITE + r.path + "</loc>\n" +
-      "    <lastmod>" + today + "</lastmod>\n" +
-      "    <changefreq>" + r.changefreq + "</changefreq>\n" +
-      "    <priority>" + r.priority + "</priority>\n" +
       "  </url>"
   ).join("\n");
 

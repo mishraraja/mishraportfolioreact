@@ -11,7 +11,7 @@ import { sfx } from "../../lib/sound";
 export function LabPage() {
   const { labId } = useParams();
   const lab = getLab(labId);
-  useTitle(lab ? lab.title + " — Backend Arcade lab" : "Lab not found — Backend Arcade");
+  useTitle(lab ? lab.title + " — Backend Arcade lab" : "Lab not found — Backend Arcade", lab ? `${lab.title}: an interactive Java backend lab with a practical coding exercise.` : "Explore practical Java backend labs in the Backend Arcade.");
   const { labRecord, mission, visit } = useJavaProgress();
 
   useEffect(() => {
@@ -139,7 +139,7 @@ export function LabPage() {
 }
 
 export function LabsIndex() {
-  useTitle("Labs — Backend Arcade");
+  useTitle("Labs — Backend Arcade", "Run interactive Java backend labs that let you explore a problem, change the code and see the result.");
   const { labRecord } = useJavaProgress();
   const cleared = LABS.filter((l) => labRecord(l.id).done).length;
   const worlds = WORLDS.filter((w) => LABS.some((l) => l.world === w.id));

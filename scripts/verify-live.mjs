@@ -1,9 +1,10 @@
 import { readFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
+import { CANONICAL_SITE_URL } from "./site-config.mjs";
 
 // Verify actual asset bytes, not just that a SPA rewrite returns HTTP 200.
-const site = new URL(process.env.SITE_URL || "https://www.rajamishra.me");
+const site = new URL(process.env.LIVE_SITE_URL || CANONICAL_SITE_URL);
 const local = JSON.parse(await readFile("build/asset-manifest.json", "utf8"));
 async function get(path) {
   const response = await fetch(new URL(path, site), { signal: AbortSignal.timeout(20000), cache: "no-store" });
@@ -13,7 +14,21 @@ async function get(path) {
 const home = await get("/");
 const html = await home.text();
 if (!html.includes("<title>Raja Mishra")) throw new Error("The live page does not identify this portfolio.");
+if (!html.includes(`<link rel="canonical" href="${CANONICAL_SITE_URL}/"`)) {
+  throw new Error("The live homepage canonical does not use the bare domain.");
+}
 console.log(`Live site: ${home.url} (HTTP ${home.status})`);
+const robots = await (await get("/robots.txt")).text();
+if (!robots.includes(`Sitemap: ${CANONICAL_SITE_URL}/sitemap.xml`)) {
+  throw new Error("robots.txt does not point to the canonical sitemap.");
+}
+const sitemap = await (await get("/sitemap.xml")).text();
+const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => new URL(match[1]));
+if (!sitemapUrls.length) throw new Error("The live sitemap contains no URLs.");
+if (sitemapUrls.some((url) => url.origin !== CANONICAL_SITE_URL)) {
+  throw new Error("The live sitemap contains URLs outside the canonical bare domain.");
+}
+console.log(`Verified robots.txt and ${sitemapUrls.length} canonical sitemap URLs`);
 const remote = await (await get("/asset-manifest.json")).json();
 if (JSON.stringify(local) !== JSON.stringify(remote)) throw new Error("Live assets differ from this production build. Deployment may still be pending.");
 const hash = (bytes) => createHash("sha256").update(bytes).digest("hex");

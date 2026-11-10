@@ -93,10 +93,15 @@ export function Contact() {
               {primaryLabel} →
             </Button>
           </span>
-          {profile.resumeUrl ? (
-            <Button as="a" href={profile.resumeUrl} variant="secondary" download onClick={sfx.click}>
-              Download Resume
-            </Button>
+          {profile.resumeRequestUrl ? (
+            <div className="contact__resume-gate">
+              <div className="contact__resume-preview" aria-hidden="true">
+                <strong>Raja Mishra</strong><span>Java Backend Developer</span><span>Experience · Skills · Projects</span>
+              </div>
+              <Button as="a" href={profile.resumeRequestUrl} variant="secondary" onClick={sfx.click}>
+                🔒 Request Resume Access
+              </Button>
+            </div>
           ) : null}
         </Reveal>
 

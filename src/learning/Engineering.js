@@ -4,7 +4,7 @@ import "./Learning.css";
 
 const REPO = "https://github.com/mishraraja/mishraportfolioreact/blob/main/";
 export default function Engineering() {
-  useTitle("How this portfolio and learning app are built");
+  useTitle("How this portfolio and learning app are built", "Read the technical case study behind Raja Mishra's portfolio and interactive learning app.");
   return <article className="learning-page container">
     <header><span className="eyebrow">Technical case study</span><h1>Building a portfolio with interactive learning tools</h1><p>This case study describes the code in this repository. The employer projects shown on the homepage are separate work; their internal architecture and performance figures are not published here.</p></header>
     <section className="learning-card"><h2>The problem and constraints</h2><p>The site needs to present my work and explain Java and DSA concepts through interactive examples. It is hosted on Vercel Hobby, so the learning tools run in the browser and do not require a paid server, database or user account.</p></section>

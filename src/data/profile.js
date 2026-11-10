@@ -28,9 +28,11 @@ export const profile = {
     instagram: "https://www.instagram.com/mishra_rajakr/",
     email: "rajamishra131297@gmail.com",
   },
-  resumeUrl: "/resume.pdf",
+  resumeRequestUrl: "mailto:rajamishra131297@gmail.com?subject=Request%20resume%20access&body=Hi%20Raja%2C%0A%0AI%27d%20like%20to%20request%20access%20to%20your%20resume.%0A%0AThank%20you.",
   yearsExperience: 5,
 };
+
+export const resumeRequestUrl = profile.resumeRequestUrl;
 
 export const focusAreas = [
   {

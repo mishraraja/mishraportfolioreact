@@ -27,7 +27,7 @@ function sidesOf(clue) {
 }
 
 export function ThisOrThat() {
-  useTitle("This or That — Backend Arcade");
+  useTitle("This or That — Backend Arcade", "Test your Java and backend engineering judgment with quick interactive interview choices.");
   const { game, state } = useJavaProgress();
   const [phase, setPhase] = useState("intro");
   const [rounds, setRounds] = useState(newGame);

@@ -18,7 +18,7 @@ test("every sitemap page renders with valid internal links and assets", async ({
     await page.goto(path + "?skipIntro=1");
     await expect(page.locator("main h1").first()).toBeVisible();
     if (path === "/") await expect(page.locator("#github")).toBeAttached();
-    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", "https://www.rajamishra.me" + path);
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", "https://rajamishra.me" + path);
     await expect(page.locator("main")).not.toContainText("Whitelabel Error Page");
     if (path === "/" || path === "/dsa/two-sum") {
       for (const theme of ["nebula", "supernova", "deepfield", "solar", "observatory", "cyberpunk"]) {

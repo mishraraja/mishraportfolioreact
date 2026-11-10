@@ -18,7 +18,7 @@ const LOOP = [
 ];
 
 export function Roadmap() {
-  useTitle("8-Week Roadmap — DSA Arcade");
+  useTitle("8-Week Roadmap — DSA Arcade", "Follow an eight-week plan through data structures, algorithms and 75 interview practice problems.");
   const { statusOf, record, reset } = useProgress();
   const [confirming, setConfirming] = useState(false);
 

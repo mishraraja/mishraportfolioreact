@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { GitHubCalendar } from "react-github-calendar";
 import { SectionHeading } from "../components/ui/SectionHeading";
 import { Reveal } from "../components/ui/Reveal";
 import { useGithubData } from "../hooks/useGithubData";
@@ -8,9 +7,7 @@ import { sfx } from "../lib/sound";
 import "./GithubActivity.css";
 import { useReducedMotion } from "../hooks/useReducedMotion";
 
-const calendarTheme = {
-  dark: ["#111116", "#2a2350", "#4a3aa8", "#6f57f0", "#a597ff"],
-};
+const activityRequest = "mailto:rajamishra131297@gmail.com?subject=Request%20GitHub%20activity%20access&body=Hi%20Raja%2C%0A%0AI%27d%20like%20to%20request%20access%20to%20your%20GitHub%20activity%20details.%0A%0AThank%20you.";
 
 /** Counts up to a value when it scrolls into view. Numbers deserve a moment. */
 function CountUp({ value, duration = 1100 }) {
@@ -130,15 +127,18 @@ export function GithubActivity() {
           </Reveal>
         ) : null}
 
-        {/* Contribution calendar */}
-        <Reveal className="gh__card">
-          <GitHubCalendar
-            username={username}
-            theme={calendarTheme}
-            colorScheme="dark"
-            fontSize={13}
-            blockSize={11}
-          />
+        {/* Contribution activity is intentionally hidden behind an email request. */}
+        <Reveal className="gh__locked">
+          <div className="gh__locked-preview" aria-hidden="true">
+            <div className="gh__locked-bars"><i /><i /><i /><i /><i /><i /><i /></div>
+            <span>Contribution activity preview</span>
+          </div>
+          <div className="gh__locked-content">
+            <span className="gh__lock-icon" aria-hidden="true">🔒</span>
+            <strong>GitHub activity is locked</strong>
+            <span>Send Raja an email to request access.</span>
+            <a href={activityRequest} onClick={sfx.click}>Email Raja to request access <span aria-hidden="true">↗</span></a>
+          </div>
         </Reveal>
 
         {/* Latest repositories, straight from the API */}

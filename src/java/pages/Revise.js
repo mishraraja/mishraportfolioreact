@@ -18,7 +18,7 @@ function plain(text) {
 }
 
 export function Revise() {
-  useTitle("Revision Sheet — Backend Arcade");
+  useTitle("Revision Sheet — Backend Arcade", "Review Java backend concepts and interview notes in a concise revision sheet.");
   const { learned } = useJavaProgress();
   const [query, setQuery] = useState("");
   const [world, setWorld] = useState("all");

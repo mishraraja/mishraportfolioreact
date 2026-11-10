@@ -17,7 +17,7 @@ function downloadBackup() {
 }
 
 export default function Learning() {
-  useTitle("Learning progress and revision");
+  useTitle("Learning progress and revision", "Review missed DSA and Java topics, back up your progress and save learning pages for offline use.");
   const [revision, setRevision] = useState(0);
   const [backup, setBackup] = useState(null);
   const [message, setMessage] = useState("");

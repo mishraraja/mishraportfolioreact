@@ -133,7 +133,7 @@ const SAY_THIS = [
 ];
 
 export function Playbook() {
-  useTitle("Interview Playbook — DSA Arcade");
+  useTitle("Interview Playbook — DSA Arcade", "Prepare for coding interviews with a practical guide to explaining, testing and improving algorithm solutions.");
   const [phase, setPhase] = useState(0);
   const current = PHASES[phase];
 

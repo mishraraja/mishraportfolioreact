@@ -175,7 +175,7 @@ function OpsChart({ n }) {
 }
 
 export function BigO() {
-  useTitle("Big-O Lab — DSA Arcade");
+  useTitle("Big-O Lab — DSA Arcade", "Learn how algorithm time and space complexity grow through an interactive Big-O comparison lab.");
   const [exp, setExp] = useState(5);
   const n = Math.max(1, Math.round(10 ** exp));
 

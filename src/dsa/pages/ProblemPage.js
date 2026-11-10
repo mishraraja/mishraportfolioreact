@@ -17,7 +17,10 @@ export function ProblemPage() {
   const { visit, watched, predicted, mastered, statusOf, record } = useProgress();
   const [revealed, setRevealed] = useState(false);
 
-  useTitle(problem ? `${problem.title} — DSA Arcade` : "Problem not found — DSA Arcade");
+  useTitle(
+    problem ? `${problem.title} — DSA Arcade` : "Problem not found — DSA Arcade",
+    problem ? `${problem.statement} Practice the pattern with an interactive walkthrough and Java/Python solutions.` : "Browse the DSA Arcade problem map for interactive interview practice by Raja Mishra."
+  );
 
   useEffect(() => {
     setRevealed(false);

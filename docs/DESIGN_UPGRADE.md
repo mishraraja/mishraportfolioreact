@@ -7,10 +7,9 @@ GitHub snapshot commit ahead (`701b797`); the checkout was fast-forwarded before
 implementation. No source changes were missing from the remote.
 
 The baseline build's complete asset manifest matched the manifest served from
-`https://www.rajamishra.me/asset-manifest.json`. The homepage returned HTTP 200.
-The previous Vercel address redirected to the www custom domain. Requests to the
-bare `https://rajamishra.me` timed out from this execution environment; this is
-a verification limit, not proof of a DNS outage.
+the then-configured www host. The homepage returned HTTP 200. The hosted URL has
+since been confirmed as `https://rajamishra.me`, and current canonical, social,
+structured-data and sitemap settings now use that bare domain.
 
 ## Reference research and implementation
 
@@ -105,7 +104,8 @@ fails when the local build differs from production. Browser interactions,
 accessibility and offline behavior are checked separately in the test suite.
 
 The canonical URL, Open Graph URL, structured data and sitemap now point to
-`https://www.rajamishra.me`. Vercel hosting and domain ownership are unchanged.
+the confirmed hosted URL, `https://rajamishra.me`. Vercel hosting and domain
+ownership are unchanged.
 
 ## Development-tool security maintenance
 
