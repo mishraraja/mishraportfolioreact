@@ -84,4 +84,5 @@
 }
 @media (max-height:600px) { .site-chat-description { display:none; } .site-chat-header { padding-block:.5rem; } .site-chat-footer { padding-block:.5rem; } .site-chat-radar { width:80px; height:80px; } .site-chat-radar::before { width:96px; } .site-chat-radar::after { height:96px; } .site-chat-radar svg { width:55px; } .site-chat-consent { max-height:70px; overflow-y:auto; } }
 @media (prefers-reduced-motion:reduce) { .site-chat,.site-chat-spinner { animation:none; } .site-chat-launch,.site-chat-prompts button { transition:none; } .site-chat-launch:hover,.site-chat-prompts button:hover { transform:none; } }
+[data-motion="paused"] .site-chat { animation: none !important; }
 @media (max-height:450px) { .site-chat { overflow-y:auto; } .site-chat-log { flex:1 0 80px; } }
