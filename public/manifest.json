@@ -1,6 +1,6 @@
 {
   "short_name": "Raja Mishra",
-  "name": "Raja Mishra — Java Full Stack Developer",
+  "name": "Raja Mishra — Java Backend Developer",
   "icons": [
     {
       "src": "favicon.svg",
@@ -10,6 +10,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#08080b",
-  "background_color": "#08080b"
+  "theme_color": "#111827",
+  "background_color": "#111827"
 }

@@ -90,7 +90,7 @@ function pageLabel(path) {
 
 function pageDescription(path, label) {
   if (path === "/") {
-    return "Raja Mishra is a Java backend developer with 5+ years of experience building Spring Boot, Kafka and AWS software.";
+    return "Raja Mishra is a Java backend developer with 5+ years building reliable Spring Boot services using Kafka, PostgreSQL and AWS. Explore his work and projects.";
   }
   if (path.startsWith("/dsa")) {
     return `Explore ${label} with Raja Mishra: practical data structures and algorithms explanations, examples, and interactive practice.`.slice(0, 155);
@@ -124,7 +124,7 @@ function replaceMeta(html, attribute, key, content) {
 async function writeRouteDocuments(routes) {
   const template = await readFile(resolve(BUILD, "index.html"), "utf8");
   const homeDescription =
-    "Raja Mishra is a Java backend developer with 5+ years of experience building Spring Boot services, Kafka systems, and AWS applications. Explore his engineering experience, projects, technical skills, and interactive resources for learning software development.";
+    "Raja Mishra is a Java backend developer with 5+ years building reliable Spring Boot services using Kafka, PostgreSQL and AWS. Explore his work and projects.";
   const homeFallback =
     `<main><h1>Raja Mishra | Java Backend Developer</h1>` +
     `<p>${escapeHtml(homeDescription)}</p></main>`;
