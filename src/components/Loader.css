@@ -1,24 +1,21 @@
 .loader {
   position: fixed;
   inset: 0;
-  z-index: var(--z-toast);
-  background: var(--color-bg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  z-index: 999999;
+  background-color: #0c0513;
+  background-image: url("/loader.svg");
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.loader__mark {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 2rem;
-  letter-spacing: 0.08em;
-  color: var(--color-fg);
-  border: 1px solid var(--color-border-strong);
-  border-radius: var(--radius-lg);
-  width: 72px;
-  height: 72px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+@media (prefers-reduced-motion: reduce) {
+  .loader {
+    background-image: none;
+  }
+
+  .loader::after {
+    content: "Loading portfolio";
+    color: var(--color-fg);
+    font: 600 0.875rem/1.5 var(--font-body);
+  }
 }

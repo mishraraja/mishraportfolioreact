@@ -3,7 +3,7 @@ import { createHash } from "node:crypto";
 import { resolve } from "node:path";
 const build = resolve("build");
 const manifest = JSON.parse(await readFile(resolve(build, "asset-manifest.json"), "utf8"));
-const assets = [...new Set(["/index.html", "/favicon.svg", ...Object.values(manifest.files).filter((path) => /\.(js|css)$/.test(path))])].sort();
+const assets = [...new Set(["/index.html", "/favicon.svg", "/loader.svg", ...Object.values(manifest.files).filter((path) => /\.(js|css)$/.test(path))])].sort();
 const hash = createHash("sha256");
 let bytes = 0;
 for (const asset of assets) {
