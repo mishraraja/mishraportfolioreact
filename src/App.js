@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes, useLocation } from "react-route
 import { MotionConfig } from "framer-motion";
 import { ExperienceProvider, useExperience } from "./context/ExperienceContext";
 import ChatLauncher from "./chat/ChatLauncher";
+import { Loader } from "./components/Loader";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { CommandPalette } from "./components/CommandPalette";
@@ -30,7 +31,6 @@ import "./styles/themes.css";
 import "./styles/base.css";
 import "./styles/interface.css";
 
-const Loader = lazy(() => import("./components/Loader").then((m) => ({ default: m.Loader })));
 const TrophyCase = lazy(() => import("./components/TrophyCase").then((m) => ({ default: m.TrophyCase })));
 const ChessPuzzle = lazy(() => import("./components/easter/ChessPuzzle").then((m) => ({ default: m.ChessPuzzle })));
 const ApiConsole = lazy(() => import("./sections/ApiConsole").then((m) => ({ default: m.ApiConsole })));
@@ -146,31 +146,18 @@ function GlobalInteractions() {
   return null;
 }
 
-/**
- * The boot log is an optional Easter egg. The portfolio renders immediately;
- * visitors who want the original startup sequence can use `?intro=1`.
- */
-function introDuration() {
-  if (typeof window === "undefined") return 0;
-
-  const params = new URLSearchParams(window.location.search);
-  if (params.get("intro") !== "1" || params.get("skipIntro") === "1") return 0;
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return 0;
-  return 1750;
-}
-
 function Shell() {
   const { chessOpen, trophyOpen } = useExperience();
   const reduced = useReducedMotion();
-  // Resolve the optional intro once so route changes never restart it.
-  const [introMs] = useState(introDuration);
-  const [loading, setLoading] = useState(introMs > 0);
+  const [loading, setLoading] = useState(() =>
+    typeof window === "undefined" || new URLSearchParams(window.location.search).get("skipIntro") !== "1"
+  );
 
   useEffect(() => {
-    if (introMs === 0) return undefined;
-    const timer = setTimeout(() => setLoading(false), introMs);
+    if (!loading) return undefined;
+    const timer = setTimeout(() => setLoading(false), 500);
     return () => clearTimeout(timer);
-  }, [introMs]);
+  }, [loading]);
 
   return (
     <MotionConfig reducedMotion={reduced ? "always" : "user"}>
@@ -178,7 +165,7 @@ function Shell() {
         Skip to content
       </a>
 
-      {loading && <Suspense fallback={null}><Loader visible={loading} /></Suspense>}
+      {loading && <Loader visible={loading} />}
 
       {/* The sky everything sits in */}
       <CosmicBackground />
