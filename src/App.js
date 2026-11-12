@@ -155,7 +155,7 @@ function Shell() {
 
   useEffect(() => {
     if (!loading) return undefined;
-    const timer = setTimeout(() => setLoading(false), reduced ? 300 : 1750);
+    const timer = setTimeout(() => setLoading(false), 400);
     return () => clearTimeout(timer);
   }, [loading, reduced]);
 
