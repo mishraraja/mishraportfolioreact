@@ -6,7 +6,7 @@
  * the problem data, so a new problem shows up here automatically.
  */
 
-import { writeFile, access, readdir, readFile } from "node:fs/promises";
+import { writeFile, access, mkdir, readdir, readFile } from "node:fs/promises";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { CANONICAL_SITE_URL } from "./site-config.mjs";
@@ -65,6 +65,102 @@ async function problemRoutes() {
   }
 }
 
+function pageLabel(path) {
+  if (path === "/") return "Raja Mishra | Java Backend Developer";
+
+  const parts = path.split("/").filter(Boolean);
+  const words = (value) => value
+    .replace(/([a-z])([A-Z])/g, "$1 $2")
+    .replace(/[-_]+/g, " ")
+    .replace(/\b\w/g, (letter) => letter.toUpperCase());
+
+  if (parts[0] === "dsa") {
+    if (parts[1] === "learn") return `${words(parts.slice(2).join(" "))} | DSA Learning`;
+    return `${words(parts.slice(1).join(" "))} | Data Structures & Algorithms`;
+  }
+  if (parts[0] === "java") {
+    if (parts[1] === "lab") return `${words(parts.slice(2).join(" "))} | Java Lab`;
+    if (parts[1] === "play") return `${words(parts.slice(2).join(" "))} | Java Practice`;
+    return `${words(parts.slice(1).join(" "))} | Java Backend`;
+  }
+  if (path === "/learning") return "Interactive Learning Tools";
+  if (path === "/engineering") return "Engineering Projects & Case Studies";
+  return words(parts.join(" "));
+}
+
+function pageDescription(path, label) {
+  if (path === "/") {
+    return "Raja Mishra is a Java backend developer with 5+ years of experience building Spring Boot, Kafka and AWS software.";
+  }
+  if (path.startsWith("/dsa")) {
+    return `Explore ${label} with Raja Mishra: practical data structures and algorithms explanations, examples, and interactive practice.`.slice(0, 155);
+  }
+  if (path.startsWith("/java")) {
+    return `Explore ${label} with Raja Mishra: Java backend concepts, practical examples, and interactive learning exercises.`.slice(0, 155);
+  }
+  if (path === "/engineering") {
+    return "Read Raja Mishra's engineering case studies on backend systems, software projects, and technical decisions.";
+  }
+  if (path === "/learning") {
+    return "Use Raja Mishra's interactive learning tools to review topics, practice, and track progress without an account.";
+  }
+  return `Explore ${label} and more software engineering work by Raja Mishra.`;
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
+}
+
+function replaceMeta(html, attribute, key, content) {
+  const selector = new RegExp(`<meta\\s+${attribute}="${key}"[^>]*>`, "s");
+  if (!selector.test(html)) throw new Error(`Missing ${attribute}=${key} metadata`);
+  return html.replace(selector, `<meta ${attribute}="${key}" content="${escapeHtml(content)}" />`);
+}
+
+async function writeRouteDocuments(routes) {
+  const template = await readFile(resolve(BUILD, "index.html"), "utf8");
+  const homeDescription =
+    "Raja Mishra is a Java backend developer with 5+ years of experience building Spring Boot services, Kafka systems, and AWS applications. Explore his engineering experience, projects, technical skills, and interactive resources for learning software development.";
+  const homeFallback =
+    `<main><h1>Raja Mishra | Java Backend Developer</h1>` +
+    `<p>${escapeHtml(homeDescription)}</p></main>`;
+  await writeFile(
+    resolve(BUILD, "index.html"),
+    template.replace('<div id="root"></div>', `<div id="root">${homeFallback}</div>`),
+    "utf8"
+  );
+
+  for (const route of routes) {
+    if (route.path === "/") continue;
+
+    const label = pageLabel(route.path);
+    const title = `${label} | Raja Mishra`;
+    const description = pageDescription(route.path, label);
+    const canonical = SITE + route.path;
+    const fallback =
+      `<main><h1>${escapeHtml(label)}</h1>` +
+      `<p>${escapeHtml(description)}</p></main>`;
+
+    let html = template.replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeHtml(title)}</title>`);
+    html = html.replace(/<link rel="canonical" href="[^"]+" \/>/, `<link rel="canonical" href="${canonical}" />`);
+    html = replaceMeta(html, "name", "description", description);
+    html = replaceMeta(html, "property", "og:url", canonical);
+    html = replaceMeta(html, "property", "og:title", title);
+    html = replaceMeta(html, "property", "og:description", description);
+    html = replaceMeta(html, "name", "twitter:title", title);
+    html = replaceMeta(html, "name", "twitter:description", description);
+    html = html.replace('<div id="root"></div>', `<div id="root">${fallback}</div>`);
+
+    const output = resolve(BUILD, route.path.slice(1) + ".html");
+    await mkdir(dirname(output), { recursive: true });
+    await writeFile(output, html, "utf8");
+  }
+}
+
 async function main() {
   try {
     await access(BUILD);
@@ -74,6 +170,8 @@ async function main() {
   }
 
   const routes = [...ROUTES, ...(await problemRoutes()), ...(await javaRoutes())];
+
+  await writeRouteDocuments(routes);
 
   const urls = routes.map(
     (r) =>
@@ -96,7 +194,7 @@ async function main() {
     "Sitemap: " + SITE + "/sitemap.xml\n";
   await writeFile(resolve(BUILD, "robots.txt"), robots, "utf8");
 
-  console.log("Wrote sitemap.xml (" + routes.length + " pages) and robots.txt for " + SITE);
+  console.log("Wrote sitemap.xml (" + routes.length + " pages), route metadata, and robots.txt for " + SITE);
 }
 
 main().catch((err) => {
