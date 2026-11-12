@@ -32,7 +32,7 @@ console.log(`Verified robots.txt and ${sitemapUrls.length} canonical sitemap URL
 const remote = await (await get("/asset-manifest.json")).json();
 if (JSON.stringify(local) !== JSON.stringify(remote)) throw new Error("Live assets differ from this production build. Deployment may still be pending.");
 const hash = (bytes) => createHash("sha256").update(bytes).digest("hex");
-const assets = [...new Set([...Object.values(local.files), "/data/github.json", "/favicon.svg", "/loader.svg", "/manifest.json", "/offline-worker.js", "/offline-assets.js", "/offline-info.json"])];
+const assets = [...new Set([...Object.values(local.files), "/data/github.json", "/favicon.svg", "/manifest.json", "/offline-worker.js", "/offline-assets.js", "/offline-info.json"])];
 let next = 0;
 await Promise.all(Array.from({ length: 4 }, async () => {
   while (next < assets.length) {

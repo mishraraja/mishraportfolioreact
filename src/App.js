@@ -155,9 +155,9 @@ function Shell() {
 
   useEffect(() => {
     if (!loading) return undefined;
-    const timer = setTimeout(() => setLoading(false), 1200);
+    const timer = setTimeout(() => setLoading(false), reduced ? 300 : 1750);
     return () => clearTimeout(timer);
-  }, [loading]);
+  }, [loading, reduced]);
 
   return (
     <MotionConfig reducedMotion={reduced ? "always" : "user"}>
