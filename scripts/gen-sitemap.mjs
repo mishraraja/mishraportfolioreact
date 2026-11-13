@@ -22,6 +22,7 @@ const SITE = CANONICAL_SITE_URL;
 const ROUTES = [
   { path: "/learning", priority: "0.7", changefreq: "monthly" },
   { path: "/engineering", priority: "0.7", changefreq: "monthly" },
+  { path: "/java-project-guide", priority: "0.8", changefreq: "monthly" },
   { path: "/", priority: "1.0", changefreq: "weekly" },
   { path: "/dsa", priority: "0.9", changefreq: "weekly" },
   { path: "/dsa/learn/patterns", priority: "0.8", changefreq: "monthly" },
@@ -67,6 +68,7 @@ async function problemRoutes() {
 
 function pageLabel(path) {
   if (path === "/") return "Raja Mishra | Java Backend Developer";
+  if (path === "/java-project-guide") return "How Java Projects Work";
 
   const parts = path.split("/").filter(Boolean);
   const words = (value) => value
@@ -91,6 +93,9 @@ function pageLabel(path) {
 function pageDescription(path, label) {
   if (path === "/") {
     return "Raja Mishra is a Java backend developer with 5+ years building reliable Spring Boot services using Kafka, PostgreSQL and AWS. Explore his work and projects.";
+  }
+  if (path === "/java-project-guide") {
+    return "Follow a Java application from source code through JVM memory, Spring, HTTP requests, databases, deployment, and production troubleshooting.";
   }
   if (path.startsWith("/dsa")) {
     return `Explore ${label} with Raja Mishra: practical data structures and algorithms explanations, examples, and interactive practice.`.slice(0, 155);

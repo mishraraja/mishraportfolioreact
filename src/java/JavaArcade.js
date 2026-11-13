@@ -16,6 +16,7 @@ const LINKS = [
   { to: "/java/play/this-or-that", label: "This or That", icon: "⚖️" },
   { to: "/java/play/guess-output", label: "Guess the Output", icon: "🖨️" },
   { to: "/java/revise", label: "Revision Sheet", icon: "📜" },
+  { to: "/java-project-guide", label: "Project guide", icon: "↗" },
 ];
 
 function XpPill() {
