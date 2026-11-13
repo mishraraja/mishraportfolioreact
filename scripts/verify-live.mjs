@@ -41,7 +41,7 @@ const hashAsset = (asset, bytes) => {
   }
   return hash(bytes);
 };
-const assets = [...new Set([...Object.values(local.files), "/data/github.json", "/favicon.svg", "/manifest.json", "/offline-worker.js", "/offline-assets.js", "/offline-info.json"])];
+const assets = [...new Set([...Object.values(local.files), "/data/github.json", "/favicon.svg", "/manifest.json", "/offline-worker.js"])];
 let next = 0;
 await Promise.all(Array.from({ length: 4 }, async () => {
   while (next < assets.length) {
@@ -51,6 +51,25 @@ await Promise.all(Array.from({ length: 4 }, async () => {
   }
 }));
 console.log(`Verified SHA-256: ${assets.length} scripts, styles and public assets`);
+const localOfflineScript = await readFile("build/offline-assets.js", "utf8");
+const remoteOfflineScript = await (await get("/offline-assets.js")).text();
+const remoteOfflineInfo = await (await get("/offline-info.json")).json();
+const releaseFrom = (source) => source.match(/const OFFLINE_RELEASE = "([a-f0-9]+)";/)?.[1];
+const filesFrom = (source) => {
+  const match = source.match(/const OFFLINE_ASSETS = (\[[^;]+\]);/);
+  return match ? JSON.parse(match[1]) : null;
+};
+const remoteOfflineRelease = releaseFrom(remoteOfflineScript);
+if (!remoteOfflineRelease || remoteOfflineRelease !== remoteOfflineInfo.revision) {
+  throw new Error("Live offline release ID and metadata do not match.");
+}
+if (JSON.stringify(filesFrom(localOfflineScript)) !== JSON.stringify(filesFrom(remoteOfflineScript))) {
+  throw new Error("Live offline asset list differs from this production build.");
+}
+if (remoteOfflineInfo.files !== filesFrom(localOfflineScript)?.length) {
+  throw new Error("Live offline file count does not match its asset list.");
+}
+console.log(`Verified offline release ${remoteOfflineRelease} (${remoteOfflineInfo.files} files)`);
 for (const path of ["/dsa/two-sum", "/java/core-java", "/learning", "/engineering"]) {
   const content = await (await get(path)).text();
   if (!local.entrypoints.some((asset) => asset.endsWith(".js") && content.includes(asset))) throw new Error(`Unexpected route document: ${path}`);
