@@ -122,6 +122,55 @@ function problemFallback(problem) {
   return parts.filter(Boolean).join("");
 }
 
+function linkListFallback(title, description, links) {
+  return `<main><h1>${escapeHtml(title)}</h1><p>${escapeHtml(description)}</p><nav aria-label="Explore topics"><h2>Explore topics</h2><ul>${links
+    .map((route) => `<li><a href="${escapeHtml(route.path)}">${escapeHtml(route.label)}</a></li>`)
+    .join("")}</ul></nav></main>`;
+}
+
+function fallbackNavigation(path, routes) {
+  const byPath = new Map(routes.map((route) => [route.path, route]));
+  const wanted = new Set(["/", "/dsa", "/java", "/java/guide", "/learning", "/engineering"]);
+  if (path === "/dsa") {
+    routes.filter((route) => route.path.startsWith("/dsa/")).forEach((route) => wanted.add(route.path));
+  } else if (path === "/java") {
+    routes.filter((route) => route.path.startsWith("/java/")).forEach((route) => wanted.add(route.path));
+  } else if (path.startsWith("/dsa/")) {
+    ["/dsa/learn/patterns", "/dsa/learn/roadmap", "/dsa/learn/big-o", "/dsa/learn/interview"].forEach((item) => wanted.add(item));
+  } else if (path.startsWith("/java/")) {
+    ["/java/labs", "/java/revise", "/java/play/this-or-that", "/java/play/guess-output"].forEach((item) => wanted.add(item));
+  }
+
+  const links = [...wanted]
+    .filter((item) => item !== path && byPath.has(item))
+    .map((item) => byPath.get(item));
+  if (!links.length) return "";
+  return `<nav aria-label="Explore related pages"><h2>Explore related pages</h2><ul>${links
+    .map((route) => `<li><a href="${escapeHtml(route.path)}">${escapeHtml(route.label || pageLabel(route.path))}</a></li>`)
+    .join("")}</ul></nav>`;
+}
+
+function fallbackWithLinks(path, fallback, routes) {
+  if (path === "/dsa" || path === "/java") return fallback;
+  const links = fallbackNavigation(path, routes);
+  return links ? fallback.replace("</main>", `${links}</main>`) : fallback;
+}
+
+function fitDescription(value, path) {
+  let description = String(value || "").replace(/\s+/g, " ").trim();
+  const suffix = path.startsWith("/dsa/")
+    ? " Learn the approach with an example, an interactive walkthrough, and Java and Python solutions."
+    : path.startsWith("/java/")
+      ? " Review key ideas with examples, code, interview questions, and hands-on exercises."
+      : " Find a clear introduction, practical examples, and links to related learning pages.";
+  if (description.length < 120) description += suffix;
+  if (description.length < 120) description += " Read the explanation and continue to related topics and practice.";
+  if (description.length > 155) {
+    description = description.slice(0, 152).replace(/\s+\S*$/, "").replace(/[,:;–—-]+$/, "") + "…";
+  }
+  return description;
+}
+
 function javaWorldFallback(world, concepts) {
   const parts = [
     `<main><h1>${escapeHtml(world.name)}</h1>`,
@@ -206,7 +255,7 @@ async function writeRouteDocuments(routes) {
     `<p>${escapeHtml(homeDescription)}</p></main>`;
   await writeFile(
     resolve(BUILD, "index.html"),
-    template.replace('<div id="root"></div>', `<div id="root">${homeFallback}</div>`),
+    template.replace('<div id="root"></div>', `<div id="root">${fallbackWithLinks("/", homeFallback, routes)}</div>`),
     "utf8"
   );
 
@@ -215,11 +264,11 @@ async function writeRouteDocuments(routes) {
 
     const label = pageLabel(route.path);
     const title = `${label} | Raja Mishra`;
-    const description = route.description || pageDescription(route.path, label);
+    const description = fitDescription(route.description || pageDescription(route.path, label), route.path);
     const canonical = SITE + route.path;
-    const fallback = route.fallbackHtml ||
+    const fallback = fallbackWithLinks(route.path, route.fallbackHtml ||
       `<main><h1>${escapeHtml(label)}</h1>` +
-      `<p>${escapeHtml(description)}</p></main>`;
+      `<p>${escapeHtml(description)}</p></main>`, routes);
 
     let html = template.replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeHtml(title)}</title>`);
     // The Person JSON-LD in index.html describes the homepage profile. Do not
@@ -248,7 +297,21 @@ async function main() {
     return;
   }
 
-  const routes = [...ROUTES, ...(await problemRoutes()), ...(await javaRoutes())];
+  const problemPages = await problemRoutes();
+  const javaPages = await javaRoutes();
+  const routes = [...ROUTES, ...problemPages, ...javaPages];
+  const dsaHub = routes.find((route) => route.path === "/dsa");
+  const javaHub = routes.find((route) => route.path === "/java");
+  dsaHub.fallbackHtml = linkListFallback(
+    "Data Structures and Algorithms",
+    "Practice algorithm patterns with interactive traces, worked examples, and Java and Python solutions.",
+    routes.filter((route) => route.path.startsWith("/dsa/")).map((route) => ({ path: route.path, label: pageLabel(route.path) }))
+  );
+  javaHub.fallbackHtml = linkListFallback(
+    "Java Backend Arcade",
+    "Browse Java backend topics, hands-on labs, interview games, and a guided walkthrough of how Java projects run.",
+    routes.filter((route) => route.path.startsWith("/java/")).map((route) => ({ path: route.path, label: pageLabel(route.path) }))
+  );
 
   await writeRouteDocuments(routes);
 
