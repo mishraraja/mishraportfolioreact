@@ -165,7 +165,7 @@ export function ArcadeTeaser() {
               <Button as={Link} to="/java/play/guess-output" variant="secondary" onClick={sfx.click}>
                 Guess the Output
               </Button>
-              <Button as={Link} to="/java-project-guide" variant="secondary" onClick={sfx.click}>
+              <Button as={Link} to="/java/guide" variant="secondary" onClick={sfx.click}>
                 How Java projects work
               </Button>
             </div>

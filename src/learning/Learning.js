@@ -57,7 +57,7 @@ export default function Learning() {
   return (
     <div className="learning-page container" data-revision={revision}>
       <header><span className="eyebrow">Learning tools</span><h1>Progress and revision</h1><p>Review topics you missed, back up your progress, and save learning pages for offline use. Everything here works without an account.</p></header>
-      <nav className="learning-actions" aria-label="Learning shortcuts"><Link to="/dsa">DSA problems</Link><Link to="/java">Java topics</Link><Link to="/java-project-guide">How Java projects work</Link><Link to="/engineering">How this site is built</Link></nav>
+      <nav className="learning-actions" aria-label="Learning shortcuts"><Link to="/dsa">DSA problems</Link><Link to="/java">Java topics</Link><Link to="/java/guide">How Java projects work</Link><Link to="/engineering">How this site is built</Link></nav>
       <section className="learning-card" aria-labelledby="review-title">
         <h2 id="review-title">What to review</h2>
         <p>Incorrect answers come first, followed by scheduled reviews. A correct answer schedules another review after 1, 3, 7, 14 or 30 days. Repeating a question early does not increase the interval.</p>
