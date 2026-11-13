@@ -70,15 +70,31 @@ async function javaRoutes() {
       const data = await exportedData(resolve(JAVA, "data/topics", world.id + ".js"));
       return [world.id, { world, concepts: data.concepts || [] }];
     }));
+    const neighboringPaths = (items, index, pathFor) => {
+      if (items.length < 2) return [];
+      return [...new Set([
+        pathFor(items[(index + items.length - 1) % items.length]),
+        pathFor(items[(index + 1) % items.length]),
+      ])];
+    };
+    const labIds = ids(labs);
+    const labPath = (id) => "/java/lab/" + id;
     return [
-      ...worldTopics.map(([id, content]) => ({
+      ...worldTopics.map(([id, content], index) => ({
         path: "/java/" + id,
+        label: content.world.name,
+        relatedPaths: neighboringPaths(worldTopics, index, ([worldId]) => "/java/" + worldId),
         priority: "0.7",
         changefreq: "monthly",
         description: `${content.world.name}: ${content.world.blurb}`.slice(0, 155),
         fallbackHtml: javaWorldFallback(content.world, content.concepts),
       })),
-      ...ids(labs).map((id) => ({ path: "/java/lab/" + id, priority: "0.6", changefreq: "monthly" })),
+      ...labIds.map((id, index) => ({
+        path: labPath(id),
+        relatedPaths: neighboringPaths(labIds, index, labPath),
+        priority: "0.6",
+        changefreq: "monthly",
+      })),
     ];
   } catch (error) {
     throw new Error("Could not read Java routes", { cause: error });
@@ -95,13 +111,33 @@ async function problemRoutes() {
         if (Array.isArray(value)) problems.push(...value.filter((problem) => problem && problem.slug && problem.title));
       }
     }
-    return problems.sort((a, b) => a.slug.localeCompare(b.slug)).map((problem) => ({
-      path: "/dsa/" + problem.slug,
-      priority: "0.6",
-      changefreq: "monthly",
-      description: `${problem.title}: ${problem.statement}`.slice(0, 155),
-      fallbackHtml: problemFallback(problem),
-    }));
+    const ordered = problems.sort((a, b) => a.slug.localeCompare(b.slug));
+    const byPattern = new Map();
+    const byWorld = new Map();
+    ordered.forEach((problem) => {
+      const group = byPattern.get(problem.pattern) || [];
+      group.push(problem);
+      byPattern.set(problem.pattern, group);
+      const world = byWorld.get(problem.world) || [];
+      world.push(problem);
+      byWorld.set(problem.world, world);
+    });
+    return ordered.map((problem) => {
+      const patternGroup = byPattern.get(problem.pattern) || [];
+      const worldGroup = byWorld.get(problem.world) || [];
+      const group = patternGroup.length > 1 ? patternGroup : worldGroup.length > 1 ? worldGroup : ordered;
+      const patternIndex = group.indexOf(problem);
+      const related = [group[(patternIndex + group.length - 1) % group.length], group[(patternIndex + 1) % group.length]];
+      return {
+        path: "/dsa/" + problem.slug,
+        label: problem.title,
+        relatedPaths: [...new Set(related.map((item) => "/dsa/" + item.slug))],
+        priority: "0.6",
+        changefreq: "monthly",
+        description: `${problem.title}: ${problem.statement}`.slice(0, 155),
+        fallbackHtml: problemFallback(problem),
+      };
+    });
   } catch (error) {
     throw new Error("Could not read DSA routes", { cause: error });
   }
@@ -131,6 +167,7 @@ function linkListFallback(title, description, links) {
 function fallbackNavigation(path, routes) {
   const byPath = new Map(routes.map((route) => [route.path, route]));
   const wanted = new Set(["/", "/dsa", "/java", "/java/guide", "/learning", "/engineering"]);
+  (byPath.get(path)?.relatedPaths || []).forEach((item) => wanted.add(item));
   if (path === "/dsa") {
     routes.filter((route) => route.path.startsWith("/dsa/")).forEach((route) => wanted.add(route.path));
   } else if (path === "/java") {
@@ -311,6 +348,12 @@ async function main() {
     "Java Backend Arcade",
     "Browse Java backend topics, hands-on labs, interview games, and a guided walkthrough of how Java projects run.",
     routes.filter((route) => route.path.startsWith("/java/")).map((route) => ({ path: route.path, label: pageLabel(route.path) }))
+  );
+  const labsHub = routes.find((route) => route.path === "/java/labs");
+  labsHub.fallbackHtml = linkListFallback(
+    "Java hands-on labs",
+    "Choose a lab to explore Java collections, concurrency, databases, Spring, testing, and Git through interactive examples.",
+    routes.filter((route) => route.path.startsWith("/java/lab/")).map((route) => ({ path: route.path, label: pageLabel(route.path) }))
   );
 
   await writeRouteDocuments(routes);
