@@ -54,6 +54,7 @@ export function Hero() {
   const { unlock } = useExperience();
   const [scene, setScene] = useState("orbit");
   const MotionDiv = reduced ? "div" : motion.div;
+  const pageHeadline = `${profile.name} | ${profile.roles[0]}`;
 
 
   useEffect(() => {
@@ -94,16 +95,17 @@ export function Hero() {
           <motion.h1
             variants={reduced ? undefined : itemVariants}
             className="hero__headline"
-            aria-label={profile.headline}
+            aria-label={pageHeadline}
           >
-            {profile.headline.split(" ").map((word, index) => (
-              <motion.span key={index} className={word === "production." ? "hero__word hero__word--accent" : "hero__word"}
+            {pageHeadline.split(" ").map((word, index) => (
+              <motion.span key={index} className={word === "Developer" ? "hero__word hero__word--accent" : "hero__word"}
                 initial={reduced ? false : { opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: .4, delay: reduced ? 0 : .06 + index * .025 }} aria-hidden="true">{word}{" "}</motion.span>
             ))}
           </motion.h1>
 
           <motion.p variants={reduced ? undefined : itemVariants} className="hero__sub">
+            {profile.headline}{" "}
             I build dependable backend systems with <strong>Java & Spring Boot</strong>.
             {" "}5+ years turning complex problems into software people can rely on.
           </motion.p>

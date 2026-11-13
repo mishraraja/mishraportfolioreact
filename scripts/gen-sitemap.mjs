@@ -146,6 +146,9 @@ async function writeRouteDocuments(routes) {
       `<p>${escapeHtml(description)}</p></main>`;
 
     let html = template.replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeHtml(title)}</title>`);
+    // The Person JSON-LD in index.html describes the homepage profile. Do not
+    // copy its homepage mainEntityOfPage value onto unrelated route documents.
+    html = html.replace(/\s*<script type="application\/ld\+json">[\s\S]*?<\/script>/, "");
     html = html.replace(/<link rel="canonical" href="[^"]+" \/>/, `<link rel="canonical" href="${canonical}" />`);
     html = replaceMeta(html, "name", "description", description);
     html = replaceMeta(html, "property", "og:url", canonical);

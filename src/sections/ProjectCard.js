@@ -51,7 +51,7 @@ export function ProjectCard({ project, index, order = index }) {
 
       <div className="project-card__media">
         {project.image ? (
-          <img src={project.image} alt="" loading="lazy" decoding="async" width="800" height="500" />
+          <img src={project.image} alt={project.imageAlt || project.title} loading="lazy" decoding="async" width="800" height="500" />
         ) : (
           <ProjectBlueprint project={project} />
         )}

@@ -32,13 +32,22 @@ console.log(`Verified robots.txt and ${sitemapUrls.length} canonical sitemap URL
 const remote = await (await get("/asset-manifest.json")).json();
 if (JSON.stringify(local) !== JSON.stringify(remote)) throw new Error("Live assets differ from this production build. Deployment may still be pending.");
 const hash = (bytes) => createHash("sha256").update(bytes).digest("hex");
+const hashAsset = (asset, bytes) => {
+  // Static hosts can normalize Windows CRLF to Unix LF in text assets such as
+  // SVGs. Compare their content while keeping binary asset checks byte exact.
+  if (/\.(?:css|html|js|json|svg|txt|xml|webmanifest)$/i.test(asset)) {
+    const normalized = Buffer.from(bytes).toString("utf8").replace(/\r\n/g, "\n");
+    return hash(Buffer.from(normalized, "utf8"));
+  }
+  return hash(bytes);
+};
 const assets = [...new Set([...Object.values(local.files), "/data/github.json", "/favicon.svg", "/manifest.json", "/offline-worker.js", "/offline-assets.js", "/offline-info.json"])];
 let next = 0;
 await Promise.all(Array.from({ length: 4 }, async () => {
   while (next < assets.length) {
     const asset = assets[next++];
     const [expected, response] = await Promise.all([readFile(`build/${asset.replace(/^\//, "")}`), get(asset)]);
-    if (hash(expected) !== hash(new Uint8Array(await response.arrayBuffer()))) throw new Error(`Live asset bytes differ: ${asset}`);
+    if (hashAsset(asset, expected) !== hashAsset(asset, new Uint8Array(await response.arrayBuffer()))) throw new Error(`Live asset bytes differ: ${asset}`);
   }
 }));
 console.log(`Verified SHA-256: ${assets.length} scripts, styles and public assets`);

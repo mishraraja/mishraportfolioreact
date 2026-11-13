@@ -16,6 +16,7 @@ export const projects = [
     stack: ["Java", "Spring Boot"],
     category: ["web"],
     image: "/projects/gov-education-portal.jpg",
+    imageAlt: "Screenshot of a higher education portal homepage with university and admissions navigation.",
     liveUrl: "https://universities.jharkhand.gov.in/home",
     repoUrl: "",
     period: "Mar 2022 – Present",
