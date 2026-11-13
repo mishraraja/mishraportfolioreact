@@ -6,17 +6,18 @@ import { LabPage, LabsIndex } from "./pages/LabPage";
 import { ThisOrThat } from "./pages/ThisOrThat";
 import { GuessOutput } from "./pages/GuessOutput";
 import { Revise } from "./pages/Revise";
+import JavaProjectGuide from "../java-guide/JavaProjectGuide";
 import "../dsa/sharedStyles";
 import "./JavaArcade.css";
 
 const LINKS = [
   { to: "/learning", label: "Progress & backup", icon: "+" },
   { to: "/java", label: "Worlds", icon: "🧭", end: true },
+  { to: "/java/guide", label: "How Java works", icon: "↗" },
   { to: "/java/labs", label: "Labs", icon: "🧪" },
   { to: "/java/play/this-or-that", label: "This or That", icon: "⚖️" },
   { to: "/java/play/guess-output", label: "Guess the Output", icon: "🖨️" },
   { to: "/java/revise", label: "Revision Sheet", icon: "📜" },
-  { to: "/java-project-guide", label: "Project guide", icon: "↗" },
 ];
 
 function XpPill() {
@@ -61,6 +62,7 @@ export default function JavaArcade() {
             <Route path="play/this-or-that" element={<ThisOrThat />} />
             <Route path="play/guess-output" element={<GuessOutput />} />
             <Route path="revise" element={<Revise />} />
+            <Route path="guide" element={<JavaProjectGuide />} />
             <Route path=":worldId" element={<WorldPage />} />
           </Routes>
         </div>

@@ -4,16 +4,29 @@
 // place of study and current location/place of work are deliberately
 // left out at his request.
 
+function completedYearsSince(start, today = new Date()) {
+  let years = today.getFullYear() - start.getFullYear();
+  const anniversaryHasPassed =
+    today.getMonth() > start.getMonth() ||
+    (today.getMonth() === start.getMonth() && today.getDate() >= start.getDate());
+  if (!anniversaryHasPassed) years -= 1;
+  return Math.max(0, years);
+}
+
+const experienceStart = "2022-04-01";
+const [startYear, startMonth, startDay] = experienceStart.split("-").map(Number);
+const careerStart = new Date(startYear, startMonth - 1, startDay);
+
 export const profile = {
   name: "Raja Mishra",
   initials: "RM",
   roles: ["Java Backend Developer", "Spring Boot & Microservices", "Kafka · AWS · PostgreSQL"],
-  headline: "Engineering software systems that hold up in production.",
+  headline: "I build Java backend services and the APIs around them.",
   positioning:
-    "Java backend developer with 5+ years of experience across Spring Boot, Spring Security, Hibernate/JPA, Kafka, PostgreSQL and AWS — focused on solutions that are as maintainable as they are functional.",
+    "Java backend developer working with Spring Boot, Spring Security, Hibernate/JPA, PostgreSQL, Kafka, and AWS.",
   bio: [
-    "I'm a Java backend developer with over five years of hands-on experience crafting digital solutions. My core expertise is Java, extended through Spring Framework, Spring Security and Hibernate/JPA into Spring Boot services — backed by PostgreSQL and MySQL, and increasingly Kafka and AWS for the systems that need to scale.",
-    "I care about elegant code as much as working code — engineering solutions that meet the brief and are a pleasure to maintain. If you're looking for a developer who brings that kind of care to the work, that's what I aim to offer.",
+    "I work mainly on Java backend services. My day-to-day tools include Spring Boot, Spring Security, Hibernate/JPA, PostgreSQL, and MySQL. I also work with Kafka and AWS, and have built Angular features for web applications.",
+    "I like following a feature from its API through the database and into production, then making it easier for the next person to maintain. Away from work, I read, travel, and play chess.",
   ],
   hobbies: ["Reading", "Traveling", "Playing Chess"],
   openToWork: true,
@@ -29,7 +42,8 @@ export const profile = {
     email: "rajamishra131297@gmail.com",
   },
   resumeRequestUrl: "mailto:rajamishra131297@gmail.com?subject=Request%20resume%20access&body=Hi%20Raja%2C%0A%0AI%27d%20like%20to%20request%20access%20to%20your%20resume.%0A%0AThank%20you.",
-  yearsExperience: 5,
+  experienceStart,
+  yearsExperience: completedYearsSince(careerStart),
 };
 
 export const resumeRequestUrl = profile.resumeRequestUrl;

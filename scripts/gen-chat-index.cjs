@@ -40,14 +40,14 @@ for (const file of fs.readdirSync("src/java/data/topics").filter((f) => f.endsWi
 add("dsa", "DSA Arcade", "/dsa", ["DSA Arcade contains animated interview problems, Java and Python solutions, quizzes, a pattern playbook, an eight-week roadmap and browser-saved progress."]);
 add("java", "Java Backend Arcade", "/java", ["Java Backend Arcade includes topic worlds, concept cards, interactive labs, topic quizzes, games and a revision sheet. Labs are browser simulations, not a Java runtime."]);
 const { LESSONS, MEMORY_AREAS, GLOSSARY, START_STEPS } = data("src/java-guide/content.js");
-add("java-project-guide", "How Java projects work", "/java-project-guide", [
+add("java-project-guide", "How Java projects work", "/java/guide", [
   "A version-neutral Java systems guide from source code to JVM startup, memory, Spring, HTTP requests, database operations, deployment and production diagnostics.",
   ...START_STEPS.flatMap((step) => [step.title, step.happens, step.memory, step.inspect]),
   ...MEMORY_AREAS.flatMap((area) => [area.name, area.stores, area.detail, area.symptom]),
   ...GLOSSARY.flatMap(([term, definition]) => [term, definition]),
 ]);
 for (const lesson of LESSONS) {
-  add("java-guide:" + lesson.id, lesson.title, "/java-project-guide#" + lesson.id, [
+  add("java-guide:" + lesson.id, lesson.title, "/java/guide#" + lesson.id, [
     lesson.summary,
     lesson.analogy,
     lesson.explanation,

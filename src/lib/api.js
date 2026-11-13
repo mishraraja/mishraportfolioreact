@@ -143,7 +143,7 @@ export const ENDPOINTS = [
       timestamp: new Date().toISOString(),
       status: 403,
       error: "Forbidden",
-      message: "Access denied. Hint: the Konami code still works in 2026.",
+      message: "Access denied. Hint: the Konami code still works.",
       path: "/api/v1/secrets",
       trace: [
         "at SecurityFilterChain.doFilter(SecurityConfig.java:42)",

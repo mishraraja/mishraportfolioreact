@@ -1,35 +1,10 @@
 import { useMemo, useState } from "react";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import { projects, projectCategories } from "../data/projects";
-import { profile } from "../data/profile";
 import { SectionHeading } from "../components/ui/SectionHeading";
 import { ProjectCard } from "./ProjectCard";
-import { Reveal } from "../components/ui/Reveal";
 import { SegmentedControl } from "../components/ui/SegmentedControl";
 import "./Projects.css";
-
-function EmptyState() {
-  return (
-    <Reveal className="projects-empty">
-      <p className="projects-empty__title">Case studies are being finalized.</p>
-      <p className="text-muted">
-        This section is fully wired up and ready to go — it just needs real project data
-        {profile.social.github ? (
-          <>
-            {" "}
-            in the meantime, browse the code on{" "}
-            <a href={profile.social.github} target="_blank" rel="noreferrer" className="text-gradient">
-              GitHub
-            </a>
-            .
-          </>
-        ) : (
-          "."
-        )}
-      </p>
-    </Reveal>
-  );
-}
 
 export function Projects() {
   const [filter, setFilter] = useState("all");
@@ -45,8 +20,8 @@ export function Projects() {
         <SectionHeading
           index="03"
           eyebrow="Selected Work"
-          title="Projects that mattered."
-          description="A closer look at what got built, why, and how."
+          title="Selected projects."
+          description="What each project does, what I worked on, and the tools it uses."
         />
 
         <div className="projects__toolbar">
@@ -65,9 +40,7 @@ export function Projects() {
             ))}
             </AnimatePresence>
           </motion.div></LayoutGroup>
-        ) : (
-          <EmptyState />
-        )}
+        ) : null}
       </div>
     </section>
   );

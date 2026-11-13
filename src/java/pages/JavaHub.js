@@ -10,6 +10,12 @@ import { ArcadeSignal } from "../../components/ui/ArcadeSignal";
 
 const TOOLS = [
   {
+    to: "/java/guide",
+    emoji: "↗",
+    title: "How a Java project works",
+    desc: "Follow source code through the JVM, application layers, database and deployment with an animated, step-by-step guide.",
+  },
+  {
     to: "/java/labs",
     emoji: "🧪",
     title: LABS.length + " hands-on labs",
@@ -111,6 +117,9 @@ export function JavaHub() {
           <Link to="/java/play/this-or-that" className="hub__btn" onClick={sfx.click}>
             ⚖️ Play This or That
           </Link>
+          <Link to="/java/guide" className="hub__btn" onClick={sfx.click}>
+            Explore how Java works →
+          </Link>
         </div>
         <ArcadeSignal kind="backend" />
       </header>
@@ -207,7 +216,7 @@ export function JavaHub() {
         <div className="arcade-section__head">
           <div>
             <h2 id="jhub-tools" className="arcade-h2">
-              Play & revise
+              Play, learn & revise
             </h2>
             <p className="arcade-section__sub">For when you have ten minutes, or the interview is tomorrow.</p>
           </div>

@@ -77,8 +77,8 @@ export function Hero() {
     <section id="home" className="hero section">
       <ObservatoryField />
       <div className="container hero__masthead">
-        <div className="hero__edition"><span>INDEPENDENT MIND. SYSTEMS THINKING.</span><span>JAVA / CLOUD / ENGINEERING</span></div>
-        <motion.div className="hero__name" initial={reduced ? false : { opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .9, ease: [.16, 1, .3, 1] }}>Raja <span>Mishra</span><sup>PORTFOLIO / 26</sup></motion.div>
+        <div className="hero__edition"><span>JAVA BACKEND DEVELOPER</span><span>JAVA / SPRING / DATA</span></div>
+        <motion.div className="hero__name" initial={reduced ? false : { opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .9, ease: [.16, 1, .3, 1] }}>Raja <span>Mishra</span><sup>PORTFOLIO</sup></motion.div>
       </div>
       <div className="container hero__grid">
         <MotionDiv
@@ -106,8 +106,7 @@ export function Hero() {
 
           <motion.p variants={reduced ? undefined : itemVariants} className="hero__sub">
             {profile.headline}{" "}
-            I build dependable backend systems with <strong>Java & Spring Boot</strong>.
-            {" "}5+ years turning complex problems into software people can rely on.
+            Most of my work uses <strong>Spring Boot, Spring Security, and SQL databases</strong>.
           </motion.p>
 
           <motion.div variants={reduced ? undefined : itemVariants} className="hero__cta">
@@ -141,16 +140,16 @@ export function Hero() {
 
           <motion.dl variants={reduced ? undefined : itemVariants} className="hero__stats">
             <div>
-              <dt>Years in production</dt>
-              <dd>{profile.yearsExperience}+</dd>
+              <dt>Professional Java work</dt>
+              <dd>Since 2022</dd>
             </div>
             <div>
               <dt>Core stack</dt>
               <dd>Java + Spring</dd>
             </div>
             <div>
-              <dt>Approach</dt>
-              <dd>Built to last</dd>
+              <dt>Also work with</dt>
+              <dd>Kafka + AWS</dd>
             </div>
           </motion.dl>
 

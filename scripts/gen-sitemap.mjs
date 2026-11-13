@@ -9,6 +9,7 @@
 import { writeFile, access, mkdir, readdir, readFile } from "node:fs/promises";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { parse } from "@babel/parser";
 import { CANONICAL_SITE_URL } from "./site-config.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -19,10 +20,32 @@ const JAVA = resolve(__dirname, "../src/java");
 // A stale Vercel SITE_URL override previously emitted www URLs that redirected.
 const SITE = CANONICAL_SITE_URL;
 
+function readLiteral(node) {
+  if (!node) return undefined;
+  if (["StringLiteral", "NumericLiteral", "BooleanLiteral"].includes(node.type)) return node.value;
+  if (node.type === "NullLiteral") return null;
+  if (node.type === "TemplateLiteral" && !node.expressions.length) return node.quasis[0].value.cooked;
+  if (node.type === "ArrayExpression") return node.elements.map(readLiteral);
+  if (node.type === "ObjectExpression") {
+    return Object.fromEntries(node.properties
+      .filter((property) => property.type === "ObjectProperty" && !property.computed)
+      .map((property) => [property.key.name || property.key.value, readLiteral(property.value)]));
+  }
+  return undefined;
+}
+
+async function exportedData(file) {
+  const source = await readFile(file, "utf8");
+  const ast = parse(source, { sourceType: "module" });
+  return Object.fromEntries(ast.program.body
+    .filter((item) => item.type === "ExportNamedDeclaration" && item.declaration?.type === "VariableDeclaration")
+    .flatMap((item) => item.declaration.declarations.map((declaration) => [declaration.id.name, readLiteral(declaration.init)])));
+}
+
 const ROUTES = [
   { path: "/learning", priority: "0.7", changefreq: "monthly" },
   { path: "/engineering", priority: "0.7", changefreq: "monthly" },
-  { path: "/java-project-guide", priority: "0.8", changefreq: "monthly" },
+  { path: "/java/guide", priority: "0.8", changefreq: "monthly" },
   { path: "/", priority: "1.0", changefreq: "weekly" },
   { path: "/dsa", priority: "0.9", changefreq: "weekly" },
   { path: "/dsa/learn/patterns", priority: "0.8", changefreq: "monthly" },
@@ -40,11 +63,21 @@ const ROUTES = [
 /** Backend Arcade worlds and labs, read from their data files (top-level `id:` entries only). */
 async function javaRoutes() {
   try {
-    const worlds = await readFile(resolve(JAVA, "data/worlds.js"), "utf8");
+    const worldData = await exportedData(resolve(JAVA, "data/worlds.js"));
     const labs = await readFile(resolve(JAVA, "labs/index.js"), "utf8");
     const ids = (source) => [...source.matchAll(/^ {4}id: "([^"]+)"/gm)].map((m) => m[1]);
+    const worldTopics = await Promise.all((worldData.WORLDS || []).map(async (world) => {
+      const data = await exportedData(resolve(JAVA, "data/topics", world.id + ".js"));
+      return [world.id, { world, concepts: data.concepts || [] }];
+    }));
     return [
-      ...ids(worlds).map((id) => ({ path: "/java/" + id, priority: "0.7", changefreq: "monthly" })),
+      ...worldTopics.map(([id, content]) => ({
+        path: "/java/" + id,
+        priority: "0.7",
+        changefreq: "monthly",
+        description: `${content.world.name}: ${content.world.blurb}`.slice(0, 155),
+        fallbackHtml: javaWorldFallback(content.world, content.concepts),
+      })),
       ...ids(labs).map((id) => ({ path: "/java/lab/" + id, priority: "0.6", changefreq: "monthly" })),
     ];
   } catch (error) {
@@ -55,20 +88,57 @@ async function javaRoutes() {
 async function problemRoutes() {
   try {
     const files = (await readdir(PROBLEMS)).filter((f) => f.endsWith(".js"));
-    const slugs = [];
+    const problems = [];
     for (const file of files) {
-      const source = await readFile(resolve(PROBLEMS, file), "utf8");
-      for (const match of source.matchAll(/slug: "([^"]+)"/g)) slugs.push(match[1]);
+      const data = await exportedData(resolve(PROBLEMS, file));
+      for (const value of Object.values(data)) {
+        if (Array.isArray(value)) problems.push(...value.filter((problem) => problem && problem.slug && problem.title));
+      }
     }
-    return slugs.sort().map((slug) => ({ path: "/dsa/" + slug, priority: "0.6", changefreq: "monthly" }));
+    return problems.sort((a, b) => a.slug.localeCompare(b.slug)).map((problem) => ({
+      path: "/dsa/" + problem.slug,
+      priority: "0.6",
+      changefreq: "monthly",
+      description: `${problem.title}: ${problem.statement}`.slice(0, 155),
+      fallbackHtml: problemFallback(problem),
+    }));
   } catch (error) {
     throw new Error("Could not read DSA routes", { cause: error });
   }
 }
 
+function problemFallback(problem) {
+  const complexity = problem.complexity || {};
+  const example = problem.examples?.[0];
+  const parts = [
+    `<main><h1>${escapeHtml(problem.title)}</h1>`,
+    `<p>${escapeHtml(problem.statement || "")}</p>`,
+    problem.story && `<section><h2>A way to picture it</h2><p>${escapeHtml(problem.story)}</p></section>`,
+    problem.insight && `<section><h2>How to approach it</h2><p>${escapeHtml(problem.insight)}</p></section>`,
+    example && `<section><h2>Example</h2><p>Input: <code>${escapeHtml(JSON.stringify(example.input))}</code>. Output: <code>${escapeHtml(JSON.stringify(example.output))}</code>.</p></section>`,
+    (complexity.time || complexity.space) && `<p>Complexity: ${escapeHtml(complexity.time || "")}${complexity.space ? ` time and ${escapeHtml(complexity.space)} space` : ""}. ${escapeHtml(complexity.why || "")}</p>`,
+    `<p>This page includes an animated walkthrough, Java and Python solutions, and a question to check your understanding.</p></main>`,
+  ];
+  return parts.filter(Boolean).join("");
+}
+
+function javaWorldFallback(world, concepts) {
+  const parts = [
+    `<main><h1>${escapeHtml(world.name)}</h1>`,
+    `<p>${escapeHtml(world.tagline)} ${escapeHtml(world.blurb)}</p>`,
+    `<section><h2>Topics in this section</h2>`,
+    ...concepts.slice(0, 6).map((concept) => {
+      const explanation = concept.simple || concept.points?.[0] || concept.say || "";
+      return `<article><h3>${escapeHtml(concept.title)}</h3><p>${escapeHtml(explanation)}</p></article>`;
+    }),
+    `</section><p>Each topic pairs a plain-language explanation with code, interview questions, and related practice where available.</p></main>`,
+  ];
+  return parts.join("");
+}
+
 function pageLabel(path) {
   if (path === "/") return "Raja Mishra | Java Backend Developer";
-  if (path === "/java-project-guide") return "How Java Projects Work";
+  if (path === "/java/guide") return "How Java Projects Work";
 
   const parts = path.split("/").filter(Boolean);
   const words = (value) => value
@@ -92,22 +162,23 @@ function pageLabel(path) {
 
 function pageDescription(path, label) {
   if (path === "/") {
-    return "Raja Mishra is a Java backend developer with 5+ years building reliable Spring Boot services using Kafka, PostgreSQL and AWS. Explore his work and projects.";
+    return "Raja Mishra is a Java backend developer working with Spring Boot, PostgreSQL, and AWS. Explore selected projects, experience, and Java learning tools.";
   }
-  if (path === "/java-project-guide") {
+  if (path === "/java/guide") {
     return "Follow a Java application from source code through JVM memory, Spring, HTTP requests, databases, deployment, and production troubleshooting.";
   }
   if (path.startsWith("/dsa")) {
-    return `Explore ${label} with Raja Mishra: practical data structures and algorithms explanations, examples, and interactive practice.`.slice(0, 155);
+    if (path === "/dsa") return "Practice data structures and algorithms with worked examples, interactive problem traces, and Java and Python solutions.";
+    return `Learn ${label.toLowerCase()} with worked examples and interactive practice in Raja Mishra's DSA Arcade.`.slice(0, 155);
   }
   if (path.startsWith("/java")) {
-    return `Explore ${label} with Raja Mishra: Java backend concepts, practical examples, and interactive learning exercises.`.slice(0, 155);
+    return `Read about ${label.toLowerCase()} with Java examples, interview questions, and interactive exercises.`.slice(0, 155);
   }
   if (path === "/engineering") {
-    return "Read Raja Mishra's engineering case studies on backend systems, software projects, and technical decisions.";
+    return "Case studies from Raja Mishra's software work, with the problem, implementation, and technical choices in each project.";
   }
   if (path === "/learning") {
-    return "Use Raja Mishra's interactive learning tools to review topics, practice, and track progress without an account.";
+    return "Practice software engineering concepts with short interactive tools and check what you understand as you go.";
   }
   return `Explore ${label} and more software engineering work by Raja Mishra.`;
 }
@@ -129,7 +200,7 @@ function replaceMeta(html, attribute, key, content) {
 async function writeRouteDocuments(routes) {
   const template = await readFile(resolve(BUILD, "index.html"), "utf8");
   const homeDescription =
-    "Raja Mishra is a Java backend developer with 5+ years building reliable Spring Boot services using Kafka, PostgreSQL and AWS. Explore his work and projects.";
+    "Raja Mishra is a Java backend developer working with Spring Boot, PostgreSQL, and AWS. Explore selected projects, experience, and Java learning tools.";
   const homeFallback =
     `<main><h1>Raja Mishra | Java Backend Developer</h1>` +
     `<p>${escapeHtml(homeDescription)}</p></main>`;
@@ -144,9 +215,9 @@ async function writeRouteDocuments(routes) {
 
     const label = pageLabel(route.path);
     const title = `${label} | Raja Mishra`;
-    const description = pageDescription(route.path, label);
+    const description = route.description || pageDescription(route.path, label);
     const canonical = SITE + route.path;
-    const fallback =
+    const fallback = route.fallbackHtml ||
       `<main><h1>${escapeHtml(label)}</h1>` +
       `<p>${escapeHtml(description)}</p></main>`;
 

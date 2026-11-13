@@ -14,7 +14,7 @@ function HobbyChip({ hobby }) {
   const isChess = hobby.toLowerCase().includes("chess");
 
   const reactions = {
-    Reading: "Currently: anything on distributed systems.",
+    Reading: "I enjoy reading about software and distributed systems.",
     Traveling: "Window seat, every time.",
   };
 
@@ -58,7 +58,7 @@ export function About() {
 
         <div className="about__content-col">
           <Reveal>
-            <h2 className="about__statement">I build the systems behind the experience.</h2>
+            <h2 className="about__statement">Java services, databases, and the web apps around them.</h2>
           </Reveal>
 
           <Reveal delay={0.1}>

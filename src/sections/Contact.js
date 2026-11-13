@@ -39,13 +39,12 @@ export function Contact() {
         </Reveal>
         <Reveal delay={0.08}>
           <h2 className="contact__headline">
-            Let&apos;s build <span className="text-gradient">something great.</span>
+            Have a <span className="text-gradient">Java project?</span>
           </h2>
         </Reveal>
         <Reveal delay={0.16}>
           <p className="contact__sub text-muted">
-            Have a project in mind, or just want to talk shop about Java, Spring Boot or system
-            design? I&apos;m always up for a conversation.
+            Email me about a backend role, a project, or a question about Java and Spring.
           </p>
         </Reveal>
 

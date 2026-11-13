@@ -1,5 +1,5 @@
 import { useEffect, useState, lazy, Suspense } from "react";
-import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { MotionConfig } from "framer-motion";
 import { ExperienceProvider, useExperience } from "./context/ExperienceContext";
 import ChatLauncher from "./chat/ChatLauncher";
@@ -46,7 +46,6 @@ const DsaArcade = lazy(() => import("./dsa/DsaArcade"));
 // The Backend Arcade — Java, Spring, SQL, testing and Git as cards, labs and
 // games — loads the same way.
 const JavaArcade = lazy(() => import("./java/JavaArcade"));
-const JavaProjectGuide = lazy(() => import("./java-guide/JavaProjectGuide"));
 const Learning = lazy(() => import("./learning/Learning"));
 const Engineering = lazy(() => import("./learning/Engineering"));
 
@@ -193,7 +192,7 @@ function Shell() {
           <Route path="/" element={<Home />} />
           <Route path="/learning" element={<Suspense fallback={<div className="section" role="status">Loading learning tools…</div>}><Learning /></Suspense>} />
           <Route path="/engineering" element={<Suspense fallback={<div className="section" role="status">Loading case study…</div>}><Engineering /></Suspense>} />
-          <Route path="/java-project-guide" element={<Suspense fallback={<div className="section" role="status">Loading Java project guide…</div>}><JavaProjectGuide /></Suspense>} />
+          <Route path="/java-project-guide" element={<Navigate to="/java/guide" replace />} />
           <Route
             path="/dsa/*"
             element={

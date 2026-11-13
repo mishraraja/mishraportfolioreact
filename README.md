@@ -3,25 +3,23 @@
   <a href="https://rajamishra.me/" target="_blank">rajamishra.me</a>
 </h2>
 
-A React developer portfolio and interview-learning app built around **a software
-system drawn as a solar system**, with separate DSA and Java Backend Arcades.
+A React portfolio and interview-learning site with separate DSA and Java
+Backend Arcades.
 
-The stack orbits a star. Skills are a constellation chart. The whole page sits
-in a lightweight starfield painted only on resize or theme changes. Underneath the sky is
-a browser-based REST simulator, an interactive terminal, twelve hidden
-things worth finding, and a data pipeline that refreshes its own GitHub numbers
-on a schedule, with a saved snapshot available when live requests fail.
+The design uses a solar-system view for the stack and a star chart for skills.
+The site also has a REST API simulator, an interactive terminal, hidden
+interactions, and scheduled GitHub activity updates with a saved fallback.
 
-## Current Project Status
+## Project Overview
 
-Repository review: **5 November 2026**. This README describes the reviewed source
-tree. Live deployment and external-service verification are tracked separately.
+This README describes the source in this repository. Check the GitHub Actions
+history and the live site separately for deployment and external-service status.
 
-| Area | Current implementation |
+| Area | What's here |
 | --- | --- |
-| Portfolio (`/`) | Hero, about, experience, four project entries, skills, API simulator, GitHub activity and contact links |
-| DSA Arcade (`/dsa`) | 75 animated problems, Java/Python solutions, quizzes, pattern practice, roadmap and browser-saved progress |
-| Backend Arcade (`/java`) | 10 topic worlds, concept cards, 16 interactive labs, boss quizzes, two games and a revision sheet |
+| Portfolio (`/`) | Profile, experience, selected projects, skills, API simulator, GitHub activity and contact links |
+| DSA Arcade (`/dsa`) | Animated interview problems, Java/Python solutions, quizzes, pattern practice, a study roadmap and browser-saved progress |
+| Backend Arcade (`/java`) | Java and backend topic worlds, concept cards, interactive labs, quizzes, games, a revision sheet and a Java project guide |
 | Learning tools (`/learning`) | Revision based on quiz answers, validated progress export/import, optional offline downloads and Google sign-in integration |
 | Technical case study (`/engineering`) | Architecture, implementation choices and limitations of this repository |
 | Site chat | Lazy-loaded local search of public content; optional Gemini replies through a Vercel function, with source links and local fallback |
@@ -29,8 +27,8 @@ tree. Live deployment and external-service verification are tracked separately.
 | Persistence | Browser storage and manual JSON backups; optional Firebase Google authentication, no account-linked progress or cloud sync |
 | Delivery | Production build, sitemap, versioned offline assets, gzip budgets, Vercel configuration and GitHub Actions checks |
 
-The current upgrade adds frontend features that need no paid backend. Google
-sign-in stays unavailable until a Firebase project is configured. See
+The frontend works without a paid backend. Google sign-in stays unavailable
+until a Firebase project is configured. See
 [free hosting and authentication setup](docs/FREE_HOSTING.md) for activation,
 offline behavior, test commands and options for a later backend. Local files
 describe implementation status, not proof that GitHub or the live deployment
@@ -46,8 +44,8 @@ by an orbit loop, and every sound is synthesised at runtime.
 
 ## Built With
 
-- React 19 + React Router 7
-- Vite 8 for development and production builds; Jest 30 for unit tests
+- React and React Router
+- Vite for development and production builds; Jest for unit tests
 - Framer Motion for choreography
 - react-icons
 - Plain CSS with design tokens (`src/styles/tokens.css`) — no CSS framework
@@ -57,8 +55,8 @@ by an orbit loop, and every sound is synthesised at runtime.
 
 ## Getting Started
 
-Use Node.js 22.18 or Node.js 24.11 or newer with npm. CI tests Node 22 and 24.
-The repository includes `package-lock.json`.
+Use a Node.js version supported by the `engines` field in `package.json`, with
+npm. The repository includes `package-lock.json`.
 
 ```bash
 npm ci
@@ -197,7 +195,7 @@ Nineteen technologies in five constellations, each star hand-placed by its
 group and jittered by a seed of its own name, so the chart is identical on every
 visit. Hover a star to read what that technology is actually used for.
 
-### Six skies and a seventh you unlock
+### Themes and retro mode
 
 Nebula, Supernova, Deep Field, Solar, Observatory and Cyberpunk each swap one set of tokens,
 so every component — including the starfield canvas and the orrery — repaints
@@ -213,7 +211,7 @@ control dock.
 ### Other things worth finding
 
 - An optional Spring Boot startup log at `?intro=1`
-- A chess studio with 24 random puzzles, three difficulty levels, legal moves,
+- A chess studio with random puzzles, difficulty settings, legal moves,
   automatic opponent replies and three attempts per puzzle ([details](docs/CHESS_PUZZLES.md))
 - A theme-aware starfield and a gently breathing nebula, with no scroll redraws
 - A 30fps stack orbit and a connected engineering atlas
@@ -246,8 +244,8 @@ keep asking (the "Blind 75"), built so learning them feels like playing.
 - **Predict mode** pauses before key decisions and asks what happens next.
 - **Each problem** has a story that makes the trick memorable, the one-line
   insight, Java and Python solutions, complexity, and a mastery question.
-- **Beyond the 75:** a 24-pattern playbook with templates, a Pattern Radar
-  recognition game, an 8-week roadmap with spaced reviews, a Big-O lab and an
+- **More practice:** a pattern playbook with templates, a Pattern Radar
+  recognition game, a study roadmap with spaced reviews, a Big-O lab and an
   interview playbook.
 - **Progress** (XP, levels, streaks, reviews) lives in `localStorage` — no
   account, no server.
@@ -296,6 +294,7 @@ storage removes saved progress, and progress does not sync across devices.
 | `/dsa/learn/interview` | Interview playbook |
 | `/dsa/radar` | Pattern recognition game |
 | `/java/:worldId` | Topic cards and boss quiz |
+| `/java/guide` | Interactive guide to how Java projects work |
 | `/java/labs` | All labs |
 | `/java/lab/:labId` | Individual lab |
 | `/java/play/this-or-that` | Trade-off game |
@@ -304,31 +303,31 @@ storage removes saved progress, and progress does not sync across devices.
 
 ## Automation
 
-The point is that nobody has to maintain the numbers on this page.
+Workflow triggers and checks are defined in `.github/workflows`; the latest run
+status is in GitHub Actions.
 
 | Workflow | Trigger | What it does |
 | --- | --- | --- |
-| `ci.yml` | push, PR | Audits, lints, tests and builds on Node 22 and 24, reports bundle size |
+| `ci.yml` | push, PR | Audits, lints, tests and builds on supported Node versions, reports bundle size |
 | `refresh-data.yml` | daily at 02:30 UTC | Pulls GitHub stats and commits the snapshot if it changed |
 | `lighthouse.yml` | PR, manual | Enforced mobile performance and accessibility scores |
 | `browser.yml` | push, PR, manual | Production-browser tests on desktop Chromium, 320px mobile Chromium and mobile WebKit |
 | `dependabot.yml` | weekly | Grouped dependency updates |
 
-The GitHub section uses three tiers: a six-hour session cache, the daily snapshot in
-`public/data/github.json`, and a live API call that quietly upgrades both. If
-the live call fails, existing cached or snapshot data remains available; if no
-data loads, the hook reports an offline state. A snapshot can become stale.
+The GitHub section first uses the live API and falls back to browser cache or the
+snapshot in `public/data/github.json`. The snapshot is refreshed by the scheduled
+workflow and can be out of date; the page shows an offline state if no data loads.
 
 ## Build, Tests and Deployment
 
-Local validation on 27 October 2026: **358 Jest tests across 13 suites passed**,
-plus **4 offline-worker tests** and **9 chat endpoint/search tests**. Production
-build results and gzip budgets are printed by `npm run build`.
+Run the commands below to check the current source. Production build results
+and gzip budgets are printed by `npm run build`; GitHub Actions shows the latest
+CI and browser-check results.
 
 Browser verification and remaining security/deployment work are recorded in
 [the end-to-end audit](docs/END_TO_END_AUDIT.md) and [the project review](docs/PROJECT_REVIEW.md). The old Create React App toolchain
-was replaced with Vite and standalone Jest. The updated dependency tree reports
-zero npm audit advisories. Keep running the audit as dependencies and advisories change.
+was replaced with Vite and standalone Jest. Run `npm audit` for the current
+dependency advisory status; package versions and advisories change over time.
 
 `npm run test:ci -- --runInBand` runs the existing Jest/React Testing Library
 suite once. It covers app rendering, all DSA example traces and input round
@@ -336,7 +335,7 @@ trips, animation frames, arcade navigation, Java content integrity, lab renderin
 and selected interactive missions, backup validation and review scheduling.
 `npm run test:offline` checks offline routing, failed installations and cache
 cleanup. `npm run test:browser` requires installed Playwright browsers and checks
-the new pages, imports and offline navigation against a production build.
+the app routes, imports and offline navigation against a production build.
 Browser and live OAuth results must be reported separately from unit tests;
 configuration of those checks alone does not establish they have passed.
 
@@ -369,7 +368,7 @@ src/
     pages/      hub, problem page, patterns, radar, roadmap, Big-O, interview
   java/         the Backend Arcade (lazy-loaded)
     data/       worlds, concept cards + bosses per topic, games content
-    labs/       16 interactive labs and their registry
+    labs/       Interactive labs and their registry
     pages/      hub, world, lab, This or That, Guess the Output, revision sheet
   context/      global state — theme, sound, the secret hunt
   lib/          api, sound, achievements, console egg
@@ -383,8 +382,8 @@ scripts/        GitHub fetch + sitemap generation
 
 All personal content — bio, skills, experience, projects, social links, and the
 resume access request — lives in `src/data/`. Update those files; the UI and the API console both
-pick up the change. Empty sections render an honest "coming soon" state instead
-of placeholder content.
+pick up the change. The sitemap generator also uses DSA and Java learning data
+to create page-specific metadata and static fallback content for crawlers.
 
 ## Accessibility
 

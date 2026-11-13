@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTitle } from "../dsa/useTitle";
+import { useReducedMotion } from "../hooks/useReducedMotion";
 import { CHECK_QUESTIONS, DEPLOYMENT_MODES, GLOSSARY, LESSONS, MEMORY_AREAS, START_STEPS } from "./content";
 import "./JavaProjectGuide.css";
 
@@ -47,6 +48,8 @@ export default function JavaProjectGuide() {
   const [glossaryQuery, setGlossaryQuery] = useState("");
   const [questionIndex, setQuestionIndex] = useState(0);
   const [answer, setAnswer] = useState(null);
+  const [playing, setPlaying] = useState(false);
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
     try {
@@ -55,6 +58,16 @@ export default function JavaProjectGuide() {
       // The guide remains usable when storage is blocked or full.
     }
   }, [reviewed]);
+
+  useEffect(() => {
+    if (!playing || reducedMotion) return undefined;
+    if (stepIndex >= START_STEPS.length - 1) {
+      setPlaying(false);
+      return undefined;
+    }
+    const timer = window.setTimeout(() => setStepIndex((current) => Math.min(current + 1, START_STEPS.length - 1)), 1700);
+    return () => window.clearTimeout(timer);
+  }, [playing, reducedMotion, stepIndex]);
 
   const deploymentMode = DEPLOYMENT_MODES[deployment];
   const memoryArea = MEMORY_AREAS.find((area) => area.id === memoryId) || MEMORY_AREAS[0];
@@ -74,8 +87,27 @@ export default function JavaProjectGuide() {
     setAnswer(null);
   }
 
+  function selectStep(index) {
+    setPlaying(false);
+    setStepIndex(index);
+  }
+
+  function advanceTrace() {
+    setPlaying(false);
+    setStepIndex((current) => Math.min(current + 1, START_STEPS.length - 1));
+  }
+
+  function toggleTrace() {
+    if (playing) {
+      setPlaying(false);
+      return;
+    }
+    if (stepIndex === START_STEPS.length - 1) setStepIndex(0);
+    setPlaying(true);
+  }
+
   return (
-    <article className="jguide container">
+    <article className="jguide">
       <header className="jguide-hero">
         <span className="jguide-eyebrow">A practical Java systems guide</span>
         <h1>How a Java project works, from code to response</h1>
@@ -83,7 +115,7 @@ export default function JavaProjectGuide() {
           Follow one application from source code, through the JVM and framework, to a database and back to a user. Learn the stable ideas first, then see where deployment choices and versions change the details.
         </p>
         <p className="jguide-hero__note">
-          This is a reading and investigation guide, separate from the Java Arcade. No single server, JDK version, database, or Spring packaging style is assumed.
+          Learn the stable ideas first, then compare the implementation choices projects make. No single server, JDK version, database, or Spring packaging style is assumed.
         </p>
         <div className="jguide-hero__actions">
           <a className="jguide-button jguide-button--primary" href="#walkthrough">Start the walkthrough <span aria-hidden="true">↓</span></a>
@@ -134,6 +166,40 @@ export default function JavaProjectGuide() {
           <ol className="jguide-boot-flow" aria-label={`${deploymentMode.label} startup stages`}>
             {deploymentMode.path.map((item, index) => <li key={item}><span>{String(index + 1).padStart(2, "0")}</span>{item}</li>)}
           </ol>
+        </div>
+
+        <div className="jguide-trace" role="group" aria-label="Interactive request trace">
+          <div className="jguide-trace__heading">
+            <div>
+              <span className="jguide-label">Watch the request travel</span>
+              <p>One click moves the request to the next layer. Play the full trip, or select any stage.</p>
+            </div>
+            <div className="jguide-trace__controls">
+              {!reducedMotion && <button className="jguide-button jguide-button--primary" type="button" onClick={toggleTrace}>
+                {playing ? "Pause trace" : stepIndex === START_STEPS.length - 1 ? "Replay trace" : "Play request"}
+              </button>}
+              <button className="jguide-button" type="button" onClick={advanceTrace} disabled={stepIndex === START_STEPS.length - 1}>Next stage</button>
+            </div>
+          </div>
+          <div className="jguide-trace__track" aria-hidden="true">
+            <span className="jguide-trace__fill" style={{ width: `${(stepIndex / Math.max(START_STEPS.length - 1, 1)) * 100}%` }} />
+            <span className="jguide-trace__packet" style={{ left: `${(stepIndex / Math.max(START_STEPS.length - 1, 1)) * 100}%` }} />
+          </div>
+          <div className="jguide-trace__stage-scroll" aria-label="Choose a request stage">
+            <ol className="jguide-trace__stages" aria-label="Request stages">
+              {START_STEPS.map((item, index) => (
+                <li key={item.label}>
+                  <button type="button" className={index === stepIndex ? "is-active" : index < stepIndex ? "is-complete" : ""} aria-current={index === stepIndex ? "step" : undefined} onClick={() => selectStep(index)}>
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <strong>{item.label}</strong>
+                  </button>
+                </li>
+              ))}
+            </ol>
+          </div>
+          <p className="jguide-trace__status" role="status" aria-live="polite">
+            {playing ? `Request is at ${step.label}.` : `Current stage: ${step.label}. ${step.lane}.`}
+          </p>
         </div>
 
         <div className="jguide-walkthrough">
@@ -283,13 +349,13 @@ export default function JavaProjectGuide() {
           <p>Use the Java Arcade for short coding drills and labs. Return to this guide when you want to understand why the runtime behaves the way it does.</p>
         </div>
         <div className="jguide-next__links">
-          <Link to="/java">Open the Java Arcade <span aria-hidden="true">→</span></Link>
+          <Link to="/java">Return to the Java Arcade <span aria-hidden="true">→</span></Link>
           <Link to="/engineering">Read how this learning site is built <span aria-hidden="true">→</span></Link>
-          <a href="https://docs.oracle.com/javase/specs/jvms/se27/html/index.html" target="_blank" rel="noreferrer">Java Virtual Machine Specification <span aria-hidden="true">↗</span></a>
+          <a href="https://docs.oracle.com/javase/specs/" target="_blank" rel="noreferrer">Java language and JVM specifications by release <span aria-hidden="true">↗</span></a>
           <a href="https://docs.spring.io/spring-framework/reference/core/beans.html" target="_blank" rel="noreferrer">Spring container reference <span aria-hidden="true">↗</span></a>
           <a href="https://docs.spring.io/spring-framework/reference/web/webmvc.html" target="_blank" rel="noreferrer">Spring Web MVC reference <span aria-hidden="true">↗</span></a>
-          <a href="https://tomcat.apache.org/tomcat-10.1-doc/architecture/overview.html" target="_blank" rel="noreferrer">Tomcat architecture example <span aria-hidden="true">↗</span></a>
-          <a href="https://docs.oracle.com/en/java/javase/27/troubleshoot/diagnostic-tools.html" target="_blank" rel="noreferrer">JVM diagnostic tools <span aria-hidden="true">↗</span></a>
+          <a href="https://tomcat.apache.org/whichversion.html" target="_blank" rel="noreferrer">Tomcat versions and compatibility <span aria-hidden="true">↗</span></a>
+          <a href="https://docs.oracle.com/en/java/javase/" target="_blank" rel="noreferrer">Java SE documentation by release <span aria-hidden="true">↗</span></a>
         </div>
         <p className="jguide-next__note">Official docs can be version-specific. Use the documentation that matches the JDK, framework, database, and server actually selected for a project.</p>
       </section>

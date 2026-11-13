@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 const SITE_TITLE = "Raja Mishra | Java Backend Developer";
-const FALLBACK_DESCRIPTION = "Raja Mishra is a Java backend developer with 5+ years building reliable Spring Boot services using Kafka, PostgreSQL and AWS. Explore his work and projects.";
+const FALLBACK_DESCRIPTION = "Raja Mishra is a Java backend developer working with Spring Boot, PostgreSQL, and AWS. Explore selected projects, experience, and Java learning tools.";
 
 function setMeta(selector, value) {
   const element = document.querySelector(selector);

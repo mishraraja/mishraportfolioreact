@@ -7,11 +7,11 @@ export const projects = [
     id: "gov-education-portal",
     title: "Higher Education Portal",
     description:
-      "A citizen-facing government portal for state-level higher education administration — university listings, student registration and admissions workflows, serving a large user base.",
+      "A public portal for university information, student registration, and admissions in Jharkhand.",
     problem:
-      "A state education department needed a single online portal for university information, student sign-up and admissions, replacing scattered offline processes.",
+      "University details and admission steps were spread across separate channels. The portal brings those services together online.",
     solution:
-      "Building and maintaining backend services in Java and Spring Boot for a live, actively-used government portal — ongoing work on a large-scale production system.",
+      "I build and maintain the portal's Java and Spring Boot backend services. The site is live, and the work continues as its services change.",
     role: "Software Developer",
     stack: ["Java", "Spring Boot"],
     category: ["web"],
@@ -26,11 +26,11 @@ export const projects = [
     id: "office-management-system",
     title: "Office Management System",
     description:
-      "A desktop application that streamlines day-to-day office operations — employee records, task assignment, documents and meetings — in one place.",
+      "A desktop app for employee records, task assignments, documents, and meeting schedules.",
     problem:
-      "Office admin work was spread across manual processes with no single system tracking employees, tasks, documents or meetings.",
+      "Office records, tasks, documents, and meetings were handled separately, making it hard to see their status in one place.",
     solution:
-      "Built a Java desktop app covering user auth and roles, employee records, task tracking, document storage and a meeting scheduler, backed by a MySQL schema designed for the relationships between them.",
+      "I built the Java desktop app, including login and roles, employee records, task tracking, document storage, and meeting scheduling, with MySQL behind it.",
     role: "Solo developer",
     stack: ["Java", "Java Swing", "JavaFX", "MySQL"],
     category: ["desktop"],
@@ -44,10 +44,10 @@ export const projects = [
     id: "campus-vehicle-system",
     title: "Campus Vehicle Entry & Exit System",
     description:
-      "A desktop application managing vehicle registration, token issuance and permit verification for campus security.",
-    problem: "Campus security needed a reliable way to register, verify and log vehicle entry and exit.",
+      "A Java Swing app for recording vehicle entry and exit at a campus.",
+    problem: "Security staff needed to check campus permits and keep an entry and exit log.",
     solution:
-      "Built a Java Swing application backed by an Oracle database, with automated token issuance, real-time permit verification and full entry/exit logging for auditing.",
+      "I built the app with Oracle storage, token issuance, permit checks, and entry and exit records.",
     role: "Solo developer",
     stack: ["Java", "Java Swing", "Oracle Database"],
     category: ["desktop"],
@@ -61,11 +61,11 @@ export const projects = [
     id: "pathology-web-app",
     title: "Pathology Management Web App",
     description:
-      "A responsive web app for patient registration, appointment scheduling and health record access at a pathology lab.",
+      "A web app for patient registration, appointment booking, and viewing lab results.",
     problem:
-      "Patients needed a straightforward way to register, book check-up appointments and access past results online.",
+      "The lab wanted patients to book check-up appointments and view previous results online.",
     solution:
-      "Led front-end design and styling with JavaScript, HTML and CSS in a three-person team, building a fully responsive interface with secure record storage on the backend.",
+      "I led the front-end work in a three-person team, using JavaScript, HTML, and CSS for the patient-facing screens.",
     role: "Front-end lead, team of 3",
     stack: ["JavaScript", "HTML", "CSS", "Java", "SQL"],
     category: ["web"],

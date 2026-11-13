@@ -1,5 +1,4 @@
 import { experience } from "../data/experience";
-import { profile } from "../data/profile";
 import { SectionHeading } from "../components/ui/SectionHeading";
 import { Reveal, RevealGroup, revealItemVariants } from "../components/ui/Reveal";
 import { motion } from "framer-motion";
@@ -42,38 +41,14 @@ function Timeline() {
   );
 }
 
-function ExperienceSnapshot() {
-  return (
-    <div className="snapshot">
-      <Reveal className="snapshot__stat">
-        <span className="snapshot__number">{profile.yearsExperience}+</span>
-        <span className="text-muted">Years building production software</span>
-      </Reveal>
-      <Reveal delay={0.08} className="snapshot__note">
-        <p>
-          {profile.name} has spent that time going deep on the Java ecosystem — Spring Boot, Spring Security
-          and Hibernate/JPA — while shipping full-stack work end to end with React, Angular and Node.js.
-        </p>
-        <p className="text-muted snapshot__pending">
-          A detailed role-by-role timeline will appear here once employer and project history is added.
-        </p>
-      </Reveal>
-    </div>
-  );
-}
-
 export function Experience() {
   return (
     <section id="experience" className="experience section">
       <div className="container">
-        <SectionHeading index="02" eyebrow="Experience" title="Where the time went." />
-        {experience.length > 0 ? (
-          <RevealGroup>
-            <Timeline />
-          </RevealGroup>
-        ) : (
-          <ExperienceSnapshot />
-        )}
+        <SectionHeading index="02" eyebrow="Experience" title="My work." />
+        <RevealGroup>
+          <Timeline />
+        </RevealGroup>
       </div>
     </section>
   );

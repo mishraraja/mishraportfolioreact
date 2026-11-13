@@ -101,7 +101,8 @@ EXPLAIN SELECT * FROM orders
 WHERE customer_id = 42 ORDER BY created_at DESC LIMIT 10;
 
 -- Can't seek with it: the leftmost column isn't filtered
-EXPLAIN SELECT * FROM orders WHERE created_at > '2026-01-01';`,
+EXPLAIN SELECT * FROM orders
+WHERE created_at > CURRENT_DATE - INTERVAL '30 days';`,
     lang: "sql",
     say: "Indexes turn scans into B-tree lookups; I design composite indexes around the leftmost-prefix rule, check plans with EXPLAIN, and remember every index slows down writes.",
     trap: "“Why not index every column?” Every insert, update and delete has to maintain every index, and the optimiser ignores low-selectivity ones anyway.",

@@ -10,7 +10,7 @@
 export const star = {
   name: "JVM",
   label: "Java Virtual Machine",
-  detail: "Eleven years of syntax, five of it in production. Everything here runs on it.",
+  detail: "The main language I use for backend services and applications.",
 };
 
 export const bodies = [
